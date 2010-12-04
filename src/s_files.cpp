@@ -116,7 +116,7 @@ static int GetDiskCurDir(int drive, char *dir) {
 {
     ULONG len = MAXPATH - 4; // 'c:\0'
 
-    return (DosQueryCurrentDir(drive, dir, &len) == 0) ? 0 : -1;
+    return (DosQueryCurrentDir(drive, (UCHAR *) dir, &len) == 0) ? 0 : -1;
 }
 #elif defined(NT)
 {
@@ -454,7 +454,9 @@ char *SepRChr(char *Dir) {
 // Returns relative path of Path with respect to Dir
 // Ex: Dir = /home/martin/src/ Path = /home/martin/src/Fte/s_files.cpp -> Fte/s_files.cpp
 int RelativePathName(const char *Dir, const char *Path, char *RelPath, int RelPathSize) {
-    char d[MAXPATH], p[MAXPATH], c;
+    char d[MAXPATH];
+    char p[MAXPATH];
+    char c;
     int dl, pl;
 
     if (ExpandPath(Dir, d, sizeof(d)) == -1) return -1;

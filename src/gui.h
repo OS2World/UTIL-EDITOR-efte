@@ -210,9 +210,9 @@ typedef struct {
     char strSearch[MAXSEARCH];
     char strReplace[MAXSEARCH];
     unsigned long Options;
-    //
     int resCount;
     int lastInsertLen;
+    int skip; // pass if skip has been selected 1 if not 0
 } SearchReplaceOptions;
 
 int DLGGetFind(GView *View, SearchReplaceOptions &sr);

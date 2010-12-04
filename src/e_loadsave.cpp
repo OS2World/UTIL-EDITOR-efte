@@ -315,7 +315,8 @@ int EBuffer::LoadFrom(const char *AFileName) {
                     if (BFI(this, BFI_SaveBookmarks) == where && (pos + len_end + 10 <= LL[l]->Count) && memcmp(LL[l]->Chars + pos, "BOOK", 4) == 0) {
                         int error = 0;
                         int i, col, startBook;
-                        char numbuf[5], buf[256];
+                        char numbuf[5];
+                        char buf[256];
 
                         startBook = pos;
                         pos += 4;
@@ -437,7 +438,8 @@ int EBuffer::SaveTo(char *AFileName) {
 
     int bindex;
     unsigned int blen = 0;
-    char *bname, book[1024] = "BOOK";
+    char *bname;
+    char book[1024] = "BOOK";
     EPoint bpos;
 
     unsigned int len_start = 0, len_end = 0;

@@ -142,7 +142,8 @@ int EBuffer::GetUData(int No, int pos, void **data, int len) {
 // TODO: void *d is dangerous, this needs fixed!
 #define UGETC(rc,no,pos,what) \
     do { void *d = 0; \
-    if ((rc = GetUData(no, pos, &d, sizeof(unsigned char)))) \
+    rc = GetUData(no, pos, &d, sizeof(unsigned char)); \
+    if (rc) \
     *(unsigned char *)&what = *(unsigned char *)d; \
     pos -= sizeof(unsigned char); \
     } while (0)
@@ -150,7 +151,8 @@ int EBuffer::GetUData(int No, int pos, void **data, int len) {
 // TODO: void *d is dangerous, this needs fixed!
 #define UGET(rc,no,pos,what) \
     do { void *d = 0; \
-    if ((rc = GetUData(no, pos, &d, sizeof(what)))) \
+    rc = GetUData(no, pos, &d, sizeof(what)); \
+    if (rc) \
     memcpy((void *)&what, d, sizeof(what)); \
     pos -= sizeof(what); \
     } while (0)
