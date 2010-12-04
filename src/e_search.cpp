@@ -164,11 +164,18 @@ int EBuffer::FindStr(char *Data, int Len, int Options) {
 
 int EBuffer::FindStr(char *Data, int Len, SearchReplaceOptions &opt) {
     int Options = opt.Options;
-    int LLen, Start, End;
+    int LLen, Start, End, Forward = 0;
     int C, L;
+    int rlen = strlen(opt.strReplace);
     PELine X;
     char *P;
 
+    if (Options & SEARCH_BACK && Options & SEARCH_REPLACE)
+	Forward = -1;
+    else if (Options & SEARCH_ALL || Options & SEARCH_REPLACE)
+	Forward = 1;
+    if (Options & SEARCH_ALL && Options & SEARCH_BACK && !(Options & SEARCH_REPLACE))
+        Options = Options & ~SEARCH_BACK | SEARCH_GLOBAL;
     if (Options & SEARCH_RE)
         return 0;
     if (Len <= 0)
@@ -199,11 +206,14 @@ int EBuffer::FindStr(char *Data, int Len, SearchReplaceOptions &opt) {
                 X = RLine(L);
                 C = X->Count;
             }
-        } else {
-            if (Options & SEARCH_REPLACE &&
+        }
+        else {
+            //fixed replace string containing search string looping below FTEPM FTE OS/2 should work for others
+            /*if (Options & SEARCH_REPLACE &&
                     opt.lastInsertLen > 0) {
                 C += CC * opt.lastInsertLen; // 0 or opt.lastInsertLen
-            } else {
+                } else*/
+            {
                 C += CC;
             }
 
@@ -279,7 +289,8 @@ int EBuffer::FindStr(char *Data, int Len, SearchReplaceOptions &opt) {
                 C = Start;
         }
 
-        while (((!(Options & SEARCH_BACK)) && (C <= End - Len)) || ((Options & SEARCH_BACK) && (C >= Start))) {
+        while (((!(Options & SEARCH_BACK)) && (C <= End - Len)) ||
+               ((Options & SEARCH_BACK) && (C >= Start))) {
             if ((!(Options & SEARCH_WORDBEG)
                     || (C == 0)
                     || (WGETBIT(Flags.WordChars, P[C - 1]) == 0))
@@ -300,11 +311,57 @@ int EBuffer::FindStr(char *Data, int Len, SearchReplaceOptions &opt) {
                 Match.Row = L;
                 MatchCount = Len;
                 MatchLen = ScreenPos(X, C + Len) - Match.Col;
-                if (!(Options & SEARCH_NOPOS)) {
-                    if (Options & SEARCH_CENTER)
-                        CenterPosR(Match.Col, Match.Row);
-                    else
-                        SetPosR(Match.Col, Match.Row);
+                //The following fixes a failure of search and replace in FTEPM when
+		//the replace string contains the search string. It also fixes "Skip"
+		//(search/replace) and search all occurences (infinate loop)
+                //not tested on other platforms.
+                if (Options & SEARCH_REPLACE && !(Options & SEARCH_BACK)) {
+                  if (!opt.skip) {
+		      if (!(Options & SEARCH_NOPOS)) {
+                          if (Options & SEARCH_CENTER)
+                              CenterPosR(Match.Col + rlen, Match.Row);
+                          else
+                              SetPosR(Match.Col + rlen, Match.Row);
+                      }
+                  }
+                  else {
+                          opt.skip = 0;
+                          if (!(Options & SEARCH_NOPOS)) {
+                              if (Options & SEARCH_CENTER)
+                                  CenterPosR(Match.Col + Forward, Match.Row);
+                              else
+                                  SetPosR(Match.Col + Forward, Match.Row);
+                    }
+                  }
+                }
+                else if (Options & SEARCH_ALL && !(Options & SEARCH_REPLACE)) {
+                       if (!(Options & SEARCH_NOPOS)) {
+                           if (Options & SEARCH_CENTER)
+                               CenterPosR(Match.Col + Forward, Match.Row);
+                           else
+                               SetPosR(Match.Col + Forward, Match.Row);
+		       }
+                }
+                else {
+		    opt.skip = 0;
+		    if (Match.Col + Forward < 0 && Match.Row > 0) {
+			L = Match.Row - 1;
+			C = End;
+		    }
+		    else if (Match.Col == 0 && Match.Row == 0 && (Options & SEARCH_BACK)) {
+			C = L = 0;
+		    }
+                    else {
+		        C = Match.Col + Forward;
+                        L = Match.Row;
+                    }
+                      //if (!(Options & SEARCH_NOPOS)) {
+		    if (Options & SEARCH_CENTER) {
+			CenterPosR(C, L);
+		    }
+		    else
+                        SetPosR(C, L);
+		    //}
                 }
                 Draw(L, L);
                 return 1;
@@ -327,12 +384,17 @@ int EBuffer::FindStr(char *Data, int Len, SearchReplaceOptions &opt) {
 
 int EBuffer::FindRx(RxNode *Rx, SearchReplaceOptions &opt) {
     int Options = opt.Options;
-    int LLen, Start, End;
+    int LLen, Start, End, Forward;
     int C, L;
+    int rlen = strlen(opt.strReplace);
     char *P;
     PELine X;
     RxMatchRes b;
 
+    if (Options & SEARCH_BACK)
+        Forward = -1;
+    else
+        Forward = 1;
     if (!(Options & SEARCH_RE))
         return 0;
     if (Options & SEARCH_BACK) { // not supported
@@ -445,7 +507,7 @@ int EBuffer::FindRx(RxNode *Rx, SearchReplaceOptions &opt) {
         X = RLine(L);
         LLen = X->Count;
         P = X->Chars;
-        Start = 0;
+        Start = 1;
         End = LLen;
 
         if (Options & SEARCH_BLOCK) {
@@ -481,12 +543,52 @@ int EBuffer::FindRx(RxNode *Rx, SearchReplaceOptions &opt) {
                     b.Close[mm] += Start;
                 }
                 MatchRes = b;
-                if (!(Options & SEARCH_NOPOS)) {
+                //The following fixes a failure of search and replace in FTEPM when
+		//the replace strin contains the search string. It also fixes "Skip"
+		//(search/replace) and search all occurences (infinate loop)
+                //not tested on other platforms.
+                if (Options & SEARCH_REPLACE && !(Options & SEARCH_BACK)) {
+                  if (!opt.skip) {
+                      if (!(Options & SEARCH_NOPOS)) {
+                          if (Options & SEARCH_CENTER)
+                              CenterPosR(C + rlen, L);
+                          else
+                              SetPosR(C + rlen, L);
+                      }
+                  }
+                  else {
+                          opt.skip = 0;
+                          if (!(Options & SEARCH_NOPOS)) {
+                              if (Options & SEARCH_CENTER)
+                                  CenterPosR(C + Forward, L);
+                              else
+                                  SetPosR(C + Forward, L);
+                    }
+		  }
+                }
+                else if (Options & SEARCH_ALL && !(Options & SEARCH_REPLACE)) {
+                       if (!(Options & SEARCH_NOPOS)) {
+                           if (Options & SEARCH_CENTER)
+                               CenterPosR(C + Forward, L);
+                           else
+                               SetPosR(C + Forward, L);
+                    }
+                }
+                else {
+                      opt.skip = 0;
+                      if (!(Options & SEARCH_NOPOS)) {
+                          if (Options & SEARCH_CENTER)
+                              CenterPosR(C, L);
+                          else
+                              SetPosR(C, L);
+                      }
+                }
+                /*if (!(Options & SEARCH_NOPOS)) {
                     if (Options & SEARCH_CENTER)
                         CenterPosR(C, L);
                     else
                         SetPosR(C, L);
-                }
+                } */
                 Draw(L, L);
                 return 1;
             }
@@ -553,7 +655,7 @@ int EBuffer::Find(SearchReplaceOptions &opt) {
                 while (1) {
                     Draw(VToR(CP.Row), 1);
                     Redraw();
-                    switch (View->MView->Win->Choice(0, "Replace",
+                    switch (View->MView->Win->Choice(GPC_NOTE, "Replace",
                                                      5,
                                                      "&Yes",
                                                      "&All",
@@ -572,6 +674,7 @@ int EBuffer::Find(SearchReplaceOptions &opt) {
                         break;
                     case 3:
                         ch = 'N';
+                        opt.skip = 1;
                         break;
                     case 4:
                     case -1:
@@ -651,7 +754,7 @@ try_join:
                 while (1) {
                     Draw(VToR(CP.Row), 1);
                     Redraw();
-                    switch (View->MView->Win->Choice(0, "Join Line",
+                    switch (View->MView->Win->Choice(GPC_NOTE, "Join Line",
                                                      5,
                                                      "&Yes",
                                                      "&All",
@@ -720,7 +823,7 @@ try_split:
                     while (1) {
                         Draw(VToR(CP.Row), 1);
                         Redraw();
-                        switch(View->MView->Win->Choice(0, "Split Line",
+                        switch(View->MView->Win->Choice(GPC_NOTE, "Split Line",
                                                         5,
                                                         "&Yes",
                                                         "&All",
@@ -869,6 +972,7 @@ last:
     }
 end:
     // end of search
+    opt.skip = 0;
     if (R)
         RxFree(R);
 
