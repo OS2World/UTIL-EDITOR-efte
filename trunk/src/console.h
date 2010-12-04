@@ -116,7 +116,7 @@ typedef struct {
     long X;
     long Y;
     unsigned short Buttons;
-    unsigned short Count;
+    unsigned long Count;
     TKeyCode KeyMask;
 } TMouseEvent;
 

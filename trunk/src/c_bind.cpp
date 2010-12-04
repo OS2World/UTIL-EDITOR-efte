@@ -89,7 +89,9 @@ EEventMap *FindActiveMap(EMode *Mode) {
 }
 
 EKey *SetKey(EEventMap *aMap, const char *aKey) {
-    EKeyMap **map = &aMap->KeyMap, *pm, *parent = 0;
+    EKeyMap **map = &aMap->KeyMap;
+    EKeyMap *pm;
+    EKeyMap *parent = 0;
     EKey *k;
     char Key[256];
     char *p, *d;

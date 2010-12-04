@@ -25,6 +25,7 @@ int Hilit_SH(EBuffer *BF, int /*LN*/, PCell B, int Pos, int Width, ELine *Line, 
     int isEOF = 0;
     int parenCount = 0;
     int bracketCount = 0;
+    char brace = '{';       // MKG: Did this to quiet OpenWatcom Warning
     for (i = 0; i < Line->Count;) {
         if (State == hsSH_EOF && 0 == i) {
             //printf("i=%d, len=%d, strlen(seof)=%d, seof=%s, Line-Chars=%s\n",
@@ -225,7 +226,7 @@ int Hilit_SH(EBuffer *BF, int /*LN*/, PCell B, int Pos, int Width, ELine *Line, 
                         // but that'll take much, much longer to figure out
                         // how to do.
                         if (b == 2 && strchr("#%:", *p) != NULL) {
-                            UntilMatchBrace('{', ColorNext());
+                            UntilMatchBrace(brace, ColorNext());
                             break;
                         }
                         if (b == 2 && *p == '}')

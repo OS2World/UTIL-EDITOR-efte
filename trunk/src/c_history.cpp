@@ -187,7 +187,8 @@ int LoadHistory(char *FileName) { /*FOLD00*/
 
 int UpdateFPos(char *FileName, int Row, int Col) { /*FOLD00*/
     int L = 0, R = FPHistoryCount, M, N;
-    FPosHistory *fp, **NH;
+    FPosHistory  *fp;
+    FPosHistory  **NH;
     int cmp;
 
     if (FPHistory != 0) {
