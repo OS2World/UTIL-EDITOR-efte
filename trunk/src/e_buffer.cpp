@@ -193,17 +193,19 @@ int EBuffer::Modify() {
 
         if ((FileName != 0) && FileOk && (stat(FileName, &StatBuf) == 0)) {
             if (FileStatus.st_size != StatBuf.st_size ||
-                    FileStatus.st_mtime != StatBuf.st_mtime) {
-                View->MView->Win->Choice(GPC_ERROR, "Warning! Press Esc!", 0, "File %-.55s changed on disk!",
-                                         FileName);
-                switch (View->MView->Win->Choice(GPC_NOTE, "File Changed on Disk", 3, "&Modify", "&Reload", "&Cancel", "%s",
-                                                 FileName))
+		FileStatus.st_mtime != StatBuf.st_mtime) {
+		// This dialog is redundant and doesn't always work as expected GKY 11-14-10
+		// Don't use "0" button messages
+                //View->MView->Win->Choice(GPC_ERROR, "Warning! Press Esc!", 0, "File %-.55s changed on disk!",
+                //                         FileName);
+              switch (View->MView->Win->Choice(GPC_WARNING, "Warning! File Changed on Disk",
+                                               2, "&Modify", "&Reload", "%s", FileName))
                 {
                 case 0:
                     break;
                 case 1:
                     Reload();
-                case 2:
+                //case 2:
                 case -1:
                 default:
                     return 0;
