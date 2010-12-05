@@ -80,9 +80,8 @@ int PutClipText(ClipData *cd) {
 
     DosRequestMutexSem(hmtxSyn, SEM_INDEFINITE_WAIT);
     DosResetEventSem(hevEnd, &PostCount);
-    if (0 == DosAllocSharedMem((void **)&mem,
-                               MEM_PREFIX "CLIPDATA",
-                               cd->fLen + 5,
+    if (0 == DosAllocSharedMem((void **)&mem, MEM_PREFIX "CLIPDATA",
+                               cd->fLen + 5, //OBJ_ANY |
                                PAG_COMMIT | PAG_READ | PAG_WRITE)) {
         ULONG L = cd->fLen;
         memcpy((void *)mem, (void *)&L, 4);
