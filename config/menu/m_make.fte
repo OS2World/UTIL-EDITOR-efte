@@ -1,0 +1,27 @@
+
+menu Help_MAKE {
+    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+    item "&Make help" { RunProgram "view U:\\WATCOM\\binp\\help\\tools.inf" }
+    item;    
+    item "&About..." { ShowVersion }
+}
+
+menu Main_MAKE {
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "&Tools",   Tools;
+#    submenu "&IPF",     IPF;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help_MAKE;
+
+}
+
+eventmap MAKE {
+    MainMenu  = "Main_MAKE";   # menu for menubar
+}
