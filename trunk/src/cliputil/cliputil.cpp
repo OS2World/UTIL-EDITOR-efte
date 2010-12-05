@@ -12,20 +12,25 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "..\exceptq.h"
+
 
 #define MAXCLIPTEXT 256 * 1024   /* just for demo */
 
 char buffer[MAXCLIPTEXT];
 
 int main(int argc, char **argv) {
+    EXCEPTIONREGISTRATIONRECORD exRegRec;
     ClipData cd;
     int i;
 
+    LoadExceptq(&exRegRec, "");
     if ((argc == 2) && (strcmp(argv[1], "-s") == 0)) {
         cd.fLen = fread(buffer, 1, MAXCLIPTEXT, stdin);
         cd.fChar = buffer;
         if (PutClipText(&cd) == -1) {
             fprintf(stderr, "Coult not set clipboard text\n");
+            UninstallExceptq(&exRegRec);
             return 1;
         }
     } else if (argc == 1) {
@@ -35,6 +40,7 @@ int main(int argc, char **argv) {
             }
         } else {
             fprintf(stderr, "Could not get clipboard text\n");
+            UninstallExceptq(&exRegRec);
             return 1;
         }
     } else {
@@ -45,7 +51,9 @@ int main(int argc, char **argv) {
                 "    cliputil | more\n"
                 "    dir | cliputil -s\n",
                 argv[0]);
+        UninstallExceptq(&exRegRec);
         return 1;
     }
+    UninstallExceptq(&exRegRec);
     return 0;
 }
