@@ -9,6 +9,8 @@ include 'menu/m_html.fte';
 include 'menu/m_rexx.fte';
 include 'menu/m_sgml.fte';
 include 'menu/m_rst.fte';
+include 'menu/m_ipf.fte';
+include 'menu/m_make.fte';
 
 include 'kbd/k_c.fte';
 include 'kbd/k_groovy.fte';
