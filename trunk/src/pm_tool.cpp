@@ -19,6 +19,8 @@
 #define TXICON 24
 
 MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2) {
+  static ULONG sLastitem;
+  static HWND hwndBubble;
     if (msg == WM_CREATE) {
         WinSetWindowPtr(hwnd, QWL_USER, PVOIDFROMMP(mp1));
     } else {
@@ -267,8 +269,8 @@ MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2) {
             POINTL ptl;
             RECTL rcl;
 
-            if (td->ulDepressed == -1)
-                break;
+            //if (td->ulDepressed == -1)
+            //    break;
 
             ptl.x = (LONG) SHORT1FROMMP(mp1);
             ptl.y = (LONG) SHORT2FROMMP(mp1);
@@ -297,13 +299,56 @@ MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2) {
                     }
                     break;
                 }
-                if (td->pItems[item].ulType == tiBITMAP) {
-                    rcl.xLeft += TXICON + 3;
-                    rcl.xRight += TXICON + 3;
-                } else if (td->pItems[item].ulType == tiSEPARATOR) {
-                    rcl.xLeft += TXSEPARATOR + 3;
-                    rcl.xRight += TXSEPARATOR + 3;
-                }
+                if (td->ulDepressed == -1 && BubbleHelp) { //SSBuffer && SSBuffer->CheckBubbleHelp()) {
+                   if (rcl.xLeft <= ptl.x && rcl.yBottom <= ptl.y &&
+                       rcl.xRight >= ptl.x && rcl.yTop >= ptl.y) {
+                       if (sLastitem != td->pItems[item].ulId && hwndBubble) {
+                            WinDestroyWindow(hwndBubble);  
+                            hwndBubble = 0;                
+                       } 
+                       if (!hwndBubble && td->pItems[item].ulId) {
+                          sLastitem = td->pItems[item].ulId;
+			  HWND  hwndBubbleClient;
+			  ULONG style = FCF_BORDER;
+		      
+			  hwndBubble = WinCreateStdWindow(HWND_DESKTOP,
+							  0,
+							  &style,
+							  WC_STATIC,
+							  "",
+							  SS_TEXT| DT_LEFT| DT_VCENTER,
+							  NULLHANDLE,
+							  NULLHANDLE,
+							  &hwndBubbleClient);
+			  POINTL pointl = { rcl.xLeft, rcl.yBottom };
+		      
+			  WinMapWindowPoints(hwnd, HWND_DESKTOP, &pointl, 1);
+			  WinSetWindowPos(hwndBubble,
+					  HWND_TOP,
+					  pointl.x, pointl.y - 24,
+					  110 , 22, // size of bubble
+					  SWP_SIZE | SWP_MOVE|SWP_SHOW);
+			  WinSetPresParam(hwndBubbleClient, PP_FONTNAMESIZE, 7,"8.Helv");
+			  RGB rgb = { 200,200,0 };
+			  WinSetPresParam(hwndBubbleClient,
+					  PP_BACKGROUNDCOLOR,
+					  sizeof(RGB),
+					  &rgb);
+			  CHAR String[32];
+			  WinLoadString (hab, 0, td->pItems[item].ulId, sizeof(String), String);
+			  WinSetWindowText(hwndBubbleClient, String);
+			  WinStartTimer(hab, hwnd, 1, 50);
+		       } /* endif */
+		       break;
+		   }
+               }
+	       if (td->pItems[item].ulType == tiBITMAP) {
+		   rcl.xLeft += TXICON + 3;
+		   rcl.xRight += TXICON + 3;
+	       } else if (td->pItems[item].ulType == tiSEPARATOR) {
+		   rcl.xLeft += TXSEPARATOR + 3;
+		   rcl.xRight += TXSEPARATOR + 3;
+               }
             }
         }
         break;
@@ -350,6 +395,26 @@ MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2) {
             td->ulDepressed = -1;
         }
         break;
+      case WM_TIMER:
+          {
+         POINTL ptl;
+         SWP   swpMenu;
+       
+         WinQueryWindowPos(hwnd, &swpMenu);
+         WinQueryPointerPos(HWND_DESKTOP, &ptl);
+         WinMapWindowPoints(HWND_DESKTOP, WinQueryWindow(hwnd, QW_PARENT), &ptl, 1);
+       
+         if (swpMenu.x > ptl.x ||
+             swpMenu.x + swpMenu.cx < ptl.x ||
+             swpMenu.y > ptl.y ||
+             swpMenu.y + swpMenu.cy < ptl.y)
+         {
+            WinDestroyWindow(hwndBubble);
+            hwndBubble = 0;
+            WinStopTimer(hab, hwnd, 1);
+         }
+          }
+         break;
         }
     }
     return WinDefWindowProc(hwnd, msg, mp1, mp2);

@@ -26,6 +26,8 @@
 #define INCL_AVIO
 #define INCL_DOS
 #define INCL_DOSERRORS
+#define INCL_BASE
+#define INCL_DOSEXCEPTIONS
 
 #include <os2.h>
 #include <stdio.h>
@@ -47,6 +49,7 @@
 #include "s_files.h"
 #include "s_string.h"
 #include "log.h"
+#include "exceptq.h"
 
 #define PM_STACK_SIZE (96 * 1024)
 
@@ -185,7 +188,7 @@ public:
 int ShowVScroll = 1;
 int ShowHScroll = 0;
 int ShowMenuBar = 1;
-int ShowToolBar = 1;
+int ShowToolBar;
 unsigned long HaveGUIDialogs =
     GUIDLG_FILE |
     GUIDLG_CHOICE |
@@ -252,6 +255,7 @@ struct {
 //    { 0, 0, 0, MIS_SEPARATOR },
     { 102, 0, ExFileOpen, MIS_BITMAP },
     { 103, 0, ExFileSave, MIS_BITMAP },
+    { 120, 0, ExFileReload, MIS_BITMAP },
     { 104, 0, ExFileClose, MIS_BITMAP },
     { 0, 0, 0, MIS_SEPARATOR },
     { 105, 0, ExFilePrev, MIS_BITMAP },
@@ -316,6 +320,7 @@ ToolBarItem tools[] = {
     //   { tiBITMAP, 101, CMD(ExExitEditor), 0, 0 },
     { tiBITMAP, 102, CMD(ExFileOpen), 0, 0 },
     { tiBITMAP, 103, CMD(ExFileSave), 0, 0 },
+    { tiBITMAP, 120, CMD(ExFileReload), 0, 0 },
     { tiBITMAP, 104, CMD(ExFileClose), 0, 0 },
     { tiSEPARATOR, 0, 0, 0, 0},
     { tiBITMAP, 105, CMD(ExFilePrev), 0, 0 },
@@ -337,6 +342,9 @@ ToolBarItem tools[] = {
     { tiBITMAP, 119, CMD(ExTagPop), 0, 0 },
     { tiBITMAP, 117, CMD(ExTagNext), 0, 0 },
     { tiBITMAP, 118, CMD(ExTagPrev), 0, 0 },
+    { tiSEPARATOR, 0, 0, 0, 0},
+    { tiBITMAP, 121, CMD(ExCompile), 0, 0 },
+    { tiSEPARATOR, 0, 0, 0, 0},
 };
 
 HWND CreateToolBar(HWND parent, HWND owner, int id) {
@@ -573,6 +581,12 @@ typedef struct {
     char *Message;
     int Flags;
 } ChoiceInfo;
+
+/**
+  * DoChoice opens message dialogs of various types.
+  * Always provide at least 1 button
+  * Zero buttons gives inconsistent results
+  */
 
 static int DoChoice(HWND hwndFrame, ChoiceInfo *choice)
 {
@@ -2393,7 +2407,9 @@ int ConGetEvent(TEventMask EventMask, TEvent *Event, int WaitTime, int Delete, G
 static void _LNK_CONV WorkThread(void *) {
     habW = WinInitialize(0);
     hmqW = WinCreateMsgQueue(hab, 0);
+    EXCEPTIONREGISTRATIONRECORD exRegRec;
 
+    LoadExceptq(&exRegRec, "");
     hwndCreatorWorker = WinCreateWindow(HWND_OBJECT,
                                         szCreator,
                                         "Creator",
@@ -2425,6 +2441,7 @@ static void _LNK_CONV WorkThread(void *) {
     WinTerminate(habW);
     //DosBeep(500, 500);
     WinPostQueueMsg(hmq, WM_QUIT, 0, 0);
+    UninstallExceptq(&exRegRec);
     _endthread();
 }
 
@@ -2544,7 +2561,7 @@ int GViewPeer::ConPutLine(int X, int Y, int W, int H, PCell Cell) {
 
 int GViewPeer::ConSetBox(int X, int Y, int W, int H, TCell Cell) {
     int I;
-    char *p = (char *) & Cell;
+    unsigned char *p = (unsigned char *) &Cell;
     int Hidden = 0;
 
     DosRequestMutexSem(hmtxPMData, SEM_INDEFINITE_WAIT);
@@ -3779,7 +3796,9 @@ static void _LNK_CONV PipeThread(void *p) {
     RESULTCODES rc_code;
 #endif
     int rc;
+    EXCEPTIONREGISTRATIONRECORD exRegRec;
 
+    LoadExceptq(&exRegRec, "");
     hab = WinInitialize(0);
 
     rc = CreatePipeChild(&sid, &pid, hfPipe, pipe->Command);
@@ -3789,6 +3808,7 @@ static void _LNK_CONV PipeThread(void *p) {
         pipe->reading = 0;
         if (pipe->notify)
             WinPostMsg(frames->Active->Peer->hwndWorker, UWM_NOTIFY, MPFROMLONG(pipe->notify), MPFROMLONG(pipe->id));
+        UninstallExceptq(&exRegRec);
         DosReleaseMutexSem(pipe->Access);
         WinTerminate(hab);
         return;
@@ -3832,6 +3852,7 @@ static void _LNK_CONV PipeThread(void *p) {
     pipe->reading = 0;
     if (pipe->notify)
         WinPostMsg(frames->Active->Peer->hwndWorker, UWM_NOTIFY, MPFROMLONG(pipe->notify), MPFROMLONG(pipe->id));
+    UninstallExceptq(&exRegRec);
     DosReleaseMutexSem(pipe->Access);
     WinTerminate(hab);
 }

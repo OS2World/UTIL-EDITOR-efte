@@ -46,6 +46,7 @@ extern int SystemClipboard;
 extern int OpenAfterClose;
 extern int ShowMenuBar;
 extern int ShowToolBar;
+extern bool BubbleHelp;
 extern int SelectPathname;
 extern char DefaultModeName[32];
 extern int WSStyleSearch;

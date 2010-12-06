@@ -22,8 +22,6 @@
 
 extern int ShowVScroll;
 
-//#define INCL_NOPM
-//#define INCL_WINSWITCHLIST
 #define INCL_WIN
 #define INCL_SUB
 #define INCL_KBD
@@ -32,6 +30,8 @@ extern int ShowVScroll;
 #define INCL_BASE
 #define INCL_DOS
 #define INCL_DOSDEVIOCTL
+#define INCL_BASE
+#define INCL_DOSEXCEPTIONS
 
 #include <stdlib.h>
 #include <process.h>
@@ -468,7 +468,7 @@ int ConSetBox(int X, int Y, int W, int H, TCell Cell) {
                     DrawMouse(0);
                     MouseHidden = 1;
                 }
-        VioWrtNCell((PCH)p, (USHORT)(W), (USHORT)(Y + I), (USHORT)X, 0);
+        VioWrtNCell(p, (USHORT)(W), (USHORT)(Y + I), (USHORT)X, 0);
 
         if (MouseHidden) {
             DrawMouse(1);
@@ -924,7 +924,7 @@ static int CreatePipeChild(PID &pid, HPIPE &hfPipe, char *Command) {
 
     return 0;
 }
-
+#include "exceptq.h"
 static void _LNK_CONV PipeThread(void *p) {
     GPipe *pipe = (GPipe *)p;
     int rc;
@@ -933,7 +933,9 @@ static void _LNK_CONV PipeThread(void *p) {
     PID pid;
     HPIPE hfPipe;
     RESULTCODES rc_code;
+    EXCEPTIONREGISTRATIONRECORD exRegRec;
 
+    LoadExceptq(&exRegRec, "");
     rc = CreatePipeChild(pid, hfPipe, pipe->Command);
 
     if (rc != 0) {
@@ -942,6 +944,7 @@ static void _LNK_CONV PipeThread(void *p) {
         pipe->reading = 0;
         DosPostEventSem(pipe->NewData);
         DosReleaseMutexSem(pipe->Access);
+        UninstallExceptq(&exRegRec);
         return;
     }
 
@@ -983,6 +986,7 @@ static void _LNK_CONV PipeThread(void *p) {
     // pclose(fp);
     pipe->reading = 0;
     DosPostEventSem(pipe->NewData);
+    UninstallExceptq(&exRegRec);
     DosReleaseMutexSem(pipe->Access);
     //fprintf(stderr, "Read: Released mutex\n");
     return;

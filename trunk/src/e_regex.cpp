@@ -18,6 +18,9 @@
 #endif
 #include "e_regex.h"
 #include "sysdep.h"
+#if defined(OS2)
+#include "exceptq.h"
+#endif
 
 //#define DEBUG
 
@@ -1238,10 +1241,14 @@ static void RxDump(int N, RxNode *n) {
     RxFree(a);
 
 int main() {
+    EXCEPTIONREGISTRATIONRECORD exRegRec;
     RxNode *a;
     RxMatchRes b;
     char line[1024];
 
+#if defined(OS2)
+    LoadExceptq(&exRegRec, "");
+#endif
     TEST(1, "a", "a");
     TEST(0, "b", "a");
     TEST(1, "aaaa", "aaaa");
@@ -1316,6 +1323,9 @@ int main() {
         }
         RxFree(a);
     }
+#if defined(OS2)
+    UninstallExceptq(&exRegRec);
+#endif
     return 0;
 }
 

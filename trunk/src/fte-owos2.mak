@@ -26,6 +26,7 @@
 CC = wpp386
 LD = wlink
 RC = wrc
+PERL = perl
 
 # Machine type -5r Pent -6r Pent Pro
 MACHINE= -3r
@@ -39,8 +40,13 @@ INCLUDE = $(%watcom)\h;$(%watcom)\h\os2;.\
 MISC    = -wcd555 -wcd013 -wcd726
 
 DEFS    = -dOS2 -dOS2OW -dINCL_32 -dWATCOM -dUSE_LOCALE
-CFLAGS  = -i=$(INCLUDE) $(MISC) $(DEFS) -d3 -db -w4 -e25 -zq $(OPT) $(MACHINE) -bm -bt=OS2 -mf -xs
+!ifdef DEBUG
+CFLAGS  = -i=$(INCLUDE) $(MISC) $(DEFS) -d3 -db -w4 -e25 -zq $(OPT) $(MACHINE) -bm -bt=OS2 -mf -xs -of+
+LDFLAGS = debug all op m op maxe=25 op q op symf op el op stack=128k
+!else
+CFLAGS  = -i=$(INCLUDE) $(MISC) $(DEFS) -d1 -db -w4 -e25 -zq $(OPT) $(MACHINE) -bm -bt=OS2 -mf -xs -of+
 LDFLAGS = op m op maxe=25 op q op symf op el op stack=128k
+!endif
 OEXT    = obj
 
 .EXTENSIONS:.rc .res
@@ -65,13 +71,15 @@ c_config.obj: c_config.cpp defcfg.h
 
 efte.exe: $(OBJS) $(VIOOBJS) fte.def
   $(LD) NAME efte SYS os2v2 $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)}
+  $(PERL) ..\tools\mapsymw.pl efte.map
 
-eftepm.res: ftepm.rc pmdlg.rc
-  $(RC) -r ftepm.rc eftepm.res
+eftepm.res: eftepm.rc pmdlg.rc
+  $(RC) -r eftepm.rc eftepm.res
 
 eftepm.exe: $(OBJS) $(PMOBJS) eftepm.res
   $(LD) NAME eftepm SYS os2v2_pm $(LDFLAGS) FILE {$(OBJS) $(PMOBJS)}
   $(RC) eftepm.res eftepm.exe
+  $(PERL) ..\tools\mapsymw.pl eftepm.map
 
 clean : .SYMBOLIC
   -@rm *.obj
@@ -79,6 +87,10 @@ clean : .SYMBOLIC
   -@rm *.err
   -@rm *.lst
   -@rm *.map
+  -@rm *.sym
+  -@rm *.res
+  -@rm *.mbr
+  -@rm *.*~
 
 cleanall : .SYMBOLIC
   -@rm *.obj
@@ -88,4 +100,8 @@ cleanall : .SYMBOLIC
   -@rm *.map
   -@rm def*.h
   -@rm *.cnf
-  -@rm *.mif
+#  -@rm *.mif
+  -@rm *.sym
+  -@rm *.res
+  -@rm *.mbr
+  -@rm *.*~
