@@ -42,6 +42,7 @@ extern int REXX_Do_Offset;
 extern int ShowVScroll;
 extern int ShowHScroll;
 extern int ShowMenuBar;
+bool BubbleHelp;
 
 int SystemClipboard = 0;
 int ScreenSizeX = -1, ScreenSizeY = -1;
@@ -55,7 +56,7 @@ int SelectPathname = 0;
 char DefaultModeName[32] = "";
 RxNode *CompletionFilter = NULL;
 char PrintDevice[MAXPATH] = "\\DEV\\PRN";
-char CompileCommand[256] = "make";
+char CompileCommand[256] = "wmake ";
 int KeepHistory = 0;
 int LoadDesktopOnEntry = 0;
 int SaveDesktopOnExit = 0;
@@ -308,6 +309,9 @@ static int SetGlobalNumber(int what, int number) {
     case FLAG_ShowMenuBar:
         ShowMenuBar = number;
         break;
+    case FLAG_BubbleHelp:
+        BubbleHelp = number;
+        break;
     case FLAG_ShowToolBar:
         ShowToolBar = number;
         break;
@@ -530,29 +534,30 @@ static int ReadCommands(CurPos &cp, const char *Name) {
     if (GetObj(cp, len) != CF_INT) ENDFUNCRC(-1);
     if (GetNum(cp, cmdno) == 0) ENDFUNCRC(-1);
     if (cmdno != (Cmd | CMD_EXT)) {
-        fprintf(stderr, "Bad Command map %s -> %ld != %ld\n", Name, Cmd, cmdno);
+      fprintf(stderr, "Bad Command map %s -> %ld != %ld\n", Name, Cmd, cmdno ? cmdno : 0);
         ENDFUNCRC(-1);
     }
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
         switch (obj) {
         case CF_COMMAND: {
-            //              char *s;
+              //            char *s;
             long cnt;
             long ign;
             long cmd;
 
-            //                if ((s = GetCharStr(cp, len)) == 0) return -1;
+            //s = (char *) GetCharStr(cp, len);
+            //                if (s  == 0) return -1;
             if (GetNum(cp, cmd) == 0) ENDFUNCRC(-1);
             if (GetObj(cp, len) != CF_INT) ENDFUNCRC(-1);
             if (GetNum(cp, cnt) == 0) ENDFUNCRC(-1);
             if (GetObj(cp, len) != CF_INT) ENDFUNCRC(-1);
             if (GetNum(cp, ign) == 0) ENDFUNCRC(-1);
 
-            //                if (cmd != CmdNum(s)) {
-            //                    fprintf(stderr, "Bad Command Id: %s -> %d\n", s, cmd);
-            //                    return -1;
-            //                }
+                //            if (cmd != CmdNum((char *) s)) {
+                //                fprintf(stderr, "Bad Command Id: %s -> %d\n", s, cmd);
+                //                return -1;
+                //            }
 
             if (AddCommand(Cmd, cmd, cnt, ign) == 0) {
                 if (Name == 0 || strcmp(Name, "xx") != 0) {

@@ -21,10 +21,36 @@ BITMAP 116 bmps\tagfind.bmp
 BITMAP 117 bmps\tagnext.bmp
 BITMAP 118 bmps\tagprev.bmp
 BITMAP 119 bmps\tagpop.bmp
+BITMAP 120 bmps\reload.bmp
+BITMAP 121 bmps\run.bmp
 
 MENU 1
 BEGIN
      MENUITEM "Quit", 100
+END
+
+STRINGTABLE
+BEGIN
+   102 "Open a file"
+   103 "Save current file"
+   104 "Close current file"
+   105 "Previous file"
+   106 "Last file"
+   107 "Next file"
+   108 "Undo"
+   109 "Redo"
+   110 "Cut"
+   111 "Copy"
+   112 "Paste stream"
+   113 "Paste column"
+   114 "Previous error"
+   115 "Next error"
+   116 "Find tag"
+   117 "Pop tag"
+   118 "Next tag"
+   119 "Previous tag"
+   120 "Reload current file"
+   121 "Compile (GREP)"    
 END
 
 rcinclude pmdlg.rc

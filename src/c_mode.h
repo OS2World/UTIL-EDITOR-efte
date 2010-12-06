@@ -212,6 +212,7 @@ extern EBufferFlags DefaultBufferFlags;
 #define FLAG_CursorInsertMask   67
 #define FLAG_CursorOverMask     68
 #define FLAG_BackupDirectory    69
+#define FLAG_BubbleHelp         70
 
 #define EM_MENUS 2
 #define EM_MainMenu 0

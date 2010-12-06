@@ -13,7 +13,9 @@
 #ifdef USE_LOCALE
 #include <locale.h>
 #endif
-
+#if defined(OS2)
+#include "exceptq.h"
+#endif
 #if defined(UNIX)
 // variables used by vfte
 uid_t effuid;
@@ -51,7 +53,7 @@ static void Usage() {
           );
 }
 
-#ifndef UNIX
+#if !defined(OS2) && !defined(UNIX)
 /*
  * findPathExt() returns a ^ to the suffix in a file name string. If the
  * name contains a suffix, the pointer ^ts to the suffix' dot character,
@@ -174,8 +176,8 @@ static int CmdLoadConfiguration(int &argc, char **argv) {
                      "via the command line option -C\n");
         }
     } else if (LoadConfig(argc, argv, ConfigFileName) == -1) {
-        DieError(1, "Failed to load configuration file '%s'.\n"
-                 "Use '-C' option.", ConfigFileName);
+          DieError(1, "Failed to load configuration file '%s'.\n"
+                   "Use '-C' option.", ConfigFileName);
     }
 
     for (Arg = 1; Arg < argc; Arg++) {
@@ -217,7 +219,69 @@ static int CmdLoadConfiguration(int &argc, char **argv) {
     return 1;
 }
 
+#if defined(OS2)
+int    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec, char* pOpts)
+{
+  static BOOL      fLoadTried = FALSE;
+  static PINSTEXQ  pfnInstall = 0;
+
+  HMODULE   hmod = 0;
+  char      szFailName[16];
+
+  /* Make only one attempt to load the dll & resolve the proc address. */
+  if (!fLoadTried) {
+    fLoadTried = TRUE;
+
+    /* If the dll can't be found on the LIBPATH, look for it in the
+     * exe's directory (which may not be the current directory).
+     */
+    if (DosLoadModule(szFailName, sizeof(szFailName), "EXCEPTQ", &hmod)) {
+      PPIB      ppib;
+      PTIB      ptib;
+      char *    ptr;
+      char      szPath[CCHMAXPATH];
+
+      DosGetInfoBlocks(&ptib, &ppib);
+      if (DosQueryModuleName(ppib->pib_hmte, CCHMAXPATH, szPath) ||
+          (ptr = strrchr(szPath, '\\')) == 0)
+        return FALSE;
+
+      strcpy(&ptr[1], "EXCEPTQ.DLL");
+      if (DosLoadModule(szFailName, sizeof(szFailName), szPath, &hmod))
+        return FALSE;
+    }
+
+    /* If the proc address isn't found (possibly because an older
+     * version of exceptq.dll was loaded), unload the dll & exit.
+     */
+    if (DosQueryProcAddr(hmod, 0, "InstallExceptq", (PFN*)&pfnInstall)) {
+      DosFreeModule(hmod);
+      return FALSE;
+    }
+  }
+
+  /* Ensure we have the proc address. */
+  if (!pfnInstall)
+    return FALSE;
+
+  /* Call InstallExceptq().  It really shouldn't fail, so if
+   * it does, zero-out the address to avoid further problems.
+   */
+  if (pfnInstall(pExRegRec, pOpts)) {
+    pfnInstall = 0;
+    return FALSE;
+  }
+
+  return TRUE;
+}
+#endif
+
 int main(int argc, char **argv) {
+    EXCEPTIONREGISTRATIONRECORD exRegRec;
+
+#if defined(OS2)
+    LoadExceptq(&exRegRec, "");
+#endif    
 #if defined(_DEBUG) && defined(MSVC) && defined(MSVCDEBUG)
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
     _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
@@ -241,17 +305,16 @@ int main(int argc, char **argv) {
     if (getgid() != effgid)
         setegid(getgid());
 #endif
-
 #ifdef USE_LOCALE
     // setup locale from environment
     setlocale(LC_ALL, "");
 #endif
 
     if (CmdLoadConfiguration(argc, argv) == 0)
+	//UninstallExceptq(&exRegRec);
         return 1;
 
     STARTFUNC("main");
-
     EGUI *g = new EGUI(argc, argv, ScreenSizeX, ScreenSizeY);
     if (gui == 0 || g == 0)
         DieError(1, "Failed to initialize display\n");
@@ -282,7 +345,9 @@ int main(int argc, char **argv) {
 #if defined(__DEBUG_ALLOC__)
     _dump_allocated(64);
 #endif
-
+#if defined(OS2)
+    UninstallExceptq(&exRegRec);
+#endif
     ENDFUNCRC(0);
     //return 0;
 }

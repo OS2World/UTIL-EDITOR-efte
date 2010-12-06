@@ -28,7 +28,10 @@
 #include "c_hilit.h"
 
 #include "fte.h"
+
+#ifndef OS2
 #include "config.h"
+#endif
 
 #define slen(s) ((s) ? (strlen(s) + 1) : 0)
 #define ACTION "[%-11s] "
@@ -56,21 +59,24 @@ int verbosity = 0;
 #include "c_commands.h"
 #include "c_cmdtab.h"
 
-static void cleanup(int xerrno) {
-    exit(xerrno);
-}
+/*static void cleanup(int xerrno) {
+  unsigned long   aulFSInfoBuf = {0};
+    DosExit(1, aulFSInfoBuf);//exit(xerrno);
+} */
 
 static void Fail(CurPos &cp, const char *s, ...) {
     va_list ap;
     char msgbuf[1024];
+    char diemsg[1024];
 
     va_start(ap, s);
     vsprintf(msgbuf, s, ap);
     va_end(ap);
 
-    fprintf(stderr, "%s:%d: Error: %s\n", cp.name, cp.line, msgbuf);
-    fprintf(stderr, "Use: efte -! -l%i %s to repair error\n", cp.line, cp.name);
-    cleanup(1);
+    sprintf(diemsg, "%s:%d: Error: %s\n Use: efte -! -l%i %s to repair error\n",
+            cp.name, cp.line, msgbuf, cp.line, cp.name);
+    DieError(1, "%s", diemsg);
+    //cleanup(1);
 }
 
 static int LoadFile(const char *WhereName, const char *CfgName, int Level = 1, int optional = 0);
@@ -141,8 +147,9 @@ int CFteMain() {
     }
 
     if (LoadFile("", ConfigFileName, 0) != 0) {
-        fprintf(stderr, "\nCompile failed\n");
-        cleanup(1);
+        DieError(1, "\nCompile failed\n");
+        //fprintf(stderr, "\nCompile failed\n");
+        //cleanup(1);
     }
 
     return 0;
@@ -254,6 +261,7 @@ static const OrdLookup global_num[] = {
     MODE_FLG(ScrollBarWidth),
     MODE_FLG(SelectPathname),
     MODE_FLG(ShowToolBar),
+    MODE_FLG(BubbleHelp),
     MODE_FLG(ShowMenuBar),
     MODE_FLG(KeepHistory),
     MODE_FLG(LoadDesktopOnEntry),
@@ -1817,20 +1825,23 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level, int o
         snprintf(dirs[4],  MAXPATH, "%s/share/efte/config/%s", EFTE_INSTALL_DIR, CfgName);
         snprintf(dirs[5],  MAXPATH, "/etc/efte/config/%s", CfgName);
 #else // if PT_UNIXISH
-#       define SEARCH_PATH_LEN 11
+#       define SEARCH_PATH_LEN 13
         char dirs[SEARCH_PATH_LEN][MAXPATH];
-        snprintf(dirs[0], MAXPATH, "%s/%s", ConfigDir, CfgName);
-        snprintf(dirs[1], MAXPATH, "~/.efte/%s", CfgName);
-        snprintf(dirs[2], MAXPATH, "~/efte/%s", CfgName);
-        snprintf(dirs[3], MAXPATH, "/efte/local/%s", CfgName);
-        snprintf(dirs[4], MAXPATH, "/efte/config/%s", CfgName);
-        snprintf(dirs[5], MAXPATH, "/Program Files/efte/local/%s", CfgName);
-        snprintf(dirs[6], MAXPATH, "/Program Files/efte/config/%s", CfgName);
-        snprintf(dirs[7], MAXPATH, "/Program Files (x86)/efte/local/%s", CfgName);
-        snprintf(dirs[8], MAXPATH, "/Program Files (x86)/efte/config/%s", CfgName);
+        const char *pg = getenv("EFTEDIR");
+        snprintf(dirs[0], MAXPATH, "%s/config/%s", pg,  CfgName);
+        snprintf(dirs[1], MAXPATH, "%s/local/%s", pg, CfgName);
+        snprintf(dirs[2], MAXPATH, "%s/%s", ConfigDir, CfgName);
+        snprintf(dirs[3], MAXPATH, "~/.efte/%s", CfgName);
+        snprintf(dirs[4], MAXPATH, "~/efte/%s", CfgName);
+        snprintf(dirs[5], MAXPATH, "/efte/local/%s", CfgName);
+        snprintf(dirs[6], MAXPATH, "/efte/config/%s", CfgName);
+        snprintf(dirs[7], MAXPATH, "/Program Files/efte/local/%s", CfgName);
+        snprintf(dirs[8], MAXPATH, "/Program Files/efte/config/%s", CfgName);
+        snprintf(dirs[9], MAXPATH, "/Program Files (x86)/efte/local/%s", CfgName);
+        snprintf(dirs[10], MAXPATH, "/Program Files (x86)/efte/config/%s", CfgName);
         const char *pf = getenv("ProgramFiles");
-        snprintf(dirs[9], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:", CfgName);
-        snprintf(dirs[10], MAXPATH, "%s/eFTE/config/%s", pf ? pf : "C:", CfgName);
+        snprintf(dirs[11], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:", CfgName);
+        snprintf(dirs[12], MAXPATH, "%s/eFTE/config/%s",pf ? pf : "C:", CfgName);
 #endif // if PT_UNIXISH
 
         char tmp[MAXPATH];
@@ -1847,11 +1858,14 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level, int o
         if (found == false && optional == 1)
             return -1;
         else if (found == false) {
-            fprintf(stderr, "Cannot find '%s' in any of the following locations:\n", CfgName);
+            char *s;
+            s = (char *) malloc(MAXPATH * (SEARCH_PATH_LEN + 1));
+            sprintf(s, "Cannot find '%s' in any of the following locations:\n", CfgName);
             for (int idx=0; idx<SEARCH_PATH_LEN; idx++) {
                 ExpandPath(dirs[idx], tmp, sizeof(tmp));
-                fprintf(stderr, "   %s\n", tmp);
+                sprintf(s + strlen(s), "   %s\n", tmp);
             }
+            DieError(1, s);
             return -1;
         }
     }

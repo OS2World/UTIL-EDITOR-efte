@@ -878,7 +878,9 @@ int EBuffer::GetString(ExState &State) {
 
 int EBuffer::RegExp(ExState &State) {
     int No = 0;
-    char Haystack[1024], Search[128], Replace[128];
+    char Haystack[1024];
+    char Search[128];
+    char Replace[128];
     RxNode *re;
     RxMatchRes match;
     char *dest = 0;
@@ -1805,7 +1807,8 @@ int EBuffer::FindTag(ExState &State) {
 // these two will probably be replaced in the future
 int EBuffer::InsertDate(ExState &State) {
     char strArg[128] = "";
-    char buf[128], *p;
+    char buf[128];
+    char *p;
 
     time_t t;
 
