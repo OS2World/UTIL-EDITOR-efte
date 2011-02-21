@@ -50,7 +50,7 @@ colorize JAVA {
 }
 
 mode JAVA: SOURCE {      # JAVA Mode
-    FileNameRx          = /\.\c{JAVA}$/;
+    FileNameRx          =  /\.\c{{java}|{js}}$/;
     HilitOn             = 1;
     Colorizer           = 'JAVA';
     AutoIndent          = 1;

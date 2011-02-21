@@ -106,12 +106,16 @@ colorize C {
 	'auto',
 	'char',
 	'double',
-	'float',
+	'double_t',
+        'float',
+        'float_t',
 	'int',
 	'int16_t',
 	'int32_t',
 	'int64_t',
 	'int8_t',
+	'intptr_t',
+	'ptrdiff_t',
 	'long',
 	'off_t',
 	'ptrdiff_t',
@@ -127,6 +131,7 @@ colorize C {
 	'uint32_t',
 	'uint64_t',
 	'uint8_t',
+-	'uintptr_t',
 	'unsigned',
 	'void',
 	'volatile',
@@ -178,7 +183,7 @@ colorize C {
 }
 
 mode C: SOURCE {      # C/C++ Mode
-    FileNameRx		= /\.\c{c|h|{cpp}|{cxx}|{hpp}|{cc}|{cu}|m|{mm}|{xs}}$/;
+  FileNameRx		= /\.\c{c|h|{cpp}|{cxx}|{hpp}|{cc}|{cu}|m|{mm}|{xs}|{hh}|{tcc}|{idc}}$/;
     HilitOn		= 1;
     Colorizer		= 'C';
     AutoIndent		= 1;
