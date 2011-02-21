@@ -165,8 +165,10 @@ menu Window {
     item "New &Frame" { FrameNew }
     item;
     item "Split &Horizontal\tCtrl+F4" { WinHSplit }
-    item "&Close view\tCtrl+Alt+F4" { WinClose }
+    item "&Close view\tShift+Alt+F4" { WinClose }
     item "Close &other views\tF5" { WinZoom }
+    item "&Next view\tF4" { WinNext }
+    item "&Prev view\tShift+F4" { WinPrev }
     item;
     item "&Load Desktop" { DesktopLoad }
     item "Sa&ve Desktop" { DesktopSave }
@@ -380,6 +382,7 @@ menu Toggle {
     item "S&pace tabs"			{ ToggleSpaceTabs }
     item "Backspace k&ill tab"		{ ToggleBackSpKillTab }
     item "&Delete kill tab"		{ ToggleDeleteKillTab }
+    #item "&Bubblehelp"             {ToggleBubbleHelp}
 }
 menu Options {
     submenu "Change &mode\tC+O C+M",  MChangeMode;

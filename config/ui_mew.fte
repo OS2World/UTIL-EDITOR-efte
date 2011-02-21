@@ -368,6 +368,7 @@ menu Options { #FOLD03
     item "S&how tabs\tC+O   Tab" { ToggleShowTabs; WinRefresh }
     item "E&xpand tabs\tC+O C+Tab" { ToggleExpandTabs; WinRefresh }
     item "&Print to...               " { SetPrintDevice }
+#    item "&Bubblehelp"             {ToggleBubbleHelp}
 }                    
 
 menu MCvs {
