@@ -13,11 +13,13 @@
 #include "o_svnbase.h"
 #include "log.h"
 
-typedef struct _GUICharactersEntry {
+typedef struct _GUICharactersEntry
+{
     struct _GUICharactersEntry *next;
     char *name;
     char *chars;
-} GUICharactersEntry;
+}
+GUICharactersEntry;
 
 // C Indent
 extern int C_Indent;
@@ -47,8 +49,8 @@ bool BubbleHelp;
 int SystemClipboard = 0;
 int ScreenSizeX = -1, ScreenSizeY = -1;
 int ScrollBarWidth = 1;
-bool CursorBlink = 0; // default is "no" (same as before)
-bool CursorWithinEOL = 0; // default is "no" (same as before)
+bool CursorBlink = 0;		// default is "no" (same as before)
+bool CursorWithinEOL = 0;	// default is "no" (same as before)
 int CursorInsertMask = 0x77;
 int CursorOverMask = 0x44;
 int OpenAfterClose = 1;
@@ -61,10 +63,12 @@ int KeepHistory = 0;
 int LoadDesktopOnEntry = 0;
 int SaveDesktopOnExit = 0;
 char WindowFont[64] = "";
+
 // Custom RGB colors (if console driver supports them)
 TRGBColor RGBColor[16];
+
 // true if corresponding triplet in RGBColor is valid
-bool RGBColorValid [16];
+bool RGBColorValid[16];
 int KeepMessages = 0;
 int ScrollBorderX = 0;
 int ScrollBorderY = 0;
@@ -91,309 +95,330 @@ char BackupDirectory[MAXPATH] = "";
 // Which characters to get. defaultCharacters if not set, rest filled
 // with defaultCharacters if too short
 // List of GUICharacters is freed, only one item remains
-const char *GetGUICharacters(const char *which, const char *defChars) {
+const char *GetGUICharacters(const char *which, const char *defChars)
+{
     GUICharactersEntry *g, *gg, *found = NULL;
     char *s;
     unsigned int i;
 
     for (g = GUICharacters; g; g = gg) {
-        gg = g->next;
-        if (strcmp(g->name, which) == 0) {
-            if ((i = strlen(g->chars)) < strlen(defChars)) {
-                s = new char [strlen(defChars) + 1];
-                assert(s != NULL);
-                strcpy(s, g->chars);
-                strcpy(s + i, defChars + i);
-                delete g->chars;
-                g->chars = s;
-            }
-            if (found) {
-                free(found->chars);
-                free(found->name);
-                free(found);
-            }
-            found = g;
-        } else {
-            free(g->name);
-            free(g->chars);
-            free(g);
-        }
+	gg = g->next;
+	if (strcmp(g->name, which) == 0) {
+	    if ((i = strlen(g->chars)) < strlen(defChars)) {
+		s = new char[strlen(defChars) + 1];
+
+		assert(s != NULL);
+		strcpy(s, g->chars);
+		strcpy(s + i, defChars + i);
+		delete g->chars;
+
+		g->chars = s;
+	    }
+	    if (found) {
+		free(found->chars);
+		free(found->name);
+		free(found);
+	    }
+	    found = g;
+	}
+	else {
+	    free(g->name);
+	    free(g->chars);
+	    free(g);
+	}
     }
     GUICharacters = found;
-    if (found) return found->chars;
-    else return defChars;
+    if (found)
+	return found->chars;
+    else
+	return defChars;
 }
 
-static void AppendGUICharacters(const char *string) {
+static void AppendGUICharacters(const char *string)
+{
     const char *s;
     GUICharactersEntry *g;
 
     s = strchr(string, ':');
     if (s) {
-        g = new GUICharactersEntry;
-        assert(g != NULL);
+	g = new GUICharactersEntry;
+	assert(g != NULL);
 
-        // allocate memory for name
-        g->name = (char *)malloc((s - string) + 1);
-        assert(g->name != NULL);
+	// allocate memory for name
+	g->name = (char *)malloc((s - string) + 1);
+	assert(g->name != NULL);
 
-        // make sure we have zero at start of string
-        *(g->name) = 0;
+	// make sure we have zero at start of string
+	*(g->name) = 0;
 
-        // strncat makes sure that we have zero at the end...
-        strncat(g->name, string, (s - string));
+	// strncat makes sure that we have zero at the end...
+	strncat(g->name, string, (s - string));
 
-        // copy text after ':' to chars...
-        g->chars = strdup(s + 1);
-        assert(g->chars != NULL);
+	// copy text after ':' to chars...
+	g->chars = strdup(s + 1);
+	assert(g->chars != NULL);
 
-        g->next = GUICharacters;
-        GUICharacters = g;
+	g->next = GUICharacters;
+	GUICharacters = g;
     }
 }
 
-static int AddKeyword(ColorKeywords *tab, char color, const char *keyword) {
+static int AddKeyword(ColorKeywords * tab, char color, const char *keyword)
+{
     int len;
 
     len = strlen(keyword);
-    if (len < 1 || len >= CK_MAXLEN) return 0;
+    if (len < 1 || len >= CK_MAXLEN)
+	return 0;
 
     if (tab->key[len]) {
-        int lx = strlen(tab->key[len]);
-        char *key;
+	int lx = strlen(tab->key[len]);
+	char *key;
 
-        key = (char *)realloc(tab->key[len], lx + len + 1 + 1);
-        assert(key != NULL);
+	key = (char *)realloc(tab->key[len], lx + len + 1 + 1);
+	assert(key != NULL);
 
-        tab->key[len] = key;
-        assert(tab->key[len] != 0);
-        strcpy(tab->key[len] + lx, keyword);
-        tab->key[len][lx + len] = color;
-        tab->key[len][lx + len + 1] = 0;
-    } else {
-        tab->key[len] = (char *)malloc(len + 2);
-        assert(tab->key[len] != 0);
-        strcpy(tab->key[len], keyword);
-        tab->key[len][len] = color;
-        tab->key[len][len + 1] = 0;
+	tab->key[len] = key;
+	assert(tab->key[len] != 0);
+	strcpy(tab->key[len] + lx, keyword);
+	tab->key[len][lx + len] = color;
+	tab->key[len][lx + len + 1] = 0;
+    }
+    else {
+	tab->key[len] = (char *)malloc(len + 2);
+	assert(tab->key[len] != 0);
+	strcpy(tab->key[len], keyword);
+	tab->key[len][len] = color;
+	tab->key[len][len + 1] = 0;
     }
     tab->count[len]++;
     tab->TotalCount++;
     return 1;
 }
 
-static int SetModeNumber(EMode *mode, int what, int number) {
+static int SetModeNumber(EMode * mode, int what, int number)
+{
     int j = what;
 
-    if (j == BFI_LeftMargin || j == BFI_RightMargin) number--;
+    if (j == BFI_LeftMargin || j == BFI_RightMargin)
+	number--;
     mode->Flags.num[j] = number;
     return 0;
 }
 
-static int SetModeString(EMode *mode, int what, const char *string) {
+static int SetModeString(EMode * mode, int what, const char *string)
+{
     int j = what;
 
     if (j == BFI_Colorizer) {
-        mode->fColorize = FindColorizer(string);
-    } else
-        if (j == BFI_EventMap) {
-            mode->fEventMap = FindEventMap(string);
-        } else if (j == BFI_IndentMode) {
-            mode->Flags.num[j] = GetIndentMode(string);
-        } else if (j == BFS_WordChars) {
-            SetWordChars(mode->Flags.WordChars, string);
-        } else if (j == BFS_CapitalChars) {
-            SetWordChars(mode->Flags.CapitalChars, string);
-        } else if (j == BFS_FileNameRx) {
-            if (mode->MatchName)
-                free(mode->MatchName);
-            if (mode->MatchNameRx)
-                RxFree(mode->MatchNameRx);
-            mode->MatchName = strdup(string);
-            mode->MatchNameRx = RxCompile(string);
-        } else if (j == BFS_FirstLineRx) {
-            if (mode->MatchLine)
-                free(mode->MatchLine);
-            if (mode->MatchLineRx)
-                RxFree(mode->MatchLineRx);
-            mode->MatchLine = strdup(string);
-            mode->MatchLineRx = RxCompile(string);
-        } else {
-            if (mode->Flags.str[j & 0xFF])
-                free(mode->Flags.str[j & 0xFF]);
-            mode->Flags.str[j & 0xFF] = strdup(string);
-        }
+	mode->fColorize = FindColorizer(string);
+    }
+    else if (j == BFI_EventMap) {
+	mode->fEventMap = FindEventMap(string);
+    }
+    else if (j == BFI_IndentMode) {
+	mode->Flags.num[j] = GetIndentMode(string);
+    }
+    else if (j == BFS_WordChars) {
+	SetWordChars(mode->Flags.WordChars, string);
+    }
+    else if (j == BFS_CapitalChars) {
+	SetWordChars(mode->Flags.CapitalChars, string);
+    }
+    else if (j == BFS_FileNameRx) {
+	if (mode->MatchName)
+	    free(mode->MatchName);
+	if (mode->MatchNameRx)
+	    RxFree(mode->MatchNameRx);
+	mode->MatchName = strdup(string);
+	mode->MatchNameRx = RxCompile(string);
+    }
+    else if (j == BFS_FirstLineRx) {
+	if (mode->MatchLine)
+	    free(mode->MatchLine);
+	if (mode->MatchLineRx)
+	    RxFree(mode->MatchLineRx);
+	mode->MatchLine = strdup(string);
+	mode->MatchLineRx = RxCompile(string);
+    }
+    else {
+	if (mode->Flags.str[j & 0xFF])
+	    free(mode->Flags.str[j & 0xFF]);
+	mode->Flags.str[j & 0xFF] = strdup(string);
+    }
     return 0;
 }
 
-static int SetGlobalNumber(int what, int number) {
+static int SetGlobalNumber(int what, int number)
+{
     STARTFUNC("SetGlobalNumber");
     LOG << "What: " << what << " Number: " << number << ENDLINE;
 
     switch (what) {
     case FLAG_C_Indent:
-        C_Indent = number;
-        break;
+	C_Indent = number;
+	break;
     case FLAG_C_BraceOfs:
-        C_BraceOfs = number;
-        break;
+	C_BraceOfs = number;
+	break;
     case FLAG_C_CaseOfs:
-        C_CaseOfs = number;
-        break;
+	C_CaseOfs = number;
+	break;
     case FLAG_C_CaseDelta:
-        C_CaseDelta = number;
-        break;
+	C_CaseDelta = number;
+	break;
     case FLAG_C_ClassOfs:
-        C_ClassOfs = number;
-        break;
+	C_ClassOfs = number;
+	break;
     case FLAG_C_ClassDelta:
-        C_ClassDelta = number;
-        break;
+	C_ClassDelta = number;
+	break;
     case FLAG_C_ColonOfs:
-        C_ColonOfs = number;
-        break;
+	C_ColonOfs = number;
+	break;
     case FLAG_C_CommentOfs:
-        C_CommentOfs = number;
-        break;
+	C_CommentOfs = number;
+	break;
     case FLAG_C_CommentDelta:
-        C_CommentDelta = number;
-        break;
+	C_CommentDelta = number;
+	break;
     case FLAG_C_FirstLevelIndent:
-        C_FirstLevelIndent = number;
-        break;
+	C_FirstLevelIndent = number;
+	break;
     case FLAG_C_FirstLevelWidth:
-        C_FirstLevelWidth = number;
-        break;
+	C_FirstLevelWidth = number;
+	break;
     case FLAG_C_Continuation:
-        C_Continuation = number;
-        break;
+	C_Continuation = number;
+	break;
     case FLAG_C_ParenDelta:
-        C_ParenDelta = number;
-        break;
+	C_ParenDelta = number;
+	break;
     case FLAG_FunctionUsesContinuation:
-        FunctionUsesContinuation = number;
-        break;
+	FunctionUsesContinuation = number;
+	break;
     case FLAG_REXX_Indent:
-        REXX_Base_Indent = number;
-        break;
+	REXX_Base_Indent = number;
+	break;
     case FLAG_REXX_Do_Offset:
-        REXX_Do_Offset = number;
-        break;
+	REXX_Do_Offset = number;
+	break;
     case FLAG_ScreenSizeX:
-        ScreenSizeX = number;
-        break;
+	ScreenSizeX = number;
+	break;
     case FLAG_ScreenSizeY:
-        ScreenSizeY = number;
-        break;
+	ScreenSizeY = number;
+	break;
     case FLAG_CursorBlink:
-        CursorBlink = number;
-        break;
+	CursorBlink = number;
+	break;
     case FLAG_SysClipboard:
-        SystemClipboard = number;
-        break;
+	SystemClipboard = number;
+	break;
     case FLAG_OpenAfterClose:
-        OpenAfterClose = number;
-        break;
+	OpenAfterClose = number;
+	break;
     case FLAG_ShowVScroll:
-        ShowVScroll = number;
-        break;
+	ShowVScroll = number;
+	break;
     case FLAG_ShowHScroll:
-        ShowHScroll = number;
-        break;
+	ShowHScroll = number;
+	break;
     case FLAG_ScrollBarWidth:
-        ScrollBarWidth = number;
-        break;
+	ScrollBarWidth = number;
+	break;
     case FLAG_SelectPathname:
-        SelectPathname = number;
-        break;
+	SelectPathname = number;
+	break;
     case FLAG_ShowMenuBar:
-        ShowMenuBar = number;
-        break;
+	ShowMenuBar = number;
+	break;
     case FLAG_BubbleHelp:
-        BubbleHelp = number;
-        break;
+	BubbleHelp = number;
+	break;
     case FLAG_ShowToolBar:
-        ShowToolBar = number;
-        break;
+	ShowToolBar = number;
+	break;
     case FLAG_KeepHistory:
-        KeepHistory = number;
-        break;
+	KeepHistory = number;
+	break;
     case FLAG_LoadDesktopOnEntry:
-        LoadDesktopOnEntry = number;
-        break;
+	LoadDesktopOnEntry = number;
+	break;
     case FLAG_SaveDesktopOnExit:
-        SaveDesktopOnExit = number;
-        break;
+	SaveDesktopOnExit = number;
+	break;
     case FLAG_KeepMessages:
-        KeepMessages = number;
-        break;
+	KeepMessages = number;
+	break;
     case FLAG_ScrollBorderX:
-        ScrollBorderX = number;
-        break;
+	ScrollBorderX = number;
+	break;
     case FLAG_ScrollBorderY:
-        ScrollBorderY = number;
-        break;
+	ScrollBorderY = number;
+	break;
     case FLAG_ScrollJumpX:
-        ScrollJumpX = number;
-        break;
+	ScrollJumpX = number;
+	break;
     case FLAG_ScrollJumpY:
-        ScrollJumpY = number;
-        break;
+	ScrollJumpY = number;
+	break;
     case FLAG_GUIDialogs:
-        GUIDialogs = number;
-        break;
+	GUIDialogs = number;
+	break;
     case FLAG_PMDisableAccel:
-        PMDisableAccel = number;
-        break;
+	PMDisableAccel = number;
+	break;
     case FLAG_SevenBit:
-        SevenBit = number;
-        break;
+	SevenBit = number;
+	break;
     case FLAG_WeirdScroll:
-        WeirdScroll = number;
-        break;
+	WeirdScroll = number;
+	break;
     case FLAG_LoadDesktopMode:
-        LoadDesktopMode = number;
-        break;
+	LoadDesktopMode = number;
+	break;
     case FLAG_IgnoreBufferList:
-        IgnoreBufferList = number;
-        break;
+	IgnoreBufferList = number;
+	break;
     case FLAG_ReassignModelIds:
-        ReassignModelIds = number;
-        break;
+	ReassignModelIds = number;
+	break;
     case FLAG_RecheckReadOnly:
-        RecheckReadOnly = number;
-        break;
+	RecheckReadOnly = number;
+	break;
     case FLAG_CursorWithinEOL:
-        CursorWithinEOL = number;
-        break;
+	CursorWithinEOL = number;
+	break;
     case FLAG_CursorInsertMask:
-        CursorInsertMask = number;
-        break;
+	CursorInsertMask = number;
+	break;
     case FLAG_CursorOverMask:
-        CursorOverMask = number;
-        break;
+	CursorOverMask = number;
+	break;
     default:
-        //printf("Unknown global number: %d\n", what);
-        ENDFUNCRC(-1);
+	//printf("Unknown global number: %d\n", what);
+	ENDFUNCRC(-1);
     }
     ENDFUNCRC(0);
 }
 
-static void SetRGBColor(const char *string) {
+static void SetRGBColor(const char *string)
+{
     int idx, r, g, b;
+
     if (sscanf(string, "%x:%x,%x,%x", &idx, &r, &g, &b) != 4) {
-        fprintf(stderr, "Invalid RGB Definition: %s\n", string);
-        return;
+	fprintf(stderr, "Invalid RGB Definition: %s\n", string);
+	return;
     }
     if (idx < 0 || idx > 15) {
-        fprintf(stderr, "Invalid RGB index: (0-f only) (%s)\n", string);
-        return;
+	fprintf(stderr, "Invalid RGB index: (0-f only) (%s)\n", string);
+	return;
     }
-    if (r < 0 || r > 255 ||
-            g < 0 || g > 255 ||
-            b < 0 || b > 255) {
-        fprintf(stderr, "Invalid RGB palette values (00-ff only): %s\n", string);
-        return;
+    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+	fprintf(stderr, "Invalid RGB palette values (00-ff only): %s\n",
+		string);
+	return;
     }
     RGBColorValid[idx] = true;
     RGBColor[idx].r = r;
@@ -401,128 +426,138 @@ static void SetRGBColor(const char *string) {
     RGBColor[idx].b = b;
 }
 
-static int SetGlobalString(long what, const char *string) {
+static int SetGlobalString(long what, const char *string)
+{
     STARTFUNC("SetGlobalString");
     LOG << "What: " << what << " String: " << string << ENDLINE;
 
     switch (what) {
     case FLAG_DefaultModeName:
-        strlcpy(DefaultModeName, string, sizeof(DefaultModeName));
-        break;
+	strlcpy(DefaultModeName, string, sizeof(DefaultModeName));
+	break;
     case FLAG_CompletionFilter:
-        if ((CompletionFilter = RxCompile(string)) == NULL) return -1;
-        break;
+	if ((CompletionFilter = RxCompile(string)) == NULL)
+	    return -1;
+	break;
     case FLAG_PrintDevice:
-        strlcpy(PrintDevice, string, sizeof(PrintDevice));
-        break;
+	strlcpy(PrintDevice, string, sizeof(PrintDevice));
+	break;
     case FLAG_CompileCommand:
-        strlcpy(CompileCommand, string, sizeof(CompileCommand));
-        break;
+	strlcpy(CompileCommand, string, sizeof(CompileCommand));
+	break;
     case FLAG_WindowFont:
-        strlcpy(WindowFont, string, sizeof(WindowFont));
-        break;
+	strlcpy(WindowFont, string, sizeof(WindowFont));
+	break;
     case FLAG_HelpCommand:
-        strlcpy(HelpCommand, string, sizeof(HelpCommand));
-        break;
+	strlcpy(HelpCommand, string, sizeof(HelpCommand));
+	break;
     case FLAG_BackupDirectory:
-        strlcpy(BackupDirectory, string, MAXPATH);
-        break;
+	strlcpy(BackupDirectory, string, MAXPATH);
+	break;
     case FLAG_GUICharacters:
-        AppendGUICharacters(string);
-        break;
+	AppendGUICharacters(string);
+	break;
     case FLAG_CvsCommand:
-        strlcpy(CvsCommand, string, sizeof(CvsCommand));
-        break;
+	strlcpy(CvsCommand, string, sizeof(CvsCommand));
+	break;
     case FLAG_CvsLogMode:
-        strlcpy(CvsLogMode, string, sizeof(CvsLogMode));
-        break;
+	strlcpy(CvsLogMode, string, sizeof(CvsLogMode));
+	break;
     case FLAG_SvnCommand:
-        strlcpy(SvnCommand, string, sizeof(SvnCommand));
-        break;
+	strlcpy(SvnCommand, string, sizeof(SvnCommand));
+	break;
     case FLAG_SvnLogMode:
-        strlcpy(SvnLogMode, string, sizeof(SvnLogMode));
-        break;
+	strlcpy(SvnLogMode, string, sizeof(SvnLogMode));
+	break;
     case FLAG_RGBColor:
-        SetRGBColor(string);
-        break;
+	SetRGBColor(string);
+	break;
     case FLAG_XShellCommand:
-        strlcpy(XShellCommand, string, sizeof(XShellCommand));
-        break;
+	strlcpy(XShellCommand, string, sizeof(XShellCommand));
+	break;
     default:
-        //printf("Unknown global string: %ld\n", what);
-        ENDFUNCRC(-1);
+	//printf("Unknown global string: %ld\n", what);
+	ENDFUNCRC(-1);
     }
     ENDFUNCRC(0);
 }
 
-static int SetEventString(EEventMap *Map, long what, const char *string) {
+static int SetEventString(EEventMap * Map, long what, const char *string)
+{
     STARTFUNC("SetEventString");
     LOG << "What: " << what << " String: " << string << ENDLINE;
     switch (what) {
     case EM_MainMenu:
     case EM_LocalMenu:
-        Map->SetMenu(what, string);
-        break;
+	Map->SetMenu(what, string);
+	break;
     default:
-        ENDFUNCRC(-1);
+	ENDFUNCRC(-1);
     }
     ENDFUNCRC(0);
 }
 
-static int SetColorizeString(EColorize *Colorize, long what, const char *string) {
+static int SetColorizeString(EColorize * Colorize, long what,
+			     const char *string)
+{
     STARTFUNC("SetColorizeString");
     LOG << "What: " << what << " String: " << string << ENDLINE;
     switch (what) {
     case COL_SyntaxParser:
-        Colorize->SyntaxParser = GetHilitMode(string);
-        break;
+	Colorize->SyntaxParser = GetHilitMode(string);
+	break;
     default:
-        ENDFUNCRC(-1);
+	ENDFUNCRC(-1);
     }
     ENDFUNCRC(0);
 }
 
-static unsigned char GetObj(CurPos &cp, unsigned short &len) {
+static unsigned char GetObj(CurPos & cp, unsigned short &len)
+{
     len = 0;
 
     if (cpos < cp.sz) {
-        //fprintf(stderr, "%i: GetObj type: %i\n", cpos, cache[cpos].tag);
-        unsigned char c = (unsigned char)cache[cpos].tag;
-        len = cache[cpos].len;
-        return c;
+	//fprintf(stderr, "%i: GetObj type: %i\n", cpos, cache[cpos].tag);
+	unsigned char c = (unsigned char)cache[cpos].tag;
+
+	len = cache[cpos].len;
+	return c;
     }
 
     return 0xFF;
 }
 
-static const char *GetCharStr(CurPos &cp, unsigned short len) {
+static const char *GetCharStr(CurPos & cp, unsigned short len)
+{
     STARTFUNC("GetCharStr");
     LOG << "Length: " << len << ENDLINE;
 
     char *p = (char *)malloc(cache[cpos].len);
+
     memcpy(p, cache[cpos].obj, cache[cpos].len);
     cpos++;
 
     ENDFUNCRC(p);
 }
 
-static int GetNum(CurPos &cp, long &num) {
+static int GetNum(CurPos & cp, long &num)
+{
     //fprintf(stderr, "%i: Reading a number, type: %i, len: %i\n", cpos, cache[cpos].tag, cache[cpos].len);
 
     unsigned char n[4];
-    if (cpos > cp.sz) return 0;
+
+    if (cpos > cp.sz)
+	return 0;
     memcpy(n, cache[cpos].obj, 4);
-    num = (n[3] << 24) +
-        (n[2] << 16) +
-        (n[1] << 8) +
-        n[0];
+    num = (n[3] << 24) + (n[2] << 16) + (n[1] << 8) + n[0];
     if ((n[3] > 127) && sizeof(long) > 4)
-        num = num | (~0xFFFFFFFFUL);
+	num = num | (~0xFFFFFFFFUL);
     cpos++;
     return 1;
 }
 
-static int ReadCommands(CurPos &cp, const char *Name) {
+static int ReadCommands(CurPos & cp, const char *Name)
+{
     STARTFUNC("ReadCommands");
     LOG << "Name = " << (Name != NULL ? Name : "(null)") << ENDLINE;
 
@@ -531,78 +566,94 @@ static int ReadCommands(CurPos &cp, const char *Name) {
     long Cmd = NewCommand(Name);
     long cmdno;
 
-    if (GetObj(cp, len) != CF_INT) ENDFUNCRC(-1);
-    if (GetNum(cp, cmdno) == 0) ENDFUNCRC(-1);
+    if (GetObj(cp, len) != CF_INT)
+	ENDFUNCRC(-1);
+    if (GetNum(cp, cmdno) == 0)
+	ENDFUNCRC(-1);
     if (cmdno != (Cmd | CMD_EXT)) {
-      fprintf(stderr, "Bad Command map %s -> %ld != %ld\n", Name, Cmd, cmdno ? cmdno : 0);
-        ENDFUNCRC(-1);
+	fprintf(stderr, "Bad Command map %s -> %ld != %ld\n", Name, Cmd,
+		cmdno ? cmdno : 0);
+	ENDFUNCRC(-1);
     }
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_COMMAND: {
-              //            char *s;
-            long cnt;
-            long ign;
-            long cmd;
+	switch (obj) {
+	case CF_COMMAND:{
+		//            char *s;
+		long cnt;
+		long ign;
+		long cmd;
 
-            //s = (char *) GetCharStr(cp, len);
-            //                if (s  == 0) return -1;
-            if (GetNum(cp, cmd) == 0) ENDFUNCRC(-1);
-            if (GetObj(cp, len) != CF_INT) ENDFUNCRC(-1);
-            if (GetNum(cp, cnt) == 0) ENDFUNCRC(-1);
-            if (GetObj(cp, len) != CF_INT) ENDFUNCRC(-1);
-            if (GetNum(cp, ign) == 0) ENDFUNCRC(-1);
+		//s = (char *) GetCharStr(cp, len);
+		//                if (s  == 0) return -1;
+		if (GetNum(cp, cmd) == 0)
+		    ENDFUNCRC(-1);
+		if (GetObj(cp, len) != CF_INT)
+		    ENDFUNCRC(-1);
+		if (GetNum(cp, cnt) == 0)
+		    ENDFUNCRC(-1);
+		if (GetObj(cp, len) != CF_INT)
+		    ENDFUNCRC(-1);
+		if (GetNum(cp, ign) == 0)
+		    ENDFUNCRC(-1);
 
-                //            if (cmd != CmdNum((char *) s)) {
-                //                fprintf(stderr, "Bad Command Id: %s -> %d\n", s, cmd);
-                //                return -1;
-                //            }
+		//            if (cmd != CmdNum((char *) s)) {
+		//                fprintf(stderr, "Bad Command Id: %s -> %d\n", s, cmd);
+		//                return -1;
+		//            }
 
-            if (AddCommand(Cmd, cmd, cnt, ign) == 0) {
-                if (Name == 0 || strcmp(Name, "xx") != 0) {
-                    fprintf(stderr, "Bad Command Id: %ld\n", cmd);
-                    ENDFUNCRC(-1);
-                }
-            }
-        }
-        break;
-        case CF_STRING: {
-            const char *s = GetCharStr(cp, len);
+		if (AddCommand(Cmd, cmd, cnt, ign) == 0) {
+		    if (Name == 0 || strcmp(Name, "xx") != 0) {
+			fprintf(stderr, "Bad Command Id: %ld\n", cmd);
+			ENDFUNCRC(-1);
+		    }
+		}
+	    }
+	    break;
+	case CF_STRING:{
+		const char *s = GetCharStr(cp, len);
 
-            if (s == 0) ENDFUNCRC(-1);
-            if (AddString(Cmd, s) == 0) ENDFUNCRC(-1);
-        }
-        break;
-        case CF_INT: {
-            long num;
+		if (s == 0)
+		    ENDFUNCRC(-1);
+		if (AddString(Cmd, s) == 0)
+		    ENDFUNCRC(-1);
+	    }
+	    break;
+	case CF_INT:{
+		long num;
 
-            if (GetNum(cp, num) == 0) ENDFUNCRC(-1);
-            if (AddNumber(Cmd, num) == 0) ENDFUNCRC(-1);
-        }
-        break;
-        case CF_VARIABLE: {
-            long num;
+		if (GetNum(cp, num) == 0)
+		    ENDFUNCRC(-1);
+		if (AddNumber(Cmd, num) == 0)
+		    ENDFUNCRC(-1);
+	    }
+	    break;
+	case CF_VARIABLE:{
+		long num;
 
-            if (GetNum(cp, num) == 0) ENDFUNCRC(-1);
-            if (AddVariable(Cmd, num) == 0) ENDFUNCRC(-1);
-        }
-        break;
-        case CF_CONCAT:
-            cpos++;
-            if (AddConcat(Cmd) == 0) ENDFUNCRC(-1);
-            break;
-        case CF_END:
-            cpos++;
-            ENDFUNCRC(Cmd);
-        default:
-            ENDFUNCRC(-1);
-        }
+		if (GetNum(cp, num) == 0)
+		    ENDFUNCRC(-1);
+		if (AddVariable(Cmd, num) == 0)
+		    ENDFUNCRC(-1);
+	    }
+	    break;
+	case CF_CONCAT:
+	    cpos++;
+	    if (AddConcat(Cmd) == 0)
+		ENDFUNCRC(-1);
+	    break;
+	case CF_END:
+	    cpos++;
+	    ENDFUNCRC(Cmd);
+	default:
+	    ENDFUNCRC(-1);
+	}
     }
     ENDFUNCRC(-1);
 }
 
-static int ReadMenu(CurPos &cp, const char *MenuName) {
+static int ReadMenu(CurPos & cp, const char *MenuName)
+{
     unsigned char obj;
     unsigned short len;
 
@@ -611,704 +662,810 @@ static int ReadMenu(CurPos &cp, const char *MenuName) {
     menu = NewMenu(MenuName);
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_ITEM: {
-            if (len == 0) {
-                item = NewItem(menu, 0);
-                cpos++;
-            } else {
-                const char *s = GetCharStr(cp, len);
-                int Cmd;
-                if (s == 0) return -1;
-                item = NewItem(menu, s);
-                if ((obj = GetObj(cp, len)) != CF_MENUSUB) return -1;
-                cpos++;
-                if ((Cmd = ReadCommands(cp, 0)) == -1) return -1;
-                Menus[menu].Items[item].Cmd = Cmd + 65536;
-            }
-        }
-        break;
-        case CF_SUBMENU: {
-            const char *s = GetCharStr(cp, len);
-            const char *w;
+	switch (obj) {
+	case CF_ITEM:{
+		if (len == 0) {
+		    item = NewItem(menu, 0);
+		    cpos++;
+		}
+		else {
+		    const char *s = GetCharStr(cp, len);
+		    int Cmd;
 
-            if ((obj = GetObj(cp, len)) != CF_STRING) return -1;
-            if ((w = GetCharStr(cp, len)) == 0) return -1;
-            item = NewSubMenu(menu, s, GetMenuId(w), SUBMENU_NORMAL);
-        }
-        break;
+		    if (s == 0)
+			return -1;
+		    item = NewItem(menu, s);
+		    if ((obj = GetObj(cp, len)) != CF_MENUSUB)
+			return -1;
+		    cpos++;
+		    if ((Cmd = ReadCommands(cp, 0)) == -1)
+			return -1;
+		    Menus[menu].Items[item].Cmd = Cmd + 65536;
+		}
+	    }
+	    break;
+	case CF_SUBMENU:{
+		const char *s = GetCharStr(cp, len);
+		const char *w;
 
-        case CF_SUBMENUCOND: {
-            const char *s = GetCharStr(cp, len);
-            const char *w;
+		if ((obj = GetObj(cp, len)) != CF_STRING)
+		    return -1;
+		if ((w = GetCharStr(cp, len)) == 0)
+		    return -1;
+		item = NewSubMenu(menu, s, GetMenuId(w), SUBMENU_NORMAL);
+	    }
+	    break;
 
-            if ((obj = GetObj(cp, len)) != CF_STRING) return -1;
-            if ((w = GetCharStr(cp, len)) == 0) return -1;
-            item = NewSubMenu(menu, s, GetMenuId(w), SUBMENU_CONDITIONAL);
-        }
-        break;
+	case CF_SUBMENUCOND:{
+		const char *s = GetCharStr(cp, len);
+		const char *w;
 
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+		if ((obj = GetObj(cp, len)) != CF_STRING)
+		    return -1;
+		if ((w = GetCharStr(cp, len)) == 0)
+		    return -1;
+		item = NewSubMenu(menu, s, GetMenuId(w), SUBMENU_CONDITIONAL);
+	    }
+	    break;
+
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadColors(CurPos &cp, const char *ObjName) {
+static int ReadColors(CurPos & cp, const char *ObjName)
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_STRING: {
-            char cl[30];
-            const char *sname = GetCharStr(cp, len);
-            const char *svalue;
-            if (sname == 0) return -1;
-            if ((obj = GetObj(cp, len)) != CF_STRING) return -1;
-            if ((svalue = GetCharStr(cp, len)) == 0) return -1;
-            strcpy(cl, ObjName);
-            strcat(cl, ".");
-            strcat(cl, sname);
-            if (SetColor(cl, svalue) == 0) return -1;
-        }
-        break;
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+	switch (obj) {
+	case CF_STRING:{
+		char cl[30];
+		const char *sname = GetCharStr(cp, len);
+		const char *svalue;
+
+		if (sname == 0)
+		    return -1;
+		if ((obj = GetObj(cp, len)) != CF_STRING)
+		    return -1;
+		if ((svalue = GetCharStr(cp, len)) == 0)
+		    return -1;
+		strcpy(cl, ObjName);
+		strcat(cl, ".");
+		strcat(cl, sname);
+		if (SetColor(cl, svalue) == 0)
+		    return -1;
+	    }
+	    break;
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadHilitColors(CurPos &cp, EColorize *Colorize, const char * /*ObjName*/) {
+static int ReadHilitColors(CurPos & cp, EColorize * Colorize,
+			   const char * /*ObjName */ )
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_INT: {
-            long cidx;
-            const char *svalue;
+	switch (obj) {
+	case CF_INT:{
+		long cidx;
+		const char *svalue;
 
-            if (GetNum(cp, cidx) == 0) return -1;
-            if ((obj = GetObj(cp, len)) != CF_STRING)
-                return -1;
-            if ((svalue = GetCharStr(cp, len)) == 0)
-                return -1;
-            if (Colorize->SetColor(cidx, svalue) == 0)
-                return -1;
-        }
-        break;
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+		if (GetNum(cp, cidx) == 0)
+		    return -1;
+		if ((obj = GetObj(cp, len)) != CF_STRING)
+		    return -1;
+		if ((svalue = GetCharStr(cp, len)) == 0)
+		    return -1;
+		if (Colorize->SetColor(cidx, svalue) == 0)
+		    return -1;
+	    }
+	    break;
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadKeywords(CurPos &cp, ColorKeywords *keywords, int color) {
+static int ReadKeywords(CurPos & cp, ColorKeywords * keywords, int color)
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_STRING: {
-            const char *kname = GetCharStr(cp, len);
-            if (kname == 0) return -1;
-            if (AddKeyword(keywords, (char) color, kname) != 1) return -1;
-        }
-        break;
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+	switch (obj) {
+	case CF_STRING:{
+		const char *kname = GetCharStr(cp, len);
+
+		if (kname == 0)
+		    return -1;
+		if (AddKeyword(keywords, (char)color, kname) != 1)
+		    return -1;
+	    }
+	    break;
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadEventMap(CurPos &cp, EEventMap *Map, const char * /*MapName*/) {
+static int ReadEventMap(CurPos & cp, EEventMap * Map,
+			const char * /*MapName */ )
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_KEY: {
-            EKey *Key;
-            const char *s;
-            int Cmd;
+	switch (obj) {
+	case CF_KEY:{
+		EKey *Key;
+		const char *s;
+		int Cmd;
 
-            if ((s = GetCharStr(cp, len)) == 0) return -1;
-            if ((Key = SetKey(Map, s)) == 0) return -1;
-            if ((obj = GetObj(cp, len)) != CF_KEYSUB) return -1;
-            cpos++;
-            if ((Cmd = ReadCommands(cp, 0)) == -1) return -1;
-            Key->Cmd = Cmd;
-        }
-        break;
+		if ((s = GetCharStr(cp, len)) == 0)
+		    return -1;
+		if ((Key = SetKey(Map, s)) == 0)
+		    return -1;
+		if ((obj = GetObj(cp, len)) != CF_KEYSUB)
+		    return -1;
+		cpos++;
+		if ((Cmd = ReadCommands(cp, 0)) == -1)
+		    return -1;
+		Key->Cmd = Cmd;
+	    }
+	    break;
 
-        case CF_ABBREV: {
-            EAbbrev *Ab;
-            const char *s;
-            const char *x;
-            int Cmd;
+	case CF_ABBREV:{
+		EAbbrev *Ab;
+		const char *s;
+		const char *x;
+		int Cmd;
 
-            if ((s = GetCharStr(cp, len)) == 0) return -1;
-            obj = GetObj(cp, len);
-            if (obj == CF_KEYSUB) {
-                cpos++;
-                if ((Cmd = ReadCommands(cp, 0)) == -1) return -1;
-                Ab = new EAbbrev(s, Cmd);
-            } else if (obj == CF_STRING) {
-                x = GetCharStr(cp, len);
-                Ab = new EAbbrev(s, x);
-            } else
-                return -1;
-            if (Ab) {
-                Map->AddAbbrev(Ab);
-            }
-        }
-        break;
+		if ((s = GetCharStr(cp, len)) == 0)
+		    return -1;
+		obj = GetObj(cp, len);
+		if (obj == CF_KEYSUB) {
+		    cpos++;
+		    if ((Cmd = ReadCommands(cp, 0)) == -1)
+			return -1;
+		    Ab = new EAbbrev(s, Cmd);
+		}
+		else if (obj == CF_STRING) {
+		    x = GetCharStr(cp, len);
+		    Ab = new EAbbrev(s, x);
+		}
+		else
+		    return -1;
+		if (Ab) {
+		    Map->AddAbbrev(Ab);
+		}
+	    }
+	    break;
 
-        case CF_SETVAR: {
-            long what;
+	case CF_SETVAR:{
+		long what;
 
-            if (GetNum(cp, what) == 0) return -1;
-            switch (GetObj(cp, len)) {
-            case CF_STRING: {
-                const char *val = GetCharStr(cp, len);
-                if (len == 0) return -1;
-                if (SetEventString(Map, what, val) != 0) return -1;
-            }
-            break;
-            /*                case CF_INT:
-             {
-             long num;
+		if (GetNum(cp, what) == 0)
+		    return -1;
+		switch (GetObj(cp, len)) {
+		case CF_STRING:{
+			const char *val = GetCharStr(cp, len);
 
-             if (GetNum(cp, num) == 0) return -1;
-             if (SetModeNumber(Mode, what, num) != 0) return -1;
-             }
-             break;*/
-            default:
-                return -1;
-            }
-        }
-        break;
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+			if (len == 0)
+			    return -1;
+			if (SetEventString(Map, what, val) != 0)
+			    return -1;
+		    }
+		    break;
+		    /*                case CF_INT:
+		       {
+		       long num;
+
+		       if (GetNum(cp, num) == 0) return -1;
+		       if (SetModeNumber(Mode, what, num) != 0) return -1;
+		       }
+		       break; */
+		default:
+		    return -1;
+		}
+	    }
+	    break;
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadColorize(CurPos &cp, EColorize *Colorize, const char *ModeName) {
+static int ReadColorize(CurPos & cp, EColorize * Colorize,
+			const char *ModeName)
+{
     unsigned char obj;
     unsigned short len;
 
     long LastState = -1;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_COLOR:
-            cpos++;
-            if (ReadHilitColors(cp, Colorize, ModeName) == -1) return -1;
-            break;
+	switch (obj) {
+	case CF_COLOR:
+	    cpos++;
+	    if (ReadHilitColors(cp, Colorize, ModeName) == -1)
+		return -1;
+	    break;
 
-        case CF_KEYWORD: {
-            const char *colorstr;
+	case CF_KEYWORD:{
+		const char *colorstr;
 
-            if ((colorstr = GetCharStr(cp, len)) == 0) return -1;
+		if ((colorstr = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            unsigned int Col;
-            unsigned int ColBg, ColFg;
+		unsigned int Col;
+		unsigned int ColBg, ColFg;
 
-            if (sscanf(colorstr, "%1X %1X", &ColFg, &ColBg) != 2)
-                return 0;
+		if (sscanf(colorstr, "%1X %1X", &ColFg, &ColBg) != 2)
+		    return 0;
 
-            Col = ColFg | (ColBg << 4);
+		Col = ColFg | (ColBg << 4);
 
-            int color = ChColor(Col);
-            if (ReadKeywords(cp, &Colorize->Keywords, color) == -1) return -1;
-        }
-        break;
+		int color = ChColor(Col);
 
-        case CF_HSTATE: {
-            long stateno;
-            long color;
+		if (ReadKeywords(cp, &Colorize->Keywords, color) == -1)
+		    return -1;
+	    }
+	    break;
 
-            if (Colorize->hm == 0)
-                Colorize->hm = new HMachine();
+	case CF_HSTATE:{
+		long stateno;
+		long color;
 
-            assert(Colorize->hm != 0);
+		if (Colorize->hm == 0)
+		    Colorize->hm = new HMachine();
 
-            if (GetNum(cp, stateno) == 0)
-                return -1;
+		assert(Colorize->hm != 0);
 
-            assert(stateno == LastState + 1);
+		if (GetNum(cp, stateno) == 0)
+		    return -1;
 
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
+		assert(stateno == LastState + 1);
 
-            if (GetNum(cp, color) == 0)
-                return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
 
-            HState newState;
+		if (GetNum(cp, color) == 0)
+		    return -1;
 
-            newState.InitState();
+		HState newState;
 
-            newState.color = color;
+		newState.InitState();
 
-            Colorize->hm->AddState(newState);
-            LastState = stateno;
-        }
-        break;
+		newState.color = color;
 
-        case CF_HTRANS: {
-            HTrans newTrans;
-            long nextState;
-            long matchFlags;
-            const char *match;
-            long color;
+		Colorize->hm->AddState(newState);
+		LastState = stateno;
+	    }
+	    break;
 
-            if (GetNum(cp, nextState) == 0)
-                return -1;
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
-            if (GetNum(cp, matchFlags) == 0)
-                return -1;
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
-            if (GetNum(cp, color) == 0)
-                return -1;
-            obj = GetObj(cp, len);
-            assert(matchFlags & MATCH_REGEXP ? obj == CF_REGEXP : obj == CF_STRING);
-            if ((match = GetCharStr(cp, len)) == 0)
-                return -1;
+	case CF_HTRANS:{
+		HTrans newTrans;
+		long nextState;
+		long matchFlags;
+		const char *match;
+		long color;
 
-            newTrans.InitTrans();
+		if (GetNum(cp, nextState) == 0)
+		    return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
+		if (GetNum(cp, matchFlags) == 0)
+		    return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
+		if (GetNum(cp, color) == 0)
+		    return -1;
+		obj = GetObj(cp, len);
+		assert(matchFlags & MATCH_REGEXP ? obj == CF_REGEXP : obj ==
+		       CF_STRING);
+		if ((match = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            newTrans.matchFlags = matchFlags;
-            newTrans.nextState = nextState;
-            newTrans.color = color;
+		newTrans.InitTrans();
 
-            if (newTrans.matchFlags & MATCH_REGEXP) {
-                newTrans.regexp = RxCompile(match);
-                newTrans.matchLen = 0;
-            } else if ((newTrans.matchFlags & MATCH_SET) ||
-                       (newTrans.matchFlags & MATCH_NOTSET)) {
-                newTrans.matchLen = 1;
-                newTrans.match = (char *)malloc(256 / 8);
-                assert(newTrans.match != NULL);
-                SetWordChars(newTrans.match, match);
-            } else {
-                newTrans.match = strdup(match);
-                newTrans.matchLen = strlen(match);
-            }
+		newTrans.matchFlags = matchFlags;
+		newTrans.nextState = nextState;
+		newTrans.color = color;
 
-            Colorize->hm->AddTrans(newTrans);
-        }
-        break;
+		if (newTrans.matchFlags & MATCH_REGEXP) {
+		    newTrans.regexp = RxCompile(match);
+		    newTrans.matchLen = 0;
+		}
+		else if ((newTrans.matchFlags & MATCH_SET) ||
+			 (newTrans.matchFlags & MATCH_NOTSET)) {
+		    newTrans.matchLen = 1;
+		    newTrans.match = (char *)malloc(256 / 8);
+		    assert(newTrans.match != NULL);
+		    SetWordChars(newTrans.match, match);
+		}
+		else {
+		    newTrans.match = strdup(match);
+		    newTrans.matchLen = strlen(match);
+		}
 
-        case CF_HWTYPE: {
-            long nextKwdMatchedState;
-            long nextKwdNotMatchedState;
-            long nextKwdNoCharState;
-            long options;
-            const char *wordChars;
+		Colorize->hm->AddTrans(newTrans);
+	    }
+	    break;
 
-            cpos++;
+	case CF_HWTYPE:{
+		long nextKwdMatchedState;
+		long nextKwdNotMatchedState;
+		long nextKwdNoCharState;
+		long options;
+		const char *wordChars;
 
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
-            if (GetNum(cp, nextKwdMatchedState) == 0)
-                return -1;
+		cpos++;
 
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
-            if (GetNum(cp, nextKwdNotMatchedState) == 0)
-                return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
+		if (GetNum(cp, nextKwdMatchedState) == 0)
+		    return -1;
 
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
-            if (GetNum(cp, nextKwdNoCharState) == 0)
-                return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
+		if (GetNum(cp, nextKwdNotMatchedState) == 0)
+		    return -1;
 
-            obj = GetObj(cp, len);
-            assert(obj == CF_INT);
-            if (GetNum(cp, options) == 0)
-                return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
+		if (GetNum(cp, nextKwdNoCharState) == 0)
+		    return -1;
 
-            obj = GetObj(cp, len);
-            assert(obj == CF_STRING);
-            if ((wordChars = GetCharStr(cp, len)) == 0)
-                return -1;
+		obj = GetObj(cp, len);
+		assert(obj == CF_INT);
+		if (GetNum(cp, options) == 0)
+		    return -1;
 
-            Colorize->hm->LastState()->options = options;
-            Colorize->hm->LastState()->nextKwdMatchedState = nextKwdMatchedState;
-            Colorize->hm->LastState()->nextKwdNotMatchedState = nextKwdNotMatchedState;
-            Colorize->hm->LastState()->nextKwdNoCharState = nextKwdNoCharState;
+		obj = GetObj(cp, len);
+		assert(obj == CF_STRING);
+		if ((wordChars = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            if (wordChars && *wordChars) {
-                Colorize->hm->LastState()->wordChars = (char *)malloc(256 / 8);
-                assert(Colorize->hm->LastState()->wordChars != NULL);
-                SetWordChars(Colorize->hm->LastState()->wordChars, wordChars);
-            }
-        }
-        break;
+		Colorize->hm->LastState()->options = options;
+		Colorize->hm->LastState()->nextKwdMatchedState =
+		    nextKwdMatchedState;
+		Colorize->hm->LastState()->nextKwdNotMatchedState =
+		    nextKwdNotMatchedState;
+		Colorize->hm->LastState()->nextKwdNoCharState =
+		    nextKwdNoCharState;
 
-        case CF_HWORDS: {
-            const char *colorstr;
-            int color;
+		if (wordChars && *wordChars) {
+		    Colorize->hm->LastState()->wordChars =
+			(char *)malloc(256 / 8);
+		    assert(Colorize->hm->LastState()->wordChars != NULL);
+		    SetWordChars(Colorize->hm->LastState()->wordChars,
+				 wordChars);
+		}
+	    }
+	    break;
 
-            if ((colorstr = GetCharStr(cp, len)) == 0) return -1;
+	case CF_HWORDS:{
+		const char *colorstr;
+		int color;
 
-            color = hcPlain_Keyword;
+		if ((colorstr = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            if (strcmp(colorstr, "-") != 0) {
-                const char *Value = colorstr;
-                int Col;
+		color = hcPlain_Keyword;
 
-                if (*Value == '-') {
-                    Value++;
-                    if (sscanf(Value, "%1X", &Col) != 1) return -1;
-                    Col |= (hcPlain_Background & 0xF0);
-                } else if (Value[1] == '-') {
-                    if (sscanf(Value, "%1X", &Col) != 1) return -1;
-                    Col <<= 4;
-                    Col |= (hcPlain_Background & 0x0F);
-                } else {
-                    unsigned int ColBg, ColFg;
+		if (strcmp(colorstr, "-") != 0) {
+		    const char *Value = colorstr;
+		    int Col;
 
-                    if (sscanf(colorstr, "%1X %1X", &ColFg, &ColBg) != 2)
-                        return 0;
+		    if (*Value == '-') {
+			Value++;
+			if (sscanf(Value, "%1X", &Col) != 1)
+			    return -1;
+			Col |= (hcPlain_Background & 0xF0);
+		    }
+		    else if (Value[1] == '-') {
+			if (sscanf(Value, "%1X", &Col) != 1)
+			    return -1;
+			Col <<= 4;
+			Col |= (hcPlain_Background & 0x0F);
+		    }
+		    else {
+			unsigned int ColBg, ColFg;
 
-                    Col = ColFg | (ColBg << 4);
-                }
-                color = Col;
-            }
-            if (ReadKeywords(cp, &Colorize->hm->LastState()->keywords, color) == -1) return -1;
-        }
-        break;
+			if (sscanf(colorstr, "%1X %1X", &ColFg, &ColBg) != 2)
+			    return 0;
 
-        case CF_SETVAR: {
-            long what;
+			Col = ColFg | (ColBg << 4);
+		    }
+		    color = Col;
+		}
+		if (ReadKeywords
+		    (cp, &Colorize->hm->LastState()->keywords, color) == -1)
+		    return -1;
+	    }
+	    break;
 
-            if (GetNum(cp, what) == 0) return -1;
-            switch (GetObj(cp, len)) {
-            case CF_STRING: {
-                const char *val = GetCharStr(cp, len);
-                if (len == 0) return -1;
-                if (SetColorizeString(Colorize, what, val) != 0) return -1;
-            }
-            break;
-            /*                case CF_INT:
-             {
-             long num;
+	case CF_SETVAR:{
+		long what;
 
-             if (GetNum(cp, num) == 0) return -1;
-             if (SetModeNumber(Mode, what, num) != 0) return -1;
-             }
-             break;*/
-            default:
-                return -1;
-            }
-        }
-        break;
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+		if (GetNum(cp, what) == 0)
+		    return -1;
+		switch (GetObj(cp, len)) {
+		case CF_STRING:{
+			const char *val = GetCharStr(cp, len);
+
+			if (len == 0)
+			    return -1;
+			if (SetColorizeString(Colorize, what, val) != 0)
+			    return -1;
+		    }
+		    break;
+		    /*                case CF_INT:
+		       {
+		       long num;
+
+		       if (GetNum(cp, num) == 0) return -1;
+		       if (SetModeNumber(Mode, what, num) != 0) return -1;
+		       }
+		       break; */
+		default:
+		    return -1;
+		}
+	    }
+	    break;
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadMode(CurPos &cp, EMode *Mode, const char * /*ModeName*/) {
+static int ReadMode(CurPos & cp, EMode * Mode, const char * /*ModeName */ )
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_SETVAR: {
-            long what;
+	switch (obj) {
+	case CF_SETVAR:{
+		long what;
 
-            if (GetNum(cp, what) == 0) return -1;
-            switch (GetObj(cp, len)) {
-            case CF_STRING: {
-                const char *val = GetCharStr(cp, len);
-                if (len == 0) return -1;
-                if (SetModeString(Mode, what, val) != 0) return -1;
-            }
-            break;
-            case CF_INT: {
-                long num;
+		if (GetNum(cp, what) == 0)
+		    return -1;
+		switch (GetObj(cp, len)) {
+		case CF_STRING:{
+			const char *val = GetCharStr(cp, len);
 
-                if (GetNum(cp, num) == 0) return -1;
-                if (SetModeNumber(Mode, what, num) != 0) return -1;
-            }
-            break;
-            default:
-                return -1;
-            }
-        }
-        break;
+			if (len == 0)
+			    return -1;
+			if (SetModeString(Mode, what, val) != 0)
+			    return -1;
+		    }
+		    break;
+		case CF_INT:{
+			long num;
 
-        case CF_END:
-            cpos++;
-            return 0;
+			if (GetNum(cp, num) == 0)
+			    return -1;
+			if (SetModeNumber(Mode, what, num) != 0)
+			    return -1;
+		    }
+		    break;
+		default:
+		    return -1;
+		}
+	    }
+	    break;
 
-        default:
-            return -1;
-        }
+	case CF_END:
+	    cpos++;
+	    return 0;
+
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadObject(CurPos &cp, const char *ObjName) {
+static int ReadObject(CurPos & cp, const char *ObjName)
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_COLOR:
-            cpos++;
-            if (ReadColors(cp, ObjName) == -1) return -1;
-            break;
-        case CF_COMPRX: {
-            long file, line, msg;
-            const char *regexp;
+	switch (obj) {
+	case CF_COLOR:
+	    cpos++;
+	    if (ReadColors(cp, ObjName) == -1)
+		return -1;
+	    break;
+	case CF_COMPRX:{
+		long file, line, msg;
+		const char *regexp;
 
-            cpos++;
+		cpos++;
 
-            if (GetObj(cp, len) != CF_INT) return -1;
-            if (GetNum(cp, file) == 0) return -1;
-            if (GetObj(cp, len) != CF_INT) return -1;
-            if (GetNum(cp, line) == 0) return -1;
-            if (GetObj(cp, len) != CF_INT) return -1;
-            if (GetNum(cp, msg) == 0) return -1;
-            if (GetObj(cp, len) != CF_REGEXP) return -1;
-            if ((regexp = GetCharStr(cp, len)) == 0) return -1;
+		if (GetObj(cp, len) != CF_INT)
+		    return -1;
+		if (GetNum(cp, file) == 0)
+		    return -1;
+		if (GetObj(cp, len) != CF_INT)
+		    return -1;
+		if (GetNum(cp, line) == 0)
+		    return -1;
+		if (GetObj(cp, len) != CF_INT)
+		    return -1;
+		if (GetNum(cp, msg) == 0)
+		    return -1;
+		if (GetObj(cp, len) != CF_REGEXP)
+		    return -1;
+		if ((regexp = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            if (AddCRegexp(file, line, msg, regexp) == 0) return -1;
-        }
-        break;
+		if (AddCRegexp(file, line, msg, regexp) == 0)
+		    return -1;
+	    }
+	    break;
 
-        case CF_CVSIGNRX: {
-            const char *regexp;
+	case CF_CVSIGNRX:{
+		const char *regexp;
 
-            cpos++;
+		cpos++;
 
-            if (GetObj(cp, len) != CF_REGEXP) return -1;
-            if ((regexp = GetCharStr(cp, len)) == 0) return -1;
+		if (GetObj(cp, len) != CF_REGEXP)
+		    return -1;
+		if ((regexp = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            if (AddCvsIgnoreRegexp(regexp) == 0) return -1;
-        }
-        break;
+		if (AddCvsIgnoreRegexp(regexp) == 0)
+		    return -1;
+	    }
+	    break;
 
-        case CF_SVNIGNRX: {
-            const char *regexp;
+	case CF_SVNIGNRX:{
+		const char *regexp;
 
-            cpos++;
+		cpos++;
 
-            if (GetObj(cp, len) != CF_REGEXP) return -1;
-            if ((regexp = GetCharStr(cp, len)) == 0) return -1;
+		if (GetObj(cp, len) != CF_REGEXP)
+		    return -1;
+		if ((regexp = GetCharStr(cp, len)) == 0)
+		    return -1;
 
-            if (AddSvnIgnoreRegexp(regexp) == 0) return -1;
-        }
-        break;
+		if (AddSvnIgnoreRegexp(regexp) == 0)
+		    return -1;
+	    }
+	    break;
 
-        case CF_SETVAR: {
-            long what;
-            if (GetNum(cp, what) == 0) return -1;
+	case CF_SETVAR:{
+		long what;
 
-            switch (GetObj(cp, len)) {
-            case CF_STRING: {
-                const char *val = GetCharStr(cp, len);
-                if (len == 0) return -1;
-                if (SetGlobalString(what, val) != 0) return -1;
-            }
-            break;
-            case CF_INT: {
-                long num;
+		if (GetNum(cp, what) == 0)
+		    return -1;
 
-                if (GetNum(cp, num) == 0) return -1;
-                if (SetGlobalNumber(what, num) != 0) return -1;
-            }
-            break;
-            default:
-                return -1;
-            }
-        }
-        break;
-        case CF_END:
-            cpos++;
-            return 0;
-        default:
-            return -1;
-        }
+		switch (GetObj(cp, len)) {
+		case CF_STRING:{
+			const char *val = GetCharStr(cp, len);
+
+			if (len == 0)
+			    return -1;
+			if (SetGlobalString(what, val) != 0)
+			    return -1;
+		    }
+		    break;
+		case CF_INT:{
+			long num;
+
+			if (GetNum(cp, num) == 0)
+			    return -1;
+			if (SetGlobalNumber(what, num) != 0)
+			    return -1;
+		    }
+		    break;
+		default:
+		    return -1;
+		}
+	    }
+	    break;
+	case CF_END:
+	    cpos++;
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-static int ReadConfigFile(CurPos &cp) {
+static int ReadConfigFile(CurPos & cp)
+{
     unsigned char obj;
     unsigned short len;
 
     while ((obj = GetObj(cp, len)) != 0xFF) {
-        switch (obj) {
-        case CF_SUB: {
-            const char *CmdName = GetCharStr(cp, len);
+	switch (obj) {
+	case CF_SUB:{
+		const char *CmdName = GetCharStr(cp, len);
 
-            if (ReadCommands(cp, CmdName) == -1) return -1;
-        }
-        break;
-        case CF_MENU: {
-            const char *MenuName = GetCharStr(cp, len);
+		if (ReadCommands(cp, CmdName) == -1)
+		    return -1;
+	    }
+	    break;
+	case CF_MENU:{
+		const char *MenuName = GetCharStr(cp, len);
 
-            if (ReadMenu(cp, MenuName) == -1) return -1;
-        }
-        break;
-        case CF_EVENTMAP: {
-            EEventMap *EventMap = 0;
-            const char *MapName = GetCharStr(cp, len);
-            const char *UpMap = 0;
+		if (ReadMenu(cp, MenuName) == -1)
+		    return -1;
+	    }
+	    break;
+	case CF_EVENTMAP:{
+		EEventMap *EventMap = 0;
+		const char *MapName = GetCharStr(cp, len);
+		const char *UpMap = 0;
 
-            if ((obj = GetObj(cp, len)) != CF_PARENT) return -1;
-            if (len > 0)
-                if ((UpMap = GetCharStr(cp, len)) == 0) return -1;
+		if ((obj = GetObj(cp, len)) != CF_PARENT)
+		    return -1;
+		if (len > 0)
+		    if ((UpMap = GetCharStr(cp, len)) == 0)
+			return -1;
 
-            // add new mode
-            if ((EventMap = FindEventMap(MapName)) == 0) {
-                EEventMap *OrgMap = 0;
+		// add new mode
+		if ((EventMap = FindEventMap(MapName)) == 0) {
+		    EEventMap *OrgMap = 0;
 
-                if (strcmp(UpMap, "") != 0)
-                    OrgMap = FindEventMap(UpMap);
-                EventMap = new EEventMap(MapName, OrgMap);
-            } else {
-                if (EventMap->Parent == 0)
-                    EventMap->Parent = FindEventMap(UpMap);
-            }
-            if (ReadEventMap(cp, EventMap, MapName) == -1) return -1;
-        }
-        break;
+		    if (strcmp(UpMap, "") != 0)
+			OrgMap = FindEventMap(UpMap);
+		    EventMap = new EEventMap(MapName, OrgMap);
+		}
+		else {
+		    if (EventMap->Parent == 0)
+			EventMap->Parent = FindEventMap(UpMap);
+		}
+		if (ReadEventMap(cp, EventMap, MapName) == -1)
+		    return -1;
+	    }
+	    break;
 
-        case CF_COLORIZE: {
-            EColorize *Mode = 0;
-            const char *ModeName = GetCharStr(cp, len);
-            const char *UpMode = 0;
+	case CF_COLORIZE:{
+		EColorize *Mode = 0;
+		const char *ModeName = GetCharStr(cp, len);
+		const char *UpMode = 0;
 
-            if ((obj = GetObj(cp, len)) != CF_PARENT) return -1;
-            if (len > 0)
-                if ((UpMode = GetCharStr(cp, len)) == 0) return -1;
+		if ((obj = GetObj(cp, len)) != CF_PARENT)
+		    return -1;
+		if (len > 0)
+		    if ((UpMode = GetCharStr(cp, len)) == 0)
+			return -1;
 
-            // add new mode
-            if ((Mode = FindColorizer(ModeName)) == 0)
-                Mode = new EColorize(ModeName, UpMode);
-            else {
-                if (Mode->Parent == 0)
-                    Mode->Parent = FindColorizer(UpMode);
-            }
-            if (ReadColorize(cp, Mode, ModeName) == -1)
-                return -1;
-        }
-        break;
+		// add new mode
+		if ((Mode = FindColorizer(ModeName)) == 0)
+		    Mode = new EColorize(ModeName, UpMode);
+		else {
+		    if (Mode->Parent == 0)
+			Mode->Parent = FindColorizer(UpMode);
+		}
+		if (ReadColorize(cp, Mode, ModeName) == -1)
+		    return -1;
+	    }
+	    break;
 
-        case CF_MODE: {
-            EMode *Mode = 0;
-            const char *ModeName = GetCharStr(cp, len);
-            const char *UpMode = 0;
+	case CF_MODE:{
+		EMode *Mode = 0;
+		const char *ModeName = GetCharStr(cp, len);
+		const char *UpMode = 0;
 
-            if ((obj = GetObj(cp, len)) != CF_PARENT) return -1;
-            if (len > 0)
-                if ((UpMode = GetCharStr(cp, len)) == 0) return -1;
+		if ((obj = GetObj(cp, len)) != CF_PARENT)
+		    return -1;
+		if (len > 0)
+		    if ((UpMode = GetCharStr(cp, len)) == 0)
+			return -1;
 
-            // add new mode
-            if ((Mode = FindMode(ModeName)) == 0) {
-                EMode *OrgMode = 0;
-                EEventMap *Map;
+		// add new mode
+		if ((Mode = FindMode(ModeName)) == 0) {
+		    EMode *OrgMode = 0;
+		    EEventMap *Map;
 
-                if (strcmp(UpMode, "") != 0)
-                    OrgMode = FindMode(UpMode);
-                Map = FindEventMap(ModeName);
-                if (Map == 0) {
-                    EEventMap *OrgMap = 0;
+		    if (strcmp(UpMode, "") != 0)
+			OrgMode = FindMode(UpMode);
+		    Map = FindEventMap(ModeName);
+		    if (Map == 0) {
+			EEventMap *OrgMap = 0;
 
-                    if (strcmp(UpMode, "") != 0)
-                        OrgMap = FindEventMap(UpMode);
-                    Map = new EEventMap(ModeName, OrgMap);
-                }
-                Mode = new EMode(OrgMode, Map, ModeName);
-                Mode->fNext = Modes;
-                Modes = Mode;
-            } else {
-                if (Mode->fParent == 0)
-                    Mode->fParent = FindMode(UpMode);
-            }
-            if (ReadMode(cp, Mode, ModeName) == -1)
-                return -1;
-        }
-        break;
-        case CF_OBJECT: {
-            const char *ObjName;
+			if (strcmp(UpMode, "") != 0)
+			    OrgMap = FindEventMap(UpMode);
+			Map = new EEventMap(ModeName, OrgMap);
+		    }
+		    Mode = new EMode(OrgMode, Map, ModeName);
+		    Mode->fNext = Modes;
+		    Modes = Mode;
+		}
+		else {
+		    if (Mode->fParent == 0)
+			Mode->fParent = FindMode(UpMode);
+		}
+		if (ReadMode(cp, Mode, ModeName) == -1)
+		    return -1;
+	    }
+	    break;
+	case CF_OBJECT:{
+		const char *ObjName;
 
-            if ((ObjName = GetCharStr(cp, len)) == 0)
-                return -1;
-            if (ReadObject(cp, ObjName) == -1)
-                return -1;
-        }
-        break;
-        case CF_EOF:
-            return 0;
-        default:
-            return -1;
-        }
+		if ((ObjName = GetCharStr(cp, len)) == 0)
+		    return -1;
+		if (ReadObject(cp, ObjName) == -1)
+		    return -1;
+	    }
+	    break;
+	case CF_EOF:
+	    return 0;
+	default:
+	    return -1;
+	}
     }
     return -1;
 }
 
-int LoadDefaultConfig() {
+int LoadDefaultConfig()
+{
     /*
-    //char *buf = (char *)malloc(strlen(DefaultConfig) + 1);
-    //strncpy(buf, DefaultConfig, strlen(DefaultConfig));
-    //buf[strlen(DefaultConfig)+1] = 0;
-    ProcessConfigFile((char *)"built-in", DefaultConfig, 0);
+       //char *buf = (char *)malloc(strlen(DefaultConfig) + 1);
+       //strncpy(buf, DefaultConfig, strlen(DefaultConfig));
+       //buf[strlen(DefaultConfig)+1] = 0;
+       ProcessConfigFile((char *)"built-in", DefaultConfig, 0);
 
-    CurPos cp;
-    cp.name = "built-in";
-    cp.sz = cpos;
-    cp.a = 0;//buffer;
-    cp.c = 0;//cp.a + 2 * 4;
-    cp.z = 0;//cp.a + cp.sz;
-    cp.line = 1;
+       CurPos cp;
+       cp.name = "built-in";
+       cp.sz = cpos;
+       cp.a = 0;//buffer;
+       cp.c = 0;//cp.a + 2 * 4;
+       cp.z = 0;//cp.a + cp.sz;
+       cp.line = 1;
 
-    cpos = 0;
+       cpos = 0;
 
-    int rc = ReadConfigFile(cp);
-    if (rc == -1) {
-        DieError(1, "Final Error %s offset %d\n", "built-in", cpos);
-    }
-    return rc;
-    */
+       int rc = ReadConfigFile(cp);
+       if (rc == -1) {
+       DieError(1, "Final Error %s offset %d\n", "built-in", cpos);
+       }
+       return rc;
+     */
     DieError(1, "Default config not yet implemented");
     return 0;
 }
 
-int LoadConfig(int argc, char **argv, char *CfgFileName) {
+int LoadConfig(int argc, char **argv, char *CfgFileName)
+{
     STARTFUNC("LoadConfig");
     LOG << "Config file: " << CfgFileName << ENDLINE;
 
@@ -1319,16 +1476,16 @@ int LoadConfig(int argc, char **argv, char *CfgFileName) {
 
     cp.name = CfgFileName;
     cp.sz = cpos;
-    cp.a = 0;//buffer;
-    cp.c = 0;//cp.a + 2 * 4;
-    cp.z = 0;//cp.a + cp.sz;
+    cp.a = 0;				//buffer;
+    cp.c = 0;				//cp.a + 2 * 4;
+    cp.z = 0;				//cp.a + cp.sz;
     cp.line = 1;
 
     cpos = 0;
 
     rc = ReadConfigFile(cp);
     if (rc == -1) {
-        DieError(1, "Final Error %s offset %d\n", CfgFileName, cpos);
+	DieError(1, "Final Error %s offset %d\n", CfgFileName, cpos);
     }
     ENDFUNCRC(rc);
 }

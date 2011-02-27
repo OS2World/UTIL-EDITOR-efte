@@ -10,10 +10,12 @@
 
 #include "fte.h"
 
-int GetPMClip(int clipboard) {
+int GetPMClip(int clipboard)
+{
     return 0;
 }
 
-int PutPMClip(int clipboard) {
+int PutPMClip(int clipboard)
+{
     return 0;
 }

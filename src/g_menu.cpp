@@ -23,11 +23,11 @@
 int MenuCount = 0;
 mMenu *Menus = 0;
 
-int NewMenu(const char *Name) {
+int NewMenu(const char *Name)
+{
     int n;
 
-    Menus = (mMenu *) realloc((void *) Menus,
-                              sizeof(mMenu) * (MenuCount + 1));
+    Menus = (mMenu *) realloc((void *)Menus, sizeof(mMenu) * (MenuCount + 1));
     n = MenuCount;
 
     Menus[n].Name = strdup(Name);
@@ -38,13 +38,15 @@ int NewMenu(const char *Name) {
     return n;
 }
 
-int NewItem(int menu, const char *Name) {
+int NewItem(int menu, const char *Name)
+{
     int n;
 
     assert(menu < MenuCount);
 
     Menus[menu].Items = (mItem *) realloc(Menus[menu].Items,
-                                          sizeof(mItem) * (Menus[menu].Count + 1));
+					  sizeof(mItem) * (Menus[menu].Count +
+							   1));
     n = Menus[menu].Count;
 
     Menus[menu].Items[n].SubMenu = -1;
@@ -56,13 +58,15 @@ int NewItem(int menu, const char *Name) {
     return n;
 }
 
-int NewSubMenu(int menu, const char *Name, int submenu, int Type) {
+int NewSubMenu(int menu, const char *Name, int submenu, int Type)
+{
     int n;
 
     assert(menu < MenuCount);
 
     Menus[menu].Items = (mItem *) realloc(Menus[menu].Items,
-                                          sizeof(mItem) * (Menus[menu].Count + 1));
+					  sizeof(mItem) * (Menus[menu].Count +
+							   1));
     n = Menus[menu].Count;
 
     Menus[menu].Items[n].SubMenu = submenu;
@@ -74,11 +78,11 @@ int NewSubMenu(int menu, const char *Name, int submenu, int Type) {
     return n;
 }
 
-int GetMenuId(const char *Name) {
+int GetMenuId(const char *Name)
+{
     if (Name)
-        for (int i = 0; i < MenuCount; i++)
-            if (strcmp(Name, Menus[i].Name) == 0)
-                return i;
+	for (int i = 0; i < MenuCount; i++)
+	    if (strcmp(Name, Menus[i].Name) == 0)
+		return i;
     return -1;
 }
-
