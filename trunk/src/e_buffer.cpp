@@ -225,11 +225,10 @@ int EBuffer::LoadRegion(EPoint * /*A*/, int /*FH*/, int /*StripChar*/, int /*Lin
 }
 
 int EBuffer::InsertLine(EPoint Pos, int ACount, const char *AChars) {
-    if (InsLine(Pos.Row, 0) == 0) return 0;
-    if (InsText(Pos.Row, Pos.Col, ACount, AChars) == 0) return 0;
-    return 1;
+    if (!InsLine(Pos.Row, 0))
+        return 0;
+    return InsText(Pos.Row, Pos.Col, ACount, AChars);
 }
-
 
 int EBuffer::UpdateMark(EPoint &M, int Type, int Row, int Col, int Rows, int Cols) {
     switch (Type) {
@@ -401,7 +400,8 @@ int EBuffer::RValidPos(EPoint Pos) {
 
 int EBuffer::AssertLine(int Row) {
     if (Row == RCount)
-        if (InsLine(RCount, 0) == 0) return 0;
+	if (!InsLine(RCount, 0))
+	    return 0;
     return 1;
 }
 

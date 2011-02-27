@@ -571,6 +571,7 @@ int TagPrev(EView *View) { /*FOLD00*/
 }
 
 int TagPop(EView *View) { /*FOLD00*/
+    int rv = 0;
     TagStack *T = TStack;
 
     assert(View != 0);
@@ -580,20 +581,22 @@ int TagPop(EView *View) { /*FOLD00*/
 
         if (CurrentTag) {
             free(CurrentTag);
-            CurrentTag = NULL;
+            //CurrentTag = NULL;
         }
-        if (T->CurrentTag) {
-            CurrentTag = strdup(T->CurrentTag);
-        }
+        //if (T->CurrentTag) {
+        //    CurrentTag = strdup(T->CurrentTag);
+	//}
+	CurrentTag = T->CurrentTag;
         TagPosition = T->TagPos;
 
-        if (GotoFilePos(View, T->FileName, T->Line, T->Col) == 0) {
-            free(T);
-            return 0;
-        }
+       // if (GotoFilePos(View, T->FileName, T->Line, T->Col) == 0) {
+       //     free(T);
+       //     return 0;
+       // }
+	rv = GotoFilePos(View, T->FileName, T->Line, T->Col);
         free(T);
-        return 1;
+        return rv;
     }
     View->Msg(S_INFO, "Tag stack empty.");
-    return 0;
+    return rv;
 }

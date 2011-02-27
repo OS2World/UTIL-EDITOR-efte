@@ -15,6 +15,8 @@
 
 #include "fte.h"
 
+#include <ctype.h>
+
 ECvsLog *CvsLogView;
 
 ECvsLog::ECvsLog(int createFlags, EModel **ARoot, char *Directory, char *OnFiles): EBuffer(createFlags, ARoot, NULL) {
@@ -73,17 +75,14 @@ ECvsLog::ECvsLog(int createFlags, EModel **ARoot, char *Directory, char *OnFiles
         }
         // Go through status
         int fAdded = 0, fRemoved = 0, fModified = 0, fOther = 0;
-        for (i = 0;i < cnt;i++) switch (status[i]) {
+        for (i = 0;i < cnt;i++) switch (toupper(status[i])) {
             case 'A':
-            case 'a':
                 fAdded++;
                 break;
             case 'R':
-            case 'r':
                 fRemoved++;
                 break;
             case 'M':
-            case 'm':
                 fModified++;
                 break;
             default:

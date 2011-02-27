@@ -14,6 +14,7 @@
  */
 
 #include "fte.h"
+#include <ctype.h>
 //#include "features.h"
 
 ESvnLog *SvnLogView;
@@ -74,17 +75,14 @@ ESvnLog::ESvnLog(int createFlags, EModel **ARoot, char *Directory, char *OnFiles
         }
         // Go through status
         int fAdded = 0, fRemoved = 0, fModified = 0, fOther = 0;
-        for (i = 0;i < cnt;i++) switch (status[i]) {
+        for (i = 0;i < cnt;i++) switch (toupper(status[i])) {
             case 'A':
-            case 'a':
                 fAdded++;
                 break;
             case 'R':
-            case 'r':
                 fRemoved++;
                 break;
             case 'M':
-            case 'm':
                 fModified++;
                 break;
             default:
@@ -117,8 +115,8 @@ ESvnLog::~ESvnLog() {
 void ESvnLog::ListFiles(int &p, const int fCount, const char *title, const int cnt, const int *position,
                         const int *len, const char *status, const char *list, const char *excinc, const int exc) {
     if (fCount) {
+        size_t i = strlen(title);
         InsertLine(p++, 4, "SVN:");
-        int i = strlen(title);
         InsertLine(p, 5, "SVN: ");
         InsText(p, 5, i, title);
         InsText(p, i += 5, 5, " file");
