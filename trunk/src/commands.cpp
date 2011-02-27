@@ -10,22 +10,24 @@
 
 #include "fte.h"
 
-int GetDefaultDirectory(EModel *M, char *Path, int MaxLen) {
+int GetDefaultDirectory(EModel * M, char *Path, int MaxLen)
+{
     if (M)
-        M->GetPath(Path, MaxLen);
+	M->GetPath(Path, MaxLen);
     if (!M || Path[0] == 0)
-        if (ExpandPath(".", Path, MaxLen) == -1)
-            return 0;
+	if (ExpandPath(".", Path, MaxLen) == -1)
+	    return 0;
     SlashDir(Path);
     return 1;
 }
 
-int SetDefaultDirectory(EModel *M) {
+int SetDefaultDirectory(EModel * M)
+{
     char Path[MAXPATH];
 
     if (GetDefaultDirectory(M, Path, sizeof(Path)) == 0)
-        return 0;
+	return 0;
     if (ChangeDir(Path) == -1)
-        return 0;
+	return 0;
     return 1;
 }

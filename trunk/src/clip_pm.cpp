@@ -18,37 +18,40 @@
 
 extern HAB hab;
 
-int GetClipText(ClipData *cd) {
+int GetClipText(ClipData * cd)
+{
     char *text;
 
     cd->fLen = 0;
     cd->fChar = 0;
     if ((WinOpenClipbrd(hab) == TRUE) &&
-            ((text = (char *) WinQueryClipbrdData(hab, CF_TEXT)) != 0)) {
-        cd->fLen = strlen(text);
-        cd->fChar = strdup(text);
+	((text = (char *)WinQueryClipbrdData(hab, CF_TEXT)) != 0)) {
+	cd->fLen = strlen(text);
+	cd->fChar = strdup(text);
     }
     WinCloseClipbrd(hab);
     return 0;
 }
 
-int PutClipText(ClipData *cd) {
+int PutClipText(ClipData * cd)
+{
     ULONG len;
     void *text;
 
     if (WinOpenClipbrd(hab) == TRUE) {
-        WinEmptyClipbrd(hab);
-        len = cd->fLen;
+	WinEmptyClipbrd(hab);
+	len = cd->fLen;
 
-        if (len) {
-          DosAllocSharedMem((void **)&text, 0, len + 1, //OBJ_ANY |
-                            PAG_READ | PAG_WRITE | PAG_COMMIT | OBJ_GIVEABLE);
-            strncpy((char *)text, cd->fChar, len + 1);
-            if (!WinSetClipbrdData(hab, (ULONG) text, CF_TEXT, CFI_POINTER))
-                DosBeep(100, 1500);
+	if (len) {
+	    DosAllocSharedMem((void **)&text, 0, len + 1,	//OBJ_ANY |
+			      PAG_READ | PAG_WRITE | PAG_COMMIT |
+			      OBJ_GIVEABLE);
+	    strncpy((char *)text, cd->fChar, len + 1);
+	    if (!WinSetClipbrdData(hab, (ULONG) text, CF_TEXT, CFI_POINTER))
+		DosBeep(100, 1500);
 
-        }
-        WinCloseClipbrd(hab);
+	}
+	WinCloseClipbrd(hab);
     }
     return 0;
 }

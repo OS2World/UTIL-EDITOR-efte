@@ -10,67 +10,82 @@
 
 #include "fte.h"
 
-ExModelView::ExModelView(EView *AView): ExView() {
+ExModelView::ExModelView(EView * AView):ExView()
+{
     View = AView;
     View->MView = this;
     MouseCaptured = 0;
     MouseMoved = 0;
 }
 
-ExModelView::~ExModelView() {
-    if (View) { // close it
-        delete View;
-        View = 0;
+ExModelView::~ExModelView()
+{
+    if (View) {				// close it
+	delete View;
+
+	View = 0;
     }
 }
 
-int ExModelView::GetContext() {
+int ExModelView::GetContext()
+{
     return View->GetContext();
 }
 
-void ExModelView::Activate(int gotfocus) {
+void ExModelView::Activate(int gotfocus)
+{
     ExView::Activate(gotfocus);
     View->Activate(gotfocus);
 }
 
-EEventMap *ExModelView::GetEventMap() {
+EEventMap *ExModelView::GetEventMap()
+{
     return View->GetEventMap();
 }
 
-int ExModelView::ExecCommand(int Command, ExState &State) {
+int ExModelView::ExecCommand(int Command, ExState & State)
+{
     return View->ExecCommand(Command, State);
 }
 
-int ExModelView::BeginMacro() {
+int ExModelView::BeginMacro()
+{
     return View->BeginMacro();
 }
 
-void ExModelView::HandleEvent(TEvent &Event) {
+void ExModelView::HandleEvent(TEvent & Event)
+{
     ExView::HandleEvent(Event);
     View->HandleEvent(Event);
 }
 
-void ExModelView::UpdateView() {
+void ExModelView::UpdateView()
+{
     View->UpdateView();
 }
 
-void ExModelView::RepaintView() {
+void ExModelView::RepaintView()
+{
     View->RepaintView();
 }
 
-void ExModelView::RepaintStatus() {
+void ExModelView::RepaintStatus()
+{
     View->RepaintStatus();
 }
 
-void ExModelView::UpdateStatus() {
+void ExModelView::UpdateStatus()
+{
     View->UpdateStatus();
 }
 
-void ExModelView::Resize(int width, int height) {
+void ExModelView::Resize(int width, int height)
+{
     View->Resize(width, height);
 }
 
-void ExModelView::WnSwitchBuffer(EModel *B) {
+void ExModelView::WnSwitchBuffer(EModel * B)
+{
     if (View)
-        View->SwitchToModel(B);
+	View->SwitchToModel(B);
 }

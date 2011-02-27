@@ -10,53 +10,62 @@
 
 #include "fte.h"
 
-ExKey::ExKey(const char *APrompt): ExView() {
+ExKey::ExKey(const char *APrompt):ExView()
+{
     if (APrompt)
-        Prompt = strdup(APrompt);
+	Prompt = strdup(APrompt);
     else
-        Prompt = 0;
+	Prompt = 0;
 }
 
-ExKey::~ExKey() {
+ExKey::~ExKey()
+{
     free(Prompt);
 }
 
-void ExKey::Activate(int gotfocus) {
+void ExKey::Activate(int gotfocus)
+{
     ExView::Activate(gotfocus);
 }
 
-int ExKey::BeginMacro() {
+int ExKey::BeginMacro()
+{
     return 1;
 }
 
-void ExKey::HandleEvent(TEvent &Event) {
+void ExKey::HandleEvent(TEvent & Event)
+{
     switch (Event.What) {
     case evKeyDown:
-        Key = Event.Key.Code;
-        if (!(Key & kfModifier)) // not ctrl,alt,shift, ....
-            EndExec(1);
-        Event.What = evNone;
-        break;
+	Key = Event.Key.Code;
+	if (!(Key & kfModifier))	// not ctrl,alt,shift, ....
+	    EndExec(1);
+	Event.What = evNone;
+	break;
     }
 }
 
-void ExKey::UpdateView() {
+void ExKey::UpdateView()
+{
     if (Next) {
-        Next->UpdateView();
+	Next->UpdateView();
     }
 }
 
-void ExKey::RepaintView() {
+void ExKey::RepaintView()
+{
     if (Next) {
-        Next->RepaintView();
+	Next->RepaintView();
     }
 }
 
-void ExKey::UpdateStatus() {
+void ExKey::UpdateStatus()
+{
     RepaintStatus();
 }
 
-void ExKey::RepaintStatus() {
+void ExKey::RepaintStatus()
+{
     TDrawBuffer B;
     int W, H;
 
