@@ -46,6 +46,8 @@ EView::~EView() {
         Model->RemoveView(this);
     if (Port)
         delete Port;
+    if (CurMsg)
+	free(CurMsg);
 }
 
 int EView::CanQuit() {
