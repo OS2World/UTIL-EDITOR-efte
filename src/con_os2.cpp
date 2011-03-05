@@ -1271,7 +1271,7 @@ static int CreatePipeChild(PID & pid, HPIPE & hfPipe, char *Command)
 
     return 0;
 }
-
+#define INCL_LOADEXCEPTQ
 #include "exceptq.h"
 static void _LNK_CONV PipeThread(void *p)
 {
@@ -1284,7 +1284,7 @@ static void _LNK_CONV PipeThread(void *p)
     RESULTCODES rc_code;
     EXCEPTIONREGISTRATIONRECORD exRegRec;
 
-    LoadExceptq(&exRegRec, "");
+    LoadExceptq(&exRegRec, "", "");
     rc = CreatePipeChild(pid, hfPipe, pipe->Command);
 
     if (rc != 0) {
@@ -1545,8 +1545,8 @@ int ConSetTitle(char *Title, char *STitle)
 
 int ConGetTitle(char *Title, int MaxLen, char *STitle, int SMaxLen)
 {
-    strcpy(Title, "eFTE");
-    strcpy(STitle, "eFTE");
+    strcpy(Title, "eFTE/2");
+    strcpy(STitle, "eFTE/2");
     return 0;
 }
 

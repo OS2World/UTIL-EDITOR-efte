@@ -432,6 +432,8 @@ int TagGoto(EView * View, char *Tag)
 	    if (GotoTag(M, View) == 0)
 		return 0;
 
+	    if (CurrentTag)
+		free(CurrentTag);
 	    CurrentTag = strdup(Tag);
 	    TagPosition = M;
 	    return 1;
@@ -461,7 +463,8 @@ int TagFind(EBuffer * B, EView * View, char *Tag)
 	    if (PushPos(B) == 0)
 		return 0;
 
-	    free(CurrentTag);
+	    if (CurrentTag)
+		free(CurrentTag);
 	    CurrentTag = strdup(Tag);
 	    if (CurrentTag == 0)
 		return 0;
@@ -487,7 +490,8 @@ int TagFind(EBuffer * B, EView * View, char *Tag)
 	    if (GotoTag(M, View) == 0)
 		return 0;
 
-	    free(CurrentTag);		// in case it already exists.
+	    if (CurrentTag)
+		free(CurrentTag);		// in case it already exists.
 	    CurrentTag = strdup(Tag);
 	    TagPosition = M;
 
@@ -637,20 +641,10 @@ int TagPop(EView * View)
     if (T) {
 	TStack = T->Next;
 
-	if (CurrentTag) {
+	if (CurrentTag)
 	    free(CurrentTag);
-	    //CurrentTag = NULL;
-	}
-	//if (T->CurrentTag) {
-	//    CurrentTag = strdup(T->CurrentTag);
-	//}
 	CurrentTag = T->CurrentTag;
 	TagPosition = T->TagPos;
-
-	// if (GotoFilePos(View, T->FileName, T->Line, T->Col) == 0) {
-	//     free(T);
-	//     return 0;
-	// }
 	rv = GotoFilePos(View, T->FileName, T->Line, T->Col);
 	free(T);
 	return rv;

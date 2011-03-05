@@ -49,6 +49,7 @@
 #include "s_files.h"
 #include "s_string.h"
 #include "log.h"
+#define INCL_LOADEXCEPTQ
 #include "exceptq.h"
 
 #define PM_STACK_SIZE (96 * 1024)
@@ -2616,7 +2617,7 @@ static void _LNK_CONV WorkThread(void *)
     hmqW = WinCreateMsgQueue(hab, 0);
     EXCEPTIONREGISTRATIONRECORD exRegRec;
 
-    LoadExceptq(&exRegRec, "");
+    LoadExceptq(&exRegRec, "", "");
     hwndCreatorWorker = WinCreateWindow(HWND_OBJECT,
 					szCreator,
 					"Creator",
@@ -4146,7 +4147,7 @@ static void _LNK_CONV PipeThread(void *p)
     int rc;
     EXCEPTIONREGISTRATIONRECORD exRegRec;
 
-    LoadExceptq(&exRegRec, "");
+    LoadExceptq(&exRegRec, "", "");
     hab = WinInitialize(0);
 
     rc = CreatePipeChild(&sid, &pid, hfPipe, pipe->Command);
@@ -4330,7 +4331,7 @@ int GUI::multiFrame()
 void DieError(int rc, const char *msg, ...)
 {
     va_list ap;
-    char str[1024];
+    char str[2048];
 
     va_start(ap, msg);
     vsprintf(str, msg, ap);
@@ -4339,8 +4340,8 @@ void DieError(int rc, const char *msg, ...)
 	hab = WinInitialize(0);
     if (hmq == 0)
 	hmq = WinCreateMsgQueue(hab, 0);
-    WinMessageBox(HWND_DESKTOP, HWND_DESKTOP, str, "eFTE", 0,
-		  MB_OK | MB_ERROR);
+    WinMessageBox(HWND_DESKTOP, HWND_DESKTOP, str, "eFTE/2", 0,
+                  MB_OK | rc > 3 ? MB_ICONASTERISK:MB_ERROR);
     WinDestroyMsgQueue(hmq);
     WinTerminate(hab);
     exit(rc);

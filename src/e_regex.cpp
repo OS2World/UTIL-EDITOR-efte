@@ -19,6 +19,8 @@
 #include "e_regex.h"
 #include "sysdep.h"
 #if defined(OS2)
+#define INCL_DOS
+#include <os2.h>
 #include "exceptq.h"
 #endif
 
@@ -1412,7 +1414,7 @@ int main()
     char line[1024];
 
 #if defined(OS2)
-    LoadExceptq(&exRegRec, "");
+    LoadExceptq(&exRegRec, "", "");
 #endif
     TEST(1, "a", "a");
     TEST(0, "b", "a");
