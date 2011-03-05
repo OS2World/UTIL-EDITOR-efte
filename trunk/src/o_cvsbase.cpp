@@ -480,7 +480,7 @@ EEventMap *ECvsBase::GetEventMap()
 // Shown in "Closing xxx..." message when closing model
 void ECvsBase::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, Title, MaxLen);
+    strlcpy(AName, Title, MaxLen);
 }
 
 // Shown in buffer list
@@ -490,14 +490,13 @@ void ECvsBase::GetInfo(char *AInfo, int MaxLen)
 
     sprintf(format, "%2d %04d/%03d %s (%%.%is) ", ModelNo, Row, Count, Title,
 	    MaxLen - 24 - (int)strlen(Title));
-    sprintf(AInfo, format, Command);
+    snprintf(AInfo, MaxLen, format, Command);
 }
 
 // Used to get default directory of model
 void ECvsBase::GetPath(char *APath, int MaxLen)
 {
-    strncpy(APath, Directory, MaxLen);
-    APath[MaxLen - 1] = 0;
+    strlcpy(APath, Directory, MaxLen);
     Slash(APath, 0);
 }
 
@@ -508,6 +507,6 @@ void ECvsBase::GetTitle(char *ATitle, int MaxLen, char *ASTitle, int SMaxLen)
 
     sprintf(format, "%s: %%.%is", Title, MaxLen - 4 - (int)strlen(Title));
     sprintf(ATitle, format, Command);
-    strncpy(ASTitle, Title, SMaxLen);
+    strlcpy(ASTitle, Title, SMaxLen);
     ASTitle[SMaxLen - 1] = 0;
 }
