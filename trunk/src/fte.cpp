@@ -14,6 +14,9 @@
 #include <locale.h>
 #endif
 #if defined(OS2)
+#define INCL_DOS
+#include <os2.h>
+#define INCL_LOADEXCEPTQ
 #include "exceptq.h"
 #endif
 #if defined(UNIX)
@@ -26,12 +29,12 @@ char ConfigFileName[MAXPATH] = "";
 
 static void Version()
 {
-    printf("eFTE version " VERSION " " COPYRIGHT "\n");
+    DieError(4, "eFTE/2 version " VERSION " " COPYRIGHT "\n");
 }
 
 static void Usage()
 {
-    printf("Usage: " PROGRAM " [-?] [-h] [--help] [-CDHTmlrt] files...\n"
+    DieError(4, "Usage: " PROGRAM " [-?] [-h] [--help] [-CDHTmlrt] files...\n"
 	   "Version: " VERSION " " COPYRIGHT "\n"
 	   "   You may distribute under the terms of either the GNU General Public\n"
 	   "   License or the Artistic License, as specified in the README file.\n"
@@ -40,7 +43,7 @@ static void Usage()
 	   "  --                End of options, only files remain.\n"
 	   "  -+                Next option is file.\n"
 	   "  -? -h --help      Display usage.\n"
-	   "  --version         Display eFTE version.\n"
+	   "  --version         Display eFTE/2 version.\n"
 	   "  -v                Increase verbosity level.\n"
 	   "  -!                Ignore config file, use builtin defaults (also -c).\n"
 	   "  -C[<.cnf>]        Use specified configuration file (no arg=builtin).\n"
@@ -89,9 +92,6 @@ char *getProgramName(char *name)
 #if defined(OS2) && defined(__EMX__)
 
 // argv[0] on emx does not contain full path
-
-#define INCL_DOS
-#include <os2.h>
 
 char *getProgramName(char *name)
 {
@@ -250,7 +250,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
     return 1;
 }
 
-#if defined(OS2)
+#if 0 //defined(OS2)
 int LoadExceptq(EXCEPTIONREGISTRATIONRECORD * pExRegRec, char *pOpts)
 {
     static BOOL fLoadTried = FALSE;
@@ -309,10 +309,10 @@ int LoadExceptq(EXCEPTIONREGISTRATIONRECORD * pExRegRec, char *pOpts)
 
 int main(int argc, char **argv)
 {
+#if defined(OS2)
     EXCEPTIONREGISTRATIONRECORD exRegRec;
 
-#if defined(OS2)
-    LoadExceptq(&exRegRec, "");
+    LoadExceptq(&exRegRec, "I", "eFTE/2 ver 1.0 GKY");
 #endif
 #if defined(_DEBUG) && defined(MSVC) && defined(MSVCDEBUG)
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
