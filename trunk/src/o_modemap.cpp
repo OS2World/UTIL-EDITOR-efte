@@ -192,20 +192,19 @@ int EventMapView::CanActivate(int /*Line */ )
 
 void EventMapView::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, "EventMapView", MaxLen);
+    strlcpy(AName, "EventMapView", MaxLen);
 }
 
-void EventMapView::GetInfo(char *AInfo, int /*MaxLen */ )
+void EventMapView::GetInfo(char *AInfo, int MaxLen)
 {
-    sprintf(AInfo,
-	    "%2d %04d/%03d EventMapView (%s)",
+    snprintf(AInfo, MaxLen, "%2d %04d/%03d EventMapView (%s)",
 	    ModelNo, Row + 1, Count, EMap->Name);
 }
 
-void EventMapView::GetTitle(char *ATitle, int /*MaxLen */ , char *ASTitle,
+void EventMapView::GetTitle(char *ATitle, int MaxLen, char *ASTitle,
 			    int SMaxLen)
 {
-    sprintf(ATitle, "EventMapView: %s", EMap->Name);
-    strncpy(ASTitle, "EventMapView", SMaxLen);
+    snprintf(ATitle, MaxLen, "EventMapView: %s", EMap->Name);
+    strlcpy(ASTitle, "EventMapView", SMaxLen);
     ASTitle[SMaxLen - 1] = 0;
 }

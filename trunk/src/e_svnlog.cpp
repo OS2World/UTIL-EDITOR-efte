@@ -212,7 +212,7 @@ int ESvnLog::ConfQuit(GxView * V, int /*multiFile */ )
 // Shown in "Closing xxx..." message when closing model
 void ESvnLog::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, "SVN log", MaxLen);
+    strlcpy(AName, "SVN log", MaxLen);
 }
 
 // Shown in buffer list
@@ -225,6 +225,6 @@ void ESvnLog::GetInfo(char *AInfo, int /*MaxLen */ )
 // Normal and short title (normal for window, short for icon in X)
 void ESvnLog::GetTitle(char *ATitle, int MaxLen, char *ASTitle, int SMaxLen)
 {
-    strncpy(ATitle, "SVN log", MaxLen);
-    strncpy(ASTitle, "SVN log", SMaxLen);
+    strlcpy(ATitle, "SVN log", MaxLen);
+    strlcpy(ASTitle, "SVN log", SMaxLen);
 }

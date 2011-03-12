@@ -345,8 +345,7 @@ int GetInputHistory(int Id, char *String, int len, int Nth)
 	if (inputHistory.Id[i] == Id) {
 	    Nth--;
 	    if (Nth == 0) {
-		strncpy(String, inputHistory.Line[i], len);
-		String[len - 1] = 0;
+		strlcpy(String, inputHistory.Line[i], len);
 		return 1;
 	    }
 	}

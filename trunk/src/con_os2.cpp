@@ -1520,8 +1520,7 @@ int ConSetTitle(char *Title, char *STitle)
        printf("\x7\n");
        else {
 
-       strncpy (sw.szSwtitle, Title, MAXNAMEL - 1);
-       sw.szSwtitle[MAXNAMEL-1] = 0;
+       strlcpy (sw.szSwtitle, Title, MAXNAMEL - 1);
 
        printf("hwnd: %X, hwndIcon: %X, pid: %d\n",
        sw.hwnd,

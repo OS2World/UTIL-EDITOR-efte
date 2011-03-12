@@ -173,12 +173,13 @@ APIRET16 APIENTRY16 UNSETEXCEPT(EXCEPTIONREGISTRATIONRECORD* _Seg16 pExRegRec);
  * Force the app to exit via a forced trap
  */
 void     APIENTRY   FORCEEXIT(void);
+BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
+                    const char* pOpts, const char* pInfo);
 
 /*****************************************************************************/
 #ifdef INCL_LOADEXCEPTQ
 
-BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
-                    const char* pOpts, const char* pInfo);
+
 
 /**
  * The following sample function loads and installs Exceptq dynamically

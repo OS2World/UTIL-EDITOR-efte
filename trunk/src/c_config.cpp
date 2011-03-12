@@ -151,8 +151,8 @@ static void AppendGUICharacters(const char *string)
 	// make sure we have zero at start of string
 	*(g->name) = 0;
 
-	// strncat makes sure that we have zero at the end...
-	strncat(g->name, string, (s - string));
+	// strlcat makes sure that we have zero at the end...
+	strlcat(g->name, string, (s - string));
 
 	// copy text after ':' to chars...
 	g->chars = strdup(s + 1);
@@ -1440,8 +1440,7 @@ int LoadDefaultConfig()
 {
     /*
        //char *buf = (char *)malloc(strlen(DefaultConfig) + 1);
-       //strncpy(buf, DefaultConfig, strlen(DefaultConfig));
-       //buf[strlen(DefaultConfig)+1] = 0;
+       //strlcpy(buf, DefaultConfig, strlen(DefaultConfig));
        ProcessConfigFile((char *)"built-in", DefaultConfig, 0);
 
        CurPos cp;

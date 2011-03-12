@@ -448,7 +448,7 @@ int PutClipText(ClipData * cd)
     if (len) {
 	DosAllocSharedMem((void **)&text, 0, len + 1,	//OBJ_ANY |
 			  PAG_READ | PAG_WRITE | PAG_COMMIT | OBJ_GIVEABLE);
-	strncpy((char *)text, cd->fChar, len + 1);
+	strlcpy((char *)text, cd->fChar, len + 1);
 	if (!p_WinSetClipbrdData
 	    (PmInfo.hab, (ULONG) text, CF_TEXT, CFI_POINTER))
 	    DosBeep(100, 1500);

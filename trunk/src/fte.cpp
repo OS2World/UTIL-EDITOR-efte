@@ -312,7 +312,7 @@ int main(int argc, char **argv)
 #if defined(OS2)
     EXCEPTIONREGISTRATIONRECORD exRegRec;
 
-    LoadExceptq(&exRegRec, "I", "eFTE/2 ver 1.0 GKY");
+    LoadExceptq(&exRegRec, "I", "eFTE/2 ver "VERSION);
 #endif
 #if defined(_DEBUG) && defined(MSVC) && defined(MSVCDEBUG)
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);

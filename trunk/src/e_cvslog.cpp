@@ -212,7 +212,7 @@ int ECvsLog::ConfQuit(GxView * V, int /*multiFile */ )
 // Shown in "Closing xxx..." message when closing model
 void ECvsLog::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, "CVS log", MaxLen);
+    strlcpy(AName, "CVS log", MaxLen);
 }
 
 // Shown in buffer list
@@ -225,6 +225,6 @@ void ECvsLog::GetInfo(char *AInfo, int /*MaxLen */ )
 // Normal and short title (normal for window, short for icon in X)
 void ECvsLog::GetTitle(char *ATitle, int MaxLen, char *ASTitle, int SMaxLen)
 {
-    strncpy(ATitle, "CVS log", MaxLen);
-    strncpy(ASTitle, "CVS log", SMaxLen);
+    strlcpy(ATitle, "CVS log", MaxLen);
+    strlcpy(ASTitle, "CVS log", SMaxLen);
 }

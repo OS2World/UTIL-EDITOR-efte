@@ -32,8 +32,7 @@ ExChoice::ExChoice(const char *ATitle, int NSel, va_list ap):ExView()
     fmt = va_arg(ap, char *);
 
     vsprintf(msg, fmt, ap);
-    strncpy(Prompt, msg, sizeof(Prompt));
-    Prompt[sizeof(Prompt) - 1] = 0;
+    strlcpy(Prompt, msg, sizeof(Prompt));
 }
 
 ExChoice::~ExChoice()

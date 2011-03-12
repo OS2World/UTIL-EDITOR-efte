@@ -952,8 +952,7 @@ int EBuffer::RegExp(ExState & State)
 
     RxExec(re, Haystack, strlen(Haystack), Haystack, &match);
     RxReplace(Replace, Haystack, strlen(Haystack), match, &dest, &dest_len);
-    strncpy(GetStrVars[No], dest, sizeof(GetStrVars[No]));
-    GetStrVars[No][dest_len] = 0;
+    strlcpy(GetStrVars[No], dest, sizeof(GetStrVars[No]));
 
     RxFree(re);
 
@@ -998,9 +997,8 @@ int EBuffer::ExpandTemplate(ExState & State)
     while (RxExec(re, buf, len, buf, &match) && match.Open[2] != -1) {
 	int num = atoi(buf + match.Open[2]);
 
-	strncpy(prompts[num], buf + match.Open[3],
+	strlcpy(prompts[num], buf + match.Open[3],
 		match.Close[3] - match.Open[3]);
-	prompts[num][match.Close[3] - match.Open[3]] = 0;
 
 	strcpy(values[num], "");
 	if (View->MView->Win->
@@ -1012,8 +1010,7 @@ int EBuffer::ExpandTemplate(ExState & State)
 
 	RxReplace(repl, buf, strlen(buf), match, &r, &r_len);
 	r[r_len] = 0;
-	strncpy(buf, r, r_len);
-	buf[r_len] = 0;
+	strlcpy(buf, r, r_len);
 	free(r);
 
 	len = r_len;
@@ -1031,8 +1028,7 @@ int EBuffer::ExpandTemplate(ExState & State)
 
 	RxReplace(rw, buf, strlen(buf), match, &r, &r_len);
 	r[r_len] = 0;
-	strncpy(buf, r, r_len);
-	buf[r_len] = 0;
+	strlcpy(buf, r, r_len);
 	free(r);
 
 	len = r_len;
@@ -1905,8 +1901,7 @@ int EBuffer::ConfQuit(GxView * V, int multiFile)
 
 void EBuffer::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, FileName, MaxLen);
-    AName[MaxLen - 1] = 0;
+    strlcpy(AName, FileName, MaxLen);
 }
 
 void EBuffer::GetPath(char *APath, int MaxLen)
@@ -1914,7 +1909,7 @@ void EBuffer::GetPath(char *APath, int MaxLen)
     JustDirectory(FileName, APath, MaxLen);
 }
 
-void EBuffer::GetInfo(char *AInfo, int /*MaxLen */ )
+void EBuffer::GetInfo(char *AInfo, int MaxLen)
 {
     char buf[256] = { 0 };
     char winTitle[256] = { 0 };
@@ -1924,14 +1919,13 @@ void EBuffer::GetInfo(char *AInfo, int /*MaxLen */ )
 	JustLastDirectory(FileName, buf, sizeof(buf));
 
     if (buf[0] != 0) {			// if there is a file/dir name, stick it in here.
-	strncat(winTitle, buf, sizeof(winTitle) - 1 - strlen(winTitle));
-	strncat(winTitle, " - ", sizeof(winTitle) - 1 - strlen(winTitle));
+	strlcat(winTitle, buf, sizeof(winTitle));
+	strlcat(winTitle, " - ", sizeof(winTitle));
     }
-    strncat(winTitle, FileName, sizeof(winTitle) - 1 - strlen(winTitle));
+    strlcat(winTitle, FileName, sizeof(winTitle));
     winTitle[sizeof(winTitle) - 1] = 0;
 
-    sprintf(AInfo,
-	    "%2d %04d:%03d%c%-150s ",
+    snprintf(AInfo, MaxLen, "%2d %04d:%03d%c%-150s ",
 	    ModelNo, 1 + CP.Row, 1 + CP.Col, Modified ? '*' : ' ', winTitle);
 }
 
@@ -1939,16 +1933,13 @@ void EBuffer::GetTitle(char *ATitle, int MaxLen, char *ASTitle, int SMaxLen)
 {
     char *p;
 
-    strncpy(ATitle, FileName, MaxLen - 1);
-    ATitle[MaxLen - 1] = 0;
+    strlcpy(ATitle, FileName, MaxLen - 1);
     p = SepRChr(FileName);
     if (p) {
-	strncpy(ASTitle, p + 1, SMaxLen - 1);
-	ASTitle[SMaxLen - 1] = 0;
+	strlcpy(ASTitle, p + 1, SMaxLen - 1);
     }
     else {
-	strncpy(ASTitle, FileName, SMaxLen - 1);
-	ASTitle[SMaxLen - 1] = 0;
+	strlcpy(ASTitle, FileName, SMaxLen - 1);
     }
 }
 
@@ -2134,8 +2125,7 @@ int EBuffer::GetStrVar(int var, char *str, int buflen)
     switch (var) {
     case mvFilePath:
 	//puts("variable FilePath\x7");
-	strncpy(str, FileName, buflen);
-	str[buflen - 1] = 0;
+	strlcpy(str, FileName, buflen);
 	return 1;
 
     case mvFileName:

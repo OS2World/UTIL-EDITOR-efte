@@ -401,8 +401,7 @@ int JustLastDirectory(const char *Path, char *Dir, int DirSize)
 	lastSlash = secondLastSlash + DirSize - 2;
     }
 
-    strncpy(Dir, Path + secondLastSlash, lastSlash - secondLastSlash);
-    Dir[lastSlash - secondLastSlash] = 0;
+    strlcpy(Dir, Path + secondLastSlash, lastSlash - secondLastSlash);
 
     return 0;
 }
@@ -423,8 +422,7 @@ int JustRoot(const char *Path, char *Root, int RootSize)
     strlcpy(Root, SSLASH, RootSize);
 #else
     if (RootSize >= 4) {
-	strncpy(Root, Path, 3);
-	Root[3] = 0;
+	strlcpy(Root, Path, 3);
     }
 #endif
     return 0;
@@ -469,7 +467,7 @@ const char *ShortFName(const char *Path, int len)
     else {
 	strncpy(P, p1, 3);
 	strcpy(P + 3, "...");
-	strncpy(P + 6, p1 + l1 - len, len - 6);
+	strlcpy(P + 6, p1 + l1 - len, len - 6);
     }
     return P;
 }

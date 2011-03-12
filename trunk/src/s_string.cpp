@@ -45,18 +45,21 @@ int UnTabStr(char *dest, int maxlen, const char *source, int slen)
 }
 
 #if !defined(HAVE_STRLCPY)
+/* returns size of src */
 size_t strlcpy(char *dst, const char *src, size_t size)
 {
-    size_t ret = strlen(src);
+    size_t sz = 0;
 
-    if (size) {
-	size_t len = (ret >= size) ? size - 1 : ret;
+    while (sz < size && (dst[sz] = src[sz]))
+	sz++;
 
-	memcpy(dst, src, len);
-	dst[len] = '\0';
-    }
+    if (sz && (sz == size))
+	dst[sz - 1] = 0;
 
-    return ret;
+    while (src[sz])
+	sz++;
+
+    return sz;
 }
 #endif // !HAVE_STRLCPY
 

@@ -151,8 +151,8 @@ static int DrawVMenu(int x, int y, int id, int active)
     h += 2;
 
     MoveChar(B, 0, w, ConGetDrawChar(DCH_H), hcMenu_Background, w);
-    MoveCh(B, ConGetDrawChar(DCH_C1), hcMenu_Background, 1);
-    MoveCh(B + w - 1, ConGetDrawChar(DCH_C2), hcMenu_Background, 1);
+    MoveCh(B, ConGetDrawChar(DCH_M2), hcMenu_Background, 1);
+    MoveCh(B + w - 1, ConGetDrawChar(DCH_M3), hcMenu_Background, 1);
     ConPutBox(x, y, w, 1, B);
     for (i = 0; i < Menus[id].Count; i++) {
 	if (i == active) {
