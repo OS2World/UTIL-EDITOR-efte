@@ -22,10 +22,10 @@ ExInput::ExInput(const char *APrompt, char *ALine, unsigned int ABufLen,
     MatchStr = (char *)malloc(MaxLen + 1);
     CurStr = (char *)malloc(MaxLen + 1);
     if (Line) {
-	Line[MaxLen] = 0;
-	strncpy(Line, ALine, MaxLen);
-	Pos = strlen(Line);
-	LPos = 0;
+	//Line[MaxLen] = 0;
+	strlcpy(Line, ALine, MaxLen);
+	//Pos = strlen(Line);
+	//LPos = 0;
     }
     if (Select)
 	SelEnd = Pos;

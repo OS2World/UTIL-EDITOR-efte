@@ -664,7 +664,7 @@ void EMessages::NotifyPipe(int APipeId)
 
 void EMessages::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, "Messages", MaxLen);
+    strlcpy(AName, "Messages", MaxLen);
 }
 
 void EMessages::GetInfo(char *AInfo, int /*MaxLen */ )
@@ -676,16 +676,16 @@ void EMessages::GetInfo(char *AInfo, int /*MaxLen */ )
 
 void EMessages::GetPath(char *APath, int MaxLen)
 {
-    strncpy(APath, Directory, MaxLen);
+    strlcpy(APath, Directory, MaxLen);
     APath[MaxLen - 1] = 0;
     Slash(APath, 0);
 }
 
-void EMessages::GetTitle(char *ATitle, int /*MaxLen */ , char *ASTitle,
+void EMessages::GetTitle(char *ATitle, int MaxLen, char *ASTitle,
 			 int SMaxLen)
 {
-    sprintf(ATitle, "Messages: %s", Command);
-    strncpy(ASTitle, "Messages", SMaxLen);
+    snprintf(ATitle, MaxLen, "Messages: %s", Command);
+    strlcpy(ASTitle, "Messages", SMaxLen);
     ASTitle[SMaxLen - 1] = 0;
 }
 

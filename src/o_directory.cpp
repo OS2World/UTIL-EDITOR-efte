@@ -577,19 +577,17 @@ int EDirectory::FmLoad(const char *Name, EView * XView)
 
 void EDirectory::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, Path, MaxLen);
-    AName[MaxLen - 1] = 0;
+    strlcpy(AName, Path, MaxLen);
     Slash(AName, 0);
 }
 
 void EDirectory::GetPath(char *APath, int MaxLen)
 {
-    strncpy(APath, Path, MaxLen);
-    APath[MaxLen - 1] = 0;
+    strlcpy(APath, Path, MaxLen);
     Slash(APath, 0);
 }
 
-void EDirectory::GetInfo(char *AInfo, int /*MaxLen */ )
+void EDirectory::GetInfo(char *AInfo, int MaxLen)
 {
     char buf[256] = { 0 };
     char winTitle[256] = { 0 };
@@ -599,27 +597,19 @@ void EDirectory::GetInfo(char *AInfo, int /*MaxLen */ )
 	JustLastDirectory(Path, buf, sizeof(buf));
 
     if (buf[0] != 0) {			// if there is a file/dir name, stick it in here.
-	strncat(winTitle, buf, sizeof(winTitle) - 1 - strlen(winTitle));
-	strncat(winTitle, "/ - ", sizeof(winTitle) - 1 - strlen(winTitle));
+	strlcat(winTitle, buf, sizeof(winTitle));
+	strlcat(winTitle, "/ - ", sizeof(winTitle));
     }
-    strncat(winTitle, Path, sizeof(winTitle) - 1 - strlen(winTitle));
-    winTitle[sizeof(winTitle) - 1] = 0;
+    strlcat(winTitle, Path, sizeof(winTitle));
 
-    sprintf(AInfo,
-	    "%2d %04d/%03d %-150s", ModelNo, Row + 1, FCount, winTitle);
-    /*    sprintf(AInfo,
-       "%2d %04d/%03d %-150s",
-       ModelNo,
-       Row + 1, FCount,
-       Path); */
+    snprintf(AInfo, MaxLen, "%2d %04d/%03d %-150s", ModelNo, Row + 1, FCount, winTitle);
 }
 
 void EDirectory::GetTitle(char *ATitle, int MaxLen, char *ASTitle,
 			  int SMaxLen)
 {
 
-    strncpy(ATitle, Path, MaxLen - 1);
-    ATitle[MaxLen - 1] = 0;
+    strlcpy(ATitle, Path, MaxLen - 1);
 
     {
 	char P[MAXPATH];

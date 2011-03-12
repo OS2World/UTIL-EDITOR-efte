@@ -788,10 +788,10 @@ int ConSetTitle(char *Title, char *STitle)
     snprintf(winTitle, sizeof(winTitle), "%s - ", win_name);
     if (buf[0] != 0) {
 	// if there is a file/dir name, stick it in here.
-	strncat(winTitle, buf, sizeof(winTitle) - 1 - strlen(winTitle));
-	strncat(winTitle, " - ", sizeof(winTitle) - 1 - strlen(winTitle));
+	strlcat(winTitle, buf, sizeof(winTitle));
+	strlcat(winTitle, " - ", sizeof(winTitle));
     }
-    strncat(winTitle, Title, sizeof(winTitle) - 1 - strlen(winTitle));
+    strlcat(winTitle, Title, sizeof(winTitle));
     winTitle[sizeof(winTitle) - 1] = 0;
 
     XSetStandardProperties(display, win, winTitle, winTitle, 0, NULL, 0,

@@ -480,7 +480,7 @@ EEventMap *ESvnBase::GetEventMap()
 // Shown in "Closing xxx..." message when closing model
 void ESvnBase::GetName(char *AName, int MaxLen)
 {
-    strncpy(AName, Title, MaxLen);
+    strlcpy(AName, Title, MaxLen);
 }
 
 // Shown in buffer list
@@ -488,16 +488,15 @@ void ESvnBase::GetInfo(char *AInfo, int MaxLen)
 {
     char format[128];
 
-    sprintf(format, "%2d %04d/%03d %s (%%.%is) ", ModelNo, Row, Count, Title,
+    snprintf(format, 128, "%2d %04d/%03d %s (%%.%is) ", ModelNo, Row, Count, Title,
 	    MaxLen - 24 - (int)strlen(Title));
-    sprintf(AInfo, format, Command);
+    snprintf(AInfo, MaxLen, format, Command);
 }
 
 // Used to get default directory of model
 void ESvnBase::GetPath(char *APath, int MaxLen)
 {
-    strncpy(APath, Directory, MaxLen);
-    APath[MaxLen - 1] = 0;
+    strlcpy(APath, Directory, MaxLen);
     Slash(APath, 0);
 }
 
@@ -506,8 +505,7 @@ void ESvnBase::GetTitle(char *ATitle, int MaxLen, char *ASTitle, int SMaxLen)
 {
     char format[128];
 
-    sprintf(format, "%s: %%.%is", Title, MaxLen - 4 - (int)strlen(Title));
-    sprintf(ATitle, format, Command);
-    strncpy(ASTitle, Title, SMaxLen);
-    ASTitle[SMaxLen - 1] = 0;
+    snprintf(format, 128, "%s: %%.%is", Title, MaxLen - 4 - (int)strlen(Title));
+    snprintf(ATitle, MaxLen, format, Command);
+    strlcpy(ASTitle, Title, SMaxLen);
 }

@@ -178,25 +178,21 @@ void ExComplete::HandleEvent(TEvent & Event)
 	    DoQuit = 1;
 	    break;
 	default:
-	    if (CheckASCII(Event.Key.Code & ~kfShift)) {
+	    if (CheckASCII(Event.Key.Code)) {
 		char *s = new char[WordFixed + 2];
 
-		if (s != NULL) {
-		    if (WordFixed > 0)
-			strncpy(s, Words[WordPos], WordFixed);
-		    s[WordFixed] = (unsigned char)(Event.Key.Code & 0xFF);
-		    s[WordFixed + 1] = 0;
-		    for (int i = 0; i < WordsLast; i++)
-			if (strncmp(s, Words[i], WordFixed + 1) == 0) {
-			    WordPos = i;
-			    if (WordFixedCount == 1)
-				DoQuit = 1;
-			    else
-				FixedUpdate(1);
-			    break;
-			}
-		    delete[]s;
-		}
+		strncpy(s, Words[WordPos], WordFixed);
+		s[WordFixed] = (unsigned char)(Event.Key.Code & 0xFF);
+		s[WordFixed + 1] = 0;
+		for (int i = 0; i < WordsLast; i++)
+                    if (strncmp(s, Words[i], WordFixed + 1) == 0) {
+                        WordPos = i;
+                        if (WordFixedCount == 1)
+                            DoQuit = 1;
+                        else
+                            FixedUpdate(1);
+                        break;
+		    }
 		Event.What = evNone;
 	    }
 	    break;
@@ -204,19 +200,9 @@ void ExComplete::HandleEvent(TEvent & Event)
     }
 
     if (DoQuit) {
-	/* int rc = 0;
-	   int l = strlen(Words[WordPos]);
-
-	   if (Buffer->InsText(Buffer->VToR(Orig.Row), Orig.Col, l, Words[WordPos], 1)
-	   && Buffer->SetPos(Orig.Col + l, Orig.Row)) {
-	   Buffer->Draw(Buffer->VToR(Orig.Row), Buffer->VToR(Orig.Row));
-	   rc = 1;
-	   } */
-
 	int rc = DoCompleteWord();
 
 	EndExec(rc);
-
 	Event.What = evNone;
     }
 
@@ -321,8 +307,7 @@ int ExComplete::RefreshComplete()
     if (WordBegin == NULL)
 	return 0;
 
-    strncpy(WordBegin, L->Chars + P, wlen);
-    WordBegin[wlen] = 0;
+    strlcpy(WordBegin, L->Chars + P, wlen);
 
     // fprintf(stderr, "Calling %d  %s\n", wlen, WordBegin);
     // Search words in TAGS
@@ -357,8 +342,7 @@ int ExComplete::RefreshComplete()
 	char *s = new char[len + 1];
 
 	if (s != NULL) {
-	    strncpy(s, M->Chars + X + wlen, len);
-	    s[len] = 0;
+	    strlcpy(s, M->Chars + X + wlen, len);
 
 	    int c = 1, H = 0, L = 0, R = WordsLast;
 

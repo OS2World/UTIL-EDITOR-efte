@@ -228,8 +228,7 @@ int GxView::ReadStr(const char *Prompt, unsigned int BufLen, char *Str,
     Repaint();
 
     if (rc == 1) {
-	strncpy(Str, input->Line, BufLen - 1);
-	Str[BufLen - 1] = 0;
+	strlcpy(Str, input->Line, BufLen - 1);
     }
     delete input;
 
