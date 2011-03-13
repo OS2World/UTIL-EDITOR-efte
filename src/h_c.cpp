@@ -1047,7 +1047,8 @@ static int IndentNormal(EBuffer * B, int Line, int /*StateLen */ ,
 			   //FIND_CLASS |
 			   FIND_COLON |
 			   FIND_SEMICOLON |
-			   FIND_COMMA | FIND_ENDBLOCK) != 1) {
+                           FIND_COMMA | FIND_ENDBLOCK) != 1) {
+            LOG << "Found: " << ENDLINE;
 	    if (RowP != PrevRowP)
 		ContinuationIndent = C_CONTINUATION;
 	    I = 0;

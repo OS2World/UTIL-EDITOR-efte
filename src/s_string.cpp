@@ -50,8 +50,10 @@ size_t strlcpy(char *dst, const char *src, size_t size)
 {
     size_t sz = 0;
 
-    while (sz < size && (dst[sz] = src[sz]))
+    while (sz < size) {
+	dst[sz] = src[sz];
 	sz++;
+    }
 
     if (sz && (sz == size))
 	dst[sz - 1] = 0;
@@ -96,8 +98,8 @@ int stricmp(const char *a, const char *b)
     int minLen = aLen < bLen ? aLen : bLen;
 
     for (int idx = 0; idx < minLen; idx++) {
-	char aC = toupper(a[idx]);
-	char bC = toupper(b[idx]);
+	char aC = (char) toupper(a[idx]);
+	char bC = (char) toupper(b[idx]);
 
 	if (aC > bC)
 	    return 1;

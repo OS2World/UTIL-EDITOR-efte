@@ -202,24 +202,24 @@ void ExChoice::RepaintStatus()
 	    Cur = 0;
     }
 
-    MoveCh(B, ' ', hcChoice_Background, W);
-    MoveStr(B, 0, W, Title, hcChoice_Title, W);
-    MoveChar(B, lTitle, W, ':', hcChoice_Background, 1);
-    MoveStr(B, lTitle + 2, W, Prompt, hcChoice_Param, W);
+    MoveCh(B, ' ', (TAttr) hcChoice_Background, W);
+    MoveStr(B, 0, W, Title, (TAttr) hcChoice_Title, W);
+    MoveChar(B, lTitle, W, ':', (TAttr) hcChoice_Background, 1);
+    MoveStr(B, lTitle + 2, W, Prompt, (TAttr) hcChoice_Param, W);
 
     pos = W - lChoice;
     for (i = 0; i < NOpt; i++) {
 	if (i == Cur) {
-	    color1 = hcChoice_ActiveItem;
-	    color2 = hcChoice_ActiveChar;
+	    color1 = (TAttr) hcChoice_ActiveItem;
+	    color2 = (TAttr) hcChoice_ActiveChar;
 	}
 	else {
-	    color1 = hcChoice_NormalItem;
-	    color2 = hcChoice_NormalChar;
+	    color1 = (TAttr) hcChoice_NormalItem;
+	    color2 = (TAttr) hcChoice_NormalChar;
 	}
 	if (i == Cur)
 	    ConSetCursorPos(pos + 1, H - 1);
-	MoveChar(B, pos, W, ConGetDrawChar(DCH_V), hcChoice_Background, 1);
+	MoveChar(B, pos, W, ConGetDrawChar(DCH_V), (TAttr) hcChoice_Background, 1);
 	MoveCStr(B, pos + 1, W, SOpt[i], color1, color2, W);
 	pos += CStrLen(SOpt[i]) + 1;
     }

@@ -69,7 +69,7 @@ int Hilit_ADA(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 			memset(StateMap + i, State, j);
 		    if (B)
 			MoveMem(B, C - Pos, Width, Line->Chars + i,
-				HILIT_CLRD(), j);
+				(TAttr) HILIT_CLRD(), j);
 		    i += j;
 		    len -= j;
 		    p += j;

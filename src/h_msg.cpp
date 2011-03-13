@@ -146,13 +146,13 @@ int Hilit_MSG(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 	if (Pos < Line->Count) {
 	    if (Pos + Width < Line->Count) {
 		if (B)
-		    MoveMem(B, 0, Width, Line->Chars + Pos, Color, Width);
+		    MoveMem(B, 0, Width, Line->Chars + Pos, (TAttr) Color, Width);
 		if (StateMap)
 		    memset(StateMap, State, Line->Count);
 	    }
 	    else {
 		if (B)
-		    MoveMem(B, 0, Width, Line->Chars + Pos, Color,
+		    MoveMem(B, 0, Width, Line->Chars + Pos, (TAttr) Color,
 			    Line->Count - Pos);
 		if (StateMap)
 		    memset(StateMap, State, Line->Count);

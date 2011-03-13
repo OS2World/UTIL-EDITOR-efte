@@ -1271,7 +1271,6 @@ static int CreatePipeChild(PID & pid, HPIPE & hfPipe, char *Command)
 
     return 0;
 }
-#define INCL_LOADEXCEPTQ
 #include "exceptq.h"
 static void _LNK_CONV PipeThread(void *p)
 {

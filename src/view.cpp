@@ -550,9 +550,9 @@ void EView::SetMsg(const char *msg)
 	MView->ConQuerySize(&Cols, &Rows);
 
 	if (MView->IsActive())
-	    SColor = hcStatus_Active;
+	    SColor = (TAttr) hcStatus_Active;
 	else
-	    SColor = hcStatus_Normal;
+	    SColor = (TAttr) hcStatus_Normal;
 
 	MoveChar(B, 0, Cols, ' ', SColor, Cols);
 	MoveStr(B, 0, Cols, CurMsg, SColor, Cols);

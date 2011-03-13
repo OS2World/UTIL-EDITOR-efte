@@ -119,13 +119,13 @@ void EEditPort::ScrollY(int Delta)
 	Delta = -Delta;
 	if (Delta > Rows)
 	    return;
-	View->MView->ConScroll(csDown, 0, 0, Cols, Rows, hcPlain_Background,
+	View->MView->ConScroll(csDown, 0, 0, Cols, Rows, (TAttr) hcPlain_Background,
 			       Delta);
     }
     else {
 	if (Delta > Rows)
 	    return;
-	View->MView->ConScroll(csUp, 0, 0, Cols, Rows, hcPlain_Background,
+	View->MView->ConScroll(csUp, 0, 0, Cols, Rows, (TAttr) hcPlain_Background,
 			       Delta);
     }
 }

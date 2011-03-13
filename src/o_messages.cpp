@@ -611,7 +611,7 @@ void EMessages::DrawLine(PCell B, int Line, int Col, ChColor color, int Width)
 			   ErrList[Line]->text, strlen(ErrList[Line]->text));
 
 	    if (len > Col)
-		MoveStr(B, 0, Width, str + Col, color, Width);
+		MoveStr(B, 0, Width, str + Col, (TAttr) color, Width);
 	}
 }
 

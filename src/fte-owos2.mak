@@ -44,7 +44,7 @@ DEFS    = -dOS2 -dOS2OW -dINCL_32 -dWATCOM -dUSE_LOCALE
 CFLAGS  = -i=$(INCLUDE) $(MISC) $(DEFS) -d3 -db -w4 -e25 -zq $(OPT) $(MACHINE) -bm -bt=OS2 -mf -xs -of+
 LDFLAGS = debug all op m op maxe=25 op q op symf op el op stack=128k
 !else
-CFLAGS  = -i=$(INCLUDE) $(MISC) $(DEFS) -d1 -db -w4 -e25 -zq $(OPT) $(MACHINE) -bm -bt=OS2 -mf -xs -of+
+CFLAGS  = -i=$(INCLUDE) $(MISC) $(DEFS) -d1 -db -w4 -e25 -zq $(OPT) $(MACHINE) -bm -bt=OS2 -mf -xs -of+-wx
 LDFLAGS = op m op maxe=25 op q op symf op el op stack=128k
 !endif
 OEXT    = obj

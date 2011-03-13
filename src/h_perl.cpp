@@ -130,7 +130,7 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 	isEOHereDoc = strlen(hereDocKey) == (size_t) len &&
 	    strncmp(hereDocKey, Line->Chars, len) == 0;
 	if (isEOHereDoc)
-	    State = hsPerl_Normal | (State & X_BIT);
+	    State = (unsigned short) (hsPerl_Normal | (State & X_BIT));
     }
     for (i = 0; i < Line->Count;) {
 	if (*p != ' ' && *p != 9)
@@ -480,7 +480,7 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 		    goto hilit;
 		}
 		else if (*p == '#') {
-		    State = hsPerl_Comment | (State & X_BIT);
+		    State = (unsigned short) (hsPerl_Comment | (State & X_BIT));
 		    continue;
 		}
 		else if (X_NOT(State) && *p == '/') {
@@ -696,7 +696,7 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 		setHereDoc = QCHAR(State);
 		while (len > 0)
 		    ColorNext();
-		State = hsPerl_Normal | (State & X_BIT);
+		State = (unsigned short) (hsPerl_Normal | (State & X_BIT));
 		continue;
 	    case hsPerl_Docs:
 		Color = CLR_Comment;
@@ -751,7 +751,7 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 	}
     }
     if ((State & X_MASK) == hsPerl_Comment)
-	State = hsPerl_Normal | (State & X_BIT);
+	State = (unsigned short) (hsPerl_Normal | (short) (State & X_BIT));
     if (setHereDoc)
 	State = QSET(hsPerl_HereDoc | (State & X_BIT), setHereDoc - 1);
     *ECol = C;

@@ -349,11 +349,11 @@ void ExInput::RepaintStatus()
     if (Pos < LPos)
 	LPos = Pos;
 
-    MoveChar(B, 0, W, ' ', hcEntry_Field, W);
-    MoveStr(B, 0, W, Prompt, hcEntry_Prompt, FPos);
-    MoveChar(B, FPos - 2, W, ':', hcEntry_Prompt, 1);
-    MoveStr(B, FPos, W, Line + LPos, hcEntry_Field, FLen);
-    MoveAttr(B, FPos + SelStart - LPos, W, hcEntry_Selection,
+    MoveChar(B, 0, W, ' ', (TAttr) hcEntry_Field, W);
+    MoveStr(B, 0, W, Prompt, (TAttr) hcEntry_Prompt, FPos);
+    MoveChar(B, FPos - 2, W, ':', (TAttr) hcEntry_Prompt, 1);
+    MoveStr(B, FPos, W, Line + LPos, (TAttr) hcEntry_Field, FLen);
+    MoveAttr(B, FPos + SelStart - LPos, W, (TAttr) hcEntry_Selection,
 	     SelEnd - SelStart);
     ConSetCursorPos(FPos + Pos - LPos, H - 1);
     ConPutBox(0, H - 1, W, 1, B);

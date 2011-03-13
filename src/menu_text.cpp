@@ -78,16 +78,16 @@ static int DrawHMenu(int x, int y, int id, int active)
 
     ConQuerySize(&Cols, &Rows);
 
-    MoveChar(B, 0, Cols, ' ', hcMenu_Background, Cols);
+    MoveChar(B, 0, Cols, ' ', (TAttr) hcMenu_Background, Cols);
     if (id != -1) {
 	for (i = 0; i < Menus[id].Count; i++) {
 	    if (i == active) {
-		color1 = hcMenu_ActiveItem;
-		color2 = hcMenu_ActiveChar;
+		color1 = (TAttr) hcMenu_ActiveItem;
+		color2 = (TAttr) hcMenu_ActiveChar;
 	    }
 	    else {
-		color1 = hcMenu_NormalItem;
-		color2 = hcMenu_NormalChar;
+		color1 = (TAttr) hcMenu_NormalItem;
+		color2 = (TAttr) hcMenu_NormalChar;
 	    }
 
 	    if (Menus[id].Items[i].Name) {
@@ -99,7 +99,7 @@ static int DrawHMenu(int x, int y, int id, int active)
 	    }
 	    else {
 		MoveChar(B, pos, Cols, ConGetDrawChar(DCH_V),
-			 hcMenu_Background, 1);
+			 (TAttr) hcMenu_Background, 1);
 		pos++;
 	    }
 	}
@@ -150,18 +150,18 @@ static int DrawVMenu(int x, int y, int id, int active)
     w += 4;
     h += 2;
 
-    MoveChar(B, 0, w, ConGetDrawChar(DCH_H), hcMenu_Background, w);
-    MoveCh(B, ConGetDrawChar(DCH_M2), hcMenu_Background, 1);
-    MoveCh(B + w - 1, ConGetDrawChar(DCH_M3), hcMenu_Background, 1);
+    MoveChar(B, 0, w, ConGetDrawChar(DCH_H), (TAttr) hcMenu_Background, w);
+    MoveCh(B, ConGetDrawChar(DCH_M2), (TAttr) hcMenu_Background, 1);
+    MoveCh(B + w - 1, ConGetDrawChar(DCH_M3), (TAttr) hcMenu_Background, 1);
     ConPutBox(x, y, w, 1, B);
     for (i = 0; i < Menus[id].Count; i++) {
 	if (i == active) {
-	    color1 = hcMenu_ActiveItem;
-	    color2 = hcMenu_ActiveChar;
+	    color1 = (TAttr) hcMenu_ActiveItem;
+	    color2 = (TAttr) hcMenu_ActiveChar;
 	}
 	else {
-	    color1 = hcMenu_NormalItem;
-	    color2 = hcMenu_NormalChar;
+	    color1 = (TAttr) hcMenu_NormalItem;
+	    color2 = (TAttr) hcMenu_NormalChar;
 	}
 	if (Menus[id].Items[i].Name) {
 	    char name[128];
@@ -178,8 +178,8 @@ static int DrawVMenu(int x, int y, int id, int active)
 		len2 = CStrLen(arg);
 
 	    MoveChar(B, 0, w, ' ', color1, w);
-	    MoveCh(B, ConGetDrawChar(DCH_V), hcMenu_Background, 1);
-	    MoveCh(B + w - 1, ConGetDrawChar(DCH_V), hcMenu_Background, 1);
+	    MoveCh(B, ConGetDrawChar(DCH_V), (TAttr) hcMenu_Background, 1);
+	    MoveCh(B + w - 1, ConGetDrawChar(DCH_V), (TAttr) hcMenu_Background, 1);
 
 	    MoveCStr(B, 2, len + 2, Menus[id].Items[i].Name, color1, color2,
 		     len);
@@ -191,15 +191,15 @@ static int DrawVMenu(int x, int y, int id, int active)
 	    }
 	}
 	else {
-	    MoveChar(B, 0, w, ConGetDrawChar(DCH_H), hcMenu_Background, w);
-	    MoveCh(B, ConGetDrawChar(DCH_V), hcMenu_Background, 1);
-	    MoveCh(B + w - 1, ConGetDrawChar(DCH_V), hcMenu_Background, 1);
+	    MoveChar(B, 0, w, ConGetDrawChar(DCH_H), (TAttr) hcMenu_Background, w);
+	    MoveCh(B, ConGetDrawChar(DCH_V), (TAttr) hcMenu_Background, 1);
+	    MoveCh(B + w - 1, ConGetDrawChar(DCH_V), (TAttr) hcMenu_Background, 1);
 	}
 	ConPutBox(x, y + i + 1, w, 1, B);
     }
-    MoveChar(B, 0, w, ConGetDrawChar(DCH_H), hcMenu_Background, w);
-    MoveCh(B, ConGetDrawChar(DCH_C3), hcMenu_Background, 1);
-    MoveCh(B + w - 1, ConGetDrawChar(DCH_C4), hcMenu_Background, 1);
+    MoveChar(B, 0, w, ConGetDrawChar(DCH_H), (TAttr) hcMenu_Background, w);
+    MoveCh(B, ConGetDrawChar(DCH_C3), (TAttr) hcMenu_Background, 1);
+    MoveCh(B + w - 1, ConGetDrawChar(DCH_C4), (TAttr) hcMenu_Background, 1);
     ConPutBox(x, y + Menus[id].Count + 1, w, 1, B);
     return 1;
 }

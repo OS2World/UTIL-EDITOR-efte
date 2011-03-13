@@ -152,7 +152,7 @@ int Hilit_SIMPLE(EBuffer * BF, int LN, PCell B, int Pos, int Width,
 		    continue;
 
 		if (matchFlags & MATCH_NOGRAB) {
-		    State = nextState;
+		    State = (unsigned short) nextState;
 		    if (State >= hm->stateCount)
 			State = 0;
 		    st = hm->state + State;
@@ -160,7 +160,7 @@ int Hilit_SIMPLE(EBuffer * BF, int LN, PCell B, int Pos, int Width,
 		}
 		else {
 		    if (matchFlags & MATCH_TAGASNEXT) {
-			State = nextState;
+			State = (unsigned short) nextState;
 			if (State >= hm->stateCount)
 			    State = 0;
 			st = hm->state + State;
@@ -171,7 +171,7 @@ int Hilit_SIMPLE(EBuffer * BF, int LN, PCell B, int Pos, int Width,
 			    else
 			ColorNext();
 		    if (!(matchFlags & MATCH_TAGASNEXT)) {
-			State = nextState;
+			State = (unsigned short) nextState;
 			if (State >= hm->stateCount)
 			    State = 0;
 			st = hm->state + State;
@@ -204,7 +204,7 @@ int Hilit_SIMPLE(EBuffer * BF, int LN, PCell B, int Pos, int Width,
 
 		if (j == 0) {
 		    if (st->nextKwdNoCharState != -1) {
-			State = st->nextKwdNoCharState;
+			State = (unsigned short) st->nextKwdNoCharState;
 			if (State >= hm->stateCount)
 			    State = 0;
 			st = hm->state + State;
@@ -217,11 +217,11 @@ int Hilit_SIMPLE(EBuffer * BF, int LN, PCell B, int Pos, int Width,
 			BF->GetHilitWord(j, &Line->Chars[i], Color,
 					 BFI(BF, BFI_MatchCase) ? 0 : 1)) {
 			if (st->nextKwdMatchedState != -1)
-			    State = st->nextKwdMatchedState;
+			    State = (unsigned short) st->nextKwdMatchedState;
 		    }
 		    else {
 			if (st->nextKwdNotMatchedState != -1) {
-			    State = st->nextKwdNotMatchedState;
+			    State = (unsigned short) st->nextKwdNotMatchedState;
 			    if (st->options & STATE_NOGRAB) {
 				if (State >= hm->stateCount)
 				    State = 0;
@@ -286,7 +286,7 @@ int Hilit_SIMPLE(EBuffer * BF, int LN, PCell B, int Pos, int Width,
 	//continue;
 
 	if (matchLen == 0) {
-	    State = nextState;
+	    State = (unsigned short) nextState;
 	    if (State >= hm->stateCount)
 		State = 0;
 	    break;

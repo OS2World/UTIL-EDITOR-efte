@@ -52,7 +52,7 @@ void EDirectory::DrawLine(PCell B, int Line, int Col, ChColor color,
 {
     char s[1024];
 
-    MoveCh(B, ' ', color, Width);
+    MoveCh(B, ' ', (TAttr) color, Width);
     if (Files && Line >= 0 && Line < FCount) {
 	int Year, Mon, Day, Hour, Min, Sec;
 	struct tm *t;
@@ -95,7 +95,7 @@ void EDirectory::DrawLine(PCell B, int Line, int Col, ChColor color,
 	s[strlen(s)] = (Files[Line]->Type() == fiDIRECTORY) ? SLASH : ' ';
 
 	if (Col < int (strlen(s)))
-	    MoveStr(B, 0, Width, s + Col, color, Width);
+	    MoveStr(B, 0, Width, s + Col, (TAttr) color, Width);
     }
 }
 

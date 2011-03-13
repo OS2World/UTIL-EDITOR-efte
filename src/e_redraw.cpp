@@ -155,11 +155,7 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
     int StartPos, EndPos;
 
     HilitX = 0;
-    MoveChar(B, 0, W, ' ', hcPlain_Background, W);
-    //    if ((VRow == VCount - 1) && !BFI(this, BFI_ForceNewLine)) {
-    // if (BFI(this, BFI_ShowMarkers))
-    //     MoveChar(B, 0, W, EOF_MARKER, hcPlain_Markers, W);
-    //    }
+    MoveChar(B, 0, W, ' ', (TAttr) hcPlain_Background, W);
     if (VRow < VCount) {
 	int Row = VToR(VRow);
 	PELine L = RLine(Row);
@@ -180,7 +176,7 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
 	if (BFI(this, BFI_ShowMarkers)) {
 	    MoveChar(B, ECol - C, W,
 		     ConGetDrawChar((Row == RCount - 1) ? DCH_EOF : DCH_EOL),
-		     hcPlain_Markers, 1);
+		     (TAttr) hcPlain_Markers, 1);
 	    ECol += 1;
 	}
 	if (Row < RCount) {
@@ -199,7 +195,7 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
 		    foldColor = hcPlain_Folds[4];
 		if (FF[f].open == 1) {
 		    l = sprintf(fold, "[%d]", FF[f].level);
-		    MoveStr(B, ECol - C + 1, W, fold, foldColor, 10);
+		    MoveStr(B, ECol - C + 1, W, fold, (TAttr) foldColor, 10);
 		    ECol += l;
 		}
 		else {
@@ -210,9 +206,9 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
 			Folded = RCount - (VRow + Vis(VRow));
 		    }
 		    l = sprintf(fold, "(%d:%d)", FF[f].level, Folded);
-		    MoveStr(B, ECol - C + 1, W, fold, foldColor, 10);
+		    MoveStr(B, ECol - C + 1, W, fold, (TAttr) foldColor, 10);
 		    ECol += l;
-		    MoveAttr(B, 0, W, foldColor, W);
+		    MoveAttr(B, 0, W, (TAttr) foldColor, W);
 		}
 	    }
 	}
@@ -255,10 +251,10 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
 		break;
 	    }
 	    if (BFI(this, BFI_SeeThruSel))
-		MoveBgAttr(B, StartPos, W, hcPlain_Selected,
+		MoveBgAttr(B, StartPos, W, (TAttr) hcPlain_Selected,
 			   EndPos - StartPos);
 	    else
-		MoveAttr(B, StartPos, W, hcPlain_Selected, EndPos - StartPos);
+		MoveAttr(B, StartPos, W, (TAttr) hcPlain_Selected, EndPos - StartPos);
 	}
 	if (BFI(this, BFI_ShowBookmarks)) {
 	    int i = 0;
@@ -269,9 +265,9 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
 		if (strncmp(Name, "_BMK", 4) == 0) {
 		    // User bookmark, hilite line
 		    if (BFI(this, BFI_SeeThruSel))
-			MoveBgAttr(B, 0, W, hcPlain_Bookmark, W);
+			MoveBgAttr(B, 0, W, (TAttr) hcPlain_Bookmark, W);
 		    else
-			MoveAttr(B, 0, W, hcPlain_Bookmark, W);
+			MoveAttr(B, 0, W, (TAttr) hcPlain_Bookmark, W);
 		    break;
 		}
 	    }
@@ -279,15 +275,15 @@ void EBuffer::DrawLine(TDrawBuffer B, int VRow, int C, int W, int &HilitX)
 	if (Match.Row != -1 && Match.Col != -1) {
 	    if (Row == Match.Row) {
 		if (BFI(this, BFI_SeeThruSel))
-		    MoveBgAttr(B, Match.Col - C, W, hcPlain_Found, MatchLen);
+		    MoveBgAttr(B, Match.Col - C, W, (TAttr) hcPlain_Found, MatchLen);
 		else
-		    MoveAttr(B, Match.Col - C, W, hcPlain_Found, MatchLen);
+		    MoveAttr(B, Match.Col - C, W, (TAttr) hcPlain_Found, MatchLen);
 	    }
 	}
     }
     else if (VRow == VCount) {
 	if (BFI(this, BFI_ShowMarkers))
-	    MoveChar(B, 0, W, ConGetDrawChar(DCH_END), hcPlain_Markers, W);
+	    MoveChar(B, 0, W, ConGetDrawChar(DCH_END), (TAttr) hcPlain_Markers, W);
     }
 }
 
@@ -423,7 +419,7 @@ void EBuffer::Redraw()
 		    Delta += B - VCount;
 		    B = VCount;
 		}
-		int LastV = VToR(VCount - 1);
+                int LastV = VToR(VCount - 1); // fixme I trap here in PM ver when a file load on startup fails reverse test near 200 e_loadsave.cpp
 		int B1 = (B == VCount) ? RCount : VToR(B);
 
 		if (B1 >= LastV) {
@@ -451,7 +447,7 @@ void EBuffer::Redraw()
 	    SColor = hcStatus_Active;
 	else
 	    SColor = hcStatus_Normal;
-	MoveChar(B, 0, W->Cols, ' ', SColor, W->Cols);
+	MoveChar(B, 0, W->Cols, ' ', (TAttr) SColor, W->Cols);
 
 	if (V->MView->Win->GetViewContext() == V->MView) {
 	    V->MView->Win->SetSbVPos(W->TP.Row, W->Rows,
@@ -520,24 +516,24 @@ void EBuffer::Redraw()
 		int fl = strlen(FileName);
 		char num[32];
 
-		MoveStr(B, 0, W->Cols, s, SColor, W->Cols);
+		MoveStr(B, 0, W->Cols, s, (TAttr) SColor, W->Cols);
 		sprintf(num, " %s %d", CCharStr, ModelNo);
-		MoveStr(B, W->Cols - strlen(num), W->Cols, num, SColor,
+		MoveStr(B, W->Cols - strlen(num), W->Cols, num, (TAttr) SColor,
 			W->Cols);
 
 		fw -= strlen(num);
 
 		if (fl > fw) {
-		    MoveStr(B, l, W->Cols, FileName + fl - fw, SColor,
+		    MoveStr(B, l, W->Cols, FileName + fl - fw, (TAttr) SColor,
 			    W->Cols);
 		}
 		else {
-		    MoveStr(B, l, W->Cols, FileName, SColor, W->Cols);
+		    MoveStr(B, l, W->Cols, FileName, (TAttr) SColor, W->Cols);
 		}
 	    }
 	}
 	else {
-	    MoveStr(B, 0, W->Cols, V->CurMsg, SColor, W->Cols);
+	    MoveStr(B, 0, W->Cols, V->CurMsg, (TAttr) SColor, W->Cols);
 	}
 	if (V->MView->Win->GetStatusContext() == V->MView) {
 	    V->MView->ConPutBox(0, W->Rows, W->Cols, 1, B);
