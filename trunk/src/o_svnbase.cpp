@@ -94,7 +94,7 @@ void ESvnBase::AddLine(char *file, int line, const char *msg, int status)
 	l->Line = line;
 	l->Msg = msg ? strdup(msg) : 0;
 	l->Buf = 0;
-	l->Status = status;
+	l->Status = (char) status;
 
 	LineCount++;
 	Lines = (SvnLine **) realloc(Lines, sizeof(SvnLine *) * LineCount);
@@ -357,7 +357,7 @@ void ESvnBase::DrawLine(PCell B, int Line, int Col, ChColor color, int Width)
 		UnTabStr(str, sizeof(str), Lines[Line]->Msg,
 			 strlen(Lines[Line]->Msg));
 	    if (len > Col)
-		MoveStr(B, 0, Width, str + Col, color, Width);
+		MoveStr(B, 0, Width, str + Col, (TAttr) color, Width);
 	}
 }
 

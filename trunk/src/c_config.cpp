@@ -310,7 +310,7 @@ static int SetGlobalNumber(int what, int number)
 	ScreenSizeY = number;
 	break;
     case FLAG_CursorBlink:
-	CursorBlink = number;
+	CursorBlink = (bool) number;
 	break;
     case FLAG_SysClipboard:
 	SystemClipboard = number;
@@ -334,7 +334,7 @@ static int SetGlobalNumber(int what, int number)
 	ShowMenuBar = number;
 	break;
     case FLAG_BubbleHelp:
-	BubbleHelp = number;
+	BubbleHelp = (bool) number;
 	break;
     case FLAG_ShowToolBar:
 	ShowToolBar = number;
@@ -388,7 +388,7 @@ static int SetGlobalNumber(int what, int number)
 	RecheckReadOnly = number;
 	break;
     case FLAG_CursorWithinEOL:
-	CursorWithinEOL = number;
+	CursorWithinEOL = (bool) number;
 	break;
     case FLAG_CursorInsertMask:
 	CursorInsertMask = number;
@@ -421,9 +421,9 @@ static void SetRGBColor(const char *string)
 	return;
     }
     RGBColorValid[idx] = true;
-    RGBColor[idx].r = r;
-    RGBColor[idx].g = g;
-    RGBColor[idx].b = b;
+    RGBColor[idx].r = (char) r;
+    RGBColor[idx].g = (char) g;
+    RGBColor[idx].b = (char) b;
 }
 
 static int SetGlobalString(long what, const char *string)

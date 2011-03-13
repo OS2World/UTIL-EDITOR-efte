@@ -158,7 +158,7 @@ void RoutineView::DrawLine(PCell B, int Line, int Col, ChColor color,
 		       Buffer->RLine(Buffer->rlst.Lines[Line])->Count);
 
 	if (len > Col)
-	    MoveStr(B, 0, Width, str + Col, color, len - Col);
+	    MoveStr(B, 0, Width, str + Col, (TAttr) color, len - Col);
     }
 }
 

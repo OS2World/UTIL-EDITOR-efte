@@ -1023,7 +1023,7 @@ int RxExec(RxNode * Regexp, const char *Data, int Len, const char *Start,
 	    }
 	}
 	else {
-	    Ch = toupper(Ch);
+	    Ch = (char) toupper(Ch);
 	    while (1) {
 		while (Start < eop && toupper(*Start) != Ch)
 		    Start++;

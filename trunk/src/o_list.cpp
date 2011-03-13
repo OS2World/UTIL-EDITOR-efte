@@ -254,7 +254,7 @@ void EListPort::PaintView(int PaintAll)
 		   (hilit ? hcList_HilitSelect : hcList_Selected)) :
 		(mark ? (hilit ? hcList_MarkHilit : hcList_Marked) :
 		 (hilit ? hcList_Hilited : hcList_Normal));
-	    MoveChar(B, 0, W, ' ', color, W);
+	    MoveChar(B, 0, W, ' ', (TAttr) color, W);
 	    if (I + TopRow < List->Count)
 		List->DrawLine(B, I + TopRow, LeftCol, color, W);
 	    View->MView->ConPutBox(0, I, W, 1, B);
@@ -294,9 +294,9 @@ void EListPort::RepaintStatus()
     View->MView->Win->SetSbHPos(LeftCol, W, 1024 + (WeirdScroll ? W - 1 : 0));
 
     if (View->MView->IsActive())	// hack
-	SColor = hcStatus_Active;
+	SColor = (TAttr) hcStatus_Active;
     else
-	SColor = hcStatus_Normal;
+	SColor = (TAttr) hcStatus_Normal;
     MoveCh(B, ' ', SColor, W);
     if (View->CurMsg == 0) {
 	if (List->Title)

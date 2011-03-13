@@ -735,7 +735,7 @@ static char *GetString(CurPos & cp)
 			n = n * 16 + *cp.c - 'A' + 10;
 		    else
 			cp.c--;
-		    *cp.c = n;
+		    *cp.c = (char) n;
 		    break;
 		}
 	    }

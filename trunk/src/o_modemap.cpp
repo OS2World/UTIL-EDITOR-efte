@@ -171,7 +171,7 @@ void EventMapView::DrawLine(PCell B, int Line, int Col, ChColor color,
 {
     if (Line < BCount)
 	if (Col < int (strlen(BList[Line])))
-	    MoveStr(B, 0, Width, BList[Line] + Col, color, Width);
+	    MoveStr(B, 0, Width, BList[Line] + Col, (TAttr) color, Width);
 }
 
 char *EventMapView::FormatLine(int Line)

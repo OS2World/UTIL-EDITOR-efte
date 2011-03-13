@@ -1882,7 +1882,7 @@ MRESULT EXPENTRY AVIOWndProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 		VioSetDeviceCellSize((SHORT) y, (SHORT) x, pmData->hvps);
 	}
 	VioGetDeviceCellSize(&pmData->cyChar, &pmData->cxChar, pmData->hvps);
-	bBlank[1] = hcPlain_Background;
+	bBlank[1] = (TAttr) hcPlain_Background;
 	VioScrollUp(0, 0, -1, -1, -1, bBlank, pmData->hvps);
 	return 0;
 

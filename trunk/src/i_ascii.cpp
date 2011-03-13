@@ -169,7 +169,7 @@ void ExASCII::RepaintStatus()
 	LPos = 0;
 
     for (int i = 0; i < W; i++)
-	MoveCh(B + i, char (i + LPos), hcAsciiChars, 1);
+	MoveCh(B + i, char (i + LPos), (TAttr) hcAsciiChars, 1);
 
     ConSetCursorPos(Pos - LPos, H - 1);
     ConShowCursor();

@@ -174,7 +174,7 @@ int EBuffer::LoadFrom(const char *AFileName)
 		if (RCount == RAllocated)
 		    if (Allocate(RCount ? (RCount * 2) : 1) == 0)
 			goto fail;
-		if (!(LL[RCount++] = new ELine((char *)m, lm)))
+		if ((LL[RCount++] = new ELine((char *)m, lm)) == 0)
 		    goto fail;
 		RGap = RCount;
 
