@@ -128,10 +128,7 @@ const char *GetGUICharacters(const char *which, const char *defChars)
 	}
     }
     GUICharacters = found;
-    if (found)
-	return found->chars;
-    else
-	return defChars;
+    return found ? found->chars:defChars;
 }
 
 static void AppendGUICharacters(const char *string)
