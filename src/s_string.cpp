@@ -50,10 +50,8 @@ size_t strlcpy(char *dst, const char *src, size_t size)
 {
     size_t sz = 0;
 
-    while (sz < size) {
-	dst[sz] = src[sz];
+    while (sz < size && (dst[sz] = src[sz]))
 	sz++;
-    }
 
     if (sz && (sz == size))
 	dst[sz - 1] = 0;
