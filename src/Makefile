@@ -53,7 +53,7 @@ OEXT    = obj
 
 !include objs.mif
 
-.cpp.obj: *.cpp
+.cpp.obj: .AUTODEPEND
   $(CC) $(CFLAGS) $<
 
 all: efte.exe eftepm.exe

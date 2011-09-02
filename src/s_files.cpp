@@ -249,6 +249,13 @@ int ExpandPath(const char *Path, char *Expand, int ExpandSize)
 
 	    if (Name[1] == SLASH || Name[1] == 0) {
 		path = Name + 1;
+#               ifdef OS2 // 2011-09-01 SHL Support eCS/OS2 home
+		  char *homePath = getenv("HOME");	// Windows Vista
+		  if (homePath == NULL)
+		      strlcpy(Name2, "\\Home", sizeof(Name2));
+		  else
+		      strlcpy(Name2, homePath, sizeof(Name2));
+#		else // assume windows
 		char *homePath = getenv("HOMEPATH");	// Windows Vista
 
 		if (homePath == NULL)
@@ -257,6 +264,7 @@ int ExpandPath(const char *Path, char *Expand, int ExpandSize)
 		    strlcpy(Name2, "C:\\", sizeof(Name2));	// Windows 95/98 do not have home path
 		else
 		    strlcpy(Name2, homePath, sizeof(Name2));
+#		endif
 	    }
 	    if (path[0] != SLASH)
 		Slash(Name2, 1);
@@ -302,7 +310,7 @@ int ExpandPath(const char *Path, char *Expand, int ExpandSize)
     if (slashed)
 	SlashDir(Expand);
     return 0;
-#endif
+#endif // PATHTYPE == PT_DOSISH
 #if PATHTYPE == PT_UNIXISH
     char Name2[MAXPATH];
     char *path, *p;
