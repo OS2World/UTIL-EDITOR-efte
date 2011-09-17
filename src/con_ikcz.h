@@ -8,8 +8,8 @@
  *
  */
 
-#ifndef  __CON_IKCS_H
-#define  __CON_IKCS_H
+#ifndef  CON_IKCS_H_
+#define  CON_IKCS_H_
 
 #include "con_i18n.h"
 #include <X11/keysym.h>
