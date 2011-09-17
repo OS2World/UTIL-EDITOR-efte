@@ -20,6 +20,7 @@ EFrame::EFrame(int XSize, int YSize):GFrame(XSize, YSize)
 
 EFrame::~EFrame()
 {
+   return;
 }
 
 void EFrame::Update()
@@ -85,6 +86,7 @@ EGUI::EGUI(int &argc, char **argv, int XSize, int YSize)
 
 EGUI::~EGUI()
 {
+   return;
 }
 
 int EGUI::ExecCommand(GxView * view, int Command, ExState & State)

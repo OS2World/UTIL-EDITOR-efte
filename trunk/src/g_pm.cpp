@@ -423,7 +423,7 @@ HWND CreatePMMenu(HWND parent, HWND owner, int menu, int id, int style)
 
     for (i = 0; i < Menus[menu].Count; i++) {
 	memset((void *)&item, 0, sizeof(item));
-	item.iPosition = i;
+	item.iPosition = (SHORT) i;
 	item.hwndSubMenu = 0;
 	if (Menus[menu].Items[i].Name) {
 	    if (Menus[menu].Items[i].SubMenu != -1) {
@@ -437,7 +437,7 @@ HWND CreatePMMenu(HWND parent, HWND owner, int menu, int id, int style)
 		{
 		    static int ids = 1000;
 
-		    item.id = ids++;
+		    item.id = (USHORT) ids++;
 		    if (ids == 7000) {
 			ids = 1000;
 		    }
@@ -445,7 +445,7 @@ HWND CreatePMMenu(HWND parent, HWND owner, int menu, int id, int style)
 	    }
 	    else {
 		item.afStyle = MIS_TEXT;
-		item.id = (Menus[menu].Items[i].Cmd & 0xFFFF) + 8192;	// ?
+		item.id = (USHORT) ((Menus[menu].Items[i].Cmd & 0xFFFF) + 8192);	// ?
 	    }
 	}
 	else {
@@ -1330,7 +1330,7 @@ MRESULT CreateChild(HWND parent, GViewPeer * peer, PMData * pmData)
     ptr.p = pmData;
 
     peer->hwndView = WinCreateWindow(parent,
-				     szClient, "eFTE",
+				     szClient, "eFTE/2",
 				     WS_VISIBLE, 0, 0, 0, 0,
 				     NULLHANDLE, HWND_TOP, FID_CLIENT,
 				     (void *)&ptr, NULL);
