@@ -71,8 +71,10 @@ c_config.obj: c_config.cpp defcfg.h
 
 efte.exe: $(OBJS) $(VIOOBJS) fte.def
   $(LD) NAME efte SYS os2v2 $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)}
-#  $(PERL) ..\tools\mapsymw.pl efte.map 
+  $(PERL) ..\tools\mapsymw.pl efte.map 
   mapxqs.exe efte.map
+  lxlite efte.exe /x+ /b-
+  lxlite efte.exe /c:minstub
 
 eftepm.res: eftepm.rc pmdlg.rc
   $(RC) -r eftepm.rc eftepm.res
@@ -80,8 +82,10 @@ eftepm.res: eftepm.rc pmdlg.rc
 eftepm.exe: $(OBJS) $(PMOBJS) eftepm.res
   $(LD) NAME eftepm SYS os2v2_pm $(LDFLAGS) FILE {$(OBJS) $(PMOBJS)}
   $(RC) eftepm.res eftepm.exe
-#  $(PERL) ..\tools\mapsymw.pl eftepm.map
+  $(PERL) ..\tools\mapsymw.pl eftepm.map
   mapxqs.exe eftepm.map
+  lxlite eftepm.exe /x+ /b-
+  lxlite eftepm.exe /c:minstub
 
 clean : .SYMBOLIC
   -@rm *.obj
