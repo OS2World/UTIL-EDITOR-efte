@@ -22,7 +22,6 @@ char buffer[MAXCLIPTEXT];
 int main(int argc, char **argv) {
     EXCEPTIONREGISTRATIONRECORD exRegRec;
     ClipData cd;
-    int i;
 
     LoadExceptq(&exRegRec, "");
     if ((argc == 2) && (strcmp(argv[1], "-s") == 0)) {
