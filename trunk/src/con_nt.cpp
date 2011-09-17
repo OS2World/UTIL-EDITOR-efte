@@ -71,8 +71,8 @@ static int LastMouseY = 0;
 
 //static int      isWin95 = 0;
 
-static char winTitle[256] = "eFTE";
-static char winSTitle[256] = "eFTE";
+static char winTitle[256] = "eFTE/2";
+static char winSTitle[256] = "eFTE/2";
 
 int codepage;
 

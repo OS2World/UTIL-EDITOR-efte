@@ -92,8 +92,8 @@ static int Refresh = 0;
 
 static int useI18n = 1;
 static int FontCX = 8, FontCY = 18;
-static char winTitle[256] = "eFTE";
-static char winSTitle[256] = "eFTE";
+static char winTitle[256] = "eFTE/2";
+static char winSTitle[256] = "eFTE/2";
 
 typedef struct _IncrementalSelectionInfo
 {
