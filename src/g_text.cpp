@@ -601,6 +601,7 @@ GFramePeer::GFramePeer(GFrame * aFrame, int Width, int Height)
 
 GFramePeer::~GFramePeer()
 {
+   return;
 }
 
 int GFramePeer::ConSetSize(int X, int Y)

@@ -574,8 +574,8 @@ int ReadMouseEvent(TEvent * Event, ULONG EventMask)
     Event->Mouse.X = mi.col;
     Event->Mouse.Y = mi.row;
     State = mi.fs;
-    Btn = Buttons = ((State & (2 | 4)) ? 1 : 0) |
-	((State & (8 | 16)) ? 2 : 0) | ((State & (32 | 64)) ? 4 : 0);
+    Btn = Buttons = (USHORT) (((State & (2 | 4)) ? 1 : 0) |
+	((State & (8 | 16)) ? 2 : 0) | ((State & (32 | 64)) ? 4 : 0));
     if (Buttons != PrevButtons) {
 	Buttons ^= PrevButtons;
 	if (PrevButtons & Buttons)

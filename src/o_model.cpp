@@ -210,6 +210,7 @@ EViewPort::EViewPort(EView * V)
 
 EViewPort::~EViewPort()
 {
+   return;
 }
 void EViewPort::HandleEvent(TEvent & /*Event */ )
 {

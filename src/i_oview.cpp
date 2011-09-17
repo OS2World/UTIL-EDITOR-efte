@@ -12,10 +12,12 @@
 
 ExView::ExView()
 {
+   return;
 }
 
 ExView::~ExView()
 {
+   return;
 }
 
 void ExView::Activate(int /*gotfocus */ )
