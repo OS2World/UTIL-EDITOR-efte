@@ -72,7 +72,8 @@ ostream & GlobalLog::operator()() {
 	<< setw(2) << ptm->tm_mday << ' '
 	<< setw(2) << ptm->tm_hour << ':'
 	<< setw(2) << ptm->tm_min << ':'
-	<< setw(2) << ptm->tm_sec << ' ' << "eFTE" << ' ';
+        << setw(2) << ptm->tm_sec << ' '
+        << "eFTE/2" << ' ';
     m_ofsLog.fill(cOldFill);
     return m_ofsLog;
 }
