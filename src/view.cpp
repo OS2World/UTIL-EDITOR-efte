@@ -758,7 +758,7 @@ int EView::ShowVersion()
     else if (access("/Program Files (x86)/doc/README", 0) == 0)
 	FileLoad(0, "/Program Files (x86)/doc/README", 0, this);
     else
-	MView->Win->Choice(0, "About", 1, "O&K",
+	MView->Win->Choice(GPC_ABOUT, "About", 1, "O&K",
 			   PROGRAM " " VERSION " " COPYRIGHT);
     return 1;
 }
