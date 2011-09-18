@@ -212,7 +212,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	    }
 	    else if (argv[Arg][1] == 'D') {
 		ExpandPath(argv[Arg] + 2, DesktopFileName,
-			   sizeof(DesktopFileName));
+			   (strstr(strupr(argv[Arg]), ".DSK") + 5) - argv[Arg]);
 		if (IsDirectory(DesktopFileName)) {
 		    Slash(DesktopFileName, 1);
 		    strlcat(DesktopFileName, DESKTOP_NAME,
@@ -228,7 +228,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	    }
 	    else if (argv[Arg][1] == 'H') {
 		strlcpy(HistoryFileName, argv[Arg] + 2,
-			sizeof(HistoryFileName));
+			(strstr(strupr(argv[Arg]), ".HIS") + 5) - argv[Arg]);
 		if (HistoryFileName[0] == 0) {
 		    KeepHistory = 0;
 		}
