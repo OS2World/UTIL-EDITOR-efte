@@ -823,7 +823,7 @@ int EBuffer::InsChars(int Row, int Ofs, int ACount, const char *Buffer)
 {
     PELine L;
 
-//    printf("InsChars: %d:%d %d\n", Row, Ofs, ACount);
+    //printf("InsChars: %d:%d %d\n", Row, Ofs, ACount);
 
     assert(Row >= 0 && Row < RCount && Ofs >= 0);
     L = RLine(Row);
@@ -859,13 +859,14 @@ int EBuffer::InsChars(int Row, int Ofs, int ACount, const char *Buffer)
     L->Count += ACount;
     Draw(Row, Row);
     Hilit(Row);
-    // printf("OK\n");
+     //printf("OK\n");
     return 1;
 }
 
 int EBuffer::InsertIndent(int Row, int Ofs, int ACount)
 {
-    if (Ofs == 0 && RLine(Row)->Count == 0 && BFI(this, BFI_IndentWithTabs)) {
+    if (Ofs == 0 && RLine(Row)->Count == 0 && BFI(this, BFI_IndentWithTabs) &&
+        ACount >= BFI(this, BFI_TabSize)) { // attempt to fix a paste failure on switch to GNU indent style
 	/* We're writing the initial indentation to the line.
 	   Insert as many tabs as we can and fill the rest with spaces. */
 	int tabCount, tabSize = BFI(this, BFI_TabSize);
@@ -877,6 +878,7 @@ int EBuffer::InsertIndent(int Row, int Ofs, int ACount)
 	    return 0;
 
 	memset(tabs, '\t', tabCount);
+	//printf("InsertIndent: TC %d TS %d AC %d tabs %s\n", tabCount, tabSize, ACount, tabs);
 	if (InsChars(Row, Ofs, tabCount, tabs) == 0) {
 	    free(tabs);
 	    return 0;
