@@ -21,7 +21,7 @@
 #    When run objs.mif will be created from objs.inc.
 #
 #----------------------------------------------------------------------------
-.SILENT
+#.SILENT
 
 CC = wpp386
 LD = wlink
