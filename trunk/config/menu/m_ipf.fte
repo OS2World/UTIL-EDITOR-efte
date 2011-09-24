@@ -2,7 +2,7 @@ menu IPF_Tools {
 %if(LANG_EN)
    item "&Compile" { FileSave; RunProgram "ipfc \"" . $FilePath."\""; }
    item "&Grep..." { Compile "grep -n " }
-   item "Save and &ISpell" { FileSave; RunProgram "F:\\ispell\\ispell.exe " . $FilePath; FileReload }
+   item "Save and &ISpell" { FileSave; RunProgram "ispell.exe " . $FilePath; FileReload }
 #   item "Save, compile and &view\tF9"  { }
    item;
  %if(TEXT_CONV)
@@ -52,6 +52,14 @@ menu IPF_Tools {
    submenu "SVN\tC+O_C+N", MSvn;
 }
 
+menu Help_IPF {
+    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+    item "&IPF" { RunProgram "view IPFREF.INF" }
+    item;    
+    item "&About..." { ShowVersion }
+
 menu Main_IPF {
 %if(LANG_EN)
     submenu "&File",    File;
@@ -63,7 +71,7 @@ menu Main_IPF {
 #    submenu "&IPF",     IPF;
     submenu "&Window",  Window;
     submenu "&Options", Options;
-    submenu "&Help",    Help;
+    submenu "&Help",    Help_IPF;
 %endif
 %if(LANG_ES)
     submenu "&Archivo",     File;
