@@ -49,7 +49,7 @@ menu MSvn {
 }
 
 menu Tools {
-    item "&Compile\tF9" { Compile "make -k " }
+    item "&Compile\tF9" { Compile "wmake -e " }
     item "&Grep" { Compile "grep -n " }
 #    item "&Diff" { Compile "cvs diff" }
     item;
@@ -288,7 +288,6 @@ menu Options {
     item "S&how tabs\tC+O   Tab" { ToggleShowTabs; WinRefresh }
     item "E&xpand tabs\tC+O C+Tab" { ToggleExpandTabs; WinRefresh }
     item "&Print to...               " { SetPrintDevice }
-#    item "&Bubblehelp"             {ToggleBubbleHelp}
 }                    
 
 menu Main { 

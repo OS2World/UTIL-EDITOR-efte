@@ -2,7 +2,7 @@
 mode TEXT: PLAIN {              # Text files (wordwrap)
     FileNameRx          = /\.\c{TXT}|{DOC}$/;
 # try also 1
-    WordWrap            = 2;
+    WordWrap            = 1;
 }
 
 oinclude 'mym_text.fte';

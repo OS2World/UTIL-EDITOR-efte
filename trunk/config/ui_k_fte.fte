@@ -327,7 +327,7 @@ eventmap PLAIN: MODEL {
     key     [A+=]       { HilitMatchBracket }
     key     [C+Space]   { InsPrevLineChar }
     key     [A+Space]   { InsPrevLineToEol }
-    key     [C+_]       { ShowPosition }
+    #key     [C+_]       { ShowPosition }
     key     [C+-]       { ShowPosition }
     key       [Center]  { MoveLineCenter }
     #key     [C+X]       { MovePrevPos }

@@ -268,9 +268,9 @@ sub IPF_ent_ibm850 {
     ?FindReplace /&AElig./ /í/ "agn" ;
 #    ?FindReplace /&alpha./ /‡/ "agn" ;
 #    ?FindReplace /&Alpha./ /A/ "agn" ;
-    ?FindReplace /&angstrom./ /?/ "agn" ;
+    ?FindReplace /&angstrom./ /è/ "agn" ;
     ?FindReplace /&ao./ /Ü/ "agn" ;
-    ?FindReplace /&Ao./ /?/ "agn" ;
+    ?FindReplace /&Ao./ /è/ "agn" ;
     ?FindReplace /&bx2022./ /π/ "agn" ;
     ?FindReplace /&bx2020./ /∫/ "agn" ;
     ?FindReplace /&bx0022./ /ª/ "agn" ;
@@ -327,7 +327,7 @@ sub IPF_ent_ibm850 {
     ?FindReplace /&divide./ /ˆ/ "agn" ;
     ?FindReplace /&dot./ /˙/ "agn" ;
     ?FindReplace /&ea./ /Ç/ "agn" ;
-    ?FindReplace /&Ea./ /?/ "agn" ;
+    ?FindReplace /&Ea./ /ê/ "agn" ;
     ?FindReplace /&ec./ /à/ "agn" ;
     ?FindReplace /&ee./ /â/ "agn" ;
     ?FindReplace /&eg./ /ä/ "agn" ;
@@ -339,7 +339,7 @@ sub IPF_ent_ibm850 {
     ?FindReplace /&ia./ /°/ "agn" ;
     ?FindReplace /&ic./ /å/ "agn" ;
     ?FindReplace /&ie./ /ã/ "agn" ;
-    ?FindReplace /&ig./ /?/ "agn" ;
+    ?FindReplace /&ig./ /ç/ "agn" ;
 #    ?FindReplace /&identical./ // "agn" ;
 #    ?FindReplace /&infinity./ /Ï/ "agn" ;
 #    ?FindReplace /&intersect./ /Ô/ "agn" ;
@@ -390,7 +390,7 @@ sub IPF_ent_ibm850 {
     ?FindReplace /&ua./ /£/ "agn" ;
     ?FindReplace /&uc./ /ñ/ "agn" ;
     ?FindReplace /&ug./ /ó/ "agn" ;
-    ?FindReplace /&ue./ /?/ "agn" ;
+    ?FindReplace /&ue./ /Å/ "agn" ;
     ?FindReplace /&Ue./ /ö/ "agn" ;
     ?FindReplace /&aus./ /¶/ "agn" ;
     ?FindReplace /&ous./ /ß/ "agn" ;
@@ -520,9 +520,9 @@ sub IPF_ibm850_ent {
     ?FindReplace /Ö/ /&ag./ "agn" ;
     ?FindReplace /ë/ /&aelig./ "agn" ;
     ?FindReplace /í/ /&AElig./ "agn" ;
-    ?FindReplace /?/ /&angstrom./ "agn" ;
+    ?FindReplace /è/ /&angstrom./ "agn" ;
     ?FindReplace /Ü/ /&ao./ "agn" ;
-    ?FindReplace /?/ /&Ao./ "agn" ;
+    ?FindReplace /è/ /&Ao./ "agn" ;
     ?FindReplace /π/ /&bx2022./ "agn" ;
     ?FindReplace /∫/ /&bx2020./ "agn" ;
     ?FindReplace /ª/ /&bx0022./ "agn" ;
@@ -560,7 +560,7 @@ sub IPF_ibm850_ent {
     ?FindReplace /ˆ/ /&divide./ "agn" ;
     ?FindReplace /˙/ /&dot./ "agn" ;
     ?FindReplace /Ç/ /&ea./ "agn" ;
-    ?FindReplace /?/ /&Ea./ "agn" ;
+    ?FindReplace /ê/ /&Ea./ "agn" ;
     ?FindReplace /à/ /&ec./ "agn" ;
     ?FindReplace /â/ /&ee./ "agn" ;
     ?FindReplace /ä/ /&eg./ "agn" ;
@@ -568,7 +568,7 @@ sub IPF_ibm850_ent {
     ?FindReplace /°/ /&ia./ "agn" ;
     ?FindReplace /å/ /&ic./ "agn" ;
     ?FindReplace /ã/ /&ie./ "agn" ;
-    ?FindReplace /?/ /&ig./ "agn" ;
+    ?FindReplace /ç/ /&ig./ "agn" ;
     ?FindReplace /™/ /&lnot./ "agn" ;
     ?FindReplace /Ê/ /&mu./ "agn" ;
     ?FindReplace /§/ /&nt./ "agn" ;
@@ -596,7 +596,7 @@ sub IPF_ibm850_ent {
     ?FindReplace /£/ /&ua./ "agn" ;
     ?FindReplace /ñ/ /&uc./ "agn" ;
     ?FindReplace /ó/ /&ug./ "agn" ;
-    ?FindReplace /?/ /&ue./ "agn" ;
+    ?FindReplace /Å/ /&ue./ "agn" ;
     ?FindReplace /ö/ /&Ue./ "agn" ;
     ?FindReplace /¶/ /&aus./ "agn" ;
     ?FindReplace /ß/ /&ous./ "agn" ;

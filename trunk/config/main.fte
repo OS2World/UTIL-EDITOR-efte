@@ -1,22 +1,52 @@
 # Main FTE Configuration File
 
-# operating system is now defined by CFTE
+# operating system is now defined by eFTE
 
 # OS_UNIX, OS_OS2, OS_DOS32, OS_NT
 
-# uncomment for appropriate keybindings and menus
+# uncomment for appropriate keybindings and menus etc
+# multiple items in any of the sets are uncommented
+# the first uncommented is used and the others are ignored.
 
+# Select spanish by uncommenting only %define(UI_ES) from the list
+# It is UI_MIXED with spanish menus. If you select it with any of the
+# other styles it does nothing.
+
+# There are 2 HTML modes; The default for english is
+# the version that is found in eFTE and FTE. The default for
+# spanish is the version by Alfredo Fernandez Diaz who also
+# provided the spanish translation. There are probably still
+# a few english items in some of the menus since I have added
+# some modes from various sources since the translation was done.
+# This HTML mode works fine in english. See m_html_a.fte and
+# m_css_a.ftefor more details regarding this mode. It also
+# replaces the css mode.
+# %define(HTML_AL)
+
+# User inteface styles
 #%define(UI_KB)
 %define(UI_FTE)
 #%define(UI_WS)
 #%define(UI_NE)
 #%define(UI_BRIEF)
+#%define(UI_MIXED)
+#%define(UI_ES)
 # experimental
+
+%if(!UI_ES)
+%define(LANG_EN)
+%endif
+
+%if(UI_ES)
+%define(LANG_ES)
+%define(HTML_AL)
+%endif
 
 %if(!BSD_BRACE)
 %define(1TBS_BRACE)
 %endif
 
+# Color Schemes
 #%define(COLORS_GRAY_BG)
 #%define(COLORS_WHITE_BG)
 %define(COLORS_BLACK_BG)
@@ -80,7 +110,7 @@ include 'pal_wht.fte';
 %if(COLORS_GRAY_BG)
 include 'pal_gray.fte';
 %endif
-    
+
 %if(COLORS_BLUE_BG)
 include 'pal_blue.fte';
 %endif
@@ -99,6 +129,7 @@ object GLOBAL {
 %if(GUI_PM)
 # PM
 # Only System VIO fonts are used. Some listed below. XX*YY.
+# fixme to use other fonts? GKY 01 Oct 11
 #    WindowFont =  "8x8";
 #    WindowFont = "6x10";
 #    WindowFont = "8x10";
@@ -142,10 +173,9 @@ include 'color.fte';
 
 # in this mode are declared all basic values
 # these are inherited in other modes - so basicaly
-# change only necessary values in submodes 
+# change only necessary values in submodes
 # must be here to be inherited by other modes
 include 'm_plain.fte';
-
 
 # In addition to just PLAIN, there are two other special modes
 # SOURCE and MARKUP. All programming language modes inherit from
@@ -155,25 +185,16 @@ include 'm_plain.fte';
 include 'm_source.fte';
 include 'm_markup.fte';
 
-# UNIX files have no CR at the end of line
-
-%if(OS_UNIX)
-mode PLAIN {
-    # Don't autodetect line separator
-    DetectLineSep = 0;
-    # Don't add CR at EOL when saving
-    AddCR      = 0;
-    # Don't remove CR if at EOL when loading
-    StripChar  = -1;
-}
-%endif
-
 eventmap TEX: PLAIN {
     key [F9] {
         Compile "latex " #. $FileName
     }
 }
 
+# Uncomment to use the alternate HTML mode in english
+# Probably works best with UI_MIXED
+# Not implemented for Multi Edit for Windows or VI interface
+#%define(HTML_AL)
 
 include 'm_4gl.fte';
 include 'm_a51.fte';
@@ -185,7 +206,12 @@ include 'm_bin.fte';
 include 'm_c.fte';
 include 'm_catbs.fte';
 include 'm_clario.fte';
+%if(!HTML_AL)
 include 'm_css.fte';
+%endif
+%if(HTML_AL)
+include 'm_css_a.fte';
+%endif
 include 'm_diff.fte';
 include 'm_ebnf.fte';
 include 'm_eiffel.fte';
@@ -195,7 +221,12 @@ include 'm_falcon.fte';
 include 'm_fte.fte';
 include 'm_gawk.fte';
 include 'm_groovy.fte';
+%if(!HTML_AL)
 include 'm_html.fte';
+%endif
+%if(HTML_AL)
+include 'm_html_a.fte';
+%endif
 include 'm_icon.fte';
 include 'm_idl.fte';
 include 'm_ipf.fte';
@@ -264,6 +295,12 @@ include 'ui_mew.fte'; # MultiEdit4Windows
 %if(UI_BRIEF)
 include 'ui_brief.fte'; # BRIEF/CRISP
 %endif
+%if(LANG_ES)
+include 'ui_mixed.fte';  # fte CUA style bindings + some Norton Editor keys...
+%endif
+%if(UI_MIXED)
+include 'ui_mixed.fte';  # fte CUA style bindings + some Norton Editor keys...
+%endif
 ##include 'ui_vi.fte';  # VI - very incomplete
 # todo: brief, epm, emacs, VI
 
@@ -284,7 +321,7 @@ object GLOBAL {
     ShowToolBar = 1;     # PM only
     BubbleHelp  = 1;      # PM only
     GUIDialogs = 1;      # PM only
-    SysClipboard = 1;    # use PM clipboard, or X11 selection for clipboard
+    SysClipboard = 1;    # use PM clipboard, or X11 selection for clipboard for PM should always be 1
     #    PMDisableAccel      = 0;   # disable Alt+Fx PM accelerators
     # enable common cursor movements (always staying within EOL)
     # CursorWithinEOL = 1;
@@ -309,7 +346,7 @@ eventmap PLAIN {
     key [C+F1] { ShowHelpWord
 %if(OS_OS2)
         # OS/2 - helpfile (can be contatenated)
-        "CPREF+PMWIN+PMMSG+PMGPI+PMREL+PMFUN+PMHOK"
+        "addendum+CP1+CP2+CP3+GPI1+GPI2+GPI3+GPI4+MMREF1+MMREF2+MMREF3+MMSSPG+PM1+PM2+PM3+PM4+PM5+WPS1+WPS2+WPS3"
 %endif
 %if(OS_UNIX)
 # UNIX - specify options to MAN
@@ -322,9 +359,7 @@ eventmap PLAIN {
     }
 %if(OS_OS2)
     key [S+F1] { ShowHelpWord "EMXDEV+EMXGNU+EMXLIB+EMXRT+EMXBSD" }
-%if(!UI_BRIEF)
-    key [F1] { ShowHelp "FTE" "" }
-%endif
+    key [F1] { ShowHelp "eFTE2" "" }
 %endif
 
     #key [C+A+F1] {

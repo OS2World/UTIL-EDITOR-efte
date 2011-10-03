@@ -79,7 +79,7 @@ color_palette {
     { 'Msg_Tag',                      'red:bg' },
     { 'Msg_Signature',                'darkCyan:bg' },
 
-    { 'Comment',                      'darkGray:bg' },
+    { 'Comment',                      'gray:bg' },
     { 'String',                       'cyan:bg' },
 
     { 'Lang_Default',                 'Editor_Default' },
