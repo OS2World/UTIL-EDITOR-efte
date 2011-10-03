@@ -24,7 +24,7 @@ ExInput::ExInput(const char *APrompt, char *ALine, unsigned int ABufLen,
     if (Line) {
 	//Line[MaxLen] = 0;
 	strlcpy(Line, ALine, MaxLen);
-	//Pos = strlen(Line);
+	Pos = strlen(Line);
 	//LPos = 0;
     }
     if (Select)
