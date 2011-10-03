@@ -1,0 +1,264 @@
+# FTE menu for HTML/UTF japanese sillabaries
+# maintained by alfredo@netropolis-si.com
+# Revision 2006/06/16
+
+menu Nihongo_v {
+  item "hiragana &a" { hg_a }
+  item "hiragana &i" { hg_i }
+  item "hiragana &u" { hg_u }
+  item "hiragana &e" { hg_e }
+  item "hiragana &o" { hg_o }
+  item "hiragana chisai a" { hg_as }
+  item "hiragana chisai i" { hg_is }
+  item "hiragana chisai u" { hg_us }
+  item "hiragana chisai e" { hg_es }
+  item "hiragana chisai o" { hg_os }
+  item;
+  item "katakana a" { kk_a }
+  item "katakana i" { kk_i }
+  item "katakana u" { kk_u }
+  item "katakana e" { kk_e }
+  item "katakana o" { kk_o }
+  item "katakana chisai a" { kk_as }
+  item "katakana chisai i" { kk_is }
+  item "katakana chisai u" { kk_us }
+  item "katakana chisai e" { kk_es }
+  item "katakana chisai o" { kk_os }
+}
+
+menu Nihongo_k {
+  item "hiragana k&a" { hg_ka }
+  item "hiragana k&i" { hg_ki }
+  item "hiragana k&u" { hg_ku }
+  item "hiragana k&e" { hg_ke }
+  item "hiragana k&o" { hg_ko }
+  item;
+  item "katakana ka" { kk_ka }
+  item "katakana ki" { kk_ki }
+  item "katakana ku" { kk_ku }
+  item "katakana ke" { kk_ke }
+  item "katakana ko" { kk_ko }
+}
+
+menu Nihongo_g {
+  item "hiragana g&a" { hg_ga }
+  item "hiragana g&i" { hg_gi }
+  item "hiragana g&u" { hg_gu }
+  item "hiragana g&e" { hg_ge }
+  item "hiragana g&o" { hg_go }
+  item;
+  item "katakana ga" { kk_ga }
+  item "katakana gi" { kk_gi }
+  item "katakana gu" { kk_gu }
+  item "katakana ge" { kk_ge }
+  item "katakana go" { kk_go }
+}
+
+menu Nihongo_s {
+  item "hiragana s&a" { hg_sa }
+  item "hiragana sh&i" { hg_shi }
+  item "hiragana s&u" { hg_su }
+  item "hiragana s&e" { hg_se }
+  item "hiragana s&o" { hg_so }
+  item;
+  item "katakana sa" { kk_sa }
+  item "katakana shi" { kk_shi }
+  item "katakana su" { kk_su }
+  item "katakana se" { kk_se }
+  item "katakana so" { kk_so }
+}
+
+menu Nihongo_z {
+  item "hiragana z&a" { hg_za }
+  item "hiragana j&i (zi)" { hg_zi }
+  item "hiragana z&u" { hg_zu }
+  item "hiragana z&e" { hg_ze }
+  item "hiragana z&o" { hg_zo }
+  item;
+  item "katakana za" { kk_za }
+  item "katakana ji (zi)" { kk_zi }
+  item "katakana zu" { kk_zu }
+  item "katakana ze" { kk_ze }
+  item "katakana zo" { kk_zo }
+}
+
+menu Nihongo_t {
+  item "hiragana t&a" { hg_ta }
+  item "hiragana ch&i" { hg_chi }
+  item "hiragana ts&u" { hg_tsu }
+  item "hiragana t&e" { hg_te }
+  item "hiragana t&o" { hg_to }
+  item "chisai ts&u" { hg_tsus }
+  item;
+  item "katakana ta" { kk_ta }
+  item "katakana chi" { kk_chi }
+  item "katakana tsu" { kk_tsu }
+  item "katakana te" { kk_te }
+  item "katakana to" { kk_to }
+  item "chisai tsu" { kk_tsus }
+}
+
+menu Nihongo_d {
+  item "hiragana d&a" { hg_da }
+  item "hiragana j&i (di)" { hg_di }
+  item "hiragana z&u (du)" { hg_du }
+  item "hiragana d&e" { hg_de }
+  item "hiragana d&o" { hg_do }
+  item;
+  item "katakana da" { kk_da }
+  item "katakana ji (di)" { kk_di }
+  item "katakana zu (du)" { kk_du }
+  item "katakana de" { kk_de }
+  item "katakana do" { kk_do }
+}
+
+menu Nihongo_n {
+  item "hiragana n&a" { hg_na }
+  item "hiragana n&i" { hg_ni }
+  item "hiragana n&u" { hg_nu }
+  item "hiragana n&e" { hg_ne }
+  item "hiragana n&o" { hg_no }
+  item "hiragana &n" { hg_n }
+  item;
+  item "katakana na" { kk_na }
+  item "katakana ni" { kk_ni }
+  item "katakana nu" { kk_nu }
+  item "katakana ne" { kk_ne }
+  item "katakana no" { kk_no }
+  item "katakana n" { kk_n }
+}
+
+menu Nihongo_h {
+  item "hiragana h&a" { hg_ha }
+  item "hiragana h&i" { hg_hi }
+  item "hiragana h&u" { hg_hu }
+  item "hiragana h&e" { hg_he }
+  item "hiragana h&o" { hg_ho }
+  item;
+  item "katakana ha" { kk_ha }
+  item "katakana hi" { kk_hi }
+  item "katakana hu" { kk_hu }
+  item "katakana he" { kk_he }
+  item "katakana ho" { kk_ho }
+}
+
+menu Nihongo_b {
+  item "hiragana b&a" { hg_ba }
+  item "hiragana b&i" { hg_bi }
+  item "hiragana b&u" { hg_bu }
+  item "hiragana b&e" { hg_be }
+  item "hiragana b&o" { hg_bo }
+  item;
+  item "katakana ba" { kk_ba }
+  item "katakana bi" { kk_bi }
+  item "katakana bu" { kk_bu }
+  item "katakana be" { kk_be }
+  item "katakana bo" { kk_bo }
+}
+
+menu Nihongo_p {
+  item "hiragana p&a" { hg_pa }
+  item "hiragana p&i" { hg_pi }
+  item "hiragana p&u" { hg_pu }
+  item "hiragana p&e" { hg_pe }
+  item "hiragana p&o" { hg_po }
+  item;
+  item "katakana pa" { kk_pa }
+  item "katakana pi" { kk_pi }
+  item "katakana pu" { kk_pu }
+  item "katakana pe" { kk_pe }
+  item "katakana po" { kk_po }
+}
+
+menu Nihongo_m {
+  item "hiragana m&a" { hg_ma }
+  item "hiragana m&i" { hg_mi }
+  item "hiragana m&u" { hg_mu }
+  item "hiragana m&e" { hg_me }
+  item "hiragana m&o" { hg_mo }
+  item "hiragana &n" { hg_n }
+  item;
+  item "katakana ma" { kk_ma }
+  item "katakana mi" { kk_mi }
+  item "katakana mu" { kk_mu }
+  item "katakana me" { kk_me }
+  item "katakana mo" { kk_mo }
+  item "katakana m" { kk_n }
+}
+
+menu Nihongo_y {
+  item "hiragana y&a" { hg_ya }
+  item "hiragana y&i" { hg_yi }
+  item "hiragana y&u" { hg_yu }
+  item "hiragana y&e" { hg_ye }
+  item "hiragana y&o" { hg_yo }
+  item "chisai ya" { hg_yas }
+  item "chisai yu" { hg_yus }
+  item "chisai yo" { hg_yos }
+  item;
+  item "katakana ya" { kk_ya }
+  item "katakana yi" { kk_yi }
+  item "katakana yu" { kk_yu }
+  item "katakana ye" { kk_ye }
+  item "katakana yo" { kk_yo }
+  item "chisai ya" { kk_yas }
+  item "chisai yu" { kk_yus }
+  item "chisai yo" { kk_yos }
+}
+
+menu Nihongo_r {
+  item "hiragana r&a" { hg_ra }
+  item "hiragana r&i" { hg_ri }
+  item "hiragana r&u" { hg_ru }
+  item "hiragana r&e" { hg_re }
+  item "hiragana r&o" { hg_ro }
+  item;
+  item "katakana ra" { kk_ra }
+  item "katakana ri" { kk_ri }
+  item "katakana ru" { kk_ru }
+  item "katakana re" { kk_re }
+  item "katakana ro" { kk_ro }
+}
+
+menu Nihongo_w {
+  item "hiragana w&a" { hg_wa }
+  item "hiragana w&i" { hg_wi }
+  item "hiragana v&u" { hg_vu }
+  item "hiragana w&e" { hg_we }
+  item "hiragana w&o" { hg_wo }
+  item "chisai wa" { hg_was }
+  item;
+  item "katakana wa" { kk_wa }
+  item "katakana wi" { kk_wi }
+  item "katakana vu" { kk_vu }
+  item "katakana we" { kk_we }
+  item "katakana wo" { kk_wo }
+  item "chisai wa" { kk_was }
+}
+
+menu Nihongo_sp {
+  item;
+}
+
+menu UTF_Nihongo {
+%if(LANG_EN)
+  submenu "&Vowels", Nihongo_v;
+%endif
+%if(LANG_ES)
+  submenu "&Vocales", Nihongo_v;
+%endif
+  submenu "&k", Nihongo_k;
+  submenu "&g", Nihongo_g;
+  submenu "&s", Nihongo_s;
+  submenu "&z", Nihongo_z;
+  submenu "&t", Nihongo_t;
+  submenu "&d", Nihongo_d;
+  submenu "&n", Nihongo_n;
+  submenu "&h", Nihongo_h;
+  submenu "&b", Nihongo_b;
+  submenu "&p", Nihongo_p;
+  submenu "&m", Nihongo_m;
+  submenu "&y", Nihongo_y;
+  submenu "&r", Nihongo_r;
+  submenu "&w", Nihongo_w;
+}

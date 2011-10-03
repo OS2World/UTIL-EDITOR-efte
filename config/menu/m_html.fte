@@ -183,11 +183,8 @@ menu HTMLTags {
     submenu "P&rogramming", HTML_Prog;
     item;
     item "&View in Browser\tF9" { FileSave; HTML_View }
-    item "Save and &Tidy" {
-        FileSave; HTML_Tidy; FileReload; }
-    item "Save and &ISpell" {
-        FileSave;
-        RunProgram "E:\\ISPELL40\\ispell.exe " . $FilePath;
+    item "Save and &Tidy" { FileSave; HTML_Tidy; FileReload; }
+    item "Save and &ISpell" { FileSave; RunProgram "ispell.exe " . $FilePath;
         FileReload; }
 }
 

@@ -24,6 +24,31 @@ menu MOpenInMode {
     item "PHP"	       { FileOpenInMode 'PHP' }
     item "P&ython"     { FileOpenInMode 'PYTHON' }
     item "reST"        { FileOpenInMode 'reST' }
+%if(!GUI_PM)
+}
+
+menu MOpenInModeMore {
+%endif
+    item "ASM"			{ FileOpenInMode 'ASM' }
+    item "ASM 370 (.CPY,.MLC)"	{ FileOpenInMode 'ASM370' }
+    item "TCL"			{ FileOpenInMode 'TCL' }
+    item "Fortran 90"		{ FileOpenInMode 'FORTRAN' }
+    item "IPF"			{ FileOpenInMode 'IPF' }
+    item "A51"			{ FileOpenInMode 'A51' }
+    item "CLARION (.CLW)"	{ FileOpenInMode 'CLARION' }
+    item "EBFN"			{ FileOpenInMode 'EBFN' }
+    item "SGML"			{ FileOpenInMode 'SGML' }
+    item "SIOD (.cscm)"		{ FileOpenInMode 'SIOD' }
+    item "S&Lang"		{ FileOpenInMode 'sl' }
+    item "Module 3"		{ FileOpenInMode 'MODULA3' }
+    item "Tex Info"		{ FileOpenInMode 'TEXINFO' }
+    item "Diff"			{ FileOpenInMode 'DIFF' }
+    item "Merge"		{ FileOpenInMode 'MERGE' }
+    item "Man pages"		{ FileOpenInMode 'CATBS' }
+    item "Batch files"		{ FileOpenInMode 'Batch' }
+%if(OS_OS2)
+    item "Config.sys"		{ FileOpenInMode 'CNFGSYS' }
+%endif
 }
 
 menu MChangeMode {
@@ -50,28 +75,11 @@ menu MChangeMode {
     item "PHP"	       { ChangeMode 'PHP' }
     item "P&ython"     { ChangeMode 'PYTHON' }
     item "reST"        { ChangeMode 'reST' }
-}
-
-menu MOpenInModeMore {
-    item "ASM"			{ FileOpenInMode 'ASM' }
-    item "ASM 370 (.CPY,.MLC)"	{ FileOpenInMode 'ASM370' }
-    item "TCL"			{ FileOpenInMode 'TCL' }
-    item "Fortran 90"		{ FileOpenInMode 'FORTRAN' }
-    item "IPF"			{ FileOpenInMode 'IPF' }
-    item "A51"			{ FileOpenInMode 'A51' }
-    item "CLARION (.CLW)"	{ FileOpenInMode 'CLARION' }
-    item "EBFN"			{ FileOpenInMode 'EBFN' }
-    item "SGML"			{ FileOpenInMode 'SGML' }
-    item "SIOD (.cscm)"		{ FileOpenInMode 'SIOD' }
-    item "S&Lang"		{ FileOpenInMode 'sl' }
-    item "Module 3"		{ FileOpenInMode 'MODULA3' }
-    item "Tex Info"		{ FileOpenInMode 'TEXINFO' }
-    item "Diff"			{ FileOpenInMode 'DIFF' }
-    item "Merge"		{ FileOpenInMode 'MERGE' }
-    item "Man pages"		{ FileOpenInMode 'CATBS' }
+%if(!GUI_PM)
 }
 
 menu MChangeModeMore {
+%endif
     item "ASM"			{ ChangeMode 'ASM' }
     item "ASM 370 (.CPY,.MLC)"	{ ChangeMode 'ASM370' }
     item "TCL"			{ ChangeMode 'TCL' }
@@ -88,12 +96,18 @@ menu MChangeModeMore {
     item "Diff"			{ ChangeMode 'DIFF' }
     item "Merge"		{ ChangeMode 'MERGE' }
     item "Man pages"		{ ChangeMode 'CATBS' }
+    item "Batch files"		{ FileOpenInMode 'Batch' }
+%if(OS_OS2)
+    item "Config.sys"		{ FileOpenInMode 'CNFGSYS' }
+%endif
 }
 
 menu Object {
     item    "&Open...\tF3"		{ FileOpen }
     submenu "Open in &Mode...\tCtrl+F3", MOpenInMode;
+%if(!GUI_PM)    
     submenu "Open in Mode more..",	MOpenInModeMore;
+%endif
     item    "Open &Binary"		{ FileOpenInMode 'BIN' }
     item;
     item    "Open &Directory\tC+M" { DirOpen }
@@ -144,9 +158,9 @@ menu MSvn {
 }
 
 menu Tools {
-    item "&Compile...\tF9" { Compile "make -k " }
+    item "&Compile...\tF9" { Compile "wmake -e " }
     item "&Grep..." { Compile "grep -n " }
-    item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+    item "Save and &ISpell" { FileSave; RunProgram "U:\\ispell\\ispell.exe " . $FilePath; FileReload }
     item;
     item "&Shell\tAlt+F9" { RunProgram "" }
     item "&Run...\tCtrl+F9" { RunProgram }
@@ -182,6 +196,7 @@ menu Window {
 menu Help {
     item "&Keyboard\tF1" { ViewModeMap }
     item "&Show key" { ShowKey }
+    #item "&Bubblehelp PM ToolBar Only"  {ToggleBubbleHelp}
     item;
     item "&About..." { ShowVersion }
 }
@@ -206,7 +221,9 @@ menu Navigate {
 menu File {
     item    "&Open...\tF3"		{ FileOpen }
     submenu "Open in &Mode...\tCtrl+F3", MOpenInMode;
+%if(!GUI_PM)
     submenu "Open in more",		MOpenInModeMore;
+%endif
     item    "Open &Binary..."		{ FileOpenInMode 'BIN' }
     item    "Open &Directory\tC+M"	{ DirOpen }
     item    "&Reload\tShift+F3" 	{ FileReload }
@@ -382,11 +399,12 @@ menu Toggle {
     item "S&pace tabs"			{ ToggleSpaceTabs }
     item "Backspace k&ill tab"		{ ToggleBackSpKillTab }
     item "&Delete kill tab"		{ ToggleDeleteKillTab }
-    #item "&Bubblehelp"             {ToggleBubbleHelp}
 }
 menu Options {
     submenu "Change &mode\tC+O C+M",  MChangeMode;
+%if(!GUI_PM)
     submenu "Change mode more",	      MChangeModeMore;
+%endif
     submenu "Change C in&dent style", MChangeCIndentStyle;
     item;
     submenu "&Toggle", Toggle;
@@ -406,6 +424,7 @@ menu Options {
     item "File Trim &EOL"		{ FileTrim; WinRefresh }
     item "I&ndent block\tAlt+\\"	{ BlockReIndent; FileTrim; WinRefresh }
     item "&Print to..."			{ SetPrintDevice }
+    #item "Test"                    {Testme}
 }
 
 menu Main {

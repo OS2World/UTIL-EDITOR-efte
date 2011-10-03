@@ -264,7 +264,7 @@ menu REXX_Misc {
     item    "Sys&WaitNamedPipe" { InsertString "result = SysWaitNamedPipe(name, [timeout])"; }
 }
 
-menu REXX_TxtScr { 
+menu REXX_TxtScr {
     item    "Sys&Cls" { InsertString "CALL SysCls"; }
     item    "SysC&urPos" { InsertString "pos = SysCurPos([row, col])"; }
     item    "SysCu&rState" { InsertString "CALL SysCurState ON/OFF"; }
@@ -384,6 +384,21 @@ menu REXXTags {
     submenu "&Functions", REXX_BuiltIn;
 }
 
+menu Help_REXX {
+    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+%if(OS_OS2)
+    item "&REXX Information" { RunProgram "view REXX.INF" }
+    item "REXX &Multimedia" { RunProgram "view mcirexx.inf" }
+    item "REXX &Tips and Tricks" { RunProgram "view RXTT36.INF" }
+    item "TCP/IP REXX &FTP API" { RunProgram "view RXFTP" }
+    item "TCP/IP REXX &Sockets API" { RunProgram "view RXSOCKET" }
+%endif
+    item;
+    item "&About..." { ShowVersion }
+}
+
 menu Main_REXX {
     submenu "&File",    File;
     submenu "&Edit",    Edit;
@@ -394,7 +409,7 @@ menu Main_REXX {
     submenu "&REXX",    REXXTags;
     submenu "&Window",  Window;
     submenu "&Options", Options;
-    submenu "&Help",    Help;
+    submenu "&Help",    Help_REXX;
 }
 
 eventmap REXX {

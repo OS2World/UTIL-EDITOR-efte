@@ -1,0 +1,508 @@
+# FTE default menus
+
+menu MOpenInMode {
+    item "&Plain"      { FileOpenInMode 'PLAIN' }
+    item "&Texto"      { FileOpenInMode 'TEXT' }
+    item "&C"          { FileOpenInMode 'C' }
+    item "&EMail"      { FileOpenInMode 'MSG' }
+    item "&HTML"       { FileOpenInMode 'HTML' }
+    item "&IPF"        { FileOpenInMode 'IPF' }
+    item "&Ada"        { FileOpenInMode 'Ada' }
+    item "&REXX"       { FileOpenInMode 'REXX' }
+    item "MA&KE"       { FileOpenInMode 'MAKE' }
+    item "&FTE"        { FileOpenInMode 'FTE' }
+    item "Recurso &Win"{ FileOpenInMode 'RESOURCE' }
+    item "&DIFF"       { FileOpenInMode 'DIFF' }
+    item "&MERGE"      { FileOpenInMode 'MERGE' }
+    item "&SH"         { FileOpenInMode 'SH' }
+    item "PER&L"       { FileOpenInMode 'PERL' }
+    item "PASCAL"      { FileOpenInMode 'PASCAL' }
+    item "&JAVA"       { FileOpenInMode 'JAVA' }
+    item "TE&X"        { FileOpenInMode 'TEX' }
+    item "&BIN"        { FileOpenInMode 'BIN' }
+    item "4&GL"        { FileOpenInMode 'GL' }
+    item "PHP"         { FileOpenInMode 'PHP' }
+    item "P&ython"     { FileOpenInMode 'PYTHON' }
+}
+
+menu MChangeMode {
+    item "&Plain"      { ChangeMode 'PLAIN' }
+    item "&Texto"      { ChangeMode 'TEXT' }
+    item "&C"          { ChangeMode 'C' }
+    item "&EMail"      { ChangeMode 'MSG' }
+    item "&HTML"       { ChangeMode 'HTML' }
+    item "&IPF"        { ChangeMode 'IPF' }
+    item "&Ada"        { ChangeMode 'Ada' }
+    item "&REXX"       { ChangeMode 'REXX' }
+    item "MA&KE"       { ChangeMode 'MAKE' }
+    item "&FTE"        { ChangeMode 'FTE' }
+    item "Recurso &Win"{ ChangeMode 'RESOURCE' }
+    item "&DIFF"       { ChangeMode 'DIFF' }
+    item "&MERGE"      { ChangeMode 'MERGE' }
+    item "&SH"         { ChangeMode 'SH' }
+    item "PER&L"       { ChangeMode 'PERL' }
+    item "PASCAL"      { ChangeMode 'PASCAL' }
+    item "&JAVA"       { ChangeMode 'JAVA' }
+    item "TE&X"        { ChangeMode 'TEX' }
+    item "&BIN"        { ChangeMode 'BIN' }
+    item "4&GL"        { ChangeMode 'GL' }
+    item "PHP"         { ChangeMode 'PHP' }
+    item "P&ython"     { ChangeMode 'PYTHON' }
+}
+
+menu MOpenInModeMore {
+    item "ASM"                  { FileOpenInMode 'ASM' }
+    item "ASM 370 (.CPY,.MLC)"  { FileOpenInMode 'ASM370' }
+    item "TCL"                  { FileOpenInMode 'TCL' }
+    item "Fortran 90"           { FileOpenInMode 'FORTRAN' }
+    item "IPF"                  { FileOpenInMode 'IPF' }
+    item "A51"                  { FileOpenInMode 'A51' }
+    item "CLARION (.CLW)"       { FileOpenInMode 'CLARION' }
+    item "EBFN"                 { FileOpenInMode 'EBFN' }
+    item "SGML"                 { FileOpenInMode 'SGML' }
+    item "SIOD (.cscm)"         { FileOpenInMode 'SIOD' }
+    item "S&Lang"               { FileOpenInMode 'sl' }
+    item "Modula 3"             { FileOpenInMode 'MODULA3' }
+    item "Tex Info"             { FileOpenInMode 'TEXINFO' }
+    item "Diff"                 { FileOpenInMode 'DIFF' }
+    item "Merge"                { FileOpenInMode 'MERGE' }
+    item "P ginas Man"          { FileOpenInMode 'CATBS' }
+}
+
+menu MChangeModeMore {
+    item "ASM"                  { ChangeMode 'ASM' }
+    item "ASM 370 (.CPY,.MLC)"  { ChangeMode 'ASM370' }
+    item "TCL"                  { ChangeMode 'TCL' }
+    item "Fortran 90"           { ChangeMode 'FORTRAN' }
+    item "IPF"                  { ChangeMode 'IPF' }
+    item "A51"                  { ChangeMode 'A51' }
+    item "CLARION (.CLW)"       { ChangeMode 'CLARION' }
+    item "EBFN"                 { ChangeMode 'EBFN' }
+    item "SGML"                 { ChangeMode 'SGML' }
+    item "SIOD (.cscm)"         { ChangeMode 'SIOD' }
+    item "S&Lang"               { ChangeMode 'sl' }
+    item "Modula 3"             { ChangeMode 'MODULA3' }
+    item "Tex Info"             { ChangeMode 'TEXINFO' }
+    item "Diff"                 { ChangeMode 'DIFF' }
+    item "Merge"                { ChangeMode 'MERGE' }
+    item "P ginas Man"          { ChangeMode 'CATBS' }
+}
+
+menu Object {
+    item    "&Abrir...\tF3"              { FileOpen }
+    submenu "Abrir en &modo...\tCtrl+F3",  MOpenInMode;
+    submenu "M s modos para abrir...",     MOpenInModeMore;
+    item    "Abrir &binario"             { FileOpenInMode 'BIN' }
+    item;
+    item    "Abrir &directorio\tC+M"     { DirOpen }
+    item;
+    item    "Siguie&nte\tAlt+Dcha"       { FileNext }
+    item    "Ante&rior\tAlt+Izqda"       { FilePrev }
+    item;
+    item    "&Cerrar\tAlt+Q"             { FileClose }
+    item;
+    item    "&Salir de FTE\tAlt+X"       { ExitEditor }
+}
+
+menu MCvs {
+    item "CVS C&heck"  { RunCvs "-n update" }
+    item "CVS &Update" { RunCvs "update -d" }
+    item "CVS &Diff"   { CvsDiff "" }
+    item "CVS &Commit" { RunCvsCommit "" }
+    item "CVS &Add"    { RunCvs "add" }
+    item "CVS &Remove" { RunCvs "remove" }
+    item "CVS S&tatus" { RunCvs "status -v" }
+    item "CV&S"        { Cvs }
+    item;
+    item "&Ver CVS"      { ViewCvs }
+    item "Ver Di&ff de CVS" { ViewCvsDiff }
+    item "Ver &log de CVS"  { ViewCvsLog }
+    item;
+    item "&Eliminar mensajes" { ClearCvsMessages }
+}
+
+menu MSvn {
+    item "SVN S&tatus" { RunSvn "status" }
+    item "SVN &Update" { RunSvn "update" }
+    item "SVN &Diff"   { SvnDiff "" }
+    item "SVN &Commit" { RunSvnCommit "" }
+    item "SVN &Add"    { RunSvn "add" }
+    item "SVN &Remove" { RunSvn "remove" }
+    item "SVN Lo&g"    { RunSvn "log" }
+    item "SV&N"        { Svn }
+    item;
+    item "&Ver SVN"         { ViewSvn }
+    item "Ver Di&ff de SVN" { ViewSvnDiff }
+    item "Ver &log de SVN"  { ViewSvnLog }
+    item;
+    item "&Eliminar mensajes" { ClearSvnMessages }
+}
+
+menu Tools {
+    item "&Compilar...\tF9" { Compile "make -k " }
+    item "&Grep..." { Compile "grep -n " }
+    item "Guardar y corregir con &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+    item;
+    item "Consola del &S.O.\tAlt+F9" { RunProgram "" }
+    item "Ejecuta&r...\tCtrl+F9" { RunProgram }
+    item;
+    item "Error &anterior\tF11" { CompilePrevError }
+    item "Siguiente &error\tF12" { CompileNextError }
+    item;
+    item "&Mensajes\tS+F9" { ViewMessages }
+    item "&Limpiar mensajes" { ClearMessages }
+    item;
+    submenu "C&VS\tC+O_C+V", MCvs;
+    submenu "SVN\tC+O_C+N", MSvn;
+}
+
+menu Window {
+    item "Nuevo marco (&frame)" { FrameNew }
+    item;
+    item "Dividir en &horizontal\tCtrl+F4" { WinHSplit }
+    item "&Cerrar vista\tCtrl+Alt+F4"      { WinClose }
+    item "Cerrar las &otras vistas\tF5"    { WinZoom }
+    item;
+    item "Guardar &Escritorio"             { DesktopSave }
+    item "Guardar Escritorio c&omo"        { DesktopSaveAs }
+    item;
+    item "&Rutinas\tCtrl+I"                { ListRoutines }
+    item "&B£fers\tAlt+0"                  { ViewBuffers }
+    item "&Directorio\tC+M"                { DirOpen }
+}
+
+menu Help {
+    item "&Teclado\tF1"   { ViewModeMap }
+    item "&Mostrar tecla" { ShowKey }
+    item;
+    item "&Acerca de FTE" { ShowVersion }
+}
+
+menu Navigate {
+    item "&Recargar\tCtrl+R"            { Rescan }
+    item;
+    item "Ir al nivel &< \tCtrl+PgUp"   { DirGoUp }
+    item "Ir al nivel &> \tCtrl+PgDn"   { DirGoDown }
+    item "Ir al dir. ra¡z &\\\tCtrl+\\" { DirGoRoot }
+    item "&/ Ir a ... \t/"              { DirGoto }
+    item "&Eliminar archivo\tCtrl+D"    { DeleteFile }
+#    item;
+#    item '&C:\\' { DirGoto 'H:\\' }
+}
+
+menu File {
+    item    "&Abrir...\tF3"              { FileOpen }
+    submenu "Abrir en &modo...\tCtrl+F3",  MOpenInMode;
+    submenu "M s modos para abrir",        MOpenInModeMore;
+    item    "Abrir &binario..."          { FileOpenInMode 'BIN' }
+    item    "Abrir &directorio\tC+M"     { DirOpen }
+    item    "&Recargar\tMay+F3"          { FileReload }
+    item;
+    item    "&Guardar\tF2"               { FileSave }
+    item    "G&uardar como...\tMay+F2"   { FileSaveAs }
+    item    "Guardar &todo\tCtrl+F2"     { FileSaveAll }
+    item    "Escribir &en..."            { FileWriteTo }
+    item;
+    item    "&Imprimir"                  { FilePrint }
+    item;
+    item    "Si&guiente\tAlt+Dcha"       { FileNext }
+    item    "A&nterior\tAlt+Izqda"       { FilePrev }
+    item;
+    item    "&Cerrar\tAlt+Q"             { FileClose }
+    item;
+    item    "&Salir de FTE\tAlt+X"       { ExitEditor }
+}
+
+menu Line {
+    item "&Insertar l¡nea\tMay+Enter"   { LineInsert }
+    item "&A¤adir l¡nea\tAlt+Enter"     { LineAdd }
+    item "Di&vidir l¡nea\tCtrl+Enter"   { LineSplit }
+    item "&Unir l¡nea\tCtrl+J"          { LineJoin }
+    item "&Duplicar l¡nea\tCtrl+D"      { LineDuplicate }
+    item "&Borrar l¡nea\tCtrl+Y"        { KillLine }
+    item "&Centrar l¡nea"               { LineCenter }
+    item;
+    item "Borrar hasta &fin de l¡nea\tAlt+Fin" { KillToLineEnd }
+    item "Borrar hasta el i&nicio\tCtrl+May+Retr" { KillToLineStart }
+    item;
+    item "Comentar\tCtrl+Alt+C" {
+        MoveLineStart; ?FindReplace /^(\s*)/ /\/\/  \1/ "xnc"; MoveDown
+    }
+    item "Descomentar\tCtrl+Alt+U" {
+        MoveLineStart; ?FindReplace /^[\/][\/]  / // "xnc"; MoveDown
+    }
+    item;
+    item "Pasar a ma&y£sculas"          { LineCaseUp }
+    item "Pasar a mi&n£sculas"          { LineCaseDown }
+    item "&Intercambiar May/Min"        { LineCaseToggle }
+    item "&Rot13"                       { LineTrans 'A-Za-z' 'N-ZA-Mn-za-m' }
+    item;
+    item "&Especificar ahora..."        { LineTrans }
+}
+
+menu Edit {
+    item "&Deshacer\tAlt+Retr"    { Undo }
+    item "&Rehacer\tAlt+May+Retr" { Redo }
+    item;
+    item "&Cortar\tMay+Supr"         { BlockCut }
+    item "&Copiar\tCtrl+Ins" { BlockCopy }
+    item "Cortar-a&nexar" { BlockCutAppend }
+    item "Copiar-&anexar" { BlockCopyAppend }
+    item "&Pegar secuencia\tMay+Ins" { BlockPasteStream }
+    item "Pegar colu&mna\tAlt+Ins"   { BlockPasteColumn }
+    item "Pegar l¡&nea"              { BlockPasteLine }
+    item "&Suprimir bloque\tCtrl+Supr" { BlockKill }
+    item;
+    submenu "&L¡nea", Line;
+    item;
+    item "&Quote Literal...\tCtrl+Q" { InsertChar }
+    item "Tabla &ASCII...\tCtrl+May+A" { ASCIITable }
+}
+
+menu Translate {
+    item "Pasar a ma&y£sculas"         { BlockCaseUp }
+    item "Pasar a mi&n£sculas"         { BlockCaseDown }
+    item "&Intercambiar May/Min"       { BlockCaseToggle }
+    item "&Rot13"             { BlockTrans 'A-Za-z' 'N-ZA-Mn-za-m' }
+    item;
+    item "&Especificar ahora..." { BlockTrans }
+}
+
+menu Block {
+    item "&Desmarcar\tEsc"         { BlockUnmark }
+    item "Marcar: &texto"           { BlockMarkStream }
+    item "Marcar: &columnas\tAlt+K" { BlockMarkColumn }
+    item "Marcar: &l¡neas\tAlt+J"   { BlockMarkLine }
+    item;
+#    item "Seleccionar palabra"    { BlockSelectWord }
+#    item "Seleccionar l¡nea"      { BlockSelectLine }
+#    item;
+    item "&Escribir en..."             { BlockWrite }
+    item "Insertar texto de..."    { BlockReadStream }
+    item "Insertar columna de..."  { BlockReadColumn }
+    item "Insertar l¡nea de..."    { BlockReadLine }
+    item "Im&primir"               { BlockPrint }
+    item;
+    submenu "Trans&formar",        Translate;
+    item "&Indentar\tAlt+I"      { BlockIndent }
+    item "Desindentar\tAlt+U"    { BlockUnindent }
+    item "E&xpandir Tabuladores"  { BlockUnTab }
+    item "&Generar Tabuladores"   { BlockEnTab }
+    item "&Ordenar"               { BlockSort }
+    item "Ordenar al &rev‚s"      { BlockSortReverse }
+}
+
+menu Tags {
+    item "&Find word\tCtrl+]"          { TagFindWord }
+    item "&Search tag...\tCtrl+May+]"   { TagFind }
+    item "&Go back\tCtrl+["            { TagPop }
+    item "&Next tag\tAlt+]"            { TagNext }
+    item "&Previous tag\tAlt+["        { TagPrev }
+    item;
+    item "&Load tags..."               { TagLoad }
+    item "&Clear tags"                 { TagClear }
+}
+
+menu SearchWords {
+    item "Buscar &anterior\tAlt+," { SearchWordPrev }
+    item "Buscar &siguiente\tAlt+." { SearchWordNext }
+    item "&Resaltar todas\tAlt+-" { HilitWord }
+}
+
+menu Search {
+    item "&Buscar...\tF7" { Find }
+    item "Buscar &siguiente\tMay+F7" { FindRepeat }
+    item "Buscar &anterior\tAlt+F7" { FindRepeatReverse }
+    item "Buscar y &reemplazar...\tCtrl+R" { FindReplace }
+    item;
+    item "&Colocar marcador..."           { PlaceBookmark }
+    item "Ir al &marcador..."             { GotoBookmark }
+    item;
+    submenu "&Tags", Tags;
+    item "&Par‚ntesis corresp.\tAlt+'"    { MatchBracket }
+    item "Ir a la &l¡nea...\tAlt+L" { MoveToLine }
+    item "Ir a la &columna..."      { MoveToColumn }
+    submenu "Apariciones de la palabra", SearchWords;
+}
+
+menu Fold {
+    item "Abrir el d&oblez\tCtrl+Gr+" { FoldOpen }
+    item "Abrir los a&nidados\tCtrl+Gr*" { FoldOpenNested }
+    item "&Abrir todos\tAlt+Gr*" { FoldOpenAll }
+    item;
+    item "Cerrar el dob&lez\tCtrl+Gr-" { FoldClose }
+    #item "Cerrar los anidados\tCtrl+Gray+/" { FoldCloseNested }
+    item "Cerrar &todos\tAlt+Gr/" { FoldCloseAll }
+    item;
+    item "&Crear doblez\tAlt+Gr+" { FoldCreate }
+    item "Crear mediante exp&reg..." { FoldCreateByRegexp }
+    item "Copiar rutina&s como dobleces" { FoldCreateAtRoutines }
+    item;
+    item "&Destruir el doblez\tAlt+Gr-" { FoldDestroy }
+    item "Destru&ir todos" { FoldDestroyAll }
+    item;
+    item "Cambiar nivel: su&perior\tMay+Gr-" { FoldPromote }
+    item "Cambiar nivel: &menor\tMay+Gr+" { FoldDemote }
+    item;
+    item "Inver&tir estado\tCtrl+Gr/" { FoldToggleOpenClose }
+}
+
+eventmap PLAIN: MODEL {
+    key     [A+']      { CharCaseToggle ; MoveRight }
+}
+
+menu Toggle {
+    item "&May£scula/Min£scula\tA+ï"         { CharCaseToggle }
+    item "&Autoindentado\tC+O C+A"           { ToggleAutoIndent }
+    item "&Sensibilidad May/Min&\tC+O C+C"   { ToggleMatchCase }
+    item "Quitar &espacios de fin de l¡nea\tC+O C+E"    { ToggleTrim }
+    item "&Deshacer/Rehacer\tC+O C+U"        { ToggleUndo }
+    item "S¢lo lectu&ra\tC+O C+R"            { ToggleReadOnly }
+    item "&Hacer copias de seguridad"        { ToggleMakeBackups }
+    item "Mantener &copias de seguridad"     { ToggleKeepBackups }
+    item "\"Retroceso\" desindenta"          { ToggleBackSpUnindents }
+    item;
+    item "&Indentar con tabuladores"         { ToggleIndentWithTabs }
+    item "&Tabuladores = espacios"           { ToggleSpaceTabs }
+    item "\"Retroceso\" elimina tabs"        { ToggleBackSpKillTab }
+    item "\"Suprimir\" elimina tabs"         { ToggleDeleteKillTab }
+}
+
+menu Options {
+    submenu "Cambiar &modo\tC+O C+M",        MChangeMode;
+    submenu "M s modos para cambiar",        MChangeModeMore;
+    submenu "Estilo de indentado de &C",     MChangeCIndentStyle;
+    item;
+    submenu "Inver&tir", Toggle;
+    item "Modo &insertar\tC+O C+I"           { ToggleInsert }
+    item "Di&vidir palabras\tC+O C+W"        { ToggleWordWrap }
+    item;
+    item "Margen iz&quierdo...\tC+O A+["     { ChangeLeftMargin }
+    item "Margen &derecho...\tC+O A+]"       { ChangeRightMargin }
+    item;
+    item "Mo&strar fin de l¡nea, etc.\tC+O ."{ ToggleShowMarkers; WinRefresh }
+    item "Resaltar etiquetas"                { ToggleHilitTags; WinRefresh }
+    item "Mostrar marcadores"                { ToggleShowBookmarks; WinRefresh }
+    item "Mostrar tabuladores\tC+O Tab"      { ToggleShowTabs; WinRefresh }
+    item "&Tama¤o de tabuladores...\tC+O C+T"{ ChangeTabSize; WinRefresh }
+    item "E&xpandir tabuladores\tC+O C+Tab"  { ToggleExpandTabs; WinRefresh }
+    item "&Insertar tabulador\tS+Tab"        { InsertTab }
+    item "Quitar todos los &espacios FDL"     { FileTrim; WinRefresh }
+    item "I&ndentar bloque\tAlt+\\"          { BlockReIndent; FileTrim; WinRefresh }
+    item "Im&primir en..."                   { SetPrintDevice }
+    item;
+    item "Rec&ompilar la configuraci¢n"      { ConfigRecompile }
+}
+
+menu Main {
+    submenu "&Archivo",  File;
+    submenu "&Editar",   Edit;
+    submenu "&Bloques",  Block;
+    submenu "Bu&scar",   Search;
+    submenu "&Dobleces", Fold;
+    submenu "H&tas.",    Tools;
+    submenu "&Ventana",  Window;
+    submenu "&Opciones", Options;
+    submenu "A&yuda",    Help;
+}
+
+menu Local {
+    item "&Desmarcar\tEsc"                     { BlockUnmark }
+    item "C&ortar\tMay+Supr"                   { BlockCut }
+    item "&Copiar\tCtrl+Ins"                   { BlockCopy }
+    item "&Pegar\tMay+Ins"                     { BlockPasteStream }
+    item "P&egar columna\tAlt+Ins"             { BlockPasteColumn }
+    item;
+    item "&Suprimir l¡nea\tCtrl+Y"             { KillLine }
+    item "Borrar hasta &fin de l¡nea\tAlt+Fin" { KillToLineEnd }
+    item;
+    item "I&ndentar el bloque\tAlt+\\"         { BlockReIndent; FileTrim; WinRefresh }
+    item;
+    item "&Guardar\tF2"                        { FileSave }
+    item "&Cerrar\tAlt+Q"                      { FileClose }
+}
+
+menu DirectoryFile {
+    item    "&Abrir seleccionado\tEnter" { Activate }
+    item;
+    item    "Abrir archivo...\tF3"             { FileOpen }
+    submenu "Abrir en &modo...\tCtrl+F3", MOpenInMode;
+    item    "Abrir &binario"            { FileOpenInMode 'BIN' }
+    item;
+    item    "Siguie&nte\tAlt+Dcha"        { FileNext }
+    item    "Ante&rior\tAlt+Izqda"     { FilePrev }
+    item;
+    item    "&Cerrar\tAlt+Q"           { FileClose }
+    item;
+    item    "&Salir\tAlt+X"            { ExitEditor }
+}
+
+menu DirectoryMain {
+    submenu "&Archivo",      DirectoryFile;
+    submenu "&Navegar",      Navigate;
+    submenu "Herramien&tas", Tools;
+    submenu "&Ventana",      Window;
+    submenu "A&yuda",        Help;
+}
+
+menu MessagesMain {
+    submenu "&Archivo",      Object;
+    submenu "Herramien&tas", Tools;
+    submenu "&Ventana",      Window;
+    submenu "A&yuda",        Help;
+}
+
+menu RoutinesMain {
+    submenu "&Archivo",      Object;
+    submenu "Herramien&tas", Tools;
+    submenu "&Ventana",      Window;
+    submenu "A&yuda",        Help;
+}
+
+menu BufferListMain {
+    submenu "&Archivo",      Object;
+    submenu "Herramien&tas", Tools;
+    submenu "&Ventana",      Window;
+    submenu "A&yuda",        Help;
+}
+
+menu EventMapViewMain {
+    submenu "&Archivo",      Object;
+    submenu "Herramien&tas", Tools;
+    submenu "&Ventana",      Window;
+    submenu "A&yuda",        Help;
+}
+
+menu DirectoryLocal {
+    item "&Abrir"                       { Activate }
+    item;
+    item "&Recargar\tCtrl+R"            { Rescan }
+    item;
+    item "Ir al nivel &< \tCtrl+PgUp"   { DirGoUp }
+    item "Ir al nivel &> \tCtrl+PgDn"   { DirGoDown }
+    item "Ir al dir. ra¡z &\\\tCtrl+\\" { DirGoRoot }
+    item "&/ Ir a ... \t/"              { DirGoto }
+    item "&Eliminar archivo\tCtrl+D"    { DeleteFile }
+}
+
+menu BufferListLocal {
+    item "&Ver\tEnter"      { Activate }
+    item;
+    item "&Guardar\tCtrl+S" { BufListFileSave }
+    item "&Cerrar\tCtrl+C"  { BufListFileClose }
+}
+
+menu RoutinesLocal {
+    item "&Ver\tEnter"      { Activate }
+}
+
+menu EventMapViewLocal {
+    item "&Cerrar vista\tAlt+Q" { FileClose }
+}
+
+menu MessagesLocal {
+    item "&Ver error\tEnter" { Activate }
+    item;
+    item "Error &anterior\tF11" { CompilePrevError }
+    item "Siguiente &error\tF12" { CompileNextError }
+}

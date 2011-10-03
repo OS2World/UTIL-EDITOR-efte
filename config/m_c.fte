@@ -131,7 +131,7 @@ colorize C {
 	'uint32_t',
 	'uint64_t',
 	'uint8_t',
--	'uintptr_t',
+	'uintptr_t',
 	'unsigned',
 	'void',
 	'volatile',

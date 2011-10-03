@@ -2,6 +2,7 @@
 menu Help_MAKE {
     item "&Keyboard\tF1" { ViewModeMap }
     item "&Show key" { ShowKey }
+    #item "&Bubblehelp PM Toolbar only"  {ToggleBubbleHelp}
     item;
     item "&Make help" { RunProgram "view U:\\WATCOM\\binp\\help\\tools.inf" }
     item;    
