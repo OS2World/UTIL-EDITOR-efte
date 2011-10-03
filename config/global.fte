@@ -41,7 +41,7 @@ object GLOBAL {
     PrintDevice         = '\\DEV\\PRN';
 %endif
     
-    CompileCommand      = 'make ';
+    CompileCommand      = 'grep -n ';
     KeepMessages        = 1;
 
     CvsCommand          = 'cvs';
