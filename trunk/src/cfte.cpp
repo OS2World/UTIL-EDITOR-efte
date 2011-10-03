@@ -2090,38 +2090,39 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		 EFTE_INSTALL_DIR, CfgName);
 	snprintf(dirs[5], MAXPATH, "/etc/efte/config/%s", CfgName);
 #else // if PT_UNIXISH
-#       define SEARCH_PATH_LEN 13
+#       define SEARCH_PATH_LEN 14
 	char dirs[SEARCH_PATH_LEN][MAXPATH];
 	const char *pg = getenv("EFTEDIR");
 
-	snprintf(dirs[0], MAXPATH, "%s/config/%s", pg, CfgName);
-	snprintf(dirs[1], MAXPATH, "%s/local/%s", pg, CfgName);
-	snprintf(dirs[2], MAXPATH, "%s/%s", ConfigDir, CfgName);
-	snprintf(dirs[3], MAXPATH, "~/.efte/%s", CfgName);
-	snprintf(dirs[4], MAXPATH, "~/efte/%s", CfgName);
-	snprintf(dirs[5], MAXPATH, "/efte/local/%s", CfgName);
-	snprintf(dirs[6], MAXPATH, "/efte/config/%s", CfgName);
-	snprintf(dirs[7], MAXPATH, "/Program Files/efte/local/%s", CfgName);
-	snprintf(dirs[8], MAXPATH, "/Program Files/efte/config/%s", CfgName);
-	snprintf(dirs[9], MAXPATH, "/Program Files (x86)/efte/local/%s",
+        snprintf(dirs[0], MAXPATH, "%s/config/%s", pg, CfgName);
+	snprintf(dirs[1], MAXPATH, "%s/%s", pg, CfgName); //EFTEDIR can be full path to config files
+	snprintf(dirs[2], MAXPATH, "%s/local/%s", pg, CfgName);
+	snprintf(dirs[3], MAXPATH, "%s/%s", ConfigDir, CfgName);
+	snprintf(dirs[4], MAXPATH, "~/.efte/%s", CfgName);
+	snprintf(dirs[5], MAXPATH, "~/efte/%s", CfgName);
+	snprintf(dirs[6], MAXPATH, "/efte/local/%s", CfgName);
+	snprintf(dirs[7], MAXPATH, "/efte/config/%s", CfgName);
+	snprintf(dirs[8], MAXPATH, "/Program Files/efte/local/%s", CfgName);
+	snprintf(dirs[9], MAXPATH, "/Program Files/efte/config/%s", CfgName);
+	snprintf(dirs[10], MAXPATH, "/Program Files (x86)/efte/local/%s",
 		 CfgName);
-	snprintf(dirs[10], MAXPATH, "/Program Files (x86)/efte/config/%s",
+	snprintf(dirs[11], MAXPATH, "/Program Files (x86)/efte/config/%s",
 		 CfgName);
 	const char *pf = getenv("ProgramFiles");
 
-	snprintf(dirs[11], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:",
+	snprintf(dirs[12], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:",
 		 CfgName);
-	snprintf(dirs[12], MAXPATH, "%s/eFTE/config/%s", pf ? pf : "C:",
+	snprintf(dirs[13], MAXPATH, "%s/eFTE/config/%s", pf ? pf : "C:",
 		 CfgName);
 #endif // if PT_UNIXISH
 
-	char tmp[MAXPATH];
+        char tmp[MAXPATH];
 	bool found = false;
 
 	for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
-	    sprintf(tmp, dirs[idx], CfgName);
-	    if (ExpandPath(tmp, Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
+	    if (ExpandPath(dirs[idx], Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
 		found = true;
+		//printf("Config path %s \n", dirs[idx]);
 		break;
 	    }
 	}
