@@ -463,7 +463,9 @@ HWND CreatePMMenu(HWND parent, HWND owner, int menu, int id, int style)
 	}
 	else {
 	    p = 0;
-	}
+        }
+        if (i && !(i % 30))
+          item.afStyle |= MIS_BREAK;
 	WinSendMsg(hmenu, MM_INSERTITEM, MPFROMP(&item), MPFROMP(p));
 	if (i == 0 && style == MS_CONDITIONALCASCADE) {
 	    WinSetWindowBits(hmenu, QWL_STYLE,
