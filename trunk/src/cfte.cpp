@@ -1995,9 +1995,13 @@ static int PreprocessConfigFile(CurPos & cp)
 	    else if (cp.c + 6 < cp.z && strncmp(cp.c, "%endif", 6) == 0) {
 		cp.c += 6;
 	    }
-	    if (cp.c < cp.z && *cp.c != '\n' && *cp.c != '\r')
-		Fail(cp, "syntax error %30.30s", cp.c);
+            while (cp.c < cp.z && *cp.c != '\n' && *cp.c != '\r') {
 
+                if (*cp.c == '\t' || *cp.c == ' ')
+                    cp.c++;
+                else
+                    Fail(cp, "syntax error %30.30s", cp.c);
+            }
 	    wipe_end = cp.c;
 
 	    // wipe preprocessor macros with space
@@ -2007,7 +2011,8 @@ static int PreprocessConfigFile(CurPos & cp)
 
 	    break;
 
-	case '\n':
+        case '\n':
+        case '\r':
 	    cp.line++;
 	    rem_active = false;
 	    string_open = false;
