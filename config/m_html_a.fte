@@ -51,7 +51,7 @@ sub HTML_Tidy_88591 { RunProgram "tidy -m -i -ascii -wrap 80 \"" . $FilePath."\"
 sub HTML_Tidy_1252  { RunProgram "tidy -m -i -win1252 -wrap 80 \"" . $FilePath."\""; }
 sub HTML_Tidy_UTF8  { RunProgram "tidy -m -i -UTF8 -wrap 80 \"" . $FilePath."\""; }
 
-sub HTML_ISpell { FileSave; RunProgram "E:\\ISPELL40\\ispell.exe ".$FilePath; FileReload; }
+sub HTML_ISpell { FileSave; RunProgram "ispell.exe ".$FilePath; FileReload; }
 
 # HTML
 
