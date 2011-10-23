@@ -1,0 +1,150 @@
+# FTE mode for editing MS_DOS .BAT and
+# JP Software Command Processor BTM files
+# by Michael DeBusk
+# debu4335@eclipsetel.com
+# Revision February 9, 2001
+
+colorize Batch {
+    SyntaxParser = 'SIMPLE';
+    
+    color {
+        { 'Normal',        'Editor_Default' },
+        { 'Keyword',       'Editor_Keywords' },
+        { 'Number',        'Lang_DecimalNumber' },
+        { 'HexNumber',     'Lang_HexNumber' },
+        { 'Punctuation',   'Lang_Punctuation' },
+        { 'String',        'Lang_String' },
+        { 'Comment',       'Lang_Comment' },
+        { 'CPreprocessor', 'Lang_Preprocessor' },
+        { 'Function',      'Lang_Function' },
+        { 'Label',         'Lang_Label' },
+    };
+
+# JPSoft and/or DOS Commands
+keyword 'Editor_Keywords' {
+    '?', 'ACTIVATE', 'ASSIGN', 'ALIAS', 'ASSOC', 'ATTRIB', 'BEEP','BREAK',
+    'CALL', 'CANCEL', 'CASE', 'CD', 'CDD', 'CHCP', 'CHDIR', 'CLS', 'COLOR',
+    'COMP', 'COPY', 'CTTY', 'DATE', 'DDEEXEC', 'DEFAULT', 'DEL', 'DELAY',
+    'DESCRIBE', 'DETACH', 'DIR', 'DIRHISTORY', 'DIRS', 'DO', 'DPATH',
+    'DRAWBOX', 'DRAWHLINE', 'DRAWVLINE', 'ECHO', 'ECHOERR', 'ECHOS',
+    'ECHOSERR', 'ENDLOCAL', 'ENDSWITCH', 'ERASE', 'ESET', 'EXCEPT', 'EXIT',
+    'FFIND', 'FOR', 'FREE', 'FTYPE', 'GLOBAL', 'GOSUB', 'GOTO', 'HELP',
+    'HISTORY', 'IF', 'IFF', 'INKEY', 'INPUT', 'KEYBD', 'KEYS', 'KEYSTACK',
+    'LH', 'LIST', 'LOADBTM', 'LOADHIGH', 'LOCK', 'LOG', 'MD', 'MEMORY',
+    'MKDIR', 'MOVE', 'MSGBOX', 'ON', 'OPTION', 'PATH', 'PAUSE', 'POPD',
+    'PROMPT', 'PUSHD', 'QUERYBOX', 'QUIT', 'RD', 'REBOOT', 'REN',
+    'RENAME','RETURN', 'RMDIR', 'SCREEN', 'SCRPUT', 'SELECT', 'SET',
+    'SETDOS', 'SETLOCAL', 'SHIFT', 'SHRALIAS', 'START', 'SWAPPING',
+    'SWITCH', 'TEE', 'TEXT', 'TIME', 'TIMER', 'TITLE', 'TOUCH', 'TREE',
+    'TRUENAME', 'TYPE', 'UNALIAS', 'UNLOCK', 'UNSET', 'VER', 'VERIFY',
+    'VOL', 'VSCRPUT', 'WINDOW', 'Y', };
+
+# JPSoft and/or DOS Command keywords
+# If anybody knows how to get the first three entries (the ones with
+# the period on either side of them) recognized, please let me know
+keyword 'Editor_Keywords2' {
+    '.AND.', '.OR.', '.XOR.', 'BY', 'DEFINED', 'DIREXIST', 'DO',
+    'ELSE', 'ELSEIFF', 'ENDDO', 'ENDIFF', 'ENDTEXT', 'EQ', 'EQL', 'EQU',
+    'ERROR','ERRORLEVEL', 'ERRORMSG', 'EXIST', 'FOREVER', 'GE', 'GEQ',
+    'GT', 'GTR', 'IFF', 'IN', 'ISALIAS', 'ISDIR', 'ISINTERNAL', 'ISLABEL',
+    'ISWINDOW', 'ITERATE', 'LE', 'LEAVE', 'LEQ', 'LSS', 'LT', 'NE', 'NEQ',
+    'NOT', 'OFF', 'THEN', 'UNTIL', 'WHILE',
+    };
+
+# JPSoft Internal variables
+keyword 'Editor_Keywords3' {
+    '?', '_?', '_4VER', '_ALIAS', '_ANSI', '_APMAC','_APMBATT', '_APMLIFE',
+    '_BATCH', '_BATCHLINE', '_BATCHNAME', '_BG', '_BOOT','_CI', '_CMDPROC',
+    '_CO', '_CODEPAGE', '_COLUMN', '_COLUMNS', '_COUNTRY', '_CPU', '_CWD',
+    '_CWDS', '_CWP', '_CWPS', '_DATE', '_DAY', '_DISK', '_DNAME', '_DOS',
+    '_DOSVER', '_DOW', '_DOWI', '_DOY', '_DPMI', '_DV', '_ENV', '_FG',
+    '_GDIFREE', '_HLOGFILE', '_HOUR', '_KBHIT', '_KSTACK', '_LASTDISK',
+    '_LOGFILE', '_MINUTE', '_MONITOR', '_MONTH', '_MOUSE', '_NDP', '_PID',
+    '_PIPE', '_PPID', '_PTYPE', '_ROW', '_ROWS', '_SECOND', '_SELECTED',
+    '_SHELL', '_SID', '_SWAPPING', '_SYSERR', '_TIME', '_TRANSIENT',
+    '_VIDEO', '_SYSFREE', '_USERFREE', '_WIN', '_WINDIR', '_WINSYSDIR',
+    '_WINTITLE', '_WINVER', '_XPIXELS', '_YEAR', '_YPIXELS',
+    };
+
+# JPSoft Variable functions
+keyword 'Editor_Keywords4' {    
+    '@ALIAS', '@ALTNAME', '@ASCII', '@ATTRIB', '@CDROM', '@CHAR', '@CLIP',
+    '@COMMA', '@CONVERT', '@DATE', '@DAY', '@DEC', '@DESCRIPT', '@DEVICE',
+    '@DISKFREE','@DISKTOTAL', '@DISKUSED', '@DOSMEM', '@DOW', '@DOWI',
+    '@DOY', '@EAREAD', '@EAWRITE', '@EMS', '@EVAL', '@EXEC', '@EXECSTR',
+    '@EXETYPE', '@EXPAND', '@EXT', '@EXTENDED', '@FILEAGE', '@FILECLOSE',
+    '@FILEDATE', '@FILENAME', '@FILEOPEN', '@FILEREAD', '@FILES',
+    '@FILESEEK', '@FILESEEKL', '@FILESIZE', '@FILETIME', '@FILEWRITE',
+    '@FILEWRITEB', '@FINDCLOSE', '@FINDFIRST', '@FINDNEXT', '@FORMAT',
+    '@FSTYPE', '@FULL', '@GETDIR', '@GETFILE', '@IF', '@INC', '@INDEX',
+    '@INIREAD', '@INIWRITE', '@INSERT', '@INSTR', '@INT', '@LABEL',
+    '@LEFT', '@LEN', '@LFN', '@LINE', '@LINES', '@LOWER', '@LPT',
+    '@MAKEAGE', '@MAKEDATE', '@MAKETIME', '@MASTER', '@MONTH', '@NAME',
+    '@NUMERIC', '@PATH', '@RANDOM', '@READSCR', '@READY', '@REMOTE',
+    '@REMOVABLE', '@REPEAT', '@REPLACE', '@REXX', '@RIGHT', '@SEARCH',
+    '@SELECT', '@SFN', '@STRIP', '@SUBSTR', '@TIME', '@TIMER', '@TRIM',
+    '@TRUENAME', '@UNIQUE', '@UPPER', '@WILD', '@WORD', '@WORDS', '@XMS',
+    '@YEAR',
+};
+
+# MS_DOS external commands not included above
+keyword 'Editor_Keywords5' {
+    'APPEND', 'BACKUP', 'CHKDSK', 'CHOICE', 'COMMAND', 'DBLSPACE','DEBUG',
+    'DEFRAG', 'DELOLDOS', 'DELTREE', 'DISKCOMP', 'DISKCOPY', 'DOSHELP',
+    'DOSKEY','DOSSHELL', 'DRVSPACE', 'EDIT', 'EDLIN', 'EMM386', 'EXE2BIN',
+    'EXPAND', 'FASTHELP', 'FASTOPEN', 'FC', 'FDISK', 'FIND', 'FORMAT',
+    'GRAPHICS', 'GRAFTABL', 'INTERLNK', 'INTERSVR', 'KEYB', 'LABEL',
+    'LOADFIX', 'MEM', 'MEMMAKER', 'MIRROR', 'MODE', 'MORE', 'MSAV',
+    'MSBACKUP', 'MSCDEX', 'MSD', 'NLSFUNC', 'POWER', 'PRINT', 'QBASIC',
+    'RECOVER', 'REPLACE', 'RESTORE', 'SCANDISK', 'SETUP', 'SETVER',
+    'SHARE', 'SIZER', 'SMARTDRV', 'SMARTMON', 'SORT', 'SUBST', 'SYS',
+    'TREE', 'UNDELETE', 'UNFORMAT', 'VSAFE', 'XCOPY',
+};
+
+    h_state 0 { 'Normal' }
+    h_trans { 1, '^', 'REM', 'Comment' } 
+    h_trans { 1, '^', 'rem', 'Comment' } 
+    h_trans { 1, '^', '::', 'Comment' } 
+    h_trans { 5, '-s', 'a-zA-Z_$@', 'Normal' }
+    h_trans { 2, '<', '\'', 'String' }
+    h_trans { 3, '<', '"', 'String' }
+    h_trans { 4, '-s', '0-9', 'Number' }
+    h_trans { 0, 'S', 'a-zA-Z0-9_$@', 'Punctuation' }
+
+    h_state 1 { 'Comment' }
+    h_trans { 0, '$', '', 'Comment' }
+
+    h_state 2 { 'String' }
+    h_trans { 0, '$', '', 'Normal' }
+    h_trans { 0, '', '\'', 'String' }
+
+    h_state 3 { 'String' }
+    h_trans { 0, '$', '', 'Normal' }
+    h_trans { 0, '', '"', 'String' }
+
+    h_state 4 { 'Number' }
+    h_trans { 0, '$', '', 'Normal' }
+    h_trans { 0, 's', 'Hh', 'Number' }
+    h_trans { 0, '-S', '0-9A-Fa-f', 'Number' }
+
+    h_state 5 { 'Normal' }
+    h_trans { 0, '$', '', 'Normal' }
+    h_wtype { 0, 0, 0, 'i', 'a-zA-Z0-9_$@' }
+}
+
+mode Batch: PLAIN {                    # Batch File mode
+    FileNameRx          = /\.\c{BAT}|{BTM}$/;
+    HilitOn             = 1;
+    Colorizer           = 'Batch';
+    TabSize             = 8;
+    AutoIndent          = 0;
+    IndentMode          = 'SIMPLE';
+    MultiLineHilit      = 1;
+    AutoHilitParen      = 1;
+
+    SaveFolds           = 2;      # save fold info at end of line
+    CommentStart        = 'REM';
+    CommentEnd          = '';
+
+    RoutineRegexp       = /^[\w_]+:/;
+}

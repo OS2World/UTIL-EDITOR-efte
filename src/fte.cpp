@@ -174,8 +174,10 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 			       sizeof(ConfigFileName));
 		    haveConfig = 1;
 		}
-		else
-		    ign = 1;
+                else {
+                    haveConfig = 1;
+                    strcpy(ConfigFileName, "edefcfg.fte");
+                }
 	    }
 	}
     }
