@@ -80,7 +80,6 @@ static void Fail(CurPos & cp, const char *s, ...)
 	    "%s:%d: Error: %s\n Use: efte -! -l%i %s to repair error\n",
 	    cp.name, cp.line, msgbuf, cp.line, cp.name);
     DieError(1, "%s", diemsg);
-    //cleanup(1);
 }
 
 static int LoadFile(const char *WhereName, const char *CfgName, int Level =
@@ -159,8 +158,6 @@ int CFteMain()
 
     if (LoadFile("", ConfigFileName, 0) != 0) {
 	DieError(1, "\nCompile failed\n");
-	//fprintf(stderr, "\nCompile failed\n");
-	//cleanup(1);
     }
 
     return 0;

@@ -7,22 +7,32 @@
 .* Source filename: contents.html
 :h1 res=1.eFTE/2
 :font facename=default size=0x0.
-:p.
-:sl compact.
+:p
 :li.:link reftype=hd res=2.About eFTE:elink.
+.br
 :li.:link reftype=hd res=5.Configuration Files:elink.
+.br
 :li.:link reftype=hd res=4.Command Line Options:elink.
+.br
 :li.:link reftype=hd res=11.Configuration of Syntax Highlighting:elink.
+.br
 :li.:link reftype=hd res=12.Colors:elink.
+.br
 :li.:link reftype=hd res=13.Macro Commands:elink.
+.br
 :li.:link reftype=hd res=7.Event Bindings:elink.
+.br
 :li.:link reftype=hd res=6.Global Configuration:elink.
+.br
 :li.:link reftype=hd res=3.Installation:elink.
+.br
 :li.:link reftype=hd res=8.Mode Configuration:elink.
+.br
 :li.:link reftype=hd res=14.Performace Tips:elink.
+.br
 :li.:link reftype=hd res=9.Regular Expressions:elink.
+.br
 :li.:link reftype=hd res=10.Status Line:elink.
-:esl.
 
 .* Source filename: about.html
 :h2 res=2.About eFTE/2
@@ -65,27 +75,29 @@ Version :hp2.0&per.46 FTE:ehp2.
 :font facename=default size=0x0.
 :p.
 While the original FTE configuration files were version specific, and required recompilation,
-eFTE uses the configuration files without compiling them. Basicly the compiler code has be 
-incoportated into eFTE/2 so the configuration is recompiled each time you start eFTE/2. 
+eFTE uses the cifiguration file with compiling them. Basicly the compiler code has be 
+incoportated into eFTE/2. 
 
-:p.On startup, the editor will attempt to load the configuration starting from 
-:font facename='System VIO' size=14x8.mymain&per.fte:font facename=default size=0x0..
-:ul.
-:lp.We look for :font facename='System VIO' size=14x8.mymain&per.fte:font facename=default size=0x0.
+:p.On startup, editor will attempt to load the configuration with starting from 
+:font facename='System VIO' size=14x8.mymain&per.fte:font facename=default size=0x0.
+We look for :font facename='System VIO' size=14x8.mymain&per.fte:font facename=default size=0x0.
 in several standard places including&colon.
+.br
 :font facename='System VIO' size=14x8.
-:li.efte ("eFTE install directory")
-:li.efte\config
-:li.efte\local :font facename=default size=0x0.
-:lp.in the "Program Files" directory from your environment. If you want the 
+efte ("eFTE install directory") 
+.br
+efte\config
+.br
+efte\local :font facename=default size=0x0.
+.br 
+both in the root and in the "Program Files" directory from your environment. If you want the 
 configuration files somewhere else or if eFTE/2 is having trouble finding mymain.fte, you
 can use :font facename='System VIO' size=14x8.SET EFTEDIR=MYPATH:font facename=default size=0x0..
 eFTE/2 will look in that directory and in a config and/or local subdirectory. If you have 
 several sets of configuration files use :font facename='System VIO' size=14x8.SET EFTEDIR
-:font facename=default size=0x0.in a script to switch between them. 
-:lp.Unlike FTE eFTE/2 doesn't have a direct way to switch between configurations and doesn't have a default 
-configuration.
-:eul.
+:font facename=default size=0x0.in a script to switch between them. Unlike
+FTE eFTE/2 doesn't have a direct way to switch between configurations and doesn't have a default 
+configuration. 
 :p.The advantage of not having to compile the cofiguration each time is you only need to edit 
 the configuration file(s) then close and reopen eFTE/2 and your new configuration is ready.
 The one downside is if you make a syntax error eFTE/2 won't open until it is fixed. For this 
@@ -100,13 +112,8 @@ fails you can easily edit/backout the changes in the first instance.
 Configuration file syntax:font facename=default size=0x0.
 .br
 .br
-:p. Comments start with character :font facename='System VIO' size=14x8.#:font facename=default size=0x0. and last 
-until the end of that line&per.
-:p. Three compiler directives are defined to conditionally include or exclude parts of the cofiguration. The directives
-are :font facename='System VIO' size=14x8.%if, %endif and %define:font
-facename=default size=0x0.. They behave as expected and the :font facename='System VIO' size=14x8.!:font 
-facename=default size=0x0."not character" can be used in the %defines. Do not try to put comments (or anything else) 
-on these lines. As this will result in a syntax error. Note white space is tolerated. 
+:p. Comments start with character :font facename='System VIO' size=14x8.#:font facename=default size=0x0. and last until the end
+of line&per.
 :p. Strings can be specified using any of :font facename='System VIO' size=14x8.' " /:font facename=default size=0x0. characters&per.
 
 :p. Single quoted strings perform no substitution&per. To enter  :font facename='System VIO' size=14x8.':font facename=default size=0x0.
@@ -146,9 +153,9 @@ Options:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.:hp2.-m:ehp2.[MOD]E:font facename=default size=0x0.
 :dd.Use mode :font facename='System VIO' size=14x8.MODE:font facename=default size=0x0. for remaining files&per. If no argument is
 specified, mode override is cancelled&per.
-.*:dt.:font facename='System VIO' size=14x8.:hp2.-C:ehp2.[file]:font facename=default size=0x0.
-.*:dd.Use specified configuration file (compiled)&per. If no argument is specified,
-.*the default builtin configuration is used&per.
+:dt.:font facename='System VIO' size=14x8.:hp2.-C:ehp2.[file]:font facename=default size=0x0.
+:dd.Use specified configuration file (compiled)&per. If no argument is specified,
+the default builtin configuration is used&per.
 :dt.:font facename='System VIO' size=14x8.:hp2.-D:ehp2.[file&per.dsk]:font facename=default size=0x0.
 :dd.Load/save desktop from file :font facename='System VIO' size=14x8.file&per.dsk:font facename=default size=0x0.&per. If no argument is specified, desktop loading/saving
 is disabled&per.
@@ -177,30 +184,27 @@ Examples:font facename=default size=0x0.
 .br
 .br
 :dl compact break=all.
-:dt.:font facename='System VIO' size=14x8.efte[pm] -mBIN efte&per.exe:font facename=default size=0x0.
-:dd.load efte[pm]&per.exe in BIN mode
-:dt.:font facename='System VIO' size=14x8.efte[pm] -l100,30 win&per.c:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.fte -mBIN fte&per.exe:font facename=default size=0x0.
+:dd.load fte&per.exe in BIN mode
+:dt.:font facename='System VIO' size=14x8.fte -l100,30 win&per.c:font facename=default size=0x0.
 :dd.go to (100,30) in win&per.c
-:dt.:font facename='System VIO' size=14x8.efte[pm] window&per.cpp:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.fte window&per.cpp:font facename=default size=0x0.
 :dd.load file window&per.cpp
-:dt.:font facename='System VIO' size=14x8.efte[pm] -mBIN efte&per.exe -m fte&per.cpp:font facename=default size=0x0.
-:dd.load efte[pm]&per.exe in binary mode, window&per.cpp in default mode (C/C++)
-:dt.:font facename='System VIO' size=14x8.efte[pm] -mBIN -+ -bla-:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.fte -mBIN fte&per.exe -m fte&per.cpp:font facename=default size=0x0.
+:dd.load fte&per.exe in binary mode, window&per.cpp in default mode (C/C++)
+:dt.:font facename='System VIO' size=14x8.fte -mBIN -+ -bla-:font facename=default size=0x0.
 :dd.load file -bla- in BIN mode
-:dt.:font facename='System VIO' size=14x8.efte[pm] -- -1 -2 -3 -4 -5 -6:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.fte -- -1 -2 -3 -4 -5 -6:font facename=default size=0x0.
 :dd.load files -1, -2, -3, -4, -5, -6
-:dt.:font facename='System VIO' size=14x8.efte[pm] -D -H efte&per.dsk efte&per.his:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.fte -D -H fte&per.dsk fte&per.his:font facename=default size=0x0.
 :dd.Disable desktop and history loading and saving and load files
-:font facename='System VIO' size=14x8.efte&per.dsk:font facename=default size=0x0. and 
-:font facename='System VIO' size=14x8.efte&per.his:font facename=default size=0x0.&per.
+:font facename='System VIO' size=14x8.fte&per.dsk:font facename=default size=0x0. and :font facename='System VIO' size=14x8.fte&per.his:font facename=default size=0x0.&per.
 :edl.
 
 
 :p.Under OS/2,NT and DOS default history and desktop files are
-named :font facename='System VIO' size=14x8.eFTE&per.DSK:font facename=default size=0x0. and 
-:font facename='System VIO' size=14x8.eFTE&per.HIS:font facename=default size=0x0. respectively&per. Under Unix they
-are named :font facename='System VIO' size=14x8.&per.efte-desktop:font facename=default size=0x0. and 
-:font facename='System VIO' size=14x8.&per.efte-history:font facename=default size=0x0.&per. The global
+named :font facename='System VIO' size=14x8.FTE&per.DSK:font facename=default size=0x0. and :font facename='System VIO' size=14x8.FTE&per.HIS:font facename=default size=0x0. respectively&per. Under Unix they
+are named :font facename='System VIO' size=14x8.&per.fte-desktop:font facename=default size=0x0. and :font facename='System VIO' size=14x8.&per.fte-history:font facename=default size=0x0.&per. The global
 desktop and history files will be searched in program directory under
 OS/2 and in user home directory under Unix&per.
 
@@ -228,27 +232,26 @@ Settings:font facename=default size=0x0.
     :hp2.SyntaxParser = ":ehp2.:hp1.Parser:ehp1.:hp2.";:ehp2.
 :ecgraphic.
 
-:lp.Activates the specified syntax parser for highlighting mode&per.
+:p.Activates the specified syntax parser for highlighting mode&per.
 Value of :font facename='System VIO' size=14x8.:hp1.Parser:ehp1.:font facename=default size=0x0. can be chosen from&colon.
 :p.
-:eul.
-:dl compact break=fit.
+:dl compact break=all.
 :dt.PLAIN
-:dd.No syntax parser, only keyword highlighting is available&per.
+:dd.No syntax parser, only keyword highlighting
+is available&per.
 :dt.SIMPLE
-:dd.User configurable syntax parser will be defined&per.
+:dd.User configurable syntax parser
+will be defined&per.
 :dt.C
 :dt.REXX
 :dt.HTML
 :dt.PERL
 :dt.MAKE
-:dd.For editing :hp2.make files:ehp2..
 :dt.DIFF
 :dd.For viewing output of :hp2.diff:ehp2.&per.
 :dt.MERGE
 :dd.For editing output of :hp2.rcsmerge:ehp2. (RCS, CVS)&per.
 :dt.IPF
-:dd.For editing :hp2.OS2 help file:ehp2. sources.
 :dt.Ada
 :dt.MSG
 :dd.For editing E-Mail,
@@ -257,10 +260,11 @@ Value of :font facename='System VIO' size=14x8.:hp1.Parser:ehp1.:font facename=d
 :dt.TEX
 :dt.FTE
 :dt.CATBS
-:dd.For :hp2.VIEWING ONLY:ehp2. of :hp2.nroff:ehp2. formatted man-pages (formatted with backspaces)&per.
+:dd.For :hp2.VIEWING ONLY:ehp2. of :hp2.nroff:ehp2. formatted
+man-pages (formatted with backspaces)&per.
 :edl.
+
 :p.
-:ul.
 :li.Keywords
 :p.Syntax&colon.
 :cgraphic.
@@ -271,7 +275,7 @@ Value of :font facename='System VIO' size=14x8.:hp1.Parser:ehp1.:font facename=d
 Multiple keyword sets with different colors can be defined&per.
 :p.
 :li.Colors
-:lp.Syntax&colon.
+:p.Syntax&colon.
 :cgraphic.
     :hp2.color {
         ":ehp2.:hp1.color_name:ehp1.:hp2.", ":ehp2.:link reftype=hd res=12.:hp1.color_specification:ehp1.:elink.:hp2.":ehp2.
@@ -279,7 +283,7 @@ Multiple keyword sets with different colors can be defined&per.
     :hp2.};:ehp2.
 :ecgraphic.
 
-:lp. The following color-names are available, which ones
+:p. The following color-names are available, which ones
 will actually be used depends on the SyntaxParser setting used&colon.
 :p.
 :ul compact.
@@ -5919,20 +5923,20 @@ Replacement Operators:font facename=default size=0x0.
 :p.This chapter contains all external links referenced in this book -
 either link is an Unified Resource Locator (URL) or simply to a
 local file which is not a part of this book.
-:h2 res=15.http&colon.//svn.netlabs.org/efte
+:h2 res=15.http&colon.//fte&per.sourceforge&per.net
+:font facename=default size=0x0.
 :p.:lines align=center.
-The link you selected points to an external resource&per. 
-.br
-Click the URL below to launch your default web browser
+The link you selected points to an external resource&per. Click the URL below to launch IBM Web Explorer
 :font facename='System VIO' size=24x14.
-http&colon.//svn.netlabs.org/efte.
-:elines.
-:h2 res=16.mailto&colon.ygk@qwest.net
+:p.:link reftype=launch object='explore.exe ' data='http://fte.sourceforge.net'.
+http&colon.//fte&per.sourceforge&per.net
+:elink.:elines.
+:h2 res=16.mailto&colon.zdenek&per.kabelac@gmail&per.com
+:font facename=default size=0x0.
 :p.:lines align=center.
-The link you selected points to an external resource&per. 
-.br
-Click the URL below to launch your default mail program
+The link you selected points to an external resource&per. Click the URL below to launch IBM Web Explorer
 :font facename='System VIO' size=24x14.
-mailto&colon.ygk@qwest.net.
-:elines.
+:p.:link reftype=launch object='explore.exe ' data='mailto:zdenek.kabelac@gmail.com'.
+mailto&colon.zdenek&per.kabelac@gmail&per.com
+:elink.:elines.
 :euserdoc.
