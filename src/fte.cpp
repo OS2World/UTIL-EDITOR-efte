@@ -152,8 +152,9 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 		else
 		    QuoteAll = 1;
 	    }
-	    else if (argv[Arg][1] == '!') {
-		ign = 1;
+            else if (argv[Arg][1] == '!') {
+                haveConfig = 1;
+                strcpy(ConfigFileName, "edefault.fte");
 	    }
 	    else if (argv[Arg][1] == '+') {
 		QuoteNext = 1;
@@ -176,7 +177,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 		}
                 else {
                     haveConfig = 1;
-                    strcpy(ConfigFileName, "edefcfg.fte");
+                    strcpy(ConfigFileName, "edefault.fte");
                 }
 	    }
 	}
@@ -200,8 +201,26 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	}
     }
     else if (LoadConfig(argc, argv, ConfigFileName) == -1) {
-	DieError(1, "Failed to load configuration file '%s'.\n"
-		 "Use '-C' option.", ConfigFileName);
+        GxView *V;
+
+        switch (V->Choice(GPC_ERROR,
+                          "Failed to load configuration file '%s'. \n"
+                          "Should I attempt to load the default configuration",
+                          2, "&Yes", "&No", "")) {
+                          case 0:
+                              strcpy(ConfigFileName, "edefault.fte");
+                              if (LoadConfig(argc, argv, ConfigFileName) == -1)
+                                  DieError(1,
+                                           "Failed to load the default configuration file,\n"
+                                           "Make sure edefault.fte is in the efte directory\n");
+                              break;
+                          case 1:
+                              DieError(1, "Failed to load configuration file '%s'.\n"
+                                       "Use '-C' option followed by the filename or alone to load the default.",
+                                       ConfigFileName);
+
+	}
+	
     }
 
     for (Arg = 1; Arg < argc; Arg++) {
