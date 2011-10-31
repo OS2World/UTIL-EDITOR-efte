@@ -2092,35 +2092,24 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		 EFTE_INSTALL_DIR, CfgName);
 	snprintf(dirs[5], MAXPATH, "/etc/efte/config/%s", CfgName);
 #else // if PT_UNIXISH
-#       define SEARCH_PATH_LEN 14
+#       define SEARCH_PATH_LEN 8
 	char dirs[SEARCH_PATH_LEN][MAXPATH];
 	const char *pg = getenv("EFTEDIR");
 
         snprintf(dirs[0], MAXPATH, "%s/config/%s", pg, CfgName);
 	snprintf(dirs[1], MAXPATH, "%s/%s", pg, CfgName); //EFTEDIR can be full path to config files
-	snprintf(dirs[2], MAXPATH, "%s/local/%s", pg, CfgName);
-	snprintf(dirs[3], MAXPATH, "%s/%s", ConfigDir, CfgName);
-	snprintf(dirs[4], MAXPATH, "~/.efte/%s", CfgName);
-	snprintf(dirs[5], MAXPATH, "~/efte/%s", CfgName);
-	snprintf(dirs[6], MAXPATH, "/efte/local/%s", CfgName);
-	snprintf(dirs[7], MAXPATH, "/efte/config/%s", CfgName);
-	snprintf(dirs[8], MAXPATH, "/Program Files/efte/local/%s", CfgName);
-	snprintf(dirs[9], MAXPATH, "/Program Files/efte/config/%s", CfgName);
-	snprintf(dirs[10], MAXPATH, "/Program Files (x86)/efte/local/%s",
-		 CfgName);
-	snprintf(dirs[11], MAXPATH, "/Program Files (x86)/efte/config/%s",
-		 CfgName);
-	const char *pf = getenv("ProgramFiles");
-
-	snprintf(dirs[12], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:",
-		 CfgName);
-	snprintf(dirs[13], MAXPATH, "%s/eFTE/config/%s", pf ? pf : "C:",
-		 CfgName);
+        snprintf(dirs[2], MAXPATH, "%s/local/%s", pg, CfgName);
+        snprintf(dirs[3], MAXPATH, "./config/%s", CfgName);
+        snprintf(dirs[4], MAXPATH, "./local/%s", CfgName);
+        snprintf(dirs[5], MAXPATH, "./%s", CfgName);
+	snprintf(dirs[6], MAXPATH, "~/.efte/%s", CfgName);
+	snprintf(dirs[7], MAXPATH, "~/efte/%s", CfgName);
 #endif // if PT_UNIXISH
 
         char tmp[MAXPATH];
 	bool found = false;
 
+        strcpy(tmp, Cfg);
 	for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
 	    if (ExpandPath(dirs[idx], Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
 		found = true;
@@ -2128,6 +2117,33 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		break;
 	    }
 	}
+        //This fails because the code requires that hwndFrame has already been created.
+        //need a new WinMessageBox function and a VIO solution.
+        /*if (found == false && stricmp(Cfg, "edefault.fte")){
+            ChoiceInfo * choice;
+
+            choice->Title = "Cannot find configuration File";
+            choice->NSel = 2;
+            choice->Buttons[0] = "&yes";
+            choice->Buttons[1] = "&no";
+            choice->Format = "%s";
+            choice->Message = "Do you want to load the defult configuration?";
+        
+            choice->Flags = GPC_ERROR;
+            switch  (DoChoice(HWND_DESKTOP,  choice)) {
+            case 0 :
+                strcpy(Cfg, "edefault.fte");
+                for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
+                    if (ExpandPath(dirs[idx], Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
+                        printf("Config path %s \n", dirs[idx]);
+                        found = true;
+                        break;
+                    }
+                }
+            case 1 :
+                break;
+            }
+        } */
 
 	if (found == false && optional == 1)
 	    return -1;
