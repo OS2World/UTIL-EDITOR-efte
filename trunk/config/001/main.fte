@@ -23,7 +23,8 @@
 # replaces the css mode.
 # %define(HTML_AL)
 
-# User inteface styles
+# User inteface styles UI_KB effects pallette and UNIX font selection and
+# can you must select a second UI_* to load it.
 #%define(UI_KB)
 %define(UI_FTE)
 #%define(UI_WS)
@@ -39,7 +40,6 @@
 
 %if(UI_ES)
 %define(LANG_ES)
-%define(HTML_AL)
 %endif
 
 %if(!BSD_BRACE)
@@ -206,12 +206,7 @@ include 'm_bin.fte';
 include 'm_c.fte';
 include 'm_catbs.fte';
 include 'm_clario.fte';
-%if(!HTML_AL)
 include 'm_css.fte';
-%endif
-%if(HTML_AL)
-include 'm_css_a.fte';
-%endif
 include 'm_diff.fte';
 include 'm_ebnf.fte';
 include 'm_eiffel.fte';
@@ -221,12 +216,7 @@ include 'm_falcon.fte';
 include 'm_fte.fte';
 include 'm_gawk.fte';
 include 'm_groovy.fte';
-%if(!HTML_AL)
 include 'm_html.fte';
-%endif
-%if(HTML_AL)
-include 'm_html_a.fte';
-%endif
 include 'm_icon.fte';
 include 'm_idl.fte';
 include 'm_ipf.fte';

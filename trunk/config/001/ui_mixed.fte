@@ -11,17 +11,12 @@ include 'uim_k_en.fte';
 %endif
 
 include 'menu/m_c.fte';
-%if(!HTML_AL)
-include 'menu/m_html.fte';
-%endif
-%if(HTML_AL)
 %define(TEXT_CONV)
 include 'htmlconv.fte';
 %define(TEXT_CHARS)
 include 'htmlchar.fte';
 include 'menu/m_html/main.fte';
-include 'menu/m_css_a.fte';
-%endif
+include 'menu/m_css.fte';
 include 'menu/m_ipf.fte';
 
 include 'menu/m_rexx.fte';
@@ -31,10 +26,5 @@ include 'kbd/k_java.fte';
 include 'kbd/k_perl.fte';
 include 'kbd/k_rexx.fte';
 include 'kbd/k_fte.fte';
-%if(!HTML_AL)
 include 'kbd/k_html.fte';
-%endif
-%if(HTML_AL)
-include 'kbd/k_html_a.fte';
-%endif
 include 'kbd/k_sgml.fte';
