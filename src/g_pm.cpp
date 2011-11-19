@@ -624,19 +624,6 @@ int DLGGetFile(GView * View, const char *Prompt, unsigned int BufLen,
     return 0;
 }
 
-// structure used to send message information to main
-// window process
-typedef struct
-{
-    char *Title;
-    int NSel;
-    char *Buttons[5];
-    char *Format;
-    char *Message;
-    int Flags;
-}
-ChoiceInfo;
-
 /**
   * DoChoice opens message dialogs of various types.
   * Always provide at least 1 button
@@ -846,6 +833,34 @@ static int DoChoice(HWND hwndFrame, ChoiceInfo * choice)
 	return rc - 200;
 
     return 0;
+} //DoChoice
+
+// EarlyDoChoice WinMessagebox wrapper for choosing options before hwndFrame is available GKY 31 Oct 11
+// Only provides a yes and a no button choice->button and choice-Flags are not used
+int EarlyDoChoice(ChoiceInfo * choice)
+{
+    CHAR szMsg[100];
+    int rc;
+
+    sprintf(szMsg, choice->Format, choice->Message);
+    if (hab == 0)
+	hab = WinInitialize(0);
+    if (hmq == 0)
+	hmq = WinCreateMsgQueue(hab, 0);
+    rc = WinMessageBox(HWND_DESKTOP,
+                       HWND_DESKTOP,                /* client-window handle  */
+                       szMsg,                     /* body of the message   */
+                       choice->Title,             /* title of the message  */
+                       0,                         /* message box id        */
+                       MB_ICONQUESTION | MB_YESNO);        /* icon and button flags */
+    if (rc == MBID_YES) {
+        WinDestroyMsgQueue(hmq);
+        WinTerminate(hab);
+        return 0;
+    }
+    WinDestroyMsgQueue(hmq);
+    WinTerminate(hab);
+    return 1;
 }
 
 /* reimplemented most of the WinMessageBox code to get store/restore position to work */
@@ -2636,7 +2651,7 @@ static void _LNK_CONV WorkThread(void *)
     if (gui->Start(gui->fArgc, gui->fArgv) == 0) {
 	gui->doLoop = 1;
 	//DosBeep(500, 500);
-	while (gui->doLoop)
+	while (gui->doLoop) // fixme? GKY 23 Oct 11 I trapped on close once
 	    gui->ProcessEvent();
 
 	gui->Stop();

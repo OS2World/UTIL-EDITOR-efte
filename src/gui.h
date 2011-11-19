@@ -215,7 +215,21 @@ typedef struct {
     int skip; // pass if skip has been selected 1 if not 0
 } SearchReplaceOptions;
 
+// structure used to send message information to main OS2
+// window process
+typedef struct
+{
+    char *Title;
+    int  NSel;
+    char *Buttons[5];
+    char *Format;
+    char *Message;
+    int  Flags;
+}
+ChoiceInfo;
+
 int DLGGetFind(GView *View, SearchReplaceOptions &sr);
 int DLGGetFindReplace(GView *View, SearchReplaceOptions &sr);
+int EarlyDoChoice(ChoiceInfo * choice);
 
 #endif

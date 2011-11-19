@@ -21,6 +21,21 @@ object GLOBAL {
 %if(OS_OS2)
     HelpCommand         = "start view.exe";
 %endif
+%if(GUI_PM)
+# PM
+# Only System VIO fonts are used. Some listed below. XX*YY.
+# fixme to use other fonts? GKY 01 Oct 11
+#    WindowFont =  "8x8";
+#    WindowFont = "6x10";
+#    WindowFont = "8x10";
+#    WindowFont = "5x12";
+#    WindowFont = "8x12";
+#    WindowFont = "6x14";
+    WindowFont = "8x14";
+#    WindowFont = "5x16";
+#    WindowFont = "8x16";
+#    WindowFont = "8x18";
+%endif
 }
 
 menu File {
@@ -260,17 +275,9 @@ eventmap PLAIN: MODEL {
     key   [C+G-PgUp]    { MoveFileStart }
     key     [G-PgDn]    { MovePageDown }
     key   [C+G-PgDn]    { MoveFileEnd }
-#    key   [A+G-Up]      { ScrollUp }
-#    key   [A+G-Down]    { ScrollDown }
-#    key   [A+G-Left]    { ScrollLeft }
-#    key   [A+G-Right]   { ScrollRight }
     
     key   [S+G-Left]    { BlockExtendBegin; MoveLeft;     BlockExtendEnd }
-    key   [S+G-Right]   { BlockExtendBegin; MoveRight;    BlockExtendEnd }
-    
-#    key [G+0] { ToggleInsert }
-#    key [G+S+0] { InsertString 'foo' }
-    
+    key   [S+G-Right]   { BlockExtendBegin; MoveRight;    BlockExtendEnd }    
     key [C+G-S+Left]    { BlockExtendBegin; MoveWordPrev;  BlockExtendEnd }
     key [C+G-S+Right]   { BlockExtendBegin; MoveWordNext;  BlockExtendEnd }
     key   [G-S+Up]      { BlockExtendBegin; MoveUp;        BlockExtendEnd }
@@ -304,7 +311,6 @@ eventmap PLAIN: MODEL {
     key       [Tab]     { InsertTab }
     key     [S+Tab]     { InsertSpacesToTab 10 }
     key     [C+Tab]     { CompleteWord }
-#    key     [C+Tab]     { InsertTab }
     key     [C+BackSp]  { KillWordPrev }
     key   [C+S+BackSp]  { KillToLineStart }
     key   [C+G-Enter]   { LineSplit }
@@ -375,8 +381,7 @@ eventmap PLAIN: MODEL {
     key     [C+O_C+C]   { ToggleMatchCase }
     key     [C+O_C+E]   { ToggleTrim }
     key     [C+O_C+I]   { ToggleInsert }
-#    key     [C+O_C+M]   { ChangeMode }
-#    key     [C+O_C+M]   { ShowMenu 'MChangeMode' }
+    key     [C+O_C+M]   { ChangeMode }
     key     [C+O_C+R]   { ToggleReadOnly }
     key     [C+O_C+S]   { ToggleSysClipboard }
     key     [C+O_C+T]   { ChangeTabSize }
@@ -402,7 +407,7 @@ eventmap PLAIN: MODEL {
     key     [C+_]       { ShowPosition }
     key       [Center]  { MoveLineCenter }
     key     [C+X]       { MovePrevPos }
-#    key   [C+S+A]       { ASCIITable }
+    key     [C+S+A]     { ASCIITable }
     key     [G+*]       { LineInsert ; MoveUp; ScrollUp }
     
 #    key     [G++]       { DumpFold } 
@@ -419,8 +424,6 @@ eventmap PLAIN: MODEL {
     
 #    key     [C+G-Up]    { MoveFoldPrev }
 #    key     [C+G-Down]  { MoveFoldNext }
-    
-#    key     [A+C+A]     { FileOpen 'BUFFER.CPP' }
     
     key     [C+K]     { ShowKey }
     key     [A+,]     { SearchWordPrev }
@@ -482,12 +485,7 @@ eventmap MLIST: MODEL {
     key     [G-PgUp]    { MovePageUp }
     key   [C+G-PgUp]    { MoveFileStart }
     key     [G-PgDn]    { MovePageDown }
-    key   [C+G-PgDn]    { MoveFileEnd }
-#    key   [A+G-Up]      { ScrollUp }
-#    key   [A+G-Down]    { ScrollDown }
-#    key   [A+G-Left]    { ScrollLeft }
-#    key   [A+G-Right]   { ScrollRight }
-    
+    key   [C+G-PgDn]    { MoveFileEnd }      
     key     [G-Enter]   { Activate }
 }
 
@@ -504,7 +502,6 @@ menu Navigate {
     item "Go &< level\tCtrl+PgUp"     { DirGoUp }
     item "Go &> level\tCtrl+PgDn"   { DirGoDown }
     item "Go to &\\\tCtrl+\\"          { DirGoRoot }
-#    item "&/ Goto Dir\t/"    { DirGoto }
     item "&\\ Goto Dir\t\\"    { DirGoto }
     item;
     item "R&ename File"               { RenameFile }
@@ -649,7 +646,7 @@ color_palette {
 
     { 'Editor_Default',               'fg:bg' },
     { 'Editor_Bold',                  'cyan:bg' },
-    { 'Editor_Keywords',              'white:bg' },
+    { 'Editor_Keywords',              'darkRed:bg' },
     { 'Editor_Keywords2',             'cyan:bg' },
     { 'Editor_Keywords3',             'green:bg' },
     { 'Editor_Keywords4',             'magenta:bg' },
@@ -695,7 +692,7 @@ color_palette {
 }
 
 # FTE mode for editing MS_DOS .BAT and
-# JP Software Command Processor BTM files
+# 4OS2/4DOS BTM files
 # by Michael DeBusk
 # debu4335@eclipsetel.com
 # Revision February 9, 2001
@@ -716,7 +713,7 @@ colorize Batch {
         { 'Label',         'Lang_Label' },
     };
 
-# JPSoft and/or DOS Commands
+# 4OS2/4DOS and/or DOS Commands
 keyword 'Editor_Keywords' {
     '?', 'ACTIVATE', 'ASSIGN', 'ALIAS', 'ASSOC', 'ATTRIB', 'BEEP','BREAK',
     'CALL', 'CANCEL', 'CASE', 'CD', 'CDD', 'CHCP', 'CHDIR', 'CLS', 'COLOR',
@@ -735,7 +732,7 @@ keyword 'Editor_Keywords' {
     'TRUENAME', 'TYPE', 'UNALIAS', 'UNLOCK', 'UNSET', 'VER', 'VERIFY',
     'VOL', 'VSCRPUT', 'WINDOW', 'Y', };
 
-# JPSoft and/or DOS Command keywords
+# 4OS2/4DOS and/or DOS Command keywords
 # If anybody knows how to get the first three entries (the ones with
 # the period on either side of them) recognized, please let me know
 keyword 'Editor_Keywords2' {
@@ -747,7 +744,7 @@ keyword 'Editor_Keywords2' {
     'NOT', 'OFF', 'THEN', 'UNTIL', 'WHILE',
     };
 
-# JPSoft Internal variables
+# 4OS2/4DOS Internal variables
 keyword 'Editor_Keywords3' {
     '?', '_?', '_4VER', '_ALIAS', '_ANSI', '_APMAC','_APMBATT', '_APMLIFE',
     '_BATCH', '_BATCHLINE', '_BATCHNAME', '_BG', '_BOOT','_CI', '_CMDPROC',
@@ -762,7 +759,7 @@ keyword 'Editor_Keywords3' {
     '_WINTITLE', '_WINVER', '_XPIXELS', '_YEAR', '_YPIXELS',
     };
 
-# JPSoft Variable functions
+# 4OS2/4DOS Variable functions
 keyword 'Editor_Keywords4' {    
     '@ALIAS', '@ALTNAME', '@ASCII', '@ATTRIB', '@CDROM', '@CHAR', '@CLIP',
     '@COMMA', '@CONVERT', '@DATE', '@DAY', '@DEC', '@DESCRIPT', '@DEVICE',
@@ -984,138 +981,9 @@ mode CNFGSYS: PLAIN {                    # CONFIG.SYS mode
 # debu4335@eclipsetel.com
 # Revision March 19, 2001
 
-# Header Comment
-# Note: If the environment variable USER is set,
-# This macro will insert the contents after the
-# word "Author:" and leave the cursor after
-# "Purpose:". If it is not set, the macro will
-# fail after "Author:".
-sub REXX_Heading {
-    InsertString "/*";
-    LineNew; InsertString "* Filename: ";
-    InsertString $FileName;
-    LineNew; InsertString "*   Author: ";
-    LineNew; InsertString "*  Created: ";
-    InsertDate;
-    LineNew; InsertString "*  Purpose: ";
-    LineNew; InsertString "*  Changes: ";
-    LineNew; InsertString "*/";
-    4:MoveUp; MoveLineEnd; InsertUid;
-    2:MoveDown; MoveLineEnd;
-}
-
-#Comment a blocked string
-sub REXX_Comment {
-    ?MoveBlockStart; InsertString "/* ";
-    ?MoveBlockEnd; InsertString " */"; BlockUnmark;
-}
-
-# Load external functions
-sub REXX_RexxUtil {
-    InsertString "/* Load RexxUtil Library */";
-    LineNew; InsertString "If RxFuncQuery('SysLoadFuncs') Then";
-    LineNew; InsertString "Do";
-    LineNew; InsertString "Call RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'";
-    LineNew; InsertString "Call SysLoadFuncs";
-    LineNew; InsertString "End";
-    2:LineNew;
-}
-
-%if(OS_OS2)
-sub REXX_RxSock {
-    InsertString "/* Load RxSock Library */";
-    LineNew; InsertString "If RxFuncQuery('SockLoadFuncs') Then";
-    LineNew; InsertString "Do";
-    LineNew; InsertString "Call RxFuncAdd 'SockLoadFuncs','RxSock','SockLoadFuncs'";
-    LineNew; InsertString "Call SockLoadFuncs";
-    LineNew; InsertString "End";
-    2:LineNew;
-}
-
-sub REXX_RxFTP {
-    InsertString "/* Load RxFTP Library */";
-    LineNew; InsertString "If RxFuncQuery('FTPLoadFuncs') Then";
-    LineNew; InsertString "Do";
-    LineNew; InsertString "Call RxFuncAdd 'FTPLoadFuncs','RxFTP','FTPLoadFuncs'";
-    LineNew; InsertString "Call FTPLoadFuncs";
-    LineNew; InsertString "End";
-    2:LineNew;
-}
-%endif
-
-# Constructs
-sub REXX_Do {
-    InsertString "DO   [TO]  [BY]  [FOR] ";
-    2:LineNew;
-    InsertString "END";
-    LineNew;
-    3:MoveUp;
-    MoveLineStart;
-    3:MoveRight;
-}
-
-sub REXX_DoUntil {
-    InsertString "DO   [TO]  [BY]  [FOR]   UNTIL ";
-    2:LineNew;
-    InsertString "END";
-    LineNew;
-    3:MoveUp;
-    MoveLineStart;
-    3:MoveRight;
-}
-
-sub REXX_DoWhile {
-    InsertString "DO   [TO]  [BY]  [FOR]   WHILE ";
-    2:LineNew;
-    InsertString "END";
-    LineNew;
-    3:MoveUp;
-    MoveLineStart;
-    3:MoveRight;
-}
-
-sub REXX_DoForever {
-    InsertString "DO FOREVER";
-    2:LineNew;
-    InsertString "END";
-    LineNew;
-    2:MoveUp;
-    MoveLineEnd;
-}
-
-sub REXX_If {
-    InsertString "IF   THEN";
-    2:LineNew;
-    InsertString "ELSE";
-    LineNew;
-    3:MoveUp; MoveLineStart; 3:MoveRight;
-}
-        
-sub REXX_Select {
-    InsertString "SELECT";
-    LineNew; InsertString "WHEN   THEN";
-    LineNew; InsertString "/* instruction */";
-    LineNew; InsertString "WHEN   THEN";
-    LineNew; InsertString "/* instruction */";
-    LineNew; InsertString "WHEN   THEN";
-    LineNew; InsertString "/* instruction */";
-    LineNew; InsertString "OTHERWISE";
-    LineNew; InsertString "/* instruction */";
-    LineNew; InsertString "END"; LineNew;
-    9:MoveUp; MoveLineStart; 9:MoveRight;
-}
-
 colorize REXX {
     SyntaxParser = 'REXX';
     
-    color {
-        { 'Normal',      'Editor_Default' },
-        { 'Number',      'Lang_Number' },
-        { 'Punctuation', 'Lang_Punctuation' },
-        { 'String',      'Lang_String' },
-        { 'Comment',     'Lang_Comment' },
-        { 'Function',    'Lang_Function' },
-    };
     # REXX Keyword Instructions
     keyword 'Editor_Keywords' {
         'ADDRESS',
@@ -1464,6 +1332,8 @@ mode NETREXX: REXX {
     FileNameRx          = /\.\c{NRX}$/;
     Colorizer           = 'NETREXX';
 }
+
+# FTE mode for editing FTE configuration files
 
 colorize FTE {
     SyntaxParser        = 'FTE';
