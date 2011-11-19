@@ -2067,6 +2067,7 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		    int optional)
 {
     int fd;
+    int rc;
     char *buffer = 0;
     struct stat statbuf;
     char last[MAXPATH];
@@ -2107,43 +2108,48 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 #endif // if PT_UNIXISH
 
         char tmp[MAXPATH];
-	bool found = false;
+        bool found = false;
+        static bool checked = false;
 
-        strcpy(tmp, Cfg);
-	for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
+        strlcpy(tmp, CfgName, sizeof(tmp));
+        for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
+            //printf("Config path %s \n", dirs[idx]);
 	    if (ExpandPath(dirs[idx], Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
 		found = true;
 		//printf("Config path %s \n", dirs[idx]);
 		break;
 	    }
-	}
+        }
         //This fails because the code requires that hwndFrame has already been created.
         //need a new WinMessageBox function and a VIO solution.
-        /*if (found == false && stricmp(Cfg, "edefault.fte")){
+        if (found == false && stricmp(Cfg, "edefault.fte") && !checked && !optional){
             ChoiceInfo * choice;
+            char s[MAXPATH];
 
-            choice->Title = "Cannot find configuration File";
-            choice->NSel = 2;
-            choice->Buttons[0] = "&yes";
-            choice->Buttons[1] = "&no";
-            choice->Format = "%s";
-            choice->Message = "Do you want to load the defult configuration?";
-        
-            choice->Flags = GPC_ERROR;
-            switch  (DoChoice(HWND_DESKTOP,  choice)) {
-            case 0 :
-                strcpy(Cfg, "edefault.fte");
-                for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
-                    if (ExpandPath(dirs[idx], Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
-                        printf("Config path %s \n", dirs[idx]);
-                        found = true;
-                        break;
-                    }
+            choice->Title = "Do you want to load the default configuration?";
+            choice->Format = "Cannot find configuration file %s";
+            choice->Message = Cfg;
+            //printf("Config path %s %s \n", choice->Title, Cfg);
+            rc = EarlyDoChoice(choice);
+            //printf("EDC %i \n", rc);
+            if (rc == 0) {
+                checked = true;
+                strlcpy(dirs[0], ".\\edefault.fte", sizeof(dirs[0]));
+                if (ExpandPath(dirs[0], Cfg, sizeof(Cfg)) == 0 && FileExists(Cfg)) {
+                    //printf("Config path 2 %s \n", Cfg);
+                    found = true;
                 }
-            case 1 :
-                break;
+                else {
+                    sprintf(s, "Can not find %s", Cfg);
+                    DieError(1, s);
+                    return -1;
+                }
             }
-        } */
+            else {
+                exit(1);
+                return -1;
+            }
+        }
 
 	if (found == false && optional == 1)
 	    return -1;
@@ -2153,7 +2159,7 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 	    s = (char *)malloc(MAXPATH * (SEARCH_PATH_LEN + 1));
 	    sprintf(s,
 		    "Cannot find '%s' in any of the following locations:\n",
-		    CfgName);
+		    tmp);
 	    for (int idx = 0; idx < SEARCH_PATH_LEN; idx++) {
 		ExpandPath(dirs[idx], tmp, sizeof(tmp));
 		sprintf(s + strlen(s), "   %s\n", tmp);

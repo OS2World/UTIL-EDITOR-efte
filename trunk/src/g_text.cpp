@@ -14,6 +14,7 @@
 #include <assert.h>
 #include <signal.h>
 #include <stdarg.h>
+#include <conio.h>
 #if defined(MSVC)
 #include <malloc.h>
 #endif
@@ -1374,4 +1375,17 @@ void DieError(int rc, const char *msg, ...)
     va_end(ap);
     fprintf(stderr, "\n");
     exit(rc);
+}
+
+int EarlyDoChoice(ChoiceInfo * choice)
+{
+    int buf;
+    char s[300];
+
+    sprintf(s, choice->Format, choice->Message);
+    fprintf(stderr, "%s\n %s\n Y/N", s, choice->Title);
+    buf = getch();
+    if (buf - 'Y' == 0 || buf - 'y' == 0)
+        return 0;
+    return 1;
 }
