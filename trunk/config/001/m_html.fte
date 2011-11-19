@@ -1,5 +1,5 @@
 # Alternate FTE mode for editing HTML files
-# maintained by alfredo@netropolis-si.com
+# maintained by mrwarper@yahoo.es
 # based on the work by Michael DeBusk
 #
 # Persistent bugs:
@@ -9,10 +9,19 @@
 #
 # Latest changes, from last to first:
 #
-# Revision 2006/11/
+# Revision 2011/10
+# -Corrected CommentStart for folds: " <!--" to "<!--"
+# -Added compulsory enctype=\"multipart/form-data\" to form code
+# -Correctly add tidy-style '[CDATA[ ]]' wrappers for embedded CSSs and JavaScript
+# -Added "created" META tag, and added to initial document
+# -Fixed bugs in several form objects HTML code
+# -Added hidden input in Forms menu
+# -Updated email address
+#
+# Revision 2006/11
 # -Fixed bugs in radio buttons HTML code
 # -Added file upload input in Forms menu
-# -Added refresh META tag
+# -Added "refresh" META tag
 #
 # Revision 2006/10/11
 # -Fixed a bug in IE conditional comments syntax
@@ -187,6 +196,8 @@ sub HTML_meta_desc  { HTML_META; InsertString "description"; 11:MoveRight; }
 sub HTML_meta_keyw  { HTML_META; InsertString "keywords";    11:MoveRight; }
 sub HTML_meta_auth  { HTML_META; InsertString "author";
                       11:MoveRight; InsertUid; }
+sub HTML_meta_crtd  { HTML_META; InsertString "created";
+                      11:MoveRight; InsertUid; InsertString ","; InsertDate "%Y-%m-%d"; }
 sub HTML_meta_rev   { HTML_META; InsertString "revised";
                       11:MoveRight; InsertUid; InsertString ","; InsertDate "%Y-%m-%d"; }
 
@@ -243,8 +254,6 @@ sub HTML_link_bkmrk { HTML_LINK; InsertString "bookmark"; MoveRight;
                       InsertString " title=\"\""; MoveLeft; }
 sub HTML_link_alt   { HTML_LINK; InsertString "alternate"; MoveRight;
                       InsertString " title=\"\""; MoveLeft; }
-#sub HTML_link_index { HTML_LINK; InsertString "index"; MoveRight;
-#                      InsertString " title=\"\""; MoveLeft; }
 sub HTML_link_lang  { HTML_LINK; SavePos; MoveRight;
                       InsertString " lang=\"\" title=\"\" hreflang=\"\"";
                       MoveLineEnd; 3:MoveLeft; InsertString " xml:lang=\"\"";
@@ -259,8 +268,8 @@ sub HTML_link_FIcon { HTML_LINK; SavePos; MoveLineEnd; 3:MoveLeft;
 sub CSS_embed_pers {
     MoveFileStart; 2:?Find /head>/ "i"; 2:MoveLeft; LineInsert;
     InsertString "<style type=\"text/css\" media=\"screen|print|all|...\">";
-    LineNew; InsertString " <!--"; 2:LineNew;
-    InsertString "-->"; LineNew;
+    LineNew; InsertString " /*<![CDATA[*/"; 2:LineNew;
+    InsertString "/*]]>*/"; LineNew;
     MoveLeft;InsertString "</style>";
     4:MoveUp; MoveLineStart; 30:MoveRight;
  }
@@ -275,8 +284,8 @@ sub JScript_link   {
 sub JScript_embed  {
     MoveFileStart; 2:?Find /head>/ "i"; 2:MoveLeft; LineInsert;
     InsertString "<script type=\"text/javascript\">"; LineNew;
-    InsertString " <!--"; 2:LineNew;
-    InsertString "// -->"; LineNew;
+    InsertString " //<![CDATA["; 2:LineNew;
+    InsertString "//]]>"; LineNew;
     MoveLeft;InsertString "</script>"; MoveSavedPos;
  }
 
@@ -659,6 +668,10 @@ sub HTML_INPUT {
     InsertString "<input id=\"\" name=\"\" type=\"\" />"; 4:MoveLeft;
 }
 
+sub HTML_HIDDEN {
+    HTML_INPUT; InsertString "hidden"; 1:MoveRight; InsertString " value=\"\""; 1:MoveLeft;
+}
+
 sub HTML_FILE {
     HTML_INPUT; InsertString "file"; 2:MoveRight;
 }
@@ -668,27 +681,27 @@ sub HTML_EFIELD {
 }
 
 sub HTML_RADIO {
-    HTML_INPUT; InsertString "radio"; 2:MoveRight;
+    HTML_INPUT; InsertString "radio"; 1:MoveRight;
     InsertString " [checked=\"checked\"]"; 2:MoveLeft;
 }
 
 sub HTML_CHECKBOX {
-    HTML_INPUT; InsertString "checkbox"; 2:MoveRight;
-    InsertString " [checked=\"checked\"]"; 2:MoveLeft;
+    HTML_INPUT; InsertString "checkbox"; 1:MoveRight;
+    InsertString " [checked=\"checked\"] "; 2:MoveLeft;
 }
 
 sub HTML_SUBMIT {
     HTML_INPUT; InsertString "submit"; MoveRight;
-    InsertString " value=\"\""; 2:MoveLeft;
+    InsertString " value=\"\""; 1:MoveLeft;
 }
 
 sub HTML_RESET {
     HTML_INPUT; InsertString "submit"; 2:MoveRight;
-    InsertString " value=\"\""; 2:MoveLeft;
+    InsertString " value=\"\""; 1:MoveLeft;
 }
 
 sub HTML_FORM {
-    InsertString "<form>"; LineNew; HTML_INPUT; SavePos; 4:MoveRight;
+    InsertString "<form action=\"\" enctype=\"multipart/form-data\" method=\"get|post\">"; LineNew; HTML_INPUT; SavePos; 4:MoveRight;
     LineNew; HTML_SUBMIT; 4:MoveRight; LineNew;
     InsertString "</form>"; MoveSavedPos;
 }
@@ -776,6 +789,7 @@ sub HTML_BaseHead {
     HTML_enc_858;
     HTML_meta_keyw;
     HTML_meta_desc;
+    HTML_meta_crtd;
     HTML_meta_rev;
     HTML_meta_auth;
     ?Find /head>/ "i"; MoveLineEnd; LineNew;
@@ -972,10 +986,10 @@ mode HTML: PLAIN {
     AutoHilitParen      = 1;
 
 #    RoutineRegexp       = /\<[Hh]\d\>/;
-    RoutineRegexp       = /\<(head)|(body)|([Hh][0-6])|(div.*id=)/;
+    RoutineRegexp       = /\<(head)|(\/*body)|([Hh][0-6])|(div.*id=)/;
 
     SaveFolds           = 2;      # save fold info at end of line
-    CommentStart        = " <!--";
+    CommentStart        = "<!--";
     CommentEnd          = "-->";
 }
 

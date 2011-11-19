@@ -1,8 +1,8 @@
 # FTE menus for editing HTML files
 # maintained by m_debusk@sourceforge.com
 # Revision 2001-11-18
-# maintained by alfredo@netropolis-si.com
-# Revision 2006/06/16
+# maintained by mrwarper@yahoo.es
+# Revision 2007/12/01
 
 include 'menu/m_html/tools.fte';
 
@@ -398,6 +398,7 @@ menu HTML_Form {
     item    "&Radio button"                { HTML_RADIO }
     item    "&CheckBox"                    { HTML_CHECKBOX }
     item    "&Text Area       <textarea> " { HTML_TEXTAREA }
+    item    "Hidden variable"              { HTML_HIDDEN }
     item    "&Upload file"                 { HTML_FILE }
     item    "Generic &input   <input>    " { HTML_INPUT }
     item;
@@ -418,6 +419,7 @@ menu HTML_Form {
     item    "Bot¢n &radial"                   { HTML_RADIO }
     item    "Casilla"                         { HTML_CHECKBOX }
     item    "µrea de te&xto      <textarea> " { HTML_TEXTAREA }
+    item    "Variable oculta"                 { HTML_HIDDEN }
     item    "S&ubir archivo"                  { HTML_FILE }
     item    "Entrada gen‚rica   <&input>   " { HTML_INPUT }
     item;

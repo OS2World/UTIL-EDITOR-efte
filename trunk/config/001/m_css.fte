@@ -1,5 +1,9 @@
 # Alternate FTE mode for editing CSS files
-# maintained by alfredo@netropolis-si.com
+# maintained by mrwarper@yahoo.es
+#
+# Revision 2011/02
+#
+# -Added last-child pseudoselector
 #
 # Revision 2007/05/08
 #
@@ -168,7 +172,7 @@ colorize CSS {
       #pseudo-classes
       "link","visited","active", "hover", #these are for links
       "focus","target",
-      "first-child",
+      "first-child", "last-child",
       "lang",
       # pseudo-elements
       "first-letter","first-line","before","after"
@@ -336,7 +340,7 @@ colorize CSS {
     h_trans { 7, '', '*/', 'Comment' }
 }
 
-mode CSS: PLAIN{
+mode CSS: PLAIN {
 #    WordChars           = '-A-Za-z0-9_';
 
     FileNameRx          = /\.\c{CSS}$/;
