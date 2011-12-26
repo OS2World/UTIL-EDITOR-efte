@@ -70,7 +70,7 @@ bin2c.exe: bin2c.obj
 c_config.obj: c_config.cpp defcfg.h
 
 efte.exe: $(OBJS) $(VIOOBJS) fte.def
-  $(LD) NAME efte SYS os2v2 $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)}
+  $(LD)  $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)} @fte.def
   $(PERL) ..\tools\mapsymw.pl efte.map 
   mapxqs.exe efte.map
   lxlite efte.exe /x+ /b-
@@ -79,8 +79,8 @@ efte.exe: $(OBJS) $(VIOOBJS) fte.def
 eftepm.res: eftepm.rc pmdlg.rc
   $(RC) -r eftepm.rc eftepm.res
 
-eftepm.exe: $(OBJS) $(PMOBJS) eftepm.res
-  $(LD) NAME eftepm SYS os2v2_pm $(LDFLAGS) FILE {$(OBJS) $(PMOBJS)}
+eftepm.exe: $(OBJS) $(PMOBJS) eftepm.res ftepm.def .explicit
+  $(LD) $(LDFLAGS) FILE {$(OBJS) $(PMOBJS)} @ftepm.def
   $(RC) eftepm.res eftepm.exe
   $(PERL) ..\tools\mapsymw.pl eftepm.map
   mapxqs.exe eftepm.map
