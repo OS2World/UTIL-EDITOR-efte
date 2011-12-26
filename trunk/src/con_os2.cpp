@@ -1574,3 +1574,14 @@ char ConGetDrawChar(int index)
     else
 	return tab[index];
 }
+void FindExePath(char *ExePath)
+{
+    PPIB ppib;
+    PTIB ptib;
+    char *s;
+
+    DosGetInfoBlocks(&ptib, &ppib);
+    DosQueryModuleName(ppib->pib_hmte, MAXPATH, ExePath);
+    s = strrchr(ExePath, '\\');
+    *s = 0;
+}

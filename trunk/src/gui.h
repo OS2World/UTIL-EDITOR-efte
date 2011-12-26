@@ -230,6 +230,7 @@ ChoiceInfo;
 
 int DLGGetFind(GView *View, SearchReplaceOptions &sr);
 int DLGGetFindReplace(GView *View, SearchReplaceOptions &sr);
-int EarlyDoChoice(ChoiceInfo * choice);
+int EarlyDoChoice(ChoiceInfo *choice);
+void FindExePath(char *ExePath);
 
 #endif

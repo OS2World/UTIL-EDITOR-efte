@@ -46,7 +46,7 @@ static void Usage()
 	   "  --version         Display eFTE/2 version.\n"
 	   "  -v                Increase verbosity level.\n"
 	   "  -!                Ignore config file, use builtin defaults (also -c).\n"
-	   "  -C[<.cnf>]        Use specified configuration file (no arg=builtin).\n"
+	   "  -C[<.cnf>]        Use specified configuration file must be full path to file (no arg=builtin).\n"
 	   "  -D[<.dsk>]        Load/Save desktop from <.dsk> file (no arg=disable desktop).\n"
 	   "  -H[<.his>]        Load/Save history from <.his> file (no arg=disable history).\n"
 	   "  -m[<mode>]        Override mode for remaining files (no arg=no override).\n"
@@ -153,7 +153,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 		    QuoteAll = 1;
 	    }
             else if (argv[Arg][1] == '!') {
-                haveConfig = 1;
+                haveConfig = 2;
                 strcpy(ConfigFileName, "edefault.fte");
 	    }
 	    else if (argv[Arg][1] == '+') {
@@ -176,7 +176,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 		    haveConfig = 1;
 		}
                 else {
-                    haveConfig = 1;
+                    haveConfig = 2;
                     strcpy(ConfigFileName, "edefault.fte");
                 }
 	    }
@@ -186,10 +186,10 @@ static int CmdLoadConfiguration(int &argc, char **argv)
     if (haveConfig == 1) {
 	if (access(ConfigFileName, 0) != 0) {
 	    DieError(1, "Could not access configuration file '%s'.\n"
-		     "Does it exist?", ConfigFileName);
+		     "Does it exist? Have you provided the full pathname?", ConfigFileName);
 	}
     }
-    else
+    else if (haveConfig != 2)
 	strcpy(ConfigFileName, "mymain.fte");
 
     // Ignore system config?

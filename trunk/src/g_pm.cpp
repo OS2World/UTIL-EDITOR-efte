@@ -4372,3 +4372,16 @@ char ConGetDrawChar(int index)
 void ConSetInsertState(bool)
 {
 }
+
+void FindExePath(char *ExePath)
+{
+    PPIB ppib;
+    PTIB ptib;
+    char *s;
+
+    DosGetInfoBlocks(&ptib, &ppib);
+    DosQueryModuleName(ppib->pib_hmte, MAXPATH, ExePath);
+    s = strrchr(ExePath, '\\');
+    *s = 0;
+}
+

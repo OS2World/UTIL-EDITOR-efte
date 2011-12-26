@@ -2093,18 +2093,77 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		 EFTE_INSTALL_DIR, CfgName);
 	snprintf(dirs[5], MAXPATH, "/etc/efte/config/%s", CfgName);
 #else // if PT_UNIXISH
-#       define SEARCH_PATH_LEN 8
-	char dirs[SEARCH_PATH_LEN][MAXPATH];
+#if defined(OS2)
+#       define SEARCH_PATH_LEN 25
+#else
+#       define SEARCH_PATH_LEN 21
+#endif
+        char dirs[SEARCH_PATH_LEN][MAXPATH];
+        char *ExePath;
 	const char *pg = getenv("EFTEDIR");
-
+#if defined(OS2)
         snprintf(dirs[0], MAXPATH, "%s/config/%s", pg, CfgName);
 	snprintf(dirs[1], MAXPATH, "%s/%s", pg, CfgName); //EFTEDIR can be full path to config files
         snprintf(dirs[2], MAXPATH, "%s/local/%s", pg, CfgName);
-        snprintf(dirs[3], MAXPATH, "./config/%s", CfgName);
-        snprintf(dirs[4], MAXPATH, "./local/%s", CfgName);
-        snprintf(dirs[5], MAXPATH, "./%s", CfgName);
-	snprintf(dirs[6], MAXPATH, "~/.efte/%s", CfgName);
-	snprintf(dirs[7], MAXPATH, "~/efte/%s", CfgName);
+        snprintf(dirs[3], MAXPATH, "%s/../%s", pg, CfgName);
+        ExePath = (char *) malloc(MAXPATH);
+        if (ExePath) {
+            FindExePath(ExePath);
+            //printf("Config path %s \n", ExePath);
+            snprintf(dirs[4], MAXPATH, "%s/config/%s", ExePath, CfgName);
+            snprintf(dirs[5], MAXPATH, "%s/%s", ExePath, CfgName);
+            snprintf(dirs[6], MAXPATH, "%s/local/%s", ExePath, CfgName);
+            snprintf(dirs[7], MAXPATH, "%s/../%s", ExePath, CfgName);
+            free(ExePath);
+        }
+        else {
+            strcpy(dirs[4], "");
+            strcpy(dirs[5], "");
+            strcpy(dirs[6], "");
+            strcpy(dirs[7], "");
+        }
+        snprintf(dirs[8], MAXPATH, "./config/%s", CfgName);
+        snprintf(dirs[9], MAXPATH, "./local/%s", CfgName);
+        snprintf(dirs[10], MAXPATH, "./%s", CfgName);
+	snprintf(dirs[11], MAXPATH, "~/.efte/%s", CfgName);
+        snprintf(dirs[12], MAXPATH, "~/efte/%s", CfgName);
+        snprintf(dirs[13], MAXPATH, "/efte/local/%s", CfgName);
+        snprintf(dirs[14], MAXPATH, "/efte/config/%s", CfgName);
+        snprintf(dirs[15], MAXPATH, "/efte/%s", CfgName);
+        const char *pf = getenv("ProgramFiles");
+        snprintf(dirs[16], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:", CfgName);
+        snprintf(dirs[17], MAXPATH, "%s/eFTE/config/%s",pf ? pf : "C:", CfgName);
+        snprintf(dirs[18], MAXPATH, "%s/eFTE/%s",pf ? pf : "C:", CfgName);
+        snprintf(dirs[19], MAXPATH, "/Program Files/efte/local/%s", CfgName);
+        snprintf(dirs[20], MAXPATH, "/Program Files/efte/config/%s", CfgName);
+        snprintf(dirs[21], MAXPATH, "/Program Files/efte/%s", CfgName);
+        snprintf(dirs[22], MAXPATH, "/Program Files (x86)/efte/local/%s", CfgName);
+        snprintf(dirs[23], MAXPATH, "/Program Files (x86)/efte/config/%s", CfgName);
+        snprintf(dirs[24], MAXPATH, "/Program Files (x86)/efte/%s", CfgName);
+#else // if OS2
+        snprintf(dirs[0], MAXPATH, "%s/config/%s", pg, CfgName);
+	snprintf(dirs[1], MAXPATH, "%s/%s", pg, CfgName); //EFTEDIR can be full path to config files
+        snprintf(dirs[2], MAXPATH, "%s/local/%s", pg, CfgName);
+        snprintf(dirs[3], MAXPATH, "%s/../%s", pg, CfgName);
+        snprintf(dirs[4], MAXPATH, "./config/%s", CfgName);
+        snprintf(dirs[5], MAXPATH, "./local/%s", CfgName);
+        snprintf(dirs[6], MAXPATH, "./%s", CfgName);
+	snprintf(dirs[7], MAXPATH, "~/.efte/%s", CfgName);
+        snprintf(dirs[8], MAXPATH, "~/efte/%s", CfgName);
+        snprintf(dirs[9], MAXPATH, "/efte/local/%s", CfgName);
+        snprintf(dirs[10], MAXPATH, "/efte/config/%s", CfgName);
+        snprintf(dirs[11], MAXPATH, "/efte/%s", CfgName);
+        const char *pf = getenv("ProgramFiles");
+        snprintf(dirs[12], MAXPATH, "%s/eFTE/local/%s", pf ? pf : "C:", CfgName);
+        snprintf(dirs[13], MAXPATH, "%s/eFTE/config/%s",pf ? pf : "C:", CfgName);
+        snprintf(dirs[14], MAXPATH, "%s/eFTE/%s",pf ? pf : "C:", CfgName);
+        snprintf(dirs[15], MAXPATH, "/Program Files/efte/local/%s", CfgName);
+        snprintf(dirs[16], MAXPATH, "/Program Files/efte/config/%s", CfgName);
+        snprintf(dirs[17], MAXPATH, "/Program Files/efte/%s", CfgName);
+        snprintf(dirs[18], MAXPATH, "/Program Files (x86)/efte/local/%s", CfgName);
+        snprintf(dirs[19], MAXPATH, "/Program Files (x86)/efte/config/%s", CfgName);
+        snprintf(dirs[20], MAXPATH, "/Program Files (x86)/efte/%s", CfgName);
+#endif // if OS2
 #endif // if PT_UNIXISH
 
         char tmp[MAXPATH];
@@ -2120,8 +2179,6 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		break;
 	    }
         }
-        //This fails because the code requires that hwndFrame has already been created.
-        //need a new WinMessageBox function and a VIO solution.
         if (found == false && stricmp(Cfg, "edefault.fte") && !checked && !optional){
             ChoiceInfo * choice;
             char s[MAXPATH];
