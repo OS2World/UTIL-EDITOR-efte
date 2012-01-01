@@ -9,7 +9,10 @@
 #
 # Latest changes, from last to first:
 #
-# Revision 2011/10
+# Revision 2011/11
+# -Added support for more file name extensions
+# -Added common HTML block marks to 'routine' RegExp for initial folding
+# -Tried to rework 'routine' RegExp so folds are not broken by tidy.
 # -Corrected CommentStart for folds: " <!--" to "<!--"
 # -Added compulsory enctype=\"multipart/form-data\" to form code
 # -Correctly add tidy-style '[CDATA[ ]]' wrappers for embedded CSSs and JavaScript
@@ -651,8 +654,8 @@ sub HTML_FLASH {
 
 sub HTML_SCRIPT {
     InsertString "<script type=\"text/javascript\">";LineNew;
-    InsertString " <!--"; LineNew; SavePos; LineNew; MoveLeft;
-    InsertString "// -->";LineNew;
+    InsertString " //<![CDATA["; LineNew; SavePos; LineNew; MoveLeft;
+    InsertString " //]]>";LineNew;
     InsertString "</script>;"
     LineNew; InsertString "<noscript></noscript>"; MoveSavedPos;
 }
@@ -933,7 +936,7 @@ colorize HTML {
 	"compact", "face", "hspace", "language", "link",
 	"noshade", "nowrap", "object", "prompt", "start",
 	"text", "version", "vlink", "vspace",
-        # known bad attribute names? why got these here at all?
+        # known bad attribute names? why did these get here at all?
 	"above", "absbottom", "all", "auto",
 	"baseline", "below", "bordercolor", "bottom", "box", "button",
 	"checkbox", "circle", "default", "disc",
@@ -979,18 +982,15 @@ colorize HTML {
 }
 
 mode HTML: PLAIN {
-    FileNameRx          = /\.\c{S?HTML?}$/;
+    FileNameRx          = /\.\c{(S|X|D)?HTML?}$/;
     HilitOn             = 1;
     Colorizer           = "HTML";
     MultiLineHilit      = 1;
     AutoHilitParen      = 1;
-
 #    RoutineRegexp       = /\<[Hh]\d\>/;
-    RoutineRegexp       = /\<(head)|(\/*body)|([Hh][0-6])|(div.*id=)/;
-
+    RoutineRegexp       = /\<(\/*head)|(\/body)|(\/title)|(\/[Hh][0-6])|(div.*id=)|(!--.*(begin)|(end))/;
     SaveFolds           = 2;      # save fold info at end of line
     CommentStart        = "<!--";
     CommentEnd          = "-->";
 }
-
 oinclude 'mym_html.fte';

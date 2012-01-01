@@ -1,9 +1,10 @@
 # Alternate FTE mode for editing CSS files
 # maintained by mrwarper@yahoo.es
 #
-# Revision 2011/02
+# Revision 2011/11
 #
-# -Added last-child pseudoselector
+# -Added CSS Level 3 pseudoclasses selectors: "empty" "-child", etc.
+# -Added menus to insert selectors, properties, etc.
 #
 # Revision 2007/05/08
 #
@@ -121,7 +122,7 @@ colorize CSS {
     #  currently #id.class is recognised as #"id.class"
 
     h_state 2 { 'Normal' }
-    h_trans { 0, 's', ',>+', 'Punctuation' } # Next selector, please
+    h_trans { 0, 's', ',>+~', 'Punctuation' } # Next selector, please
     h_trans { 1, 's', ' ',  'Punctuation' } # Next selector, please
     h_trans { 3, '<', '[' , 'Punctuation' }  # 3 = attribute names
     h_trans { 5, 's', ':', 'Punctuation'}    # 5 = pseudoselectors
@@ -154,9 +155,10 @@ colorize CSS {
      }
     h_wtype { -1, -1, -1, "i", "a-z\-" }
     h_trans { 1, 's', ']', 'Punctuation'}  # selector closed; next?
+    h_trans { 4, 's', '=', 'Punctuation'}  # 4 = attribute values, freestyle
     h_trans { 4, 's', '~=', 'Punctuation'} # 4 = attribute values, freestyle
     h_trans { 4, 's', '|=', 'Punctuation'} # 4 = attribute values, freestyle
-    h_trans { 4, 's', '=', 'Punctuation'}  # 4 = attribute values, freestyle
+    h_trans { 4, 's', '^=', 'Punctuation'} # 4 = attribute values, freestyle
     h_trans { 10, '', '/*', 'Comment' }
 
     # 4: FREE-STYLE 2 = attribute values
@@ -169,13 +171,24 @@ colorize CSS {
     # 5: only pseudo-selectors allowed
     h_state 5 { 'Special' }
     h_words 'Editor_Keywords4' { #pseudoselectors
-      #pseudo-classes
-      "link","visited","active", "hover", #these are for links
-      "focus","target",
-      "first-child", "last-child",
-      "lang",
+     #link pseudo-classes
+      "link", "visited",
+     #user action pseudo-classes
+      "hover", "active", "focus",
+     #special pseudo-classes
+      "target", "lang",
+     #UI pseudo-classes
+      "enabled", "disabled", "checked", "indeterminate",
+     #structural /* TO-DO: implement (an+b) syntax for 'nth'  */
+      "root",
+      "nth-child", "nth-last-child",
+      "nth-of-type", "nth-last-of-type",
+      "first-child", "last-child", "only-child",
+      "first-of-type", "last-of-type", "only-of-type",
+      "empty",
       # pseudo-elements
-      "first-letter","first-line","before","after"
+      "first-letter","first-line","before","after",
+      "not"
      }
     h_wtype { 1, 1, 1, "i", "a-z\-" }
 
@@ -184,13 +197,13 @@ colorize CSS {
     # 6: specifying one or more rule names
 
     h_state 6 { 'Special' }
-    h_words 'Editor_Keywords4' { # CSS 2.1 properties
+    h_words 'Editor_Keywords4' { # CSS2 properties + some CSS3
       # my reference: http://www.htmldog.com/reference/cssproperties/
       #Text and Fonts
       "font-family","font-size","font-weight","font-style","font-variant", "font",
       "line-height","letter-spacing","word-spacing",
       "text-align","text-decoration","text-indent","text-transform",
-      "vertical-align","white-space",
+      "vertical-align","white-space","hyphens",
       #Colours and Backgrounds
       "color","background-color","background","background-image",
       "background-repeat","background-position","background-attachment",
@@ -244,7 +257,7 @@ colorize CSS {
 
     h_state 7 { 'String' }
     h_words 'Editor_Keywords3' { # known rule value keywords
-      # my reference: http://www.cookwood.com/html/extras/cssref.html
+      # my reference: http://www.elizabethcastro.com/html/extras/cssref.html
       "inherit","none",      # everything?
       "auto","normal","url", # so many things
       "transparent",         # color
@@ -342,7 +355,6 @@ colorize CSS {
 
 mode CSS: PLAIN {
 #    WordChars           = '-A-Za-z0-9_';
-
     FileNameRx          = /\.\c{CSS}$/;
     HilitOn             = 1;
     Colorizer           = "CSS";
@@ -353,5 +365,4 @@ mode CSS: PLAIN {
     CommentStart        = " /*";
     CommentEnd          = "*/";
 }
-
 oinclude 'mym_css.fte';

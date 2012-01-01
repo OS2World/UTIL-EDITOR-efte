@@ -1,25 +1,32 @@
-# Alternate FTE mode for editing CSS files
-# maintained by alfredo@netropolis-si.com
+# Alternate FTE mode for editing IPF files
+# maintained by mrwarper@yahoo.es
 #
-# Standing issues:
+# IPF issues:
 #
-# -Since FTE saves its folds as comments and IPFC only allows single-line
-# comments that must start with '.*' (which restricts useful values of
-# SaveFolds to 0 or 1), each line where a FTE text fold begins becomes
-# automatically a comment as a whole for IPFC and is therefore left out of the
-# final document. To prevent accidentally commenting lines out of the document
-# when creating text folds, a line break is appended at the end of each one.
-# However, this prevents FTE from recognizing those comments as its very own
-# text folds when the file is loaded again. So for now it's better not to save
-# folds at all -> FileClutterUponSave prevented :)
+# FTE saves its folds as comments, but IPFC only allows full-line comments
+# starting with '.* '. Consequences:
+#
+# 1) If FTE folds are to be saved (SaveFolds > 0), they must be at start-of-
+#  line position (SaveFolds = 1), and not EOL (SaveFolds = 2)
+# 2) If FTE folds are saved to file, any lines starting FTE folds will be
+#  turned into comments, and thus ignored by IPFC, so please BE CAREFUL when
+#  defining folds.
+#
+# Defining CommentEnd = "\r\n" allows folds to be saved to file WITHOUT
+# accidentally commenting lines, but folds are not recognized by FTE later,
+# which renders saving them as useless file cluttering.
 #
 # Latest changes:
 #
+# Revision 2011/11
+#
+# -IPF issues section reworded, FTE folds allowed inside IPF files again.
+#
 # Revision 2006/10/06
 #
-# -Fixed misspelled keywords, and added '_' as attribute value legal char
+# -Fixed mispelled keywords, and added '_' as attribute value legal char
 #
-# Revision 2006/09/13 
+# Revision 2006/09/13
 #
 # -Minor changes to the entities <-> chars conv. table
 # -Slight reword of previous 'Standing issues'
@@ -33,15 +40,12 @@
 #   relevant keywords are highlighted each time
 #  -attribute/value states inside open tags
 #  -non-closed tags, double colons (::) etc. analysis matches IPFC's as
-#   closely as possible.
+#   closely as possible so it's easier to spot where IPFC will complain.
 # -More flexible routine definition: headers are allowed to have attributes
 #  when defining a routine ;)
 # -Fixed a NASTY bug that makes me suspect no one actually tried IPF mode before:
 #  comments are not translated to text and inserted into the doc anymore.
-#  FileMessUponLoad prevented as well :)
-# -Changed SaveFolds from 1 to 0 because of the standing issue.
-# -Changed CommentEnd to "\r\n" to prevent accidentally commenting text parts
-#  out of the doc
+#  FileMessUponLoad prevented :)
 #
 
 colorize IPF {
@@ -178,10 +182,10 @@ mode IPF: PLAIN {               # .IPF files
     HilitOn             = 1;
     Colorizer           = 'IPF';
     MultiLineHilit      = 1;
-    RoutineRegexp       = ':[Hh][0-6].*\.';
-    SaveFolds           = 0;    # 1 = save fold info at beginning of line
-    CommentStart        = '.*';
-    CommentEnd          = "\r\n";
+    RoutineRegexp       = '^:[Hh][0-6].*\.';
+    SaveFolds           = 1; # 0 = Don't save, 1 = save at beginning of line, 2 = EOL
+    CommentStart        = '.* ';
+    CommentEnd          = " ";
 }
 
 # IPF entities <-> plain text conversions
@@ -670,3 +674,5 @@ sub IPF_2colon {
     ?FindReplace ':\\' '&colon.\\' 'agn' ;
     ?FindReplace ':/' '&colon./' 'agn' ;
 }
+
+oinclude 'mym_ipf.fte';
