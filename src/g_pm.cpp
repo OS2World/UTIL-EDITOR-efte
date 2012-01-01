@@ -2651,7 +2651,7 @@ static void _LNK_CONV WorkThread(void *)
     if (gui->Start(gui->fArgc, gui->fArgv) == 0) {
 	gui->doLoop = 1;
 	//DosBeep(500, 500);
-	while (gui->doLoop) // fixme? GKY 23 Oct 11 I trapped on close once
+	while (gui->doLoop) // fixme? GKY 23 Oct 11 I trapped on close once again on 1 Jan 12
 	    gui->ProcessEvent();
 
 	gui->Stop();

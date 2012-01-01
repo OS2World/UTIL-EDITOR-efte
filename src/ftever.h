@@ -13,7 +13,7 @@
 
 #define MAKE_VERSION(major,minor,release) ((major<<24L) | (minor << 16L) | release)
 
-#define PROG_FTE      "efte(pm)"
+#define PROG_FTE      "eFTE/2"
 #define PROG_CFTE     "cefte"
 #define PROGRAM       PROG_FTE
 #define EXTRA_VERSION ""
