@@ -397,7 +397,7 @@ menu HTML_Form {
     item    "&Entryfield"                  { HTML_EFIELD }
     item    "&Radio button"                { HTML_RADIO }
     item    "&CheckBox"                    { HTML_CHECKBOX }
-    item    "&Text Area       <textarea> " { HTML_TEXTAREA }
+    item    "&Text area       <textarea> " { HTML_TEXTAREA }
     item    "Hidden variable"              { HTML_HIDDEN }
     item    "&Upload file"                 { HTML_FILE }
     item    "Generic &input   <input>    " { HTML_INPUT }
