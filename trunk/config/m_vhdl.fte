@@ -87,4 +87,4 @@ mode VHDL: SOURCE {
     RoutineRegexp       = `^{{architecture}|{entity}} `;
 }
 
-oinclude "mym_vhdl.fte";
+oinclude 'mym_vhdl.fte';
