@@ -60,8 +60,8 @@ object GLOBAL {
     
 # smart indentation.        
     C_Indent            = 4;
-    C_Continuation      = 4;
     C_BraceOfs          = 0;
+    C_ParenDelta        = -1;
     C_CaseOfs           = 0;
     C_CaseDelta         = 4;
     C_ClassOfs          = 0;
@@ -71,11 +71,95 @@ object GLOBAL {
     C_CommentDelta      = 1;
     C_FirstLevelWidth   = -1;
     C_FirstLevelIndent  = 4;
-    C_ParenDelta        = -1;
+    C_Continuation      = 4;
     # if this is true (1), function parameters will only indent
     # as much as C_Continuation says, rather than line up one column
     # to the right of the '('.
     FunctionUsesContinuation = 0;
+    
+%if(LINUXKERNEL)    
+    # smart indentation.        
+    C_Indent            = 8;
+    C_BraceOfs          = 0;
+    C_ParenDelta        = -1;
+    C_CaseOfs           = 0;
+    C_CaseDelta         = 8;
+    C_ClassOfs          = 0;
+    C_ClassDelta        = 8;
+    C_ColonOfs          = -8;
+    C_CommentOfs        = 0;
+    C_CommentDelta      = 1;
+    C_FirstLevelWidth   = -1;
+    C_FirstLevelIndent  = 8;
+    C_Continuation      = 8;
+    # if this is true (1), function parameters will only indent
+    # as much as C_Continuation says, rather than line up one column
+    # to the right of the '('.
+    FunctionUsesContinuation = 0;
+%endif        
+    
+%if(GNU)    
+    # smart indentation.        
+    C_Indent            = 2;
+    C_BraceOfs          = 2;
+    C_ParenDelta        = -1;
+    C_CaseOfs           = 0;
+    C_CaseDelta         = 2;
+    C_ClassOfs          = 0;
+    C_ClassDelta        = 2;
+    C_ColonOfs          = -2;
+    C_CommentOfs        = 0;
+    C_CommentDelta      = 1;
+    C_FirstLevelWidth   = -1;
+    C_FirstLevelIndent  = 2;
+    C_Continuation      = 2;
+    # if this is true (1), function parameters will only indent
+    # as much as C_Continuation says, rather than line up one column
+    # to the right of the '('.
+    FunctionUsesContinuation = 0;
+%endif        
+    
+%if(OS2DDK)    
+    # smart indentation.        
+    C_Indent            = 3;
+    C_BraceOfs          = 0;
+    C_ParenDelta        = -1;
+    C_CaseOfs           = 0;
+    C_CaseDelta         = 3;
+    C_ClassOfs          = 0;
+    C_ClassDelta        = 3;
+    C_ColonOfs          = -2;
+    C_CommentOfs        = 0;
+    C_CommentDelta      = 1;
+    C_FirstLevelWidth   = -1;
+    C_FirstLevelIndent  = 3;
+    C_Continuation      = 3;
+    # if this is true (1), function parameters will only indent
+    # as much as C_Continuation says, rather than line up one column
+    # to the right of the '('.
+    FunctionUsesContinuation = 0;
+%endif        
+    
+%if(FM2)    
+    # smart indentation.        
+    C_Indent            = 2;
+    C_BraceOfs          = 0;
+    C_ParenDelta        = -1;
+    C_CaseOfs           = 0;
+    C_CaseDelta         = 2;
+    C_ClassOfs          = 0;
+    C_ClassDelta        = 2;
+    C_ColonOfs          = -2;
+    C_CommentOfs        = 0;
+    C_CommentDelta      = 1;
+    C_FirstLevelWidth   = -1;
+    C_FirstLevelIndent  = 2;
+    C_Continuation      = -1;
+    # if this is true (1), function parameters will only indent
+    # as much as C_Continuation says, rather than line up one column
+    # to the right of the '('.
+    FunctionUsesContinuation = 0;
+%endif    
     
     REXX_Indent         = 4;
 #    REXX_Do_Offset      = 0;

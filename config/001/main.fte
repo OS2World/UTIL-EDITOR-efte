@@ -12,17 +12,6 @@
 # It is UI_MIXED with spanish menus. If you select it with any of the
 # other styles it does nothing.
 
-# There are 2 HTML modes; The default for english is
-# the version that is found in eFTE and FTE. The default for
-# spanish is the version by Alfredo Fernandez Diaz who also
-# provided the spanish translation. There are probably still
-# a few english items in some of the menus since I have added
-# some modes from various sources since the translation was done.
-# This HTML mode works fine in english. See m_html_a.fte and
-# m_css_a.ftefor more details regarding this mode. It also
-# replaces the css mode.
-# %define(HTML_AL)
-
 # User inteface styles UI_KB effects pallette and UNIX font selection and
 # can you must select a second UI_* to load it.
 #%define(UI_KB)
@@ -66,9 +55,9 @@
 # to add stuff in this file.
 # Some examples are below. If you find something that cannot be
 # configured here, tell me about it.
-# If you wish to modify only a specific mode, add customizations
-# at the end of file. To also modify all of the descendants,
-# put customizations right after the include statement for mode.
+# If you wish to modify only a specific mode, add customizations to a my*.fte file
+# and "include" it at the end of file. To also modify all of the descendants,
+# "include" customizations right after the include statement for mode.
 
 # The current hierarchy of modes is:
 # PLAIN
@@ -86,7 +75,7 @@
 
 # My ultimate goal is to have the default files unmodifiable and
 # have all customization done here, but this is not currently possible for
-# all things (menus come to mind).
+# all things (menus come to mind). Use a my*.fte for this case.
 
 include 'global.fte';
 
@@ -196,6 +185,7 @@ eventmap TEX: PLAIN {
 # Not implemented for Multi Edit for Windows or VI interface
 #%define(HTML_AL)
 
+include 'm_cnfgs.fte';
 include 'm_4gl.fte';
 include 'm_a51.fte';
 include 'm_ada.fte';
@@ -253,7 +243,6 @@ include 'm_xslt.fte';
 include 'm_rst.fte';
 include 'm_ocaml.fte';
 include 'm_batch.fte';
-include 'm_cnfgs.fte';
 
 # Must be included AFTER m_text.fte in order for the filename regexp to
 # match correctly (i.e. CMakeLists.txt should match CMAKE mode, not TEXT mode)
