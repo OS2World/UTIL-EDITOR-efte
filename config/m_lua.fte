@@ -118,4 +118,4 @@ mode Lua: SOURCE {
     RoutineRegexp       = /^\s*{local }*function /;
 }
 
-oinclude "mym_lua.fte";
+oinclude 'mym_lua.fte';

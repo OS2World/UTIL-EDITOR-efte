@@ -283,4 +283,4 @@ mode PYTHON: SOURCE {
 	CommentEnd          = "";
 }
 
-oinclude "mym_py.fte";
+oinclude 'mym_py.fte';
