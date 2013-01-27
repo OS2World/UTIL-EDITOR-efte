@@ -191,6 +191,7 @@ include 'm_a51.fte';
 include 'm_ada.fte';
 include 'm_asm.fte';
 include 'm_asm370.fte';
+include 'm_mvsasm.fte';
 include 'm_basic.fte';
 include 'm_bin.fte';
 include 'm_c.fte';
@@ -269,7 +270,7 @@ include 'ui_ws.fte';  # wordstar like
 include 'ui_ne.fte';  # norton classic editor - incomplete
 %endif
 %if(UI_MEW)
-include 'ui_mew.fte'; # MultiEdit4Windows
+include 'ui_m_ew.fte'; # MultiEdit4Windows
 %endif
 %if(UI_BRIEF)
 include 'ui_brief.fte'; # BRIEF/CRISP
