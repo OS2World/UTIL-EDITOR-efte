@@ -1,0 +1,83 @@
+menu IPF_Tools {
+%if(LANG_EN)
+   item "&Compile" { FileSave; RunProgram "ipfc \"" . $FilePath."\""; }
+   item "&Grep..." { Compile "grep -n " }
+   item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+#   item "Save, compile and &view\tF9"  { }
+   item;
+   item "&Unencode ascii-only entities"        { SavePos; MoveFileStart; IPF_ent_ascii;  MoveSavedPos; }
+   item "Convert entities to &text (IBM850)"  { SavePos; MoveFileStart; IPF_ent_ibm850; MoveSavedPos; }
+   item "Convert entities to te&xt (Win1252)" { SavePos; MoveFileStart; IPF_ent_win1252;MoveSavedPos; }
+   item;
+   item "&Encode ascii-only entities"          { SavePos; MoveFileStart; IPF_ascii_ent;  MoveSavedPos; }
+   item "Convert text to entities (IBM&850)"  { SavePos; MoveFileStart; IPF_ibm850_ent; MoveSavedPos; }
+   item "Convert text to entities (Win&1252)" { SavePos; MoveFileStart; IPF_win1252_ent;MoveSavedPos; }
+   item;
+   item "&Fix typical problems with colons"    { SavePos; MoveFileStart; IPF_2colon;MoveSavedPos; }
+   item;
+   item    "&Shell\tAlt+F9"             { RunProgram "" }
+   item    "&Run...\tCtrl+F9"           { RunProgram }
+%endif
+%if(LANG_ES)
+   item "&Compilar" { FileSave; RunProgram "ipfc \"" . $FilePath."\""; }
+   item "&Grep..." { Compile "grep -n " }
+   item "Guardar y corregir con &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+#   item "Save, compile and &view\tF9"  { }
+   item;
+   item "&Descodificar entidades ASCII"        { SavePos; MoveFileStart; IPF_ent_ascii;  MoveSavedPos; }
+   item "Convertir entidades a &texto (IBM850)"  { SavePos; MoveFileStart; IPF_ent_ibm850; MoveSavedPos; }
+   item "Convertir entidades a te&xto (Win1252)" { SavePos; MoveFileStart; IPF_ent_win1252;MoveSavedPos; }
+   item;
+   item "&Codificar entidades ASCII"          { SavePos; MoveFileStart; IPF_ascii_ent;  MoveSavedPos; }
+   item "Convertir texto (IBM&850) en entidades"  { SavePos; MoveFileStart; IPF_ibm850_ent; MoveSavedPos; }
+   item "Convertir texto (Win&1252) en entidades" { SavePos; MoveFileStart; IPF_win1252_ent;MoveSavedPos; }
+   item;
+   item "Corregir casos t¡picos con dos puntos" { SavePos; MoveFileStart; IPF_2colon;MoveSavedPos; }
+   item;
+   item    "Consola del &S.O.\tAlt+F9"   { RunProgram "" }
+   item    "Ejecuta&r...\tCtrl+F9"       { RunProgram }
+%endif
+   item;
+   submenu "C&VS\tC+O_C+V", MCvs;
+   submenu "SVN\tC+O_C+N", MSvn;
+}
+
+menu Help_IPF {
+    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+%if(OS_OS2)
+    item "&IPF" { RunProgram "view IPFREF.INF" }
+%endif
+    item;    
+    item "&About..." { ShowVersion }
+}
+
+menu Main_IPF {
+%if(LANG_EN)
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "IPF &Tools",   IPF_Tools;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help_IPF;
+%endif
+%if(LANG_ES)
+    submenu "&Archivo",     File;
+    submenu "&Editar",      Edit;
+    submenu "&Bloques",     Block;
+    submenu "Bu&scar",      Search;
+    submenu "&Dobleces",    Fold;
+    submenu "H&tas. IPF",       IPF_Tools;
+    submenu "&Ventana",     Window;
+    submenu "&Opciones",    Options;
+    submenu "A&yuda",       Help;
+%endif
+}
+
+eventmap IPF {
+    MainMenu  = "Main_IPF";   # menu for menubar
+}

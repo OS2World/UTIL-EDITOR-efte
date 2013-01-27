@@ -1,0 +1,337 @@
+# FTE menus for editing CSS files
+# maintained by mrwarper@yahoo.es
+# Revision 2006/09/01
+
+menu CSSTools {
+%if(LANG_EN)
+#    item "&Compile...\tF9" { Compile "make -k " }
+#    item "&Grep..." { Compile "grep -n " }
+#    item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+#    item;
+    item "&Shell\tAlt+F9" { RunProgram "" }
+    item "&Run...\tCtrl+F9" { RunProgram }
+    item;
+#    item "&Previous error\tF11" { CompilePrevError }
+#    item "&Next error\tF12" { CompileNextError }
+#    item;
+    item "&Messages\tS+F9" { ViewMessages }
+    item "C&lear Messages" { ClearMessages }
+%endif
+%if(LANG_ES)
+#    item "&Compilar...\tF9" { Compile "make -k " }
+#    item "&Grep..." { Compile "grep -n " }
+#    item "Guardar y corregir con &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+#    item;
+    item "Consola del &S.O.\tAlt+F9" { RunProgram "" }
+    item "Ejecuta&r...\tCtrl+F9" { RunProgram }
+    item;
+#    item "Error &anterior\tF11" { CompilePrevError }
+#    item "Siguiente &error\tF12" { CompileNextError }
+#    item;
+    item "&Mensajes\tS+F9" { ViewMessages }
+    item "&Limpiar mensajes" { ClearMessages }
+%endif
+    item;
+    submenu "C&VS\tC+O_C+V", MCvs;
+    submenu "SVN\tC+O_C+N", MSvn;
+}
+
+menu CSS_HTML_selector {
+%if(LANG_EN)
+%endif
+%if(LANG_ES)
+%endif
+    item    "html" { InsertString "html" }
+    item    "head" { InsertString "head" }
+    item    "body" { InsertString "body" }
+    item    "frameset" { InsertString "frameset" }
+    item    "frame" { InsertString "frame" }
+    item    "noframes" { InsertString "noframes" }
+    item    "iframe" { InsertString "iframe" }
+
+    item    "h1" { InsertString "h1" }
+    item    "h2" { InsertString "h2" }
+    item    "h3" { InsertString "h3" }
+    item    "h4" { InsertString "h4" }
+    item    "h5" { InsertString "h5" }
+    item    "h6" { InsertString "h6" }
+
+    item    "a" { InsertString "a" }
+
+    item    "q" { InsertString "q" }
+    item    "blockquote" { InsertString "blockquote" }
+    item    "cite" { InsertString "cite" }
+
+    item    "ins" { InsertString "ins" }
+    item    "del" { InsertString "del" }
+
+    item    "pre" { InsertString "pre" }
+    item    "address" { InsertString "address" }
+    item    "abbr" { InsertString "abbr" }
+    item    "acronym" { InsertString "acronym" }
+    item    "dfn" { InsertString "dfn" }
+%if(!GUI_PM)
+}
+menu CSS_HTML_selector_2 {
+%endif
+    item    "code" { InsertString "code" }
+    item    "kbd" { InsertString "kbd" }
+    item    "var" { InsertString "var" }
+    item    "samp" { InsertString "samp" }
+
+    item    "ul" { InsertString "ul" }
+    item    "ol" { InsertString "ol" }
+    item    "li" { InsertString "li" }
+
+    item    "dl" { InsertString "dl" }
+    item    "dt" { InsertString "dt" }
+    item    "dd" { InsertString "dd" }
+
+    item    "table" { InsertString "table" }
+    item    "caption" { InsertString "caption" }
+    item    "thead" { InsertString "thead" }
+    item    "tfoot" { InsertString "tfoot" }
+    item    "tbody" { InsertString "tbody" }
+    item    "tr" { InsertString "tr" }
+    item    "th" { InsertString "th" }
+    item    "td" { InsertString "td" }
+
+    item    "col" { InsertString "col" }
+    item    "colgroup" { InsertString "colgroup" }
+
+    item    "strong" { InsertString "strong" }
+    item    "em" { InsertString "em" }
+    item    "sub" { InsertString "sub" }
+    item    "sup" { InsertString "sup" }
+    item    "bdo" { InsertString "bdo" }
+%if(!GUI_PM)
+}
+menu CSS_HTML_selector_3 {
+%endif
+    item    "tt" { InsertString "tt" }
+    item    "b" { InsertString "b" }
+    item    "i" { InsertString "i" }
+    item    "big" { InsertString "big" }
+    item    "small" { InsertString "small" }
+
+    item    "img" { InsertString "img" }
+    item    "map" { InsertString "map" }
+    item    "area" { InsertString "area" }
+    item    "object" { InsertString "object" }
+
+    item    "param" { InsertString "param" }
+    item    "script" { InsertString "script" }
+    item    "noscript" { InsertString "noscript" }
+
+    item    "form" { InsertString "form" }
+    item    "fieldset" { InsertString "fieldset" }
+    item    "legend" { InsertString "legend" }
+    item    "label" { InsertString "label" }
+    item    "select" { InsertString "select" }
+    item    "option" { InsertString "option" }
+    item    "optgroup" { InsertString "optgroup" }
+
+    item    "input"    { InsertString "input" }
+    item    "textarea" { InsertString "textarea" }
+    item    "button"   { InsertString "button" }
+
+    item    "div" { InsertString "span" }
+    item    "span" { InsertString "div" }
+}
+
+menu CSS_prop_main {
+%if(LANG_EN)
+%endif
+%if(LANG_ES)
+%endif
+}
+
+menu HTML_col_name {
+%if(LANG_EN)
+    item    "&Black  " { InsertString "black" }
+    item    "&Navy   " { InsertString "navy" }
+    item    "&Green  " { InsertString "green" }
+    item    "&Teal   " { InsertString "teal" }
+    item    "&Maroon " { InsertString "maroon" }
+    item    "&Purple " { InsertString "purple" }
+    item    "&Olive  " { InsertString "olive" }
+    item    "&Silver " { InsertString "silver" }
+    item    "Gr&ay   " { InsertString "gray" }
+    item    "Bl&ue   " { InsertString "blue" }
+    item    "&Lime   " { InsertString "lime" }
+    item    "&Cyan   " { InsertString "aqua" }
+    item    "&Red    " { InsertString "red" }
+    item    "M&agenta" { InsertString "fuchsia" }
+    item    "&Yellow " { InsertString "yellow" }
+    item    "&White  " { InsertString "white" }
+%endif
+%if(LANG_ES)
+    item    "&Negro"       { InsertString "black" }
+    item    "A&zul marino" { InsertString "navy" }
+    item    "&Verde"       { InsertString "green" }
+    item    "&Turquesa"    { InsertString "teal" }
+    item    "&Marr¢n"      { InsertString "maroon" }
+    item    "&P£rpura"     { InsertString "purple" }
+    item    "Verde &oliva" { InsertString "olive" }
+    item    "&Gris claro"  { InsertString "silver" }
+    item    "Gris oscuro"  { InsertString "gray" }
+    item    "&Celeste"     { InsertString "blue" }
+    item    "&Lima"        { InsertString "lime" }
+    item    "C&ian"        { InsertString "aqua" }
+    item    "&Rojo"        { InsertString "red" }
+    item    "Mag&enta"     { InsertString "fuchsia" }
+    item    "&Amarillo"    { InsertString "yellow" }
+    item    "&Blanco"      { InsertString "white" }
+%endif
+}
+
+menu HTML_col_hexa {
+%if(LANG_EN)
+    item    "&Black  " { InsertString "#000000" }
+    item    "&Navy   " { InsertString "#000080" }
+    item    "&Green  " { InsertString "#008000" }
+    item    "&Teal   " { InsertString "#008080" }
+    item    "&Maroon " { InsertString "#800000" }
+    item    "&Purple " { InsertString "#800080" }
+    item    "&Olive  " { InsertString "#808000" }
+    item    "&Silver " { InsertString "#c0c0c0" }
+    item    "Gr&ay   " { InsertString "#808080" }
+    item    "Bl&ue   " { InsertString "#0000ff" }
+    item    "&Lime   " { InsertString "#00ff00" }
+    item    "&Cyan   " { InsertString "#00ffff" }
+    item    "&Red    " { InsertString "#ff0000" }
+    item    "M&agenta" { InsertString "#ff00ff" }
+    item    "&Yellow " { InsertString "#ffff00" }
+    item    "&White  " { InsertString "#ffffff" }
+%endif
+%if(LANG_ES)
+    item    "&Negro"       { InsertString "#000000" }
+    item    "A&zul marino" { InsertString "#000080" }
+    item    "&Verde"       { InsertString "#008000" }
+    item    "&Turquesa"    { InsertString "#008080" }
+    item    "&Marr¢n"      { InsertString "#800000" }
+    item    "&P£rpura"     { InsertString "#800080" }
+    item    "Verde &oliva" { InsertString "#808000" }
+    item    "&Gris claro"  { InsertString "#c0c0c0" }
+    item    "Gris oscuro"  { InsertString "#808080" }
+    item    "&Celeste"     { InsertString "#0000ff" }
+    item    "&Lima"        { InsertString "#00ff00" }
+    item    "C&ian"        { InsertString "#00ffff" }
+    item    "&Rojo"        { InsertString "#ff0000" }
+    item    "Mag&enta"     { InsertString "#ff00ff" }
+    item    "&Amarillo"    { InsertString "#ffff00" }
+    item    "&Blanco"      { InsertString "#ffffff" }
+%endif
+}
+
+menu HTML_col_rgb {
+%if(LANG_EN)
+    item    "&Black  " { InsertString "rgb(0,0,0)" }
+    item    "&Navy   " { InsertString "rgb(0,0,128)" }
+    item    "&Green  " { InsertString "rgb(0,128,0)" }
+    item    "&Teal   " { InsertString "rgb(0,128,128)" }
+    item    "&Maroon " { InsertString "rgb(128,0,0)" }
+    item    "&Purple " { InsertString "rgb(128,0,128)" }
+    item    "&Olive  " { InsertString "rgb(128,128,0)" }
+    item    "&Silver " { InsertString "rgb(192,192,192)" }
+    item    "Gr&ay   " { InsertString "rgb(128,128,128)" }
+    item    "Bl&ue   " { InsertString "rgb(0,0,255)" }
+    item    "&Lime   " { InsertString "rgb(0,255,0)" }
+    item    "&Cyan   " { InsertString "rgb(0,255,255)" }
+    item    "&Red    " { InsertString "rgb(255,0,0)" }
+    item    "M&agenta" { InsertString "rgb(255,0,255)" }
+    item    "&Yellow " { InsertString "rgb(255,255,0)" }
+    item    "&White  " { InsertString "rgb(255,255,255)" }
+%endif
+%if(LANG_ES)
+    item    "&Negro"       { InsertString "rgb(0,0,0)" }
+    item    "A&zul marino" { InsertString "rgb(0,0,128)" }
+    item    "&Verde"       { InsertString "rgb(0,128,0)" }
+    item    "&Turquesa"    { InsertString "rgb(0,128,128)" }
+    item    "&Marr¢n"      { InsertString "rgb(128,0,0)" }
+    item    "&P£rpura"     { InsertString "rgb(128,0,128)" }
+    item    "Verde &oliva" { InsertString "rgb(128,128,0)" }
+    item    "&Gris claro"  { InsertString "rgb(192,192,192)" }
+    item    "Gris oscuro"  { InsertString "rgb(128,128,128)" }
+    item    "&Celeste"     { InsertString "rgb(0,0,255)" }
+    item    "&Lima"        { InsertString "rgb(0,255,0)" }
+    item    "C&ian"        { InsertString "rgb(0,255,255)" }
+    item    "&Rojo"        { InsertString "rgb(255,0,0)" }
+    item    "Mag&enta"     { InsertString "rgb(255,0,255)" }
+    item    "&Amarillo"    { InsertString "rgb(255,255,0)" }
+    item    "&Blanco"      { InsertString "rgb(255,255,255)" }
+%endif
+}
+
+menu CSS_values {
+#  item;
+%if(LANG_EN)
+  submenu "HTML colors, by &name ",HTML_col_name;
+  submenu "HTML colors, &HEXA",    HTML_col_hexa;
+  submenu "HTML colors, &r/g/b",   HTML_col_rgb;
+%endif
+%if(LANG_ES)
+  submenu "Colores HTML, por &nombre ",HTML_col_name;
+  submenu "Colores HTML, &HEXA",       HTML_col_hexa;
+  submenu "Colores HTML, &r/g/b",      HTML_col_rgb;
+%endif
+}
+
+menu CSS {
+%if(LANG_EN)
+#  submenu "CSS Framework templates ",  CSS_framework;
+  submenu "HTML selector", CSS_HTML_selector;
+%if(!GUI_PM)
+  submenu "HTML selector 2", CSS_HTML_selector_2;
+  submenu "HTML selector 3", CSS_HTML_selector_3;
+%endif
+#  submenu "Property: names", CSS_prop_main;
+  submenu "Property: special value ", CSS_values;
+#  item;
+#  item "Generate basic CSS", CSS_basic;
+%endif
+%if(LANG_ES)
+#  submenu "Modelos de trabajo con CSS ",  CSS_framework;
+  submenu "Selector HTML", CSS_HTML_selector;
+%if(!GUI_PM)
+  submenu "Selector HTML 2", CSS_HTML_selector_2;
+  submenu "Selector HTML 3", CSS_HTML_selector_3;
+%endif
+#  submenu "Propiedad: nombre", CSS_prop_main;
+  submenu "Propiedad: valor especial ", CSS_values;
+#  item;
+#  item "Generate basic CSS", CSS_basic;
+%endif
+}
+
+menu Main_CSS {
+%if(LANG_EN)
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "&Tools",   Tools;
+    submenu "&CSS",     CSS;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help;
+%endif
+%if(LANG_ES)
+    submenu "&Archivo",     File;
+    submenu "&Editar",      Edit;
+    submenu "&Bloques",     Block;
+    submenu "Bu&scar",      Search;
+    submenu "&Dobleces",    Fold;
+    submenu "H&tas.",       CSSTools;
+    submenu "&CSS",         CSS;
+    submenu "&Ventana",     Window;
+    submenu "&Opciones",    Options;
+    submenu "A&yuda",       Help;
+%endif
+}
+
+eventmap CSS {
+    MainMenu  = "Main_CSS";   # menu for menubar
+    key [A+C] { MainMenu 'C' }
+}

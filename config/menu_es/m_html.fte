@@ -1,0 +1,582 @@
+# FTE menus for editing HTML files
+# maintained by m_debusk@sourceforge.com
+# Revision 2001-11-18
+# maintained by mrwarper@yahoo.es
+# Revision 2007/12/01
+
+include 'menu/m_html_t.fte';
+
+# HTML
+
+menu HTML_BaseDoc {
+ %if(LANG_EN)
+  item "&Normal   C+H 0"     { HTML_Base }
+  item "&Frameset"           { HTML_BaseFrame }
+ %endif
+ %if(LANG_ES)
+  item "&Normal      C+H 0"  { HTML_Base }
+  item "Marcos (&Frameset)"  { HTML_BaseFrame }
+ %endif
+}
+
+# HTML_Base
+
+menu HTML_DTD {
+  item "XHTML 1.0 &Transitional" { HTML_DTD_X1T }
+  item "XHTML 1.0 &Strict"       { HTML_DTD_X1S }
+  item "XHTML 1.0 &Frameset"     { HTML_DTD_X1F }
+  item;
+  item "HTML &4.01 Transitional" { HTML_DTD_4T }
+  item "HTML 4.0&1 Strict"       { HTML_DTD_4S }
+  item "HTML 4.&01 Frameset"     { HTML_DTD_4F }
+  item;
+  item "HTML &3.2 Final"         { HTML_DTD_32F }
+  item;
+  item "HTML &2.0"               { HTML_DTD_2 }
+}
+
+menu HTML_Frames {
+    item    "&Frameset     <frameset> C+H 7  " { HTML_FRAMESET }
+    item    "F&rame        <frame>    C+H A+F" { HTML_FRAME }
+    item    "&No Frames    <noframes> C+H C+R" { HTML_NOFRAMES }
+    item    "&Inline Frame <iframe>          " { HTML_IFRAME }
+}
+
+menu HTML_Base {
+    submenu "&DTDs", HTML_DTD;
+    item    "&HTML <html> C+H C+Z" { HTML_HTM }
+    item    "Hea&d <head> C+H 8  " { HTML_HEAD }
+    item    "&Body <body> C+H 9  " { HTML_BODY }
+    submenu "&Frames", HTML_Frames;
+}
+
+# Head element menus...
+
+menu HTML_encoding {
+  item "us-&ascii"   { HTML_enc_ascii }
+  item "IBM&858"     { HTML_enc_858   }
+  item "&ISO-8859-1" { HTML_enc_88591 }
+  item "&Win1252"    { HTML_enc_1252  }
+  item "&UTF-8"      { HTML_enc_UTF8  }
+  item "&Custom"     { HTML_enc_gen   }
+}
+
+menu HTML_Head_Meta {
+%if(LANG_EN)
+  submenu "&Encoding",  HTML_encoding;
+  item "&Refresh"     { HTML_refresh }
+  item "&Description" { HTML_meta_desc }
+  item "&Keywords"    { HTML_meta_keyw }
+  item "&Author"      { HTML_meta_auth }
+  item "Re&vision"    { HTML_meta_rev  }
+  item "&Generic"     { HTML_META      }
+%endif
+%if(LANG_ES)
+  submenu "&Codificaci¢n", HTML_encoding;
+  item "&Renovaci¢n"     { HTML_refresh }
+  item "&Descripci¢n"    { HTML_meta_desc }
+  item "&Palabras clave" { HTML_meta_keyw }
+  item "&Autor"          { HTML_meta_auth }
+  item "Re&visi¢n"       { HTML_meta_rev  }
+  item "&Gen‚rica"       { HTML_META      }
+%endif
+}
+
+menu HTML_Head_CSS {
+%if(LANG_EN)
+  item "&Persistent, \tlinked"   { CSS_link_pers  }
+  item "P&referred, \tlinked"    { CSS_link_pref  }
+  item "&Alternate, \tlinked"    { CSS_link_alt   }
+  item "P&ersistent, \tembedded" { CSS_embed_pers }
+  item "Pre&ferred, \tembedded"  { CSS_embed_pref }
+%endif
+%if(LANG_ES)
+  item "&Persistente, \texterna"  { CSS_link_pers  }
+  item "P&referida, \texterna"    { CSS_link_pref  }
+  item "&Alternativa, \texterna"  { CSS_link_alt   }
+  item "P&ersistente, \tincluida" { CSS_embed_pers }
+  item "Pre&ferida, \tincluida"   { CSS_embed_pref }
+%endif
+}
+
+menu HTML_Link_Nav {
+%if(LANG_EN)
+  item "&Start"    { HTML_link_start }
+  item "&Up"       { HTML_link_up    }
+  item "&First"    { HTML_link_first }
+  item "&Previous" { HTML_link_prev  }
+  item "&Next"     { HTML_link_next  }
+  item "&Last"     { HTML_link_last  }
+  item;
+  item "&Help"     { HTML_link_help  }
+  item "S&earch"   { HTML_link_srch  }
+%endif
+%if(LANG_ES)
+  item "&Inicio" { HTML_link_start }
+  item "&Arriba"       { HTML_link_up    }
+  item "&Primero"    { HTML_link_first }
+  item "Anterior" { HTML_link_prev  }
+  item "Sigui&ente"     { HTML_link_next  }
+  item "U&ltimo"     { HTML_link_last  }
+  item;
+  item "A&yuda"     { HTML_link_help  }
+  item "Bu&scar"   { HTML_link_srch  }
+%endif
+}
+
+menu HTML_Link_helpers {
+%if(LANG_EN)
+  item "&Contents"          { HTML_link_cntnt }
+  item "&Glossary"          { HTML_link_gloss }
+  item "C&hapter"           { HTML_link_chap  }
+  item "&Section"           { HTML_link_sect  }
+  item "Su&bsection"        { HTML_link_subs  }
+  item "A&ppendix"          { HTML_link_apndx }
+  item "&Index"             { HTML_link_index }
+  item;
+  item "&Author"            { HTML_link_auth  }
+  item "Copy&right"         { HTML_link_copyr }
+  item;
+  item "Book&mark"          { HTML_link_bkmrk }
+  item "&Language version"  { HTML_link_lang  }
+  item "Alternate &version" { HTML_link_alt   }
+%endif
+%if(LANG_ES)
+  item "&Contenido"           { HTML_link_cntnt }
+  item "&Glosario"            { HTML_link_gloss }
+  item "C&ap¡tulo"            { HTML_link_chap  }
+  item "&Secci¢n"             { HTML_link_sect  }
+  item "Su&bsecci¢n"          { HTML_link_subs  }
+  item "A&p‚ndice"            { HTML_link_apndx }
+  item "&Indice"              { HTML_link_index }
+  item;
+  item "&Autor"               { HTML_link_auth  }
+  item "Copy&right"           { HTML_link_copyr }
+  item;
+  item "&Marcador"            { HTML_link_bkmrk }
+  item "En otra &lengua"      { HTML_link_lang  }
+  item "&Version alternativa" { HTML_link_alt   }
+%endif
+}
+
+menu HTML_Head {
+%if(LANG_EN)
+  item    "&Title \t<title>"          { HTML_TITLE }
+  item    "&Base URL \tC+H C+U"       { HTML_BASEURL }
+  item;
+  submenu "&Meta tags",                 HTML_Head_Meta;
+  submenu "&CSS",                       HTML_Head_CSS;
+  submenu "Linked site &navigation",    HTML_Link_Nav;
+  submenu "Linked document &helpers ",  HTML_Link_helpers;
+  item    "&Favorite Icon"            { HTML_link_FIcon }
+  item    "Generic &link"             { HTML_LINK }
+  item;
+  item    "&Embedded javascript"      { JScript_embed }
+  item    "Link to e&xternal JScript" { JScript_link  }
+%endif
+%if(LANG_ES)
+  item    "&T¡tulo \t<title>"         { HTML_TITLE }
+  item    "URL &base \tC+H C+U"       { HTML_BASEURL }
+  item;
+  submenu "Etiquetas &meta",          HTML_Head_Meta;
+  submenu "Hojas de estilo (&CSS)",   HTML_Head_CSS;
+  submenu "Enlaces de &navegaci¢n",   HTML_Link_Nav;
+  submenu "Enlaces a &documentos",    HTML_Link_helpers;
+  item    "Icono &favorito"           { HTML_link_FIcon }
+  item    "En&lace gen‚rico"          { HTML_LINK }
+  item;
+  item    "&Javascript incluido"      { JScript_embed  }
+  item    "Enlace a JScript &externo" { JScript_link }
+%endif
+}
+
+menu HTML_Header {
+    item    "<h&1>  C+H 1" { HTML_H1 }
+    item    "<h&2>  C+H 2" { HTML_H2 }
+    item    "<h&3>  C+H 3" { HTML_H3 }
+    item    "<h&4>  C+H 4" { HTML_H4 }
+    item    "<h&5>  C+H 5" { HTML_H5 }
+    item    "<h&6>  C+H 6" { HTML_H6 }
+}
+
+menu HTML_Comments {
+%if(LANG_EN)
+    item    "&Normal comment <!-- --> C+H c"  { HTML_COMMENT }
+    item    "IE CC <![.]>: &Hide from IE"     { HTML_CC_STD  }
+    item    "IE CC <![.]>: &Show to IE only"  { HTML_CC_IE  }
+%endif
+%if(LANG_ES)
+    item    "Comentario &normal <!-- --> C+H c" { HTML_COMMENT }
+    item    "CC IE <![.]>: &Ocultar de IE"      { HTML_CC_STD  }
+    item    "CC IE <![.]>: &Mostrar s¢lo a IE"  { HTML_CC_IE  }
+%endif
+}
+
+menu HTML_A_Types {
+%if(LANG_EN)
+    item    "Anchor H&Ref   <a href> C+H C-H" { HTML_AHREF }
+    item    "Anchor &Name   <a name> C+H C-N" { HTML_ANAME }
+    item    "Two way &anchor         C+H C-L" { HTML_A2WAY }
+%endif
+%if(LANG_ES)
+    item    "&Hacia...      <a href> C+H C-H" { HTML_AHREF }
+    item    "De desti&no    <a name> C+H C-N" { HTML_ANAME }
+    item    "&Ambivalente \tC+H C-L"          { HTML_A2WAY }
+%endif
+}
+
+menu HTML_Txt_Types {
+%if(LANG_EN)
+#   submenu "Quotations et al",    HTML_QuotesNCo;
+       item "&Quote      <q>          C+H A+Q" { HTML_Q }
+       item "&Blockquote <blockquote> C+H C+Q" { HTML_BLOCKQUOTE }
+       item "Ci&te       <cite>       C+H C-O" { HTML_CITE }
+#   submenu "Mangled text",    HTML_Mangled;
+    item;
+       item "&Deleted Text  <del>     C+H A+E" { HTML_DEL }
+       item "&Inserted Text <ins>     C+H A+I" { HTML_INS }
+    item;
+    item    "&Preformatted  <pre>     C+H C-F" { HTML_PRE }
+    item    "&Address       <address> C+H A+A" { HTML_ADDRESS }
+    item    "A&bbreviation  <abbr>    C+H C+A" { HTML_ABBR }
+    item    "Acro&nym       <acronym> C+H C+Y" { HTML_ACRONYM }
+    item    "De&finition    <dfn>     C+H C-D" { HTML_DFN }
+#   submenu "Computer code",  HTML_Comp_code;
+       item;
+       item "&Code          <code>    C+H C-C" { HTML_CODE }
+       item "&Kbd entry     <kbd>     C+H C-K" { HTML_KBD }
+       item "&Variable      <var>     C+H C-V" { HTML_VAR }
+       item "&Sample msg    <samp>    C+H C-M" { HTML_SAMP }
+%endif
+%if(LANG_ES)
+#   submenu "Citas y fuentes",     HTML_QuotesNCo;
+       item "Cita &literal        <q> C+H A+Q" { HTML_Q }
+       item "Blo&que     <blockquote> C+H C+Q" { HTML_BLOCKQUOTE }
+       item "Fuente e&xterna   <cite> C+H C-O" { HTML_CITE }
+#   submenu "Texto manipulado",    HTML_Mangled;
+    item;
+       item "Texto &borrado     <del> C+H A+E" { HTML_DEL }
+       item "Texto &insertado   <ins> C+H A+I" { HTML_INS }
+    item;
+    item    "&Preformateado     <pre> C+H C-F" { HTML_PRE }
+    item    "&Direcci¢n     <address> C+H A+A" { HTML_ADDRESS }
+    item    "A&breviatura      <abbr> C+H C+A" { HTML_ABBR }
+    item    "&Acr¢nimo      <acronym> C+H C+Y" { HTML_ACRONYM }
+    item    "De&finici¢n        <dfn> C+H C-D" { HTML_DFN }
+#   submenu "C¢digo de ordenador", HTML_Code_Types;
+       item;
+       item "&C¢digo           <code> C+H C-C" { HTML_CODE }
+       item "Texto &tecleado    <kbd> C+H C-K" { HTML_KBD }
+       item "&Variable          <var> C+H C-V" { HTML_VAR }
+       item "Mue&stra          <samp> C+H C-M" { HTML_SAMP }
+%endif
+}
+
+menu HTML_Lists {
+%if(LANG_EN)
+  item    "&Unordered list    <ul> C+H u"  { HTML_UL }
+  item    "&Ordered list      <ol> C+H o"  { HTML_OL }
+  item    "List &item         <li> C+H i"  { HTML_LI }
+  item;
+  item    "Definition &list   <dl> C+H l"  { HTML_DL }
+  item    "Definition &tag    <dt> C+H t"  { HTML_DT }
+  item    "Definition D&ata   <dd> C+H d"  { HTML_DD }
+%endif
+%if(LANG_ES)
+  item    "Sin ning&un orden  <ul>  C+H u"  { HTML_UL }
+  item    "&Ordenada          <ol>  C+H o"  { HTML_OL }
+  item    "Elemento de l&ista <li>  C+H i"  { HTML_LI }
+  item;
+  item    "De de&finiciones   <dl>  C+H l"  { HTML_DL }
+  item    "&T‚rmino definido  <dt>  C+H t"  { HTML_DT }
+  item    "&Definici¢n        <dd>  C+H d"  { HTML_DD }
+%endif
+}
+
+menu HTML_Table {
+%if(LANG_EN)
+    item    "&Table        <table>    C+H A-T" { HTML_TABLE }
+    item    "&Caption      <caption>  C+H A-C" { HTML_CAPTION }
+    item    "TH&ead        <thead>    C+H h  " { HTML_THEAD }
+    item    "TFo&ot        <tfoot>    C+H f  " { HTML_TFOOT }
+    item    "TBody        <t&body>    C+H b  " { HTML_TBODY }
+    item    "&Row          <tr>       C+H A-R" { HTML_TR }
+    item    "&Header       <th>       C+H A-H" { HTML_TH }
+    item    "&Data         <td>       C+H A-D" { HTML_TD }
+    item;
+    item    "Co&lumn       <col>             " { HTML_COL }
+    item    "Column &Group <colgroup> C+H A+G" { HTML_COLGROUP }
+%endif
+%if(LANG_ES)
+    item    "Tabla         <&table>    C+H A-T" { HTML_TABLE }
+    item    "Titulo        <&caption>  C+H A-C" { HTML_CAPTION }
+    item    "Cabeza        <th&ead>    C+H h  " { HTML_THEAD }
+    item    "Pie           <tfo&ot>    C+H f  " { HTML_TFOOT }
+    item    "Cuerpo        <t&body>    C+H b  " { HTML_TBODY }
+    item    "Fila          <t&r>       C+H A-R" { HTML_TR }
+    item    "Cabecera      <t&h>       C+H A-H" { HTML_TH }
+    item    "Datos         <t&d>       C+H A-D" { HTML_TD }
+    item;
+    item    "Columna       <co&l>             " { HTML_COL }
+    item    "Grupo de col. <col&group> C+H A+G" { HTML_COLGROUP }
+%endif
+}
+
+menu HTML_ChFmt {
+%if(LANG_EN)
+#    submenu  "Semantic"
+      item    "&Strong      <strong>  C+H C-S" { HTML_STRONG }
+      item    "&Emphasize   <em>      C+H C+H" { HTML_EM }
+      item    "S&ubscript   <sub>     C+H A+U" { HTML_SUB }
+      item    "Superscri&pt <sup>     C+H A+P" { HTML_SUP }
+      item    "Bidirecti&on <bdo>     C+H A+O" { HTML_BDO }
+#    submenu "Visual"
+      item;
+      item    "&Typewriter  <tt>      C+H C-T" { HTML_TT }
+      item    "&Bold        <b>       C+H C-B" { HTML_B }
+      item    "&Italic      <i>       C+H C-I" { HTML_I }
+      item    "Underscore             C+H C-U" { HTML_U }
+      item    "Bi&g         <big>     C+H A+B" { HTML_BIG }
+      item    "S&mall       <small>   C+H A+S" { HTML_SMALL }
+%endif
+%if(LANG_ES)
+#    submenu "Sem ntico"
+      item    "&Enfasis        <em> C+H C+H" { HTML_EM }
+      item    "&Fuerte     <strong> C+H C-S" { HTML_STRONG }
+      item    "S&ub¡ndice     <sub> C+H A+U" { HTML_SUB }
+      item    "Su&per¡ndice   <sup> C+H A+P" { HTML_SUP }
+      item    "&Bidireccional <bdo> C+H A+O" { HTML_BDO }
+#    submenu "Visual"
+      item;
+      item    "&Teletipo       <tt> C+H C-T" { HTML_TT }
+      item    "&Negrita         <b> C+H C-B" { HTML_B }
+      item    "Curs&iva         <i> C+H C-I" { HTML_I }
+      item    "&Subrayado           C+H C-U" { HTML_U }
+      item    "&Grande        <big> C+H A+B" { HTML_BIG }
+      item    "&Peque¤a     <small> C+H A+S" { HTML_SMALL }
+%endif
+}
+
+menu HTML_Object {
+%if(LANG_EN)
+    item "&Image              <img>    C+H C-G" { HTML_IMG }
+    item "Image &Map          <map>    C+H A+M" { HTML_MAP }
+    item "Image Map &Area     <area>"           { HTML_AREA }
+    item;
+    item "Generic &Object     <object> C+H C+J" { HTML_OBJECT }
+    item "&Parameter          <param>"          { HTML_PARAM }
+    item "&Flash animation"                     { HTML_FLASH }
+    item;
+    item "Inline &Script      <script>  "       { HTML_SCRIPT }
+    item "Script &alternative <noscript>"       { HTML_NOSCRIPT }
+%endif
+%if(LANG_ES)
+    item "&Imagen          <img>    C+H C-G" { HTML_IMG }
+    item "&Mapa de imagen  <map>    C+H A+M" { HTML_MAP }
+    item "&Area de un mapa <area>"           { HTML_AREA }
+    item;
+    item "&Objeto gen‚rico <object> C+H C+J" { HTML_OBJECT }
+    item "&Par metro       <param>"          { HTML_PARAM }
+    item "Animaci¢n &Flash"                  { HTML_FLASH }
+    item;
+    item "&Script local    <script>  "       { HTML_SCRIPT }
+    item "Si&n script...   <noscript>"       { HTML_NOSCRIPT }
+%endif
+}
+
+menu HTML_Form {
+%if(LANG_EN)
+    item    "&Form            <form>     " { HTML_FORM }
+    item    "Field&set        <fieldset> " { HTML_FIELDSET }
+    item    "Fieldset &title  <legend>   " { HTML_LEGEND }
+    item    "La&bel           <label>    " { HTML_LABEL }
+    item    "Selectable &list <select>   " { HTML_SELECT }
+    item    "List &option     <option>   " { HTML_OPTION }
+    item    "Option &group    <optgroup> " { HTML_OPTGROUP }
+    item;
+    item    "&Entryfield"                  { HTML_EFIELD }
+    item    "&Radio button"                { HTML_RADIO }
+    item    "&CheckBox"                    { HTML_CHECKBOX }
+    item    "&Text area       <textarea> " { HTML_TEXTAREA }
+    item    "Hidden variable"              { HTML_HIDDEN }
+    item    "&Upload file"                 { HTML_FILE }
+    item    "Generic &input   <input>    " { HTML_INPUT }
+    item;
+    item    "Submit &button"               { HTML_SUBMIT }
+    item    "Reset button"                 { HTML_RESET }
+    item    "&Push Button     <button>   " { HTML_BUTTON }
+%endif
+%if(LANG_ES)
+    item    "&Formulario         <form>     " { HTML_FORM }
+    item    "&Contenedor         <fieldset> " { HTML_FIELDSET }
+    item    "&T¡tulo del cont.   <legend>   " { HTML_LEGEND }
+    item    "&Etiqueta           <label>    " { HTML_LABEL }
+    item    "&Lista de opciones  <select>   " { HTML_SELECT }
+    item    "&Opci¢n de la lista <option>   " { HTML_OPTION }
+    item    "&Grupo de opciones  <optgroup> " { HTML_OPTGROUP }
+    item;
+    item    "Entrada de &texto"               { HTML_EFIELD }
+    item    "Bot¢n &radial"                   { HTML_RADIO }
+    item    "Casilla"                         { HTML_CHECKBOX }
+    item    "µrea de te&xto      <textarea> " { HTML_TEXTAREA }
+    item    "Variable oculta"                 { HTML_HIDDEN }
+    item    "S&ubir archivo"                  { HTML_FILE }
+    item    "Entrada gen‚rica   <&input>   " { HTML_INPUT }
+    item;
+    item    "&Bot¢n de env¡o"                 { HTML_SUBMIT }
+    item    "Bot¢n de reinicio"               { HTML_RESET }
+    item    "Bot¢n &pulsable     <button>   " { HTML_BUTTON }
+%endif
+}
+
+menu HTML_Divs {
+%if(LANG_EN)
+  item    "Simple <&div>  C+H A+V" { HTML_DIV }
+  item    "Div with &id "          { HTML_DIV_id }
+  item    "Div with &class "       { HTML_DIV_class }
+  item    "Div with id&+class "    { HTML_DIV_idclass }
+  item;
+  item    "Text   <&span> C+H C+W" { HTML_SPAN }
+%endif
+%if(LANG_ES)
+  item    "<&div> simple    C+H A+V" { HTML_DIV }
+  item    "<div> con &id  "          { HTML_DIV_id }
+  item    "<div> con &clase"         { HTML_DIV_class }
+  item    "<div> con id&+clase"      { HTML_DIV_idclass }
+  item;
+  item    "<&span> de texto C+H C+W" { HTML_SPAN }
+%endif
+}
+
+%if(TEXT_CHARS)
+
+#include 'menu/chr_html/latin.fte';
+#include 'menu/chr_html/ents.fte';
+include 'menu/chr_html/jap.fte';
+
+menu HTML_SpChar {
+%if(LANG_EN)
+#  submenu "Math &symbols",    HTML_Math;
+#  submenu "&Greek for maths", HTML_Greek;
+#  submenu "&Typography",      HTML_Typo;
+#  submenu "&Finances",        HTML_Fin;
+  item;
+#  submenu "&Latin characters",HTML_Latin;
+  submenu "&Japanese", UTF_Nihongo;
+%endif
+%if(LANG_ES)
+#  submenu "&S¡mbolos matem ticos",HTML_Math;
+#  submenu "&Griego (matem ticas)",HTML_Greek;
+#  submenu "&Tipograf¡a",          HTML_Typo;
+#  submenu "&Finanzas",            HTML_Fin;
+  item;
+#  submenu "Caracteres &latinos",  HTML_Latin;
+  submenu "&Japon‚s", UTF_Nihongo;
+%endif
+}
+%endif
+
+menu HTMLTags {
+%if(LANG_EN)
+  submenu "&Create basic document", HTML_BaseDoc;
+  item;
+  submenu "&Basic structures",  HTML_Base;
+  submenu "&Document head",     HTML_Head;
+  item;
+  submenu "&Headers       <h1>... <h6>", HTML_Header;
+  item    "&Paragraph     <p>  C+H C-P" { HTML_P }
+  item    "Line break    <br> C+H ¼" { HTML_BR }
+  item    "Horiz. &ruler  <hr> C+H &-" { HTML_HR }
+  submenu "Co&mment (hide HTML)", HTML_Comments;
+  submenu "&Anchors/Links",     HTML_A_Types;
+  submenu "Te&xt types",        HTML_Txt_Types;
+  submenu "&Lists",             HTML_Lists;
+  submenu "&Table",             HTML_Table;
+  submenu "Character format",   HTML_ChFmt;
+  submenu "&Objects",           HTML_Object;
+  submenu "&Forms",             HTML_Form;
+  submenu "Logical di&visions", HTML_Divs;
+ %if(TEXT_CHARS)
+  submenu "&Special chars",     HTML_SpChar;
+ %endif
+%endif
+%if(LANG_ES)
+  submenu "&Crear documento b sico ", HTML_BaseDoc;
+  item;
+  submenu "Estructuras &b sicas",  HTML_Base;
+  submenu "Cabe&za del documento", HTML_Head;
+  item;
+  submenu "Cabeceras        <&h1>...<h6>",   HTML_Header;
+  item    "&P rrafo          <p>  C+H C-P" { HTML_P }
+  item    "&Dividir l¡nea    <br> C+H ¼"  { HTML_BR }
+  item    "Separador ho&riz. <hr> C+H &-"  { HTML_HR }
+  submenu "Co&mentario (ocultar HTML)", HTML_Comments;
+  submenu "&Anclajes/Enlaces",      HTML_A_Types;
+  submenu "Tipos de te&xto",        HTML_Txt_Types;
+  submenu "&Listas",                HTML_Lists;
+  submenu "&Tabla",                 HTML_Table;
+  submenu "T&ipo de letra",         HTML_ChFmt;
+  submenu "&Objeto",                HTML_Object;
+  submenu "&Formulario",            HTML_Form;
+  submenu "Di&visiones l¢gicas",    HTML_Divs;
+ %if(TEXT_CHARS)
+  submenu "Caracteres e&speciales", HTML_SpChar;
+ %endif
+%endif
+}
+
+menu HTML_Colors {
+    item    "&Black  " { InsertString "#000000" }
+    item    "Bl&ue   " { InsertString "#0000ff" }
+    item    "&Cyan   " { InsertString "#00ffff" }
+    item    "&Gray   " { InsertString "#808080" }
+    item    "Gr&een  " { InsertString "#008000" }
+    item    "&Lime   " { InsertString "#00ff00" }
+    item    "&Magenta" { InsertString "#ff00ff" }
+    item    "M&aroon " { InsertString "#800000" }
+    item    "&Navy   " { InsertString "#000080" }
+    item    "&Olive  " { InsertString "#808000" }
+    item    "&Purple " { InsertString "#800080" }
+    item    "&Red    " { InsertString "#ff0000" }
+    item    "&Silver " { InsertString "#c0c0c0" }
+    item    "&Teal   " { InsertString "#008080" }
+    item    "&White  " { InsertString "#ffffff" }
+    item    "&Yellow " { InsertString "#ffff00" }
+}
+
+menu Main_HTML {
+%if(LANG_EN)
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "&Tools",   HTMLTools;
+    submenu "HT&ML",    HTMLTags;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help;
+%endif
+%if(LANG_ES)
+    submenu "&Archivo",     File;
+    submenu "&Editar",      Edit;
+    submenu "&Bloques",     Block;
+    submenu "Bu&scar",      Search;
+    submenu "&Dobleces",    Fold;
+    submenu "H&tas.",       HTMLTools;
+    submenu "&HTML",        HTMLTags;
+    submenu "&Ventana",     Window;
+    submenu "&Opciones",    Options;
+    submenu "A&yuda",       Help;
+%endif
+}
+
+eventmap HTML {
+    MainMenu  = "Main_HTML";   # menu for menubar
+%if(LANG_EN)
+    key [A+M] { MainMenu 'M' }
+%endif
+%if(LANG_ES)
+    key [A+H] { MainMenu 'H' }
+%endif
+}
