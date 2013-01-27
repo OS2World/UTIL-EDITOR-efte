@@ -1,7 +1,7 @@
 # NE
 
-include 'ui_m_ne.fte';
-include 'ui_k_ne.fte';
+include 'menu/ui_m_ne.fte';
+include 'menu/ui_k_ne.fte';
 
 include 'menu/m_c.fte';
 %define(TEXT_CONV)
