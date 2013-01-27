@@ -10,7 +10,7 @@ include 'menu/m_groovy.fte';
 include 'htmlconv.fte';
 %define(TEXT_CHARS)
 include 'htmlchar.fte';
-include 'menu/m_html/main.fte';
+include 'menu/m_html.fte';
 include 'menu/m_css.fte';
 include 'menu/m_rexx.fte';
 include 'menu/m_sgml.fte';
