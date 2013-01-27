@@ -4,18 +4,11 @@
 # HTML Tools
 
 menu Tidy_menu {
-%if(LANG_EN)
-    item "File coded in IBM&858"     { FileSave; HTML_Tidy_858;   FileReload }
-    item "File coded in &ISO-8859-1" { FileSave; HTML_Tidy_88591; FileReload }
-    item "File coded in &Win1252"    { FileSave; HTML_Tidy_1252;  FileReload }
-    item "File coded in &UTF-8"      { FileSave; HTML_Tidy_UTF8;  FileReload }
-%endif
-%if(LANG_ES)
+
     item "Archivo en IBM&858"     { FileSave; HTML_Tidy_858;   FileReload }
     item "Archivo en &ISO-8859-1" { FileSave; HTML_Tidy_88591; FileReload }
     item "Archivo en &Win1252"    { FileSave; HTML_Tidy_1252;  FileReload }
     item "Archivo en &UTF-8"      { FileSave; HTML_Tidy_UTF8;  FileReload }
-%endif
 }
 
 %if(TEXT_CONV)
@@ -32,37 +25,14 @@ menu Tidy_menu {
    item "&UTF-8"     { SavePos; MoveFileStart; Conv_ent_UTF8;  MoveSavedPos; }
   }
  menu Conv_ent      {
-   %if(LANG_EN)
-     item "&Numbers -> Names" { SavePos; MoveFileStart; Conv_num_ent; MoveSavedPos; }
-     item "N&ames -> Numbers" { SavePos; MoveFileStart; Conv_ent_num; MoveSavedPos; }
-   %endif
-   %if(LANG_ES)
+   
      item "&N£meros -> Nombres" {SavePos; MoveFileStart; Conv_num_ent; MoveSavedPos; }
      item "N&ombres -> N£meros" {SavePos; MoveFileStart; Conv_ent_num; MoveSavedPos; }
-   %endif
   }
 %endif
 
 menu HTMLTools {
-%if(LANG_EN)
-#    item "&Compile...\tF9" { Compile "make -k " }
-#    item "&Grep..." { Compile "grep -n " }
-#    item;
-    submenu "Save and &Tidy ",             Tidy_menu;
-    item    "Save and &ISpell"           { HTML_ISpell }
-    item    "Save &View in Browser\tF9"  { HTML_View }
-    item;
- %if(TEXT_CONV)
-    submenu "&Characters -> Entities",     Conv_char_ent;
-    submenu "&Entities -> Characters",     Conv_ent_char;
-    submenu "Convert entities",            Conv_ent;
-    item    "ASCII te&xt -> HTML C+H &x" { HTML_TXT }
-    item;
- %endif
-    item    "&Shell\tAlt+F9"             { RunProgram "" }
-    item    "&Run...\tCtrl+F9"           { RunProgram }
-%endif
-%if(LANG_ES)
+
     submenu "Corregir c¢digo con &Tidy",    Tidy_menu;
     item    "Corregir texto con &ISpell"  { HTML_ISpell }
     item    "&Ver en un navegador\tF9"    { HTML_View }
@@ -76,7 +46,6 @@ menu HTMLTools {
  %endif
     item    "Consola del &S.O.\tAlt+F9"   { RunProgram "" }
     item    "Ejecuta&r...\tCtrl+F9"       { RunProgram }
-%endif
 #   item;
 #   item    "&Previous error\tF11"       { CompilePrevError }
 #   item    "&Next error\tF12"           { CompileNextError }
