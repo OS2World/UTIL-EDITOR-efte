@@ -35,25 +35,27 @@ static void Version()
 static void Usage()
 {
     DieError(4, "Usage: " PROGRAM " [-?] [-h] [--help] [-CDHTmlrt] files...\n"
-	   "Version: " VERSION " " COPYRIGHT "\n"
-	   "   You may distribute under the terms of either the GNU General Public\n"
-	   "   License or the Artistic License, as specified in the README file.\n"
-	   "\n"
-	   "Options:\n"
-	   "  --                End of options, only files remain.\n"
-	   "  -+                Next option is file.\n"
-	   "  -? -h --help      Display usage.\n"
-	   "  --version         Display eFTE/2 version.\n"
-	   "  -v                Increase verbosity level.\n"
-	   "  -!                Ignore config file, use builtin defaults (also -c).\n"
-	   "  -C[<.cnf>]        Use specified configuration file must be full path to file (no arg=builtin).\n"
-	   "  -D[<.dsk>]        Load/Save desktop from <.dsk> file (no arg=disable desktop).\n"
-	   "  -H[<.his>]        Load/Save history from <.his> file (no arg=disable history).\n"
-	   "  -m[<mode>]        Override mode for remaining files (no arg=no override).\n"
-	   "  -l<line>[,<col>]  Go to line (and column) in next file.\n"
-	   "  -r                Open next file as read-only.\n"
-	   "  -T[<tagfile>]     Load tags file at startup.\n"
-	   "  -t<tag>           Locate specified tag.\n"
+             "Version: " VERSION " " COPYRIGHT "\n"
+             "   You may distribute under the terms of either the GNU General Public\n"
+             "   License or the Artistic License, as specified in the README file.\n"
+             "\n"
+             "Options:\n"
+             "  --                End of options, only files remain.\n"
+             "  -+                Next option is file.\n"
+             "  -? -h --help      Display usage.\n"
+             "  --debug<clean>    Write to efte.log append if not clean \n"
+             "  --version         Display eFTE/2 version.\n"
+             "  -v                Increase verbosity level.\n"
+             "  -!                Ignore config file, use builtin defaults (also -c).\n"
+             "  -C[<.cnf>]        Use specified configuration file must be full path to file (no arg=builtin).\n"
+             "  -d<defineterm>    Defines a term for use in %if() statements in config files \n"
+             "  -D[<.dsk>]        Load/Save desktop from <.dsk> file (no arg=disable desktop).\n"
+             "  -H[<.his>]        Load/Save history from <.his> file (no arg=disable history).\n"
+             "  -m[<mode>]        Override mode for remaining files (no arg=no override).\n"
+             "  -l<line>[,<col>]  Go to line (and column) in next file.\n"
+             "  -r                Open next file as read-only.\n"
+             "  -T[<tagfile>]     Load tags file at startup.\n"
+             "  -t<tag>           Locate specified tag.\n"
 //           "       -p        Load files into already running eFTE.\n"
 	);
 }
@@ -364,7 +366,6 @@ int main(int argc, char **argv)
 #endif
 
     if (CmdLoadConfiguration(argc, argv) == 0)
-	//UninstallExceptq(&exRegRec);
 	return 1;
 
     STARTFUNC("main");

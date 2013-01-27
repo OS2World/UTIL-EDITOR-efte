@@ -135,7 +135,16 @@ int CFteMain()
 #elif defined(NT)
 	       "NT"
 #endif
-	);
+              );
+
+    if (getenv("FM2"))
+        DefineWord("FM2");
+    if (getenv("OS2DDK"))
+        DefineWord("OS2DDK");
+    if (getenv("GNU"))
+        DefineWord("GNU");
+    if (getenv("LINUXKERNEL"))
+        DefineWord("LINUXKERNEL");
 
     CurPos cp;
 
@@ -761,7 +770,7 @@ static int GetNumber(CurPos & cp)
     int value = 0;
     int neg = 0;
 
-    if (cp.c < cp.z && *cp.c == '-' || *cp.c == '+') {
+    if (cp.c < cp.z && (*cp.c == '-' || *cp.c == '+')) {
 	if (*cp.c == '-')
 	    neg = 1;
 	cp.c++;

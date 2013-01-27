@@ -25,7 +25,7 @@ menu MChangeCIndentStyle {
     item "&FM2" {
         ChangeTabSize 8;
         SetIndentWithTabs 0
-        SetCIndentStyle 2 2 -1 0 2 0 2 -2 0 1 -1 2 -1
+        SetCIndentStyle 2 0 -1 0 2 0 2 -2 0 1 -1 2 -1
     }
 %endif
     # more...
