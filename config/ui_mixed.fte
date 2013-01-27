@@ -1,14 +1,8 @@
 # FTE 
 #if you chose MY UI style, then you have to choose a lang... in main.fte
 
-%if(LANG_ES)
-include 'uim_m_es.fte';
-include 'uim_k_es.fte';
-%endif
-%if(LANG_EN)
-include 'uim_m_en.fte';
-include 'uim_k_en.fte';
-%endif
+include 'menu/ui_m_fte.fte';
+include 'menu/ui_k_fte.fte';
 
 include 'menu/m_c.fte';
 %define(TEXT_CONV)

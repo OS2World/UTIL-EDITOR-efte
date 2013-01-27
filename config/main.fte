@@ -270,7 +270,7 @@ include 'ui_ws.fte';  # wordstar like
 include 'ui_ne.fte';  # norton classic editor - incomplete
 %endif
 %if(UI_MEW)
-include 'ui_m_ew.fte'; # MultiEdit4Windows
+include 'ui_ew.fte'; # MultiEdit4Windows
 %endif
 %if(UI_BRIEF)
 include 'ui_brief.fte'; # BRIEF/CRISP

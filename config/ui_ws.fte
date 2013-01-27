@@ -1,7 +1,7 @@
 # FTE 
 
-include 'ui_m_ws.fte';
-include 'ui_k_ws.fte';
+include 'menu/ui_m_ws.fte';
+include 'menu/ui_k_ws.fte';
 
 include 'menu/m_c.fte';
 %define(TEXT_CONV)
