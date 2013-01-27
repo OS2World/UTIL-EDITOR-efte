@@ -8,9 +8,7 @@
 # multiple items in any of the sets are uncommented
 # the first uncommented is used and the others are ignored.
 
-# Select spanish by uncommenting only %define(UI_ES) from the list
-# It is UI_MIXED with spanish menus. If you select it with any of the
-# other styles it does nothing.
+# Spanish works best with UI_MIXED. 
 
 # User inteface styles UI_KB effects pallette and UNIX font selection and
 # can you must select a second UI_* to load it.
@@ -20,16 +18,7 @@
 #%define(UI_NE)
 #%define(UI_BRIEF)
 #%define(UI_MIXED)
-#%define(UI_ES)
 # experimental
-
-%if(!UI_ES)
-%define(LANG_EN)
-%endif
-
-%if(UI_ES)
-%define(LANG_ES)
-%endif
 
 %if(!BSD_BRACE)
 %define(1TBS_BRACE)
@@ -274,9 +263,6 @@ include 'ui_ew.fte'; # MultiEdit4Windows
 %endif
 %if(UI_BRIEF)
 include 'ui_brief.fte'; # BRIEF/CRISP
-%endif
-%if(LANG_ES)
-include 'ui_mixed.fte';  # fte CUA style bindings + some Norton Editor keys...
 %endif
 %if(UI_MIXED)
 include 'ui_mixed.fte';  # fte CUA style bindings + some Norton Editor keys...
