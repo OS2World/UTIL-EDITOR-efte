@@ -263,9 +263,9 @@ menu HTML_Divs {
 
 %if(TEXT_CHARS)
 
-#include 'menu/chr_html/latin.fte';
-#include 'menu/chr_html/ents.fte';
-include 'menu/chr_html/jap.fte';
+#include 'charset/latin.fte';
+#include 'charset/ents.fte';
+include 'charset/jap.fte';
 
 menu HTML_SpChar {
 
