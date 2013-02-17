@@ -48,7 +48,7 @@ static void Usage()
              "  -v                Increase verbosity level.\n"
              "  -!                Ignore config file, use builtin defaults (also -c).\n"
              "  -C[<.cnf>]        Use specified configuration file must be full path to file (no arg=builtin).\n"
-             "  -d<defineterm>    Defines a term for use in %if() statements in config files \n"
+             "  -d<defineterm>    Defines a term for use in \%if() statements in config files \n"
              "  -D[<.dsk>]        Load/Save desktop from <.dsk> file (no arg=disable desktop).\n"
              "  -H[<.his>]        Load/Save history from <.his> file (no arg=disable history).\n"
              "  -m[<mode>]        Override mode for remaining files (no arg=no override).\n"
@@ -56,6 +56,7 @@ static void Usage()
              "  -r                Open next file as read-only.\n"
              "  -T[<tagfile>]     Load tags file at startup.\n"
              "  -t<tag>           Locate specified tag.\n"
+             "  -l<lang>          Choose the language where lang is the 2 letter lanuage code or \n nothing to default to english"
 //           "       -p        Load files into already running eFTE.\n"
 	);
 }
@@ -170,6 +171,11 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	    }
 	    else if (argv[Arg][1] == 'd') {
 		DefineWord(argv[Arg] + 2);
+            }
+            else if (argv[Arg][1] == 'l') {
+                translate = -1;
+                if (argv[Arg][2] && argv[Arg][3] && strnicmp("en", &argv[Arg][2], 2))
+                    snprintf(menupath, MAXPATH, "menu_%c%c", argv[Arg][2], argv[Arg][3]);
 	    }
 	    else if (argv[Arg][1] == 'c' || argv[Arg][1] == 'C') {
 		if (argv[Arg][2]) {
@@ -192,7 +198,53 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	}
     }
     else if (haveConfig != 2)
-	strcpy(ConfigFileName, "mymain.fte");
+        strcpy(ConfigFileName, "mymain.fte");
+
+    if (translate != -1) {
+        char *lang;
+
+        lang = getenv("LANG");
+        if (lang) {
+            if (!strnicmp(lang, "es", 2)) { //Spanish
+                translate = 1;
+                strcpy(menupath, "menu_es");
+            }
+            else if (!strnicmp(lang, "de", 2)) { // German
+                translate = 1;
+                strcpy(menupath, "menu_de");
+            }
+            else if (!strnicmp(lang, "cs", 2)) { // Czech
+                translate = 1;
+                strcpy(menupath, "menu_cs");
+            }
+            else if (!strnicmp(lang, "nl", 2)) { // Dutch
+                translate = 1;
+                strcpy(menupath, "menu_nl");
+            }
+            else if (!strnicmp(lang, "fr", 2)) { // French
+                translate = 1;
+                strcpy(menupath, "menu_fr");
+            }
+            else if (!strnicmp(lang, "it", 2)) { // Itailian
+                translate = 1;
+                strcpy(menupath, "menu_it");
+            }
+            else if (!strnicmp(lang, "no", 2)) { // Norwegian
+                translate = 1;
+                strcpy(menupath, "menu_no");
+            }
+            else if (!strnicmp(lang, "ru", 2)) { // Russian
+                translate = 1;
+                strcpy(menupath, "menu_ru");
+            }
+            else if (!strnicmp(lang, "sv", 2)) { //  Swedish
+                translate = 1;
+                strcpy(menupath, "menu_sv");
+            }
+            else
+                translate = 0;
+        } // if lang
+    } // if tanslate
 
     // Ignore system config?
     if (ign == 1) {
