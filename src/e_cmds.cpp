@@ -1672,12 +1672,12 @@ int EBuffer::BlockTrim()
 
 #define TOGGLE(x) \
     Flags.num[BFI_##x] = (Flags.num[BFI_##x]) ? 0 : 1; \
-    /*Msg(INFO, #x " is now %s.", Flags.num[BFI_##x] ? "ON" : "OFF");*/ \
+    Msg(S_INFO, #x " is now %s.", Flags.num[BFI_##x] ? "ON" : "OFF"); \
     return 1;
 
 #define TOGGLE_R(x) \
     Flags.num[BFI_##x] = (Flags.num[BFI_##x]) ? 0 : 1; \
-    /*Msg(INFO, #x " is now %s.", Flags.num[BFI_##x] ? "ON" : "OFF");*/ \
+    Msg(S_INFO, #x " is now %s.", Flags.num[BFI_##x] ? "ON" : "OFF"); \
     FullRedraw(); \
     return 1;
 
@@ -1775,10 +1775,10 @@ int EBuffer::ToggleMakeBackups()
 int EBuffer::ToggleWordWrap()
 {
     BFI(this, BFI_WordWrap) = (BFI(this, BFI_WordWrap) + 1) % 3;
-    /*Msg(INFO,
+    Msg(S_INFO,
        "WordWrap is now %s.",
        (BFI(this, BFI_WordWrap) == 2) ? "AUTO" :
-       (BFI(this, BFI_WordWrap) == 1) ? "ON" : "OFF"); */
+       (BFI(this, BFI_WordWrap) == 1) ? "ON" : "OFF");
     return 1;
 }
 
