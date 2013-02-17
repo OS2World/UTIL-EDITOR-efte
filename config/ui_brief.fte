@@ -1,7 +1,7 @@
 # Brief (work in progress)
 
 include 'menu/ui_m_fte.fte'; # TODO
-include 'menu/k_brief.fte'; # incomplete
+include 'menu/ui_k_brf.fte'; # incomplete
 
 include 'menu/m_c.fte';
 %define(TEXT_CONV)

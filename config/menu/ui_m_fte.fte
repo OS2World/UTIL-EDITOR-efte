@@ -103,21 +103,22 @@ menu MChangeModeMore {
 }
 
 menu Object {
-    item    "&Open...\tF3"              { FileOpen }
+    item    "&Open...\tF3"		{ FileOpen }
     submenu "Open in &Mode...\tCtrl+F3", MOpenInMode;
-%if(!GUI_PM)
-    submenu "Open in Mode more..",      MOpenInModeMore;
+%if(!GUI_PM)    
+    submenu "Open in Mode more..",	MOpenInModeMore;
 %endif
-    item    "Open &Binary"              { FileOpenInMode 'BIN' }
+    item    "Open &Binary"		{ FileOpenInMode 'BIN' }
     item;
     item    "Open &Directory\tC+M" { DirOpen }
     item;
-    item    "&Next\tAlt+Right"        { FileNext }
+    item    "&Next\tAlt+Right"	      { FileNext }
     item    "&Previous\tAlt+Left"     { FilePrev }
     item;
-    item    "&Close\tAlt+Q"           { FileClose }
+    item    "&Close\tAlt+Q"	      { FileClose }
+    item    "Close All"               { FileCloseAll }
     item;
-    item    "E&xit\tAlt+X"            { ExitEditor }
+    item    "E&xit\tAlt+X"	      { ExitEditor }
 }
 
 menu MCvs {
@@ -130,7 +131,7 @@ menu MCvs {
     item "CVS S&tatus" { RunCvs "status -v" }
     item "CV&S"        { Cvs }
     item;
-    item "&View CVS"      { ViewCvs }
+    item "&View CVS"	  { ViewCvs }
     item "View CVS Di&ff" { ViewCvsDiff }
     item "View CVS &log"  { ViewCvsLog }
     item;
@@ -145,9 +146,11 @@ menu MSvn {
     item "SVN &Add"    { RunSvn "add" }
     item "SVN &Remove" { RunSvn "remove" }
     item "SVN Lo&g"    { RunSvn "log" }
+    item "SVN Re&vert" { RunSvn "revert" }
+    item "SVN &Blame"  { RunSvn "blame" }
     item "SV&N"        { Svn }
     item;
-    item "&View SVN"    { ViewSvn }
+    item "&View SVN"	  { ViewSvn }
     item "View SVN Di&ff" { ViewSvnDiff }
     item "View SVN &log"  { ViewSvnLog }
     item;
@@ -155,9 +158,9 @@ menu MSvn {
 }
 
 menu Tools {
-    item "&Compile...\tF9" { Compile "make -k " }
+    item "&Compile...\tF9" { Compile "wmake -e " }
     item "&Grep..." { Compile "grep -n " }
-    item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+    item "Save and &ISpell" { FileSave; RunProgram "ispell.exe " . $FilePath; FileReload }
     item;
     item "&Shell\tAlt+F9" { RunProgram "" }
     item "&Run...\tCtrl+F9" { RunProgram }
@@ -176,9 +179,12 @@ menu Window {
     item "New &Frame" { FrameNew }
     item;
     item "Split &Horizontal\tCtrl+F4" { WinHSplit }
-    item "&Close view\tCtrl+Alt+F4" { WinClose }
+    item "&Close view\tShift+Alt+F4" { WinClose }
     item "Close &other views\tF5" { WinZoom }
+    item "&Next view\tF4" { WinNext }
+    item "&Prev view\tShift+F4" { WinPrev }
     item;
+    item "&Load Desktop" { DesktopLoad }
     item "Sa&ve Desktop" { DesktopSave }
     item "Save Desktop &As" { DesktopSaveAs }
     item;
@@ -195,66 +201,71 @@ menu Help {
 }
 
 menu Navigate {
-    item    "&Reload\tCtrl+R"         { Rescan }
+    item    "&Reload\tCtrl+R"	      { Rescan }
     item;
     item "Go &< level\tCtrl+PgUp"     { DirGoUp }
     item "Go &> level\tCtrl+PgDn"     { DirGoDown }
-    item "Go to &\\\tCtrl+\\"         { DirGoRoot }
+    item "Go to &\\\tCtrl+\\"	      { DirGoRoot }
     item "&/ Goto Dir\t/"             { DirGoto }
-    item "&Delete File\tCtrl+D"       { DeleteFile }
+    item;
+    item "R&ename File"               { RenameFile }
+    item "&Make Directory"            { MakeDirectory }
+    item;
+    item "Delete &File\tCtrl+D"       { DeleteFile }
 #    item;
 #    item '&C:\\' { DirGoto 'H:\\' }
 }
 
 
 menu File {
-    item    "&Open...\tF3"              { FileOpen }
+    item    "&Open...\tF3"		{ FileOpen }
     submenu "Open in &Mode...\tCtrl+F3", MOpenInMode;
 %if(!GUI_PM)
-    submenu "Open in more",             MOpenInModeMore;
+    submenu "Open in more",		MOpenInModeMore;
 %endif
-    item    "Open &Binary..."           { FileOpenInMode 'BIN' }
-    item    "Open &Directory\tC+M"      { DirOpen }
-    item    "&Reload\tShift+F3"         { FileReload }
+    item    "Open &Binary..."		{ FileOpenInMode 'BIN' }
+    item    "Open &Directory\tC+M"	{ DirOpen }
+    item    "&Reload\tShift+F3" 	{ FileReload }
     item;
-    item    "&Save\tF2"                 { FileSave }
-    item    "Save &As...\tShift+F2"     { FileSaveAs }
-    item    "Save Al&l\tCtrl+F2"        { FileSaveAll }
-    item    "Write &To..."              { FileWriteTo }
+    item    "&Save\tF2" 		{ FileSave }
+    item    "Save &As...\tShift+F2"	{ FileSaveAs }
+    item    "Save Al&l\tCtrl+F2"	{ FileSaveAll }
+    item    "Write &To..."		{ FileWriteTo }
     item;
-    item    "Prin&t"                    { FilePrint }
+    item    "Prin&t"			{ FilePrint }
     item;
-    item    "&Next\tAlt+Right"          { FileNext }
-    item    "&Previous\tAlt+Left"       { FilePrev }
+    item    "&Next\tAlt+Right"		{ FileNext }
+    item    "&Previous\tAlt+Left"	{ FilePrev }
     item;
-    item    "&Close\tAlt+Q"             { FileClose }
+    item    "&Close\tAlt+Q"		{ FileClose }
+    item    "Close All"                 { FileCloseAll }
     item;
-    item    "E&xit\tAlt+X"              { ExitEditor }
+    item    "E&xit\tAlt+X"		{ ExitEditor }
 }
 
 menu Line {
-    item "&Insert line\tShift+Enter"    { LineInsert }
-    item "&Add line\tAlt+Enter"         { LineAdd }
-    item "&Split line\tCtrl+Enter"      { LineSplit }
-    item "&Join line\tCtrl+J"           { LineJoin }
-    item "Dup&licate line\tCtrl+D"      { LineDuplicate }
-    item "&Delete line\tCtrl+Y"         { KillLine }
-    item "&Center line"                  { LineCenter }
+    item "&Insert line\tShift+Enter"	{ LineInsert }
+    item "&Add line\tAlt+Enter" 	{ LineAdd }
+    item "&Split line\tCtrl+Enter"	{ LineSplit }
+    item "&Join line\tCtrl+J"		{ LineJoin }
+    item "Dup&licate line\tCtrl+D"	{ LineDuplicate }
+    item "&Delete line\tCtrl+Y" 	{ KillLine }
+    item "&Center line" 		 { LineCenter }
     item;
     item "Delete to line &end\tAlt+End" { KillToLineEnd }
     item "Delete to li&ne start\tCtrl+Sh+BackSp" { KillToLineStart }
     item;
     item "Comment\tCtrl+Alt+C" {
-        MoveLineStart; ?FindReplace /^(\s*)/ /\/\/  \1/ "xnc"; MoveDown
+	MoveLineStart; ?FindReplace /^(\s*)/ /\/\/  \1/ "xnc"; MoveDown
     }
     item "Uncomment\tCtrl+Alt+U" {
-        MoveLineStart; ?FindReplace /^[\/][\/]  / // "xnc"; MoveDown
+	MoveLineStart; ?FindReplace /^[\/][\/]	/ // "xnc"; MoveDown
     }
     item;
-    item "&Uppercase"         { LineCaseUp }
-    item "&Lowercase"         { LineCaseDown }
-    item "&Togglecase"        { LineCaseToggle }
-    item "&Rot13"             { LineTrans 'A-Za-z' 'N-ZA-Mn-za-m' }
+    item "&Uppercase"	      { LineCaseUp }
+    item "&Lowercase"	      { LineCaseDown }
+    item "&Togglecase"	      { LineCaseToggle }
+    item "&Rot13"	      { LineTrans 'A-Za-z' 'N-ZA-Mn-za-m' }
     item;
     item "User &specified..." { LineTrans }
 }
@@ -269,7 +280,7 @@ menu Edit {
     item "Copy-Appe&nd" { BlockCopyAppend }
     item "&Paste Stream\tShift+Ins" { BlockPasteStream }
     item "Paste Colu&mn\tAlt+Ins"   { BlockPasteColumn }
-    item "Paste Li&ne"              { BlockPasteLine }
+    item "Paste Li&ne"		    { BlockPasteLine }
     item "Cl&ear\tCtrl+Del" { BlockKill }
     item;
     submenu "&Line", Line;
@@ -279,47 +290,49 @@ menu Edit {
 }
 
 menu Translate {
-    item "&Uppercase"         { BlockCaseUp }
-    item "&Lowercase"         { BlockCaseDown }
-    item "&Togglecase"        { BlockCaseToggle }
-    item "&Rot13"             { BlockTrans 'A-Za-z' 'N-ZA-Mn-za-m' }
+    item "&Uppercase"	      { BlockCaseUp }
+    item "&Lowercase"	      { BlockCaseDown }
+    item "&Togglecase"	      { BlockCaseToggle }
+    item "&Rot13"	      { BlockTrans 'A-Za-z' 'N-ZA-Mn-za-m' }
     item;
     item "User &specified..." { BlockTrans }
 }
 
 menu Block {
-    item "&Unmark\tEsc"          { BlockUnmark }
-    item "Mark &Stream\tAlt+A"   { BlockMarkStream }
-    item "Mark &Column\tAlt+K"   { BlockMarkColumn }
-    item "Mark &Line\tAlt+J"     { BlockMarkLine }
+    item "&Unmark\tEsc" 	 { BlockUnmark }
+    item "Mark &Stream\tAlt+A"	 { BlockMarkStream }
+    item "Mark &Column\tAlt+K"	 { BlockMarkColumn }
+    item "Mark &Line\tAlt+L"	 { BlockMarkLine }
     item;
-#    item "Select Wor&d"   { BlockSelectWord }
-#    item "Selec&t Line"   { BlockSelectLine }
-#    item;
-    item "&Write..."             { BlockWrite }
-    item "&Read Stream..."       { BlockReadStream }
-    item "Re&ad Column..."       { BlockReadColumn }
-    item "Rea&d Line..."         { BlockReadLine }
-    item "&Print"                { BlockPrint }
+    item "Select Wor&d"   { BlockSelectWord }
+    item "Selec&t Line"   { BlockSelectLine }
     item;
-    submenu "Translat&e",        Translate;
-    item "&Indent\tAlt+I"        { BlockIndent }
-    item "U&nindent\tAlt+U"      { BlockUnindent }
-    item "E&xpand Tabs"          { BlockUnTab }
-    item "&Generate Tabs"        { BlockEnTab }
-    item "Sor&t"                 { BlockSort }
-    item "Sort Re&verse"         { BlockSortReverse }
+    item "&Write..."		 { BlockWrite }
+    item "&Read Stream..."	 { BlockReadStream }
+    item "Re&ad Column..."	 { BlockReadColumn }
+    item "Rea&d Line..."	 { BlockReadLine }
+    item "&Print"		 { BlockPrint }
+    item;
+    item "&Indent\tAlt+I"	 { BlockIndent }
+    item "U&nindent\tAlt+U"	 { BlockUnindent }
+    item "R&eIndent\tAlt+\\"     { BlockReIndent }
+    item;
+    submenu "Translat&e",	 Translate;
+    item "E&xpand Tabs" 	 { BlockUnTab }
+    item "&Generate Tabs"	 { BlockEnTab }
+    item "Sor&t"		 { BlockSort }
+    item "Sort Re&verse"	 { BlockSortReverse }
 }
 
 menu Tags {
-    item "&Find word\tCtrl+]"          { TagFindWord }
+    item "&Find word\tCtrl+]"	       { TagFindWord }
     item "&Search tag...\tCtrl+Sh+]"   { TagFind }
-    item "&Go back\tCtrl+["            { TagPop }
-    item "&Next tag\tAlt+]"            { TagNext }
+    item "&Go back\tCtrl+["	       { TagPop }
+    item "&Next tag\tAlt+]"	       { TagNext }
     item "&Previous tag\tAlt+["        { TagPrev }
     item;
-    item "&Load tags..."               { TagLoad }
-    item "&Clear tags"                 { TagClear }
+    item "&Load tags..."	       { TagLoad }
+    item "&Clear tags"		       { TagClear }
 }
 
 menu SearchWords {
@@ -329,9 +342,9 @@ menu SearchWords {
 }
 
 menu Search {
-    item "&Find...\tF7" { Find }
-    item "Find &Next\tSh+F7" { FindRepeat }
-    item "Find &Prev\tAlt+F7" { FindRepeatReverse }
+    item "&Find...\tCtrl+F" { Find }
+    item "Find &Next\tCtrl+G" { FindRepeat }
+    item "Find &Prev\tCtrl+H" { FindRepeatReverse }
     item "Find and &Replace...\tCtrl+R" { FindReplace }
     item;
     item "P&lace Bookmark..." { PlaceBookmark }
@@ -339,9 +352,9 @@ menu Search {
     item;
     submenu "&Tags", Tags;
     item "&Match Parenthesis\tAlt+-" { MatchBracket }
-    item "&Goto Line...\tAlt+L" { MoveToLine }
+    item "&Goto Line...\tAlt+J" { MoveToLine }
     item "Goto &Column..." { MoveToColumn }
-    submenu "&Word at cursor", SearchWords;
+    submenu "Current &Word", SearchWords;
 }
 
 menu Fold {
@@ -367,63 +380,61 @@ menu Fold {
 }
 
 eventmap PLAIN: MODEL {
-    key     [A+`]      { CharCaseToggle ; MoveRight }
+    key     [A+\`]	{ CharCaseToggle ; MoveRight }
 }
 
 menu Toggle {
-    item "Charac&ter case\tA+`"         { CharCaseToggle }
-    item "&Auto indent\tC+O C+A"        { ToggleAutoIndent }
-    item "&Case sensitive\tC+O C+C"     { ToggleMatchCase }
-    item "Trim &EOL spaces\tC+O C+E"    { ToggleTrim }
-    item "&Undo/Redo\tC+O C+U"          { ToggleUndo }
-    item "&Read only\tC+O C+R"          { ToggleReadOnly }
-    item "&Keep backups"                { ToggleKeepBackups }
-    item "&Make backups"                { ToggleMakeBackups }
-    item "&Backspace Unindents"         { ToggleBackSpUnindents }
+    item "Charac&ter case\tA+`"		{ CharCaseToggle }
+    item "&Auto indent\tC+O C+A"	{ ToggleAutoIndent }
+    item "&Case sensitive\tC+O C+C"	{ ToggleMatchCase }
+    item "Trim &EOL spaces\tC+O C+E"	{ ToggleTrim }
+    item "&Undo/Redo\tC+O C+U"		{ ToggleUndo }
+    item "&Read only\tC+O C+R"		{ ToggleReadOnly }
+    item "&Keep backups"		{ ToggleKeepBackups }
+    item "&Make backups"		{ ToggleMakeBackups }
+    item "&Backspace Unindents"		{ ToggleBackSpUnindents }
     item;
-    item "I&ndent with tabs"            { ToggleIndentWithTabs }
-    item "S&pace tabs"                  { ToggleSpaceTabs }
-    item "Backspace k&ill tab"          { ToggleBackSpKillTab }
-    item "&Delete kill tab"             { ToggleDeleteKillTab }
+    item "I&ndent with tabs"		{ ToggleIndentWithTabs }
+    item "S&pace tabs"			{ ToggleSpaceTabs }
+    item "Backspace k&ill tab"		{ ToggleBackSpKillTab }
+    item "&Delete kill tab"		{ ToggleDeleteKillTab }
 }
 menu Options {
     submenu "Change &mode\tC+O C+M",  MChangeMode;
 %if(!GUI_PM)
-    submenu "Change mode more",       MChangeModeMore;
+    submenu "Change mode more",	      MChangeModeMore;
 %endif
     submenu "Change C in&dent style", MChangeCIndentStyle;
     item;
     submenu "&Toggle", Toggle;
-    item "&Insert mode\tC+O C+I"        { ToggleInsert }
-    item "&Word wrap\tC+O C+W"          { ToggleWordWrap }
+    item "&Insert mode\tC+O C+I"	{ ToggleInsert }
+    item "&Word wrap\tC+O C+W"		{ ToggleWordWrap }
     item;
-    item "&Left margin...\tC+O A+["     { ChangeLeftMargin }
-    item "Ri&ght margin...\tC+O A+]"    { ChangeRightMargin }
+    item "&Left margin...\tC+O A+["	{ ChangeLeftMargin }
+    item "Ri&ght margin...\tC+O A+]"	{ ChangeRightMargin }
     item;
-    item "&Show markers\tC+O ."         { ToggleShowMarkers; WinRefresh }
-    item "Highlight tags"               { ToggleHilitTags; WinRefresh }
-    item "Show &bookmarks"              { ToggleShowBookmarks; WinRefresh }
-    item "S&how tabs\tC+O Tab"          { ToggleShowTabs; WinRefresh }
-    item "&Tab size...\tC+O C+T"        { ChangeTabSize; WinRefresh }
-    item "E&xpand tabs\tC+O C+Tab"      { ToggleExpandTabs; WinRefresh }
-    item "&Insert tabulator\tS+Tab"     { InsertTab }
-    item "File Trim &EOL"               { FileTrim; WinRefresh }
-    item "I&ndent block\tAlt+\\"        { BlockReIndent; FileTrim; WinRefresh }
-    item "&Print to..."                 { SetPrintDevice }
-    item;
-    item "Rec&ompile Configuration" { ConfigRecompile }
+    item "&Show markers\tC+O C+."	{ ToggleShowMarkers; WinRefresh }
+    item "Highlight tags"		{ ToggleHilitTags; WinRefresh }
+    item "Show &bookmarks"		{ ToggleShowBookmarks; WinRefresh }
+    item "S&how tabs\tC+O   Tab"	{ ToggleShowTabs; WinRefresh }
+    item "&Tab size...\tC+O C+T"	{ ChangeTabSize; WinRefresh }
+    item "E&xpand tabs\tC+O C+Tab"	{ ToggleExpandTabs; WinRefresh }
+    item "&Insert tabulator\tS+Tab"	{ InsertTab }
+    item "File Trim &EOL"		{ FileTrim; WinRefresh }
+    item "I&ndent block\tAlt+\\"	{ BlockReIndent; FileTrim; WinRefresh }
+    item "&Print to..."			{ SetPrintDevice }
 }
 
 menu Main {
-    submenu "&File",    File;
-    submenu "&Edit",    Edit;
-    submenu "&Block",   Block;
-    submenu "&Search",  Search;
-    submenu "Fol&d",    Fold;
-    submenu "&Tools",   Tools;
-    submenu "&Window",  Window;
+    submenu "&File",	File;
+    submenu "&Edit",	Edit;
+    submenu "&Block",	Block;
+    submenu "&Search",	Search;
+    submenu "Fol&d",	Fold;
+    submenu "&Tools",	Tools;
+    submenu "&Window",	Window;
     submenu "&Options", Options;
-    submenu "&Help",    Help;
+    submenu "&Help",	Help;
 }
 
 menu Local {
@@ -438,52 +449,52 @@ menu Local {
     item;
     item "I&ndent block\tAlt+\\"   { BlockReIndent; FileTrim; WinRefresh }
     item;
-    item "&Save\tF2"    { FileSave }
+    item "&Save\tF2"	{ FileSave }
     item "Cl&ose\tAlt+Q" { FileClose }
 }
 
 menu DirectoryFile {
     item    "&Selected\tEnter" { Activate }
     item;
-    item    "&Open...\tF3"              { FileOpen }
+    item    "&Open...\tF3"		{ FileOpen }
     submenu "Open in &Mode...\tCtrl+F3", MOpenInMode;
-    item    "Open &Binary"              { FileOpenInMode 'BIN' }
+    item    "Open &Binary"		{ FileOpenInMode 'BIN' }
     item;
-    item    "&Next\tAlt+Right"        { FileNext }
+    item    "&Next\tAlt+Right"	      { FileNext }
     item    "&Previous\tAlt+Left"     { FilePrev }
     item;
-    item    "&Close\tAlt+Q"           { FileClose }
+    item    "&Close\tAlt+Q"	      { FileClose }
     item;
-    item    "E&xit\tAlt+X"            { ExitEditor }
+    item    "E&xit\tAlt+X"	      { ExitEditor }
 }
 
 menu DirectoryMain {
     submenu "&File", DirectoryFile;
     submenu "&Navigate", Navigate;
     submenu "&Tools", Tools;
-    submenu "&Window",  Window;
-    submenu "&Help",    Help;
+    submenu "&Window",	Window;
+    submenu "&Help",	Help;
 }
 
 menu MessagesMain {
     submenu "&File", Object;
     submenu "&Tools", Tools;
     submenu "&Window", Window;
-    submenu "&Help",    Help;
+    submenu "&Help",	Help;
 }
 
 menu RoutinesMain {
     submenu "&File", Object;
     submenu "&Tools", Tools;
     submenu "&Window", Window;
-    submenu "&Help",    Help;
+    submenu "&Help",	Help;
 }
 
 menu BufferListMain {
     submenu "&File", Object;
     submenu "&Tools", Tools;
     submenu "&Window", Window;
-    submenu "&Help",    Help;
+    submenu "&Help",	Help;
 }
 
 menu EventMapViewMain {
@@ -496,13 +507,17 @@ menu EventMapViewMain {
 menu DirectoryLocal {
     item "&Open" { Activate }
     item;
-    item "&Reload\tCtrl+R"         { Rescan }
+    item    "&Reload\tCtrl+R"	      { Rescan }
     item;
     item "Go &< level\tCtrl+PgUp"     { DirGoUp }
     item "Go &> level\tCtrl+PgDn"     { DirGoDown }
-    item "Go to &\\\tCtrl+\\"         { DirGoRoot }
+    item "Go to &\\\tCtrl+\\"	      { DirGoRoot }
     item "&/ Goto Dir\t/"             { DirGoto }
-    item "&Delete File\tCtrl+D"       { DeleteFile }
+    item;
+    item "R&ename File"               { RenameFile }
+    item "&Make Directory"            { MakeDirectory }
+    item;
+    item "Delete &File\tCtrl+D"       { DeleteFile }
 }
 
 menu BufferListLocal {

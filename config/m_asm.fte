@@ -152,7 +152,7 @@ colorize ASM {
 }
 
 mode ASM: SOURCE {
-    FileNameRx          = /\.\cASM$/;
+    FileNameRx          = /\.\c{{ASM}|{ASMX}}$/;
     HilitOn             = 1;
     Colorizer           = 'ASM';
     AutoHilitParen      = 1;
