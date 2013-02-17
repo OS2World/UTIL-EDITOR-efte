@@ -45,6 +45,8 @@ typedef struct
 DefinedMacro;
 
 char ConfigDir[MAXPATH] = ".";
+char menupath[MAXPATH] = "menu";
+int translate = 0;
 
 // Cached objects
 CachedObject cache[CACHE_SIZE];
@@ -145,6 +147,7 @@ int CFteMain()
         DefineWord("GNU");
     if (getenv("LINUXKERNEL"))
         DefineWord("LINUXKERNEL");
+
 
     CurPos cp;
 
@@ -1829,15 +1832,21 @@ static int ParseConfigFile(CurPos & cp)
 		}
 		break;
 	    case K_INCLUDE:{
-		    char *fn;
+                    char *fn;
+                    char temp[MAXPATH];
+                    bool usetemp = 0;
 
 		    if (Parse(cp) != P_STRING)
 			Fail(cp, "String expected");
-		    fn = GetString(cp);
-
+                    fn = GetString(cp);
+                    if (translate != 0 && stricmp(menupath, "menu") &&
+                        (strstr(strlwr(fn), "menu/") || strstr(strlwr(fn), "menu\\"))) {
+                        snprintf(temp, MAXPATH, "%s/%s", menupath, fn + 5);
+                        usetemp = 1;
+                    }
 		    if (verbosity > 0)
 			fprintf(stderr, ACTION "%s... ", "include", fn);
-		    if (LoadFile(cp.name, fn) != 0)
+                    if (LoadFile(cp.name, usetemp ? temp : fn) != 0)
 			Fail(cp, "Include of file '%s' failed", fn);
 		    if (Parse(cp) != P_EOS)
 			Fail(cp, "';' expected");
@@ -1846,14 +1855,20 @@ static int ParseConfigFile(CurPos & cp)
 		break;
 	    case K_OINCLUDE:{
 		    char *fn;
+                    char temp[MAXPATH];
+                    bool usetemp = 0;
 
 		    if (Parse(cp) != P_STRING)
 			Fail(cp, "String expected");
 		    fn = GetString(cp);
-
+                    if (translate != 0 && stricmp(menupath, "menu") &&
+                        (strstr(strlwr(fn), "menu/") || strstr(strlwr(fn), "menu\\"))) {
+                        snprintf(temp, MAXPATH, "%s/%s", menupath, fn + 5);
+                        usetemp = 1;
+                    }
 		    if (verbosity > 1)
 			fprintf(stderr, ACTION "%s... ", "opt include", fn);
-		    if (LoadFile(cp.name, fn, 1, 1) != 0) {
+		    if (LoadFile(cp.name, usetemp ? temp : fn, 1, 1) != 0) {
 			if (verbosity > 1)
 			    fprintf(stderr, "not found\n");
 			GetOp(cp, P_EOS);
@@ -2186,18 +2201,28 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		found = true;
 		//printf("Config path %s \n", dirs[idx]);
 		break;
-	    }
+            }
+            else if (strstr(Cfg, "menu_")) {
+                strcpy(strstr(Cfg, "menu_") + 4 , strstr(Cfg, "menu_") + 7);
+                if (FileExists(Cfg)) {
+                    found = true;\
+                    //printf("Config path %s \n", dirs[idx]);
+                    break;
+                }
+            }
         }
         if (found == false && stricmp(Cfg, "edefault.fte") && !checked && !optional){
-            ChoiceInfo * choice;
+            ChoiceInfo *choice;
             char s[MAXPATH];
 
+            choice = (ChoiceInfo *) malloc(sizeof(ChoiceInfo));
             choice->Title = "Do you want to load the default configuration?";
             choice->Format = "Cannot find configuration file %s";
             choice->Message = Cfg;
             //printf("Config path %s %s \n", choice->Title, Cfg);
             rc = EarlyDoChoice(choice);
             //printf("EDC %i \n", rc);
+            free(choice);
             if (rc == 0) {
                 checked = true;
                 strlcpy(dirs[0], ".\\edefault.fte", sizeof(dirs[0]));
@@ -2216,6 +2241,8 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
                 return -1;
             }
         }
+        else
+            checked = true;
 
 	if (found == false && optional == 1)
 	    return -1;

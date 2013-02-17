@@ -76,6 +76,8 @@ extern int ReassignModelIds;
 extern int RecheckReadOnly;
 extern char XShellCommand[256];
 extern char BackupDirectory[MAXPATH];
+extern char menupath[MAXPATH];
+extern int translate;
 
 const char *GetGUICharacters(const char *which, const char *defChars);
 int LoadConfig(int argc, char **argv, char *CfgFileName);
