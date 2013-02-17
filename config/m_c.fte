@@ -88,17 +88,19 @@ colorize C {
 
 	# C++0x (C++ 11) keywords
 	# Source: N2798, Working Draft, Standard for Programming Language C++, 2008-10-04
-	'alignof',
-	'axiom',
+        'alignas',
+        'alignof',
+	#'axiom',
 	'char16_t',
 	'char32_t',
-	'concept',
-	'concept_map',
+	#'concept',
+	#'concept_map',
 	'constexpr',
 	'decltype',
-	'late_check',
+        'late_check',
+        'noexcept',
 	'nullptr',
-	'requires',
+	#'requires',
 	'static_assert',
 	'thread_local',
 

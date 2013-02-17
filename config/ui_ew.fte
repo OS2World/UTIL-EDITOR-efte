@@ -1,0 +1,19 @@
+# NE
+
+include 'menu/ui_m_ew.fte';
+#include 'ui_k_ne.fte';
+
+include 'menu/m_c.fte';
+%define(TEXT_CONV)
+include 'htmlconv.fte';
+%define(TEXT_CHARS)
+include 'htmlchar.fte';
+include 'menu/m_html.fte';
+include 'menu/m_css.fte';
+
+include 'kbd/k_c.fte';
+include 'kbd/k_java.fte';
+include 'kbd/k_perl.fte';
+include 'kbd/k_rexx.fte';
+include 'kbd/k_fte.fte';
+include 'kbd/k_html.fte';
