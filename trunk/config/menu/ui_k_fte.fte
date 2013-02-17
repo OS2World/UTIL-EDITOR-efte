@@ -289,15 +289,14 @@ eventmap PLAIN: MODEL {
     key     [A+E]       { MainMenu 'E' }
     key     [A+G]       { BlockCut }
     key     [A+I]       { BlockIndent }
-#    key     [A+J]       { MoveToLine }
-    key     [A+L]       { MoveToLine }
+    key     [A+J]       { MoveToLine }
     key     [A+K]       { BlockMarkColumn }
-#    key     [A+L]       { BlockMarkLine }
-    key     [A+J]       { BlockMarkLine }
+    key     [A+L]       { BlockMarkLine }
     key     [A+O]       { MainMenu 'O' }
     key     [A+R]       { WrapPara }           # Reformat
     key     [A+S]       { MainMenu 'S' }
     key     [A+U]       { BlockUnindent }
+    key     [A+\\]      { BlockReIndent }
     key     [C+S]       { IncrementalSearch }
 
     key     [C+O_C+A]   { ToggleAutoIndent }
@@ -313,7 +312,7 @@ eventmap PLAIN: MODEL {
     key     [C+O_C+W]   { ToggleWordWrap }
     key     [C+O_C+V]   { ShowMenu 'MCvs' }
     key     [C+O_C+N]   { ShowMenu 'MSvn' }
-    key     [C+O_.]     { ToggleShowMarkers }
+    key     [C+O_C+.]   { ToggleShowMarkers }
     key     [C+O_[]     { SetLeftMargin }     # set margin to current cursor pos
     key     [C+O_\]]    { SetRightMargin }
     key     [C+O_A+[]   { ChangeLeftMargin }
