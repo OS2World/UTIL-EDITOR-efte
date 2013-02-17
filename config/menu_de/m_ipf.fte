@@ -1,0 +1,51 @@
+menu IPF_Tools {
+
+   item "&Compile" { FileSave; RunProgram "ipfc \"" . $FilePath."\""; }
+   item "&Grep..." { Compile "grep -n " }
+   item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
+#   item "Save, compile and &view\tF9"  { }
+   item;
+   item "&Unencode ascii-only entities"        { SavePos; MoveFileStart; IPF_ent_ascii;  MoveSavedPos; }
+   item "Convert entities to &text (IBM850)"  { SavePos; MoveFileStart; IPF_ent_ibm850; MoveSavedPos; }
+   item "Convert entities to te&xt (Win1252)" { SavePos; MoveFileStart; IPF_ent_win1252;MoveSavedPos; }
+   item;
+   item "&Encode ascii-only entities"          { SavePos; MoveFileStart; IPF_ascii_ent;  MoveSavedPos; }
+   item "Convert text to entities (IBM&850)"  { SavePos; MoveFileStart; IPF_ibm850_ent; MoveSavedPos; }
+   item "Convert text to entities (Win&1252)" { SavePos; MoveFileStart; IPF_win1252_ent;MoveSavedPos; }
+   item;
+   item "&Fix typical problems with colons"    { SavePos; MoveFileStart; IPF_2colon;MoveSavedPos; }
+   item;
+   item    "&Shell\tAlt+F9"             { RunProgram "" }
+   item    "&Run...\tCtrl+F9"           { RunProgram }
+   item;
+   submenu "C&VS\tC+O_C+V", MCvs;
+   submenu "SVN\tC+O_C+N", MSvn;
+}
+
+menu Help_IPF {
+    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+%if(OS_OS2)
+    item "&IPF" { RunProgram "view IPFREF.INF" }
+%endif
+    item;    
+    item "&About..." { ShowVersion }
+}
+
+menu Main_IPF {
+
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "IPF &Tools",   IPF_Tools;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help_IPF;
+}
+
+eventmap IPF {
+    MainMenu  = "Main_IPF";   # menu for menubar
+}

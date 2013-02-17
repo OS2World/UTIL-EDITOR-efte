@@ -1,0 +1,61 @@
+# maintained by mrwarper@yahoo.es
+# Revision 2006/06/16
+
+# HTML Tools
+
+menu Tidy_menu {
+
+    item "File coded in IBM&858"     { FileSave; HTML_Tidy_858;   FileReload }
+    item "File coded in &ISO-8859-1" { FileSave; HTML_Tidy_88591; FileReload }
+    item "File coded in &Win1252"    { FileSave; HTML_Tidy_1252;  FileReload }
+    item "File coded in &UTF-8"      { FileSave; HTML_Tidy_UTF8;  FileReload }
+}
+
+%if(TEXT_CONV)
+ menu Conv_char_ent {
+   item "IBM&858"    { SavePos; MoveFileStart; Conv_858_ent;   MoveSavedPos; }
+   item "&ISO8859-1" { SavePos; MoveFileStart; Conv_88591_ent; MoveSavedPos; }
+   item "&Win1252"   { SavePos; MoveFileStart; Conv_1252_ent;  MoveSavedPos; }
+   item "&UTF-8"     { SavePos; MoveFileStart; Conv_UTF8_ent;  MoveSavedPos; }
+  }
+ menu Conv_ent_char {
+   item "IBM&858"    { SavePos; MoveFileStart; Conv_ent_858;   MoveSavedPos; }
+   item "&ISO8859-1" { SavePos; MoveFileStart; Conv_ent_88591; MoveSavedPos; }
+   item "&Win1252"   { SavePos; MoveFileStart; Conv_ent_1252;  MoveSavedPos; }
+   item "&UTF-8"     { SavePos; MoveFileStart; Conv_ent_UTF8;  MoveSavedPos; }
+  }
+ menu Conv_ent      {
+   
+     item "&Numbers -> Names" { SavePos; MoveFileStart; Conv_num_ent; MoveSavedPos; }
+     item "N&ames -> Numbers" { SavePos; MoveFileStart; Conv_ent_num; MoveSavedPos; }
+  }
+%endif
+
+menu HTMLTools {
+
+#    item "&Compile...\tF9" { Compile "make -k " }
+#    item "&Grep..." { Compile "grep -n " }
+#    item;
+    submenu "Save and &Tidy ",             Tidy_menu;
+    item    "Save and &ISpell"           { HTML_ISpell }
+    item    "Save &View in Browser\tF9"  { HTML_View }
+    item;
+%if(TEXT_CONV)
+    submenu "&Characters -> Entities",     Conv_char_ent;
+    submenu "&Entities -> Characters",     Conv_ent_char;
+    submenu "Convert entities",            Conv_ent;
+    item    "ASCII te&xt -> HTML C+H &x" { HTML_TXT }
+    item;
+%endif
+    item    "&Shell\tAlt+F9"             { RunProgram "" }
+    item    "&Run...\tCtrl+F9"           { RunProgram }
+#   item;
+#   item    "&Previous error\tF11"       { CompilePrevError }
+#   item    "&Next error\tF12"           { CompileNextError }
+#   item;
+#   item    "&Messages\tS+F9"            { ViewMessages }
+#   item    "C&lear Messages"            { ClearMessages }
+    item;
+    submenu "C&VS\tC+O_C+V", MCvs;
+    submenu "SVN\tC+O_C+N", MSvn;
+}

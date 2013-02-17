@@ -1,0 +1,345 @@
+# FTE menus for editing HTML files
+# maintained by m_debusk@sourceforge.com
+# Revision 2001-11-18
+# maintained by mrwarper@yahoo.es
+# Revision 2007/12/01
+
+include 'menu/m_html_t.fte';
+
+# HTML
+
+menu HTML_BaseDoc {
+
+  item "&Normal   C+H 0"     { HTML_Base }
+  item "&Frameset"           { HTML_BaseFrame }
+}
+
+# HTML_Base
+
+menu HTML_DTD {
+  item "XHTML 1.0 &Transitional" { HTML_DTD_X1T }
+  item "XHTML 1.0 &Strict"       { HTML_DTD_X1S }
+  item "XHTML 1.0 &Frameset"     { HTML_DTD_X1F }
+  item;
+  item "HTML &4.01 Transitional" { HTML_DTD_4T }
+  item "HTML 4.0&1 Strict"       { HTML_DTD_4S }
+  item "HTML 4.&01 Frameset"     { HTML_DTD_4F }
+  item;
+  item "HTML &3.2 Final"         { HTML_DTD_32F }
+  item;
+  item "HTML &2.0"               { HTML_DTD_2 }
+}
+
+menu HTML_Frames {
+    item    "&Frameset     <frameset> C+H 7  " { HTML_FRAMESET }
+    item    "F&rame        <frame>    C+H A+F" { HTML_FRAME }
+    item    "&No Frames    <noframes> C+H C+R" { HTML_NOFRAMES }
+    item    "&Inline Frame <iframe>          " { HTML_IFRAME }
+}
+
+menu HTML_Base {
+    submenu "&DTDs", HTML_DTD;
+    item    "&HTML <html> C+H C+Z" { HTML_HTM }
+    item    "Hea&d <head> C+H 8  " { HTML_HEAD }
+    item    "&Body <body> C+H 9  " { HTML_BODY }
+    submenu "&Frames", HTML_Frames;
+}
+
+# Head element menus...
+
+menu HTML_encoding {
+  item "us-&ascii"   { HTML_enc_ascii }
+  item "IBM&858"     { HTML_enc_858   }
+  item "&ISO-8859-1" { HTML_enc_88591 }
+  item "&Win1252"    { HTML_enc_1252  }
+  item "&UTF-8"      { HTML_enc_UTF8  }
+  item "&Custom"     { HTML_enc_gen   }
+}
+
+menu HTML_Head_Meta {
+
+  submenu "&Encoding",  HTML_encoding;
+  item "&Refresh"     { HTML_refresh }
+  item "&Description" { HTML_meta_desc }
+  item "&Keywords"    { HTML_meta_keyw }
+  item "&Author"      { HTML_meta_auth }
+  item "Re&vision"    { HTML_meta_rev  }
+  item "&Generic"     { HTML_META      }
+}
+
+menu HTML_Head_CSS {
+
+  item "&Persistent, \tlinked"   { CSS_link_pers  }
+  item "P&referred, \tlinked"    { CSS_link_pref  }
+  item "&Alternate, \tlinked"    { CSS_link_alt   }
+  item "P&ersistent, \tembedded" { CSS_embed_pers }
+  item "Pre&ferred, \tembedded"  { CSS_embed_pref }
+}
+
+menu HTML_Link_Nav {
+
+  item "&Start"    { HTML_link_start }
+  item "&Up"       { HTML_link_up    }
+  item "&First"    { HTML_link_first }
+  item "&Previous" { HTML_link_prev  }
+  item "&Next"     { HTML_link_next  }
+  item "&Last"     { HTML_link_last  }
+  item;
+  item "&Help"     { HTML_link_help  }
+  item "S&earch"   { HTML_link_srch  }
+}
+
+menu HTML_Link_helpers {
+
+  item "&Contents"          { HTML_link_cntnt }
+  item "&Glossary"          { HTML_link_gloss }
+  item "C&hapter"           { HTML_link_chap  }
+  item "&Section"           { HTML_link_sect  }
+  item "Su&bsection"        { HTML_link_subs  }
+  item "A&ppendix"          { HTML_link_apndx }
+  item "&Index"             { HTML_link_index }
+  item;
+  item "&Author"            { HTML_link_auth  }
+  item "Copy&right"         { HTML_link_copyr }
+  item;
+  item "Book&mark"          { HTML_link_bkmrk }
+  item "&Language version"  { HTML_link_lang  }
+  item "Alternate &version" { HTML_link_alt   }
+}
+
+menu HTML_Head {
+
+  item    "&Title \t<title>"          { HTML_TITLE }
+  item    "&Base URL \tC+H C+U"       { HTML_BASEURL }
+  item;
+  submenu "&Meta tags",                 HTML_Head_Meta;
+  submenu "&CSS",                       HTML_Head_CSS;
+  submenu "Linked site &navigation",    HTML_Link_Nav;
+  submenu "Linked document &helpers ",  HTML_Link_helpers;
+  item    "&Favorite Icon"            { HTML_link_FIcon }
+  item    "Generic &link"             { HTML_LINK }
+  item;
+  item    "&Embedded javascript"      { JScript_embed }
+  item    "Link to e&xternal JScript" { JScript_link  }
+}
+
+menu HTML_Header {
+    item    "<h&1>  C+H 1" { HTML_H1 }
+    item    "<h&2>  C+H 2" { HTML_H2 }
+    item    "<h&3>  C+H 3" { HTML_H3 }
+    item    "<h&4>  C+H 4" { HTML_H4 }
+    item    "<h&5>  C+H 5" { HTML_H5 }
+    item    "<h&6>  C+H 6" { HTML_H6 }
+}
+
+menu HTML_Comments {
+
+    item    "&Normal comment <!-- --> C+H c"  { HTML_COMMENT }
+    item    "IE CC <![.]>: &Hide from IE"     { HTML_CC_STD  }
+    item    "IE CC <![.]>: &Show to IE only"  { HTML_CC_IE  }
+}
+
+menu HTML_A_Types {
+
+    item    "Anchor H&Ref   <a href> C+H C-H" { HTML_AHREF }
+    item    "Anchor &Name   <a name> C+H C-N" { HTML_ANAME }
+    item    "Two way &anchor         C+H C-L" { HTML_A2WAY }
+}
+
+menu HTML_Txt_Types {
+
+#   submenu "Quotations et al",    HTML_QuotesNCo;
+       item "&Quote      <q>          C+H A+Q" { HTML_Q }
+       item "&Blockquote <blockquote> C+H C+Q" { HTML_BLOCKQUOTE }
+       item "Ci&te       <cite>       C+H C-O" { HTML_CITE }
+#   submenu "Mangled text",    HTML_Mangled;
+    item;
+       item "&Deleted Text  <del>     C+H A+E" { HTML_DEL }
+       item "&Inserted Text <ins>     C+H A+I" { HTML_INS }
+    item;
+    item    "&Preformatted  <pre>     C+H C-F" { HTML_PRE }
+    item    "&Address       <address> C+H A+A" { HTML_ADDRESS }
+    item    "A&bbreviation  <abbr>    C+H C+A" { HTML_ABBR }
+    item    "Acro&nym       <acronym> C+H C+Y" { HTML_ACRONYM }
+    item    "De&finition    <dfn>     C+H C-D" { HTML_DFN }
+#   submenu "Computer code",  HTML_Comp_code;
+       item;
+       item "&Code          <code>    C+H C-C" { HTML_CODE }
+       item "&Kbd entry     <kbd>     C+H C-K" { HTML_KBD }
+       item "&Variable      <var>     C+H C-V" { HTML_VAR }
+       item "&Sample msg    <samp>    C+H C-M" { HTML_SAMP }
+}
+
+menu HTML_Lists {
+
+  item    "&Unordered list    <ul> C+H u"  { HTML_UL }
+  item    "&Ordered list      <ol> C+H o"  { HTML_OL }
+  item    "List &item         <li> C+H i"  { HTML_LI }
+  item;
+  item    "Definition &list   <dl> C+H l"  { HTML_DL }
+  item    "Definition &tag    <dt> C+H t"  { HTML_DT }
+  item    "Definition D&ata   <dd> C+H d"  { HTML_DD }
+}
+
+menu HTML_Table {
+
+    item    "&Table        <table>    C+H A-T" { HTML_TABLE }
+    item    "&Caption      <caption>  C+H A-C" { HTML_CAPTION }
+    item    "TH&ead        <thead>    C+H h  " { HTML_THEAD }
+    item    "TFo&ot        <tfoot>    C+H f  " { HTML_TFOOT }
+    item    "TBody        <t&body>    C+H b  " { HTML_TBODY }
+    item    "&Row          <tr>       C+H A-R" { HTML_TR }
+    item    "&Header       <th>       C+H A-H" { HTML_TH }
+    item    "&Data         <td>       C+H A-D" { HTML_TD }
+    item;
+    item    "Co&lumn       <col>             " { HTML_COL }
+    item    "Column &Group <colgroup> C+H A+G" { HTML_COLGROUP }
+}
+
+menu HTML_ChFmt {
+
+#    submenu  "Semantic"
+      item    "&Strong      <strong>  C+H C-S" { HTML_STRONG }
+      item    "&Emphasize   <em>      C+H C+H" { HTML_EM }
+      item    "S&ubscript   <sub>     C+H A+U" { HTML_SUB }
+      item    "Superscri&pt <sup>     C+H A+P" { HTML_SUP }
+      item    "Bidirecti&on <bdo>     C+H A+O" { HTML_BDO }
+#    submenu "Visual"
+      item;
+      item    "&Typewriter  <tt>      C+H C-T" { HTML_TT }
+      item    "&Bold        <b>       C+H C-B" { HTML_B }
+      item    "&Italic      <i>       C+H C-I" { HTML_I }
+      item    "Underscore             C+H C-U" { HTML_U }
+      item    "Bi&g         <big>     C+H A+B" { HTML_BIG }
+      item    "S&mall       <small>   C+H A+S" { HTML_SMALL }
+}
+
+menu HTML_Object {
+
+    item "&Image              <img>    C+H C-G" { HTML_IMG }
+    item "Image &Map          <map>    C+H A+M" { HTML_MAP }
+    item "Image Map &Area     <area>"           { HTML_AREA }
+    item;
+    item "Generic &Object     <object> C+H C+J" { HTML_OBJECT }
+    item "&Parameter          <param>"          { HTML_PARAM }
+    item "&Flash animation"                     { HTML_FLASH }
+    item;
+    item "Inline &Script      <script>  "       { HTML_SCRIPT }
+    item "Script &alternative <noscript>"       { HTML_NOSCRIPT }
+}
+
+menu HTML_Form {
+
+    item    "&Form            <form>     " { HTML_FORM }
+    item    "Field&set        <fieldset> " { HTML_FIELDSET }
+    item    "Fieldset &title  <legend>   " { HTML_LEGEND }
+    item    "La&bel           <label>    " { HTML_LABEL }
+    item    "Selectable &list <select>   " { HTML_SELECT }
+    item    "List &option     <option>   " { HTML_OPTION }
+    item    "Option &group    <optgroup> " { HTML_OPTGROUP }
+    item;
+    item    "&Entryfield"                  { HTML_EFIELD }
+    item    "&Radio button"                { HTML_RADIO }
+    item    "&CheckBox"                    { HTML_CHECKBOX }
+    item    "&Text area       <textarea> " { HTML_TEXTAREA }
+    item    "Hidden variable"              { HTML_HIDDEN }
+    item    "&Upload file"                 { HTML_FILE }
+    item    "Generic &input   <input>    " { HTML_INPUT }
+    item;
+    item    "Submit &button"               { HTML_SUBMIT }
+    item    "Reset button"                 { HTML_RESET }
+    item    "&Push Button     <button>   " { HTML_BUTTON }
+}
+
+menu HTML_Divs {
+
+  item    "Simple <&div>  C+H A+V" { HTML_DIV }
+  item    "Div with &id "          { HTML_DIV_id }
+  item    "Div with &class "       { HTML_DIV_class }
+  item    "Div with id&+class "    { HTML_DIV_idclass }
+  item;
+  item    "Text   <&span> C+H C+W" { HTML_SPAN }
+}
+
+%if(TEXT_CHARS)
+
+#include 'charset/latin.fte';
+#include 'charset/ents.fte';
+include 'charset/jap.fte';
+
+menu HTML_SpChar {
+
+#  submenu "Math &symbols",    HTML_Math;
+#  submenu "&Greek for maths", HTML_Greek;
+#  submenu "&Typography",      HTML_Typo;
+#  submenu "&Finances",        HTML_Fin;
+  item;
+#  submenu "&Latin characters",HTML_Latin;
+  submenu "&Japanese", UTF_Nihongo;
+}
+%endif
+
+menu HTMLTags {
+
+  submenu "&Create basic document", HTML_BaseDoc;
+  item;
+  submenu "&Basic structures",  HTML_Base;
+  submenu "&Document head",     HTML_Head;
+  item;
+  submenu "&Headers       <h1>... <h6>", HTML_Header;
+  item    "&Paragraph     <p>  C+H C-P" { HTML_P }
+  item    "Line break    <br> C+H ¼" { HTML_BR }
+  item    "Horiz. &ruler  <hr> C+H &-" { HTML_HR }
+  submenu "Co&mment (hide HTML)", HTML_Comments;
+  submenu "&Anchors/Links",     HTML_A_Types;
+  submenu "Te&xt types",        HTML_Txt_Types;
+  submenu "&Lists",             HTML_Lists;
+  submenu "&Table",             HTML_Table;
+  submenu "Character format",   HTML_ChFmt;
+  submenu "&Objects",           HTML_Object;
+  submenu "&Forms",             HTML_Form;
+  submenu "Logical di&visions", HTML_Divs;
+ %if(TEXT_CHARS)
+  submenu "&Special chars",     HTML_SpChar;
+ %endif
+}
+
+menu HTML_Colors {
+    
+    item    "&Black  " { InsertString "#000000" }
+    item    "Bl&ue   " { InsertString "#0000ff" }
+    item    "&Cyan   " { InsertString "#00ffff" }
+    item    "&Gray   " { InsertString "#808080" }
+    item    "Gr&een  " { InsertString "#008000" }
+    item    "&Lime   " { InsertString "#00ff00" }
+    item    "&Magenta" { InsertString "#ff00ff" }
+    item    "M&aroon " { InsertString "#800000" }
+    item    "&Navy   " { InsertString "#000080" }
+    item    "&Olive  " { InsertString "#808000" }
+    item    "&Purple " { InsertString "#800080" }
+    item    "&Red    " { InsertString "#ff0000" }
+    item    "&Silver " { InsertString "#c0c0c0" }
+    item    "&Teal   " { InsertString "#008080" }
+    item    "&White  " { InsertString "#ffffff" }
+    item    "&Yellow " { InsertString "#ffff00" }
+}
+
+menu Main_HTML {
+
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "&Tools",   HTMLTools;
+    submenu "HT&ML",    HTMLTags;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help;
+}
+
+eventmap HTML {
+    MainMenu  = "Main_HTML";   # menu for menubar
+
+    key [A+M] { MainMenu 'M' }
+}
