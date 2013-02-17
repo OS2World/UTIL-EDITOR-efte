@@ -507,6 +507,21 @@ void DefineWord(const char *w)
     }
 }
 
+void UnDefineWord(const char *w)
+{
+    if (!w || !w[0])
+	return;
+    if (DefinedWord(w)) {
+	if (verbosity > 0) {
+	    fprintf(stderr, ACTION "%s\n", "undefine", w);
+        }
+        for (unsigned int i = 0; i < wordCount; i++)
+            if (strcmp(w, words[i]) == 0)
+                strcpy(words[i], "");
+    }
+}
+
+
 static int colorCount;
 static struct _color
 {
@@ -1946,14 +1961,15 @@ static int PreprocessConfigFile(CurPos & cp)
 			cp.c++;
 		}
 		cp.c++;
-		/*            } else if (cp.c + 6 && strcmp(cp.c, "undef(", 6) == 0) {
-		   Word w;
-		   cp.c += 6;
+            }
+            else if (cp.c + 10 && strncmp(cp.c, "%undefine(", 10) == 0) {
+                Word w;
+                cp.c += 10;
 
-		   while (cp.c < cp.z && *cp.c != ')') {
+                while (cp.c < cp.z && *cp.c != ')') {
 		   GetWord(cp, w);
-		   UndefWord(w);
-		   } */
+                   UnDefineWord(w);
+                }
 	    }
 	    else if (cp.c + 4 < cp.z && strncmp(cp.c, "%if(", 4) == 0) {
 		Word w;
