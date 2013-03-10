@@ -4,6 +4,26 @@
 # functionality over and above what the sysadmin may have made available
 # without adversely affecting other users.
 
+# uncomment for appropriate keybindings and menus etc
+# also uncomment appropriate COLOR_ setting
+# if multiple items in any of the sets are uncommented
+# the first uncommented is used and the others are ignored.
+# these can be overriden in systemmain.fte
+
+# Spanish works best with UI_MIXED. 
+
+# User inteface styles UI_KB effects pallette and UNIX font selection and
+# can you must select a second UI_* to load it.
+#%define(UI_KB)
+#%define(UI_FTE)
+#%define(UI_WS)
+#%define(UI_NE)
+#%define(UI_BRIEF)
+#%define(UI_MIXED)
+%define(UI_MEW)
+# experimental
+#%define(UI_VI)
+
 # include the system main config - usually in /usr/local/fte/localconfig.
 include 'systemmain.fte';
 
