@@ -6,7 +6,7 @@ eventmap MODEL {
     key       [F3_=]      { WinHSplit }
     key       [F3_-]      { WinClose }
     key       [F3_S-X]    { FileLast }
-    
+
     key       [F3_S-N]    { FileOpen }
     key       [F3_S-Q]    { FileClose }
 
@@ -16,7 +16,7 @@ eventmap MODEL {
     key       [F10]       { MainMenu }
 
     key     [A+X]         { ExitEditor }
-    
+
     key   [C+S+G-Up]    { WinResize -1 }
     key   [C+S+G-Down]  { WinResize +1 }
 }
@@ -38,7 +38,7 @@ eventmap MLIST: MODEL {
 #    key   [A+G-Down]   { ScrollDown }
     key   [C+Left]      { ScrollRight }
     key   [C+Right]     { ScrollLeft }
-    
+
     key     [G-Enter]   { Activate }
     key     [Space]     { ActivateInOtherWindow }
     key     [S+Enter]   { CloseActivate }
@@ -67,7 +67,7 @@ eventmap SVN: MLIST {
 eventmap DIRECTORY: MLIST {
     MainMenu = 'DirectoryMain';
     LocalMenu = 'DirectoryLocal';
-    
+
     key [C+G-PgUp]      { DirGoUp }
     key [C+G-PgDn]      { DirGoDown }
     key [C+\\]          { DirGoRoot }
@@ -75,7 +75,7 @@ eventmap DIRECTORY: MLIST {
     key [\\]            { DirGoto }
     key [C+D]           { DeleteFile }
     key [Esc]           { FileClose 0 }
-    
+
     key     [A+D]       { MainMenu 'D' }
     key     [A+N]       { MainMenu 'N' }
     key     [A+W]       { MainMenu 'W' }
@@ -84,7 +84,7 @@ eventmap DIRECTORY: MLIST {
 eventmap BUFFERS: MLIST {
     MainMenu = "BufferListMain";
     LocalMenu = "BufferListLocal";
-    
+
     key  [Esc]   { FileClose 0 } # 0 = do not open directory when last closed, overrides OpenAfterClose default.
 
     key  [C+C]   { BufListFileClose }
@@ -101,7 +101,7 @@ eventmap ROUTINES: MLIST {
 eventmap MESSAGES: MLIST {
     MainMenu = "MessagesMain";
     LocalMenu = "MessagesLocal";
-    
+
     key     [A+M]       { MainMenu 'M' }
     key     [A+T]       { MainMenu 'T' }
     key     [A+W]       { MainMenu 'W' }
@@ -112,7 +112,7 @@ eventmap MESSAGES: MLIST {
 eventmap EVENTMAPVIEW: MLIST {
     MainMenu = "EventMapViewMain";
     LocalMenu = "EventMapViewLocal";
-    
+
     key [Esc] { FileClose 0 }
 }
 
@@ -165,7 +165,7 @@ eventmap PLAIN: MODEL {
     key   [A+G-Down]    { ScrollDown }
     key   [A+G-Left]    { ScrollLeft }
     key   [A+G-Right]   { ScrollRight }
-    
+
     key   [S+G-Left]    { BlockExtendBegin; MoveLeft;     BlockExtendEnd }
     key   [S+G-Right]   { BlockExtendBegin; MoveRight;    BlockExtendEnd }
     key [C+G-S+Left]    { BlockExtendBegin; MoveWordPrev;  BlockExtendEnd }
@@ -208,10 +208,10 @@ eventmap PLAIN: MODEL {
 
     key       [BackSp]  { BackSpace }
     key     [G-Del]     { Delete }
-    key     [C+W]       { KillWordPrev }
+    key     [C+W]       { Find }
     key     [A+W]       { KillWord }
-    key     [C+L]       { KillToLineStart }
-    key     [A+L]       { KillToLineEnd }
+    key     [C+L]       { FindRepeat }
+    key     [A+L]       { BlockMarkLine }
     key     [A+K]       { KillLine }
 
     key     [C+V]       { BlockEnd; MoveLineStart; BlockBegin; BlockCaseToggle; MoveBlockEnd; BlockUnmark; }
@@ -222,7 +222,7 @@ eventmap PLAIN: MODEL {
 
     key     [C+P]       { InsertChar }
 
-#    key     [G++]       { DumpFold } 
+#    key     [G++]       { DumpFold }
     key     [A+G++]     { FoldCreate }
     key     [A+G+-]     { FoldDestroy }
     key     [G+S++]     { FoldPromote }
@@ -233,5 +233,5 @@ eventmap PLAIN: MODEL {
     key     [C+G+/]     { FoldToggleOpenClose }
     key     [A+G+*]     { FoldOpenAll }
     key     [A+G+/]     { FoldCloseAll }
-   
+
 }

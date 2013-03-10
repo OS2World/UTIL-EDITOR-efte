@@ -807,7 +807,7 @@ menu HTMLTags {
     submenu "&Tables                           ", HTML_Table;
     item;
     item    "Pre&formatted  <PRE>\tC-E C-F  " { HTML_PRE }
-    item    "&Centered      <CENTER>\tC-E .    " { HTML_CENTER }
+    #item    "&Centered      <CENTER>\tC-E .    " { HTML_CENTER }
     item;
     item    "Anchor &Name   <A NAME>\tC-E C-N  " { HTML_ANAME }
     item    "Anchor H&Ref   <A HREF>\tC-E C-H  " { HTML_AHREF }
@@ -886,7 +886,7 @@ eventmap HTML: PLAIN {
     key [C+E_C+F]   { HTML_PRE }
     key [C+E_G-Enter] { HTML_BR }
     key [C+E_-]     { HTML_HR }
-    key [C+E_.]     { HTML_CENTER }
+    #key [C+E_.]     { HTML_CENTER }
     key [C+E_C+P]   { HTML_P }
     
 # character escapes
