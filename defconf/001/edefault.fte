@@ -976,6 +976,9 @@ mode CNFGSYS: PLAIN {                    # CONFIG.SYS mode
     RoutineRegexp       = /^[\w_]+:/;
 }
 
+mode SOURCE: PLAIN {
+}
+
 # FTE mode for editing REXX files
 # enhanced from the original by Michael DeBusk
 # debu4335@eclipsetel.com
@@ -983,6 +986,15 @@ mode CNFGSYS: PLAIN {                    # CONFIG.SYS mode
 
 colorize REXX {
     SyntaxParser = 'REXX';
+    
+     color {
+        { 'Normal',      'Editor_Default' },
+        { 'Number',      'Lang_Number' },
+        { 'Punctuation', 'Lang_Punctuation' },
+        { 'String',      'Lang_String' },
+        { 'Comment',     'Lang_Comment' },
+        { 'Function',    'Lang_Function' },
+    };
     
     # REXX Keyword Instructions
     keyword 'Editor_Keywords' {
