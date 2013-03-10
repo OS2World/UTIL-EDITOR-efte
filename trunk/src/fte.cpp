@@ -56,7 +56,7 @@ static void Usage()
              "  -r                Open next file as read-only.\n"
              "  -T[<tagfile>]     Load tags file at startup.\n"
              "  -t<tag>           Locate specified tag.\n"
-             "  -l<lang>          Choose the language where lang is the 2 letter lanuage code or \n nothing to default to english"
+             "  -L<Lang>          Choose the language where lang is the 2 letter lanuage code or \n nothing to default to english"
 //           "       -p        Load files into already running eFTE.\n"
 	);
 }
@@ -172,7 +172,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	    else if (argv[Arg][1] == 'd') {
 		DefineWord(argv[Arg] + 2);
             }
-            else if (argv[Arg][1] == 'l') {
+            else if (argv[Arg][1] == 'L') {
                 translate = -1;
                 if (argv[Arg][2] && argv[Arg][3] && strnicmp("en", &argv[Arg][2], 2))
                     snprintf(menupath, MAXPATH, "menu_%c%c", argv[Arg][2], argv[Arg][3]);
@@ -205,7 +205,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 
         lang = getenv("LANG");
         if (lang) {
-            if (!strnicmp(lang, "es", 2)) { //Spanish
+            if (!strnicmp(lang, "es", 2)) {      //Spanish
                 translate = 1;
                 strcpy(menupath, "menu_es");
             }
