@@ -1962,14 +1962,19 @@ static int PreprocessConfigFile(CurPos & cp)
 		}
 		cp.c++;
             }
-            else if (cp.c + 10 && strncmp(cp.c, "%undefine(", 10) == 0) {
+            else if (cp.c + 10 < cp.z && strncmp(cp.c, "%undefine(", 10) == 0) {
                 Word w;
                 cp.c += 10;
 
                 while (cp.c < cp.z && *cp.c != ')') {
 		   GetWord(cp, w);
                    UnDefineWord(w);
-                }
+		    if (cp.c < cp.z && *cp.c != ',' && *cp.c != ')')
+			Fail(cp, "unexpected: %c", cp.c[0]);
+		    if (cp.c < cp.z && *cp.c == ',')
+			cp.c++;
+		}
+		cp.c++;
 	    }
 	    else if (cp.c + 4 < cp.z && strncmp(cp.c, "%if(", 4) == 0) {
 		Word w;

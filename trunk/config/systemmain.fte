@@ -7,6 +7,99 @@
 # be made available with new versions of FTE.  New versions of FTE will not
 # overwrite customizations this way.
 
+%define(UI_FTE_SYS)
+#%define(UI_WS_SYS)
+#%define(UI_NE_SYS)
+#%define(UI_BRIEF_SYS)
+#%define(UI_MIXED_SYS)
+#%define(UI_MEW_SYS)
+# experimental
+#%define(UI_VI_SYS)
+
+%if(UI_FTE_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+# experimental
+%undefine(UI_VI)
+
+%define(UI_FTE)
+%endif
+
+%if(UI_WS_SYS)
+%undefine(UI_FTE)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+# experimental
+%undefine(UI_VI)
+
+%define(UI_WS)
+%endif
+
+%if(UI_NE_SYS)
+%undefine(UI_WS)
+%undefine(UI_FTE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+# experimental
+%undefine(UI_VI)
+
+%define(UI_NE)
+%endif
+
+%if(UI_BRIEF_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_FTE)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+# experimental
+%undefine(UI_VI)
+
+%define(UI_BRIEF)
+%endif
+
+%if(UI_MIXED_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_FTE)
+%undefine(UI_MEW)
+# experimental
+%undefine(UI_VI)
+
+%define(UI_MIXED)
+%endif
+
+%if(UI_MEW_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_FTE)
+# experimental
+%undefine(UI_VI)
+
+%define(UI_MEW)
+%endif
+
+%if(UI_VI_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+%undefine(UI_FTE)
+
+# experimental
+%define(UI_VI)
+%endif
+
 # include the main config - usually in /usr/local/efte/config.
 include 'main.fte';
 

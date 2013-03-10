@@ -4,33 +4,9 @@
 
 # OS_UNIX, OS_OS2, OS_DOS32, OS_NT
 
-# uncomment for appropriate keybindings and menus etc
-# multiple items in any of the sets are uncommented
-# the first uncommented is used and the others are ignored.
-
-# Spanish works best with UI_MIXED. 
-
-# User inteface styles UI_KB effects pallette and UNIX font selection and
-# can you must select a second UI_* to load it.
-#%define(UI_KB)
-%define(UI_FTE)
-#%define(UI_WS)
-#%define(UI_NE)
-#%define(UI_BRIEF)
-#%define(UI_MIXED)
-# experimental
-
 %if(!BSD_BRACE)
 %define(1TBS_BRACE)
 %endif
-
-# Color Schemes
-#%define(COLORS_GRAY_BG)
-#%define(COLORS_WHITE_BG)
-%define(COLORS_BLACK_BG)
-#%define(COLORS_BLUE_BG)
-#%define(COLORS_BLUEZ_BG)
-#%define(COLORS_NCE_BG)
 
 %if(OS_OS2)
 %define(GUI_PM)
@@ -267,7 +243,9 @@ include 'ui_brief.fte'; # BRIEF/CRISP
 %if(UI_MIXED)
 include 'ui_mixed.fte';  # fte CUA style bindings + some Norton Editor keys...
 %endif
-##include 'ui_vi.fte';  # VI - very incomplete
+%if(UI_VI)
+include 'experimental/ui_vi.fte';  # VI - very incomplete
+%endif
 # todo: brief, epm, emacs, VI
 
 # some templates and abbreviations
