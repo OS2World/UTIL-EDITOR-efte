@@ -73,7 +73,7 @@ efte.exe: $(OBJS) $(VIOOBJS) fte.def
   $(LD)  $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)} @fte.def
   $(PERL) ..\tools\mapsymw.pl efte.map 
   mapxqs.exe efte.map
-  lxlite efte.exe /x+ /b-
+  lxlite efte.exe /x- /b-
   lxlite efte.exe /c:minstub
 
 eftepm.res: eftepm.rc pmdlg.rc
@@ -84,7 +84,7 @@ eftepm.exe: $(OBJS) $(PMOBJS) eftepm.res ftepm.def .explicit
   $(RC) eftepm.res eftepm.exe
   $(PERL) ..\tools\mapsymw.pl eftepm.map
   mapxqs.exe eftepm.map
-  lxlite eftepm.exe /x+ /b-
+  lxlite eftepm.exe /x- /b-
   lxlite eftepm.exe /c:minstub
 
 clean : .SYMBOLIC
