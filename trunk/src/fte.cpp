@@ -47,7 +47,7 @@ static void Usage()
              "  --version         Display eFTE/2 version.\n"
              "  -v                Increase verbosity level.\n"
              "  -!                Ignore config file, use builtin defaults (also -c).\n"
-             "  -C[<.cnf>]        Use specified configuration file must be full path to file (no arg=builtin).\n"
+             "  -C[<.fte>]        Use specified configuration file must be full path to file (no arg=builtin).\n"
              "  -d<defineterm>    Defines a term for use in \%if() statements in config files \n"
              "  -D[<.dsk>]        Load/Save desktop from <.dsk> file (no arg=disable desktop).\n"
              "  -H[<.his>]        Load/Save history from <.his> file (no arg=disable history).\n"
