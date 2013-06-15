@@ -96,9 +96,9 @@ menu MChangeModeMore {
     item "Diff"			{ ChangeMode 'DIFF' }
     item "Merge"		{ ChangeMode 'MERGE' }
     item "Man pages"		{ ChangeMode 'CATBS' }
-    item "Batch files"		{ FileOpenInMode 'Batch' }
+    item "Batch files"		{ ChangeMode 'Batch' }
 %if(OS_OS2)
-    item "Config.sys"		{ FileOpenInMode 'CNFGSYS' }
+    item "Config.sys"		{ ChangeMode 'CNFGSYS' }
 %endif
 }
 
