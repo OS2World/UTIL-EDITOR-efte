@@ -1,9 +1,9 @@
 .*----------------------------------------------------------------------------*
- Converted by HTML2IPF from contents.html at 4 Jul 2011, 3:30pm       *
+.* Converted by HTML2IPF from contents.html at 4 Jul 2011, 3:30pm       *
 .*----------------------------------------------------------------------------*
 :userdoc.
-:docprof toc=12345.
 :title.eFTE/2
+:docprof toc=12345.
 .* Source filename: contents.html
 :h1 res=1.eFTE/2
 :font facename=default size=0x0.
@@ -5099,44 +5099,6 @@ end&colon.
 :p.
 This section covers installation and configuration of editor&per.
 .br
-:font facename='Helv' size=32x20.
-.br
-OS/2:font facename=default size=0x0.
-.br
-.br
-.br
-:font facename='Helv' size=20x12.
-.br
-Files:font facename=default size=0x0.
-.br
-.br
-:p.
-The following files are included in the archive&colon.
-:dl compact break=all.
-:dt.:font facename='System VIO' size=14x8.README:font facename=default size=0x0.
-:dd.Release notes, read first!
-:dt.:font facename='System VIO' size=14x8.efte&per.exe:font facename=default size=0x0.
-:dd.Text-mode executable
-:dt.:font facename='System VIO' size=14x8.eftepm&per.exe:font facename=default size=0x0.
-:dd.Presentation Manager executable
-:dt.:font facename='System VIO' size=14x8.efte&per.sym and efte&per.xqs:font facename=default size=0x0.
-:dd.Text-mode executable symbol files for debugging and use with exceptq
-:dt.:font facename='System VIO' size=14x8.eftepm&per.sym and eftepm&per.xqs:font facename=default size=0x0.
-:dd.Presentation Manager executable symbol files for debugging and use with exceptq
-:dt.:font facename='System VIO' size=14x8.edefault&per.fte:font facename=default size=0x0.
-:dd.Default configuration file&per.
-:dt.:font facename='System VIO' size=14x8.efte2&per.hlp:font facename=default size=0x0., 
-:dd.This file.
-:dt.:font facename='System VIO' size=14x8.config\*&per.fte:font facename=default size=0x0.
-:dd.Configuration files.
-:dt.:font facename='System VIO' size=14x8.HISTORY:font facename=default size=0x0.
-:dd.Revision history&per.
-:dt.:font facename='System VIO' size=14x8.TODO:font facename=default size=0x0.
-:dd.Todo list&per.
-:dt.:font facename='System VIO' size=14x8.file_id&per.diz:font facename=default size=0x0.
-:dd.Program description for BBS upload&per.
-:edl.
-
 .br
 :font facename='Helv' size=20x12.
 .br
@@ -5162,7 +5124,7 @@ toolkit, you should install it and include the path to its help files in HELP. T
 help files. 
 .br
 .br
-:hp2.A list of packages which eFTE/2 is setup to work with&colon.:ehp2.
+:hp2.A list of packages which eFTE/2 is setup to work with if they are in the PATH&colon.:ehp2.
 :p.
 :dl compact break=all.
 :dt.:hp2.Open watcom:ehp2.
@@ -5173,45 +5135,89 @@ help files.
 :dd.Provides reasonable spell checking.
 :dt.:hp2.SVN and CVS:ehp2.
 :dd.Direct access to the most commonly used commands for these versioning systems.
+:dt.:hp2.HTML Tidy:ehp2.
+:dd.Direct access via menu
 :edl.
 .br
 :h3 res=17.List of Configuration Files
 :p.This is a complete list of the config files that need to be installed on a clean install.
-Updates are meant to be included in a file related to the file being update i.e. mym_html.fte fpr m_html.fte.
-In practice any one of them may get edited by the user. This means updating them will be 
-difficult.
+Updates are meant to be included in a file related to the file being update i.e. mym_html.fte 
+for m_html.fte. In practice any one of them may get edited by the user. This means updating 
+them will be difficult.
 :p. If you wish to modify only a specific mode, add customizations to a my*.fte file
 and "include" it at the end of file. To also modify all of the descendants,
 "include" customizations right after the include statement for mode.
 
 :dl compact break=all.
- :font facename='System VIO' size=14x8.
-:dt.config\ab_c.fte
-:dd.:font facename=default size=0x0.Abbreviations for 'C' mode
-:dt.:font facename='System VIO' size=14x8.config\ab_c_os2.fte
-:dd.:font facename=default size=0x0.Additional OS/2 only abbreviations for 'C' mode
-:dt.:font facename='System VIO' size=14x8.config\ab_java.fte
-:dd.:font facename=default size=0x0.Abreviations for 'JAVA' mode
-:dt.:font facename='System VIO' size=14x8.config\ab_perl.fte
-:dd.:font facename=default size=0x0.Abreviations for 'PERL' mode
-:dt.:font facename='System VIO' size=14x8.config\ab_rexx.fte
-:dd.:font facename=default size=0x0.Abreviations for 'REXX' mode
-:dt.:font facename='System VIO' size=14x8.config\ab_sh.fte
-:dd.:font facename=default size=0x0.Abreviations for 'SH' mode
-:dt.:font facename='System VIO' size=14x8.config\color.fte
-:dd.:font facename=default size=0x0.Color layout for the editor itself.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_html\ents.fte
+:dthd.Abreviation expansion for various mods:
+:ddhd.
+:dt.:font facename='System VIO' size=14x8.config\ab_c.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\global.fte
+:dt.:font facename='System VIO' size=14x8.config\ab_c_os2.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\ab_java.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\ab_perl.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\ab_rexx.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\ab_sh.fte
+:dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.Character sets and conversion tools selectable from menus (Incomplete)
+:ddhd.
+:dt.:font facename='System VIO' size=14x8.config\charset\ents.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\charset\jap.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\charset\latin.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\htmlchar.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\htmlconv.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_html\jap.fte
+:edl.
+:dl compact break=all.
+:dthd.Color definitions and schemes for eFTE(PM)
+:ddhd.
+:dt.:font facename='System VIO' size=14x8.config\color.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\k_brief.fte
+:dt.:font facename='System VIO' size=14x8.config\pal_b_kb.fte
 :dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_base.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_blk.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_blue.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_bluez.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_gray.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_nce.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\pal_wht.fte
+:dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.Experimental (incomplete) expansions of the UI (included as a base for 
+further development)
+:ddhd.
+:dt.:font facename='System VIO' size=14x8.config\Experimental\m_vi.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\Experimental\m_xp.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\Experimental\rgbcolor.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\Experimental\ui_k_joe.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\Experimental\ui_vi.fte
+:dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.Mode specific keyboard hot key definitions.
+:ddhd.
 :dt.:font facename='System VIO' size=14x8.config\kbd\k_c.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\kbd\k_fte.fte
@@ -5230,8 +5236,10 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\kbd\k_sgml.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_html\latin.fte
-:dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.Mode specific text highlighting
+:ddhd.
 :dt.:font facename='System VIO' size=14x8.config\m_4gl.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_a51.fte
@@ -5250,8 +5258,6 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_c.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_c.fte
-:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_catbs.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_clario.fte
@@ -5261,8 +5267,6 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dt.:font facename='System VIO' size=14x8.config\m_cnfgs.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_css.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_css.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_diff.fte
 :dd.:font facename=default size=0x0.
@@ -5282,19 +5286,13 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_groovy.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_groovy.fte
-:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_html.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_html.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_icon.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_idl.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_ipf.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_ipf.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_java.fte
 :dd.:font facename=default size=0x0.
@@ -5305,8 +5303,6 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dt.:font facename='System VIO' size=14x8.config\m_lua.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_make.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_make.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_markup.fte
 :dd.:font facename=default size=0x0.
@@ -5334,19 +5330,13 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_rexx.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_rexx.fte
-:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_rpm.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_rst.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_rst.fte
-:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_ruby.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_sgml.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_sgml.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_sh.fte
 :dd.:font facename=default size=0x0.
@@ -5372,134 +5362,181 @@ and "include" it at the end of file. To also modify all of the descendants,
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_vhdl.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\m_vi.fte
-:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_xml.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\m_xp.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\m_xslt.fte
 :dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.Main/Global configuration
+:ddhd.
 :dt.:font facename='System VIO' size=14x8.config\main.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_html\main.fte
+:dt.:font facename='System VIO' size=14x8.config\mymain.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\mymain.fte*
+:dt.:font facename='System VIO' size=14x8.config\systemmain.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_b_kb.fte
+:dt.:font facename='System VIO' size=14x8.config\global.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_base.fte
+:edl.
+:dl compact break=all.
+:dthd.English language menus (always installed as a fall back)
+:ddhd.
+:dt.:font facename='System VIO' size=14x8.config\menu\m_c.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_blk.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_css.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_blue.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_groovy.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_bluez.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_html.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_gray.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_html_t.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_nce.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_ipf.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\pal_wht.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_make.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\rgbcolor.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_rexx.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\systemmain.fte*
+:dt.:font facename='System VIO' size=14x8.config\menu\m_rst.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\menu\m_html\tools.fte
+:dt.:font facename='System VIO' size=14x8.config\menu\m_sgml.fte
 :dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_k_brf.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_k_fte.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_k_ne.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_k_ws.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_m_ew.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_m_fte.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_m_fte.fte~
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_m_ne.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu\ui_m_ws.fte
+:dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.Internationalized menus where xx is the country code
+:ddhd.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_c.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_css.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_groovy.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_html.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_html_t.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_ipf.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_make.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_rexx.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_rst.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\m_sgml.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_k_brf.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_k_fte.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_k_ne.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_k_ws.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_m_ew.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_m_fte.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_m_fte.fte~
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_m_ne.fte
+:dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\menu_xx\ui_m_ws.fte
+:dd.:font facename=default size=0x0.
+:edl.
+:dl compact break=all.
+:dthd.User interface styles
+:ddhd.
 :dt.:font facename='System VIO' size=14x8.config\ui_brief.fte
 :dd.:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.config\ui_ew.fte
+:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\ui_fte.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_k_fte.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_k_joe.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_k_ne.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_k_ws.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_m_fte.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_m_ne.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_m_ws.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_mew.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\ui_mixed.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\ui_ne.fte
 :dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\ui_vi.fte
-:dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\ui_ws.fte
 :dd.:font facename=default size=0x0.
 :dt.:font facename='System VIO' size=14x8.config\uicstyle.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\uim_k_en.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\uim_k_es.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\uim_m_en.fte
-:dd.:font facename=default size=0x0.
-:dt.:font facename='System VIO' size=14x8.config\uim_m_es.fte
-:dd.:font facename=default size=0x0.
-:edl.
+:dd.:font facename=default size=0x0.:edl.
 .br
-:cgraphic.컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴:ecgraphic.
+:cgraphic.___________________________________________________________________________:ecgraphic.
 .br
 .br
 :font facename='Helv' size=32x20.
-:h3 res=18.Unix:font facename=default size=0x0.
+:h3 res=18.OS2:font facename=default size=0x0.
 .br
 .br
 
 The following files are included in the archive&colon.
 :dl compact break=all.
-:dt.:font facename='System VIO' size=14x8.README:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.README2:font facename=default size=0x0.
 :dd.Readme file&per.
-:dt.:font facename='System VIO' size=14x8.fte:font facename=default size=0x0.
-:dd.Linux console-only executable
-:dt.:font facename='System VIO' size=14x8.Xfte:font facename=default size=0x0.
-:dd.X11 Xlib executable&per.
-:dt.:font facename='System VIO' size=14x8.fte-def&per.cnf:font facename=default size=0x0.
-:dd.Default compiled configuration file
-:dt.:font facename='System VIO' size=14x8.fte&per.html:font facename=default size=0x0.
+:dt.:font facename='System VIO' size=14x8.efte.exe:font facename=default size=0x0.
+:dd.VIO console-only executable
+:dt.:font facename='System VIO' size=14x8.eftepm.exe:font facename=default size=0x0.
+:dd.PM executable&per.
+:dt.:font facename='System VIO' size=14x8.edefault&per.fte:font facename=default size=0x0.
+:dd.Default configuration file
+:dt.:font facename='System VIO' size=14x8.efte2&per.hlp:font facename=default size=0x0.
 :dd.Reference manual
 :dt.:font facename='System VIO' size=14x8.config\*&per.fte:font facename=default size=0x0.
-:dd.Configuration files in source form&per.
+:dd.Configuration files&per.
 :dt.:font facename='System VIO' size=14x8.HISTORY:font facename=default size=0x0.
 :dd.History of changes&per.
-:dt.:font facename='System VIO' size=14x8.TODO:font facename=default size=0x0.
-:dd.Todo list&per.
+:dt.:font facename='System VIO' size=14x8.README.efte:font facename=default size=0x0.
+:dd.efte readme file&per.
 :dt.:font facename='System VIO' size=14x8.file_id&per.diz:font facename=default size=0x0.
 :dd.Program description for BBS upload&per.
-:dt.:font facename='System VIO' size=14x8.fte-0&per.38&per.lsm:font facename=default size=0x0.
-:dd.LSM entry for FTE&per.
+:dt.:font facename='System VIO' size=14x8.COPYING:font facename=default size=0x0.
+:dd.GNU licence&per.
+:dt.:font facename='System VIO' size=14x8.Artistic:font facename=default size=0x0.
+:dd.Artistic licence&per.
+:dt.:font facename='System VIO' size=14x8.AUTHORS:font facename=default size=0x0.
+:dd.Contributor credits&per.
 :edl.
 
 
-:p. The default configuration files are precompiled into
-:font facename='System VIO' size=14x8.fte-def&per.cnf:font facename=default size=0x0.&per. This file should be copied to :font facename='System VIO' size=14x8.~/&per.fterc:font facename=default size=0x0.
-to be automatically loaded by FTE&per. You may want to compile your own
-configuration from source using :hp1.cfte:ehp1. configuration file
-compiler&per.
+:p. The default configuration files are in
+:font facename='System VIO' size=14x8.edefault&per.fte:font facename=default size=0x0.&per. 
+This file should be in the:font facename='System VIO' size=14x8. eFTE install directory
+:font facename=default size=0x0.to be automatically loaded by eFTE(PM)&per. 
 
 :p. Suggested installation directories&colon.
 :cgraphic.
-    /usr/local/bin/fte
-    /usr/local/bin/Xfte
-    /usr/local/bin/cfte
-    /usr/local/etc/fte/system&per.fterc
-    /usr/local/lib/fte/etc/*&per.fte
-    /usr/local/lib/fte/lib/fte&per.html
-    /usr/local/lib/fte/lib/TODO
-    /usr/local/lib/fte/lib/HISTORY
-    /usr/local/lib/fte/lib/README
+    %TOOLS%\eFTE\efte.exe
+    %TOOLS%\eFTE\eftepm.exe
+    %TOOLS%\eFTE\efte2.hlp
+    %TOOLS%\eFTE\edefault.fte
+    %TOOLS%\eFTE\config\*&per.fte
+    %TOOLS%\eFTE\docs\README.efte
+    %TOOLS%\eFTE\docs\HISTORY
+    %TOOLS%\eFTE\docs\README2
+    %TOOLS%\eFTE\docs\COPYING
+    %TOOLS%\eFTE\docs\Artistic
+    %TOOLS%\eFTE\docs\AUTHORS
 :ecgraphic.
-
 
 .* Source filename: modes.html
 :h2 res=8.Mode Configuration
