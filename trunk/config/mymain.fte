@@ -24,6 +24,14 @@
 # experimental
 #%define(UI_VI)
 
+# Color Schemes
+#%define(COLORS_GRAY_BG)
+#%define(COLORS_WHITE_BG)
+%define(COLORS_BLACK_BG)
+#%define(COLORS_BLUE_BG)
+#%define(COLORS_BLUEZ_BG)
+#%define(COLORS_NCE_BG)
+
 # include the system main config - usually in /usr/local/fte/localconfig.
 include 'systemmain.fte';
 
