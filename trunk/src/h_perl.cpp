@@ -20,6 +20,7 @@
  */
 
 #include "fte.h"
+#include <stdio.h>
 
 #define X_BIT     0x80			/* set if last was number, var, */
 #define X_MASK    0x7F
@@ -202,7 +203,14 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 			    (Line->Chars[i + j] == '_'
 			     || Line->Chars[i + j] == '\''))
 			)
-			j++;
+                        j++;
+                    int x;
+
+                    x = i + j;
+                    while ((x < Line->Count) &&
+                           ((Line->Chars[x] == ' ')
+                            || (Line->Chars[x] == 9)))
+                        x++;
 		    if (BF->GetHilitWord(j, &Line->Chars[i], Color)) {
 			//Color = hcPERL_Keyword;
 			State = hsPerl_Keyword;
@@ -211,13 +219,6 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 			}
 		    }
 		    else {
-			int x;
-
-			x = i + j;
-			while ((x < Line->Count) &&
-			       ((Line->Chars[x] == ' ')
-				|| (Line->Chars[x] == 9)))
-			    x++;
 			if ((x < Line->Count) && (Line->Chars[x] == '(')) {
 			    Color = CLR_Function;
 			}
@@ -225,33 +226,38 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 			    Color = CLR_Normal;
 			}
 			State = hsPerl_Normal;
-		    }
-		    if (j == 1) {
-			if (*p == 'q')
-			    op = opQ;
-			else if (*p == 's' || *p == 'y')
-			    op = opS;
-			else if (*p == 'm')
-			    op = opM;
-		    }
-		    else if (j >= 2) {
-			if (*p == 'q') {
-			    if (p[1] == 'q')
-				op = opQQ;
-			    else if (p[1] == 'w')
-				op = opQW;
-			    else if (p[1] == 'r')
-				op = opQR;
-			    else if (p[1] == 'x')
-				op = opQX;
-			}
-			else if (*p == 't' && p[1] == 'r')
-			    op = opTR;
-			if (op != -1 && j > 2 && p[2] == '\'')
-			    j = 2;
-			else if (op != -1 && kwd(p[2]))
-			    op = -1;
-		    }
+                    }
+                    // it's common for these to be hash keys, e.g., $point{y} or y =>
+                    // so let's look for that and try not to hilight them.
+                    if (p[1] != '}' && !(x < Line->Count+1 &&
+                                         strncmp(Line->Chars + x, "=>", 2) == 0)) {
+                        if (j == 1) {
+                            if (*p == 'q')
+                                op = opQ;
+                            else if (*p == 's' || *p == 'y')
+                                op = opS;
+                            else if (*p == 'm')
+                                op = opM;
+                        }
+                        else if (j >= 2) {
+                            if (*p == 'q') {
+                                if (p[1] == 'q')
+                                    op = opQQ;
+                                else if (p[1] == 'w')
+                                    op = opQW;
+                                else if (p[1] == 'r')
+                                    op = opQR;
+                                else if (p[1] == 'x')
+                                    op = opQX;
+                            }
+                            else if (*p == 't' && p[1] == 'r')
+                                op = opTR;
+                            if (op != -1 && j > 2 && p[2] == '\'')
+                                j = 2;
+                            else if (op != -1 && kwd(p[2]))
+                                op = -1;
+                        }
+                    }
 		    if (StateMap)
 			memset(StateMap + i, State, j);
 		    if (B)
@@ -421,8 +427,6 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 		    ColorNext();
 		    while (len && (isxdigit(*p) || *p == '_'))
 			ColorNext();
-		    //                    if (len && (toupper(*p) == 'U')) ColorNext();
-		    //                    if (len && (toupper(*p) == 'L')) ColorNext();
 		    State = hsPerl_Normal | X_BIT;
 		    continue;
 		}
@@ -434,8 +438,6 @@ int Hilit_PERL(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 			   && (isdigit(*p)
 			       || (*p == 'e' || *p == 'E' || *p == '_')))
 			ColorNext();
-		    //                    if (len && (toupper(*p) == 'U')) ColorNext();
-		    //                    if (len && (toupper(*p) == 'L')) ColorNext();
 		    State = hsPerl_Normal | X_BIT;
 		    continue;
 		}
