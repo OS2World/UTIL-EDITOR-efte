@@ -17,7 +17,8 @@
 %endif
 
 # to customize FTE to your preferences you should only need
-# to add stuff in this file.
+# to add stuff in the mymain or systemmain file. However if this fails
+# try changing it in this file
 # Some examples are below. If you find something that cannot be
 # configured here, tell me about it.
 # If you wish to modify only a specific mode, add customizations to a my*.fte file
@@ -45,10 +46,6 @@
 include 'global.fte';
 
 include 'pal_base.fte';
-
-#color_palette {
-#    { 'Comment', 'green:black' },
-#}
 
 %if(COLORS_BLACK_BG)
 %if(UI_KB)
@@ -148,7 +145,6 @@ eventmap TEX: PLAIN {
 # Uncomment to use the alternate HTML mode in english
 # Probably works best with UI_MIXED
 # Not implemented for Multi Edit for Windows or VI interface
-#%define(HTML_AL)
 
 include 'm_cnfgs.fte';
 include 'm_4gl.fte';
@@ -245,6 +241,18 @@ include 'ui_mixed.fte';  # fte CUA style bindings + some Norton Editor keys...
 %endif
 %if(UI_VI)
 include 'experimental/ui_vi.fte';  # VI - very incomplete
+%endif
+%if(UI_EPM)              
+include 'ui_mixed.fte';  # EPM UI not yet implemented
+%endif
+%if(UI_E)
+include 'ui_brief.fte'; # T UI not yet implemented
+%endif
+%if(UI_EMACS)
+include 'ui_fte.fte'; # EMACS UI not yet implemented
+%endif
+%if(UI_EXTRA)
+include 'ui_fte.fte'; # EXTRA UI not yet implemented mean for as yet unidentified UI
 %endif
 # todo: brief, epm, emacs, VI
 
