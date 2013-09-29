@@ -15,19 +15,23 @@
 # User inteface styles UI_KB effects pallette and UNIX font selection and
 # can you must select a second UI_* to load it.
 #%define(UI_KB)
-#%define(UI_FTE)
+%define(UI_FTE)
 #%define(UI_WS)
 #%define(UI_NE)
 #%define(UI_BRIEF)
 #%define(UI_MIXED)
-%define(UI_MEW)
+#%define(UI_MEW)
 # experimental
 #%define(UI_VI)
+#%define(UI_EPM)
+#%define(UI_E) 
+#%define(UI_EMACS)
+#%define(UI_EXTRA)
 
 # Color Schemes
 #%define(COLORS_GRAY_BG)
-#%define(COLORS_WHITE_BG)
-%define(COLORS_BLACK_BG)
+%define(COLORS_WHITE_BG)
+#%define(COLORS_BLACK_BG)
 #%define(COLORS_BLUE_BG)
 #%define(COLORS_BLUEZ_BG)
 #%define(COLORS_NCE_BG)

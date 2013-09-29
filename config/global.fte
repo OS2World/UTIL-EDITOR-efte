@@ -33,6 +33,28 @@ object GLOBAL {
     CompletionFilter    = /^{\c.+\.o|a|{bak}|{exe}|{lib}|{class}|{jar}|{zip}|{gz}|{tar.gz}|{tgz}}|{.+~}|{CVS}|{SVN}$/;
     # {obj} file is also ASCII Object File Format for MAYA graphics editor
     # so it is removed from Completion Filter
+# fonts for GUI version
+
+%if(GUI_PM)
+# PM
+# Only System VIO fonts are used. Some listed below in myfontsize.fte
+# which is included below. XX*YY.
+# fixme to use other fonts? GKY 01 Oct 11
+    WindowFont = "8x14";
+%endif
+
+%if(GUI_X11)
+# X11
+# Any fixed-width font should do. Make sure it has all 256 characters
+# defined or weird things can happen. More choices in myfontsize.fte
+    WindowFont = "9x15";
+%if(UI_KB)
+    WindowFont = "*-fixed-bold-*-15*,*-fixed-bold-*-16*";
+%endif
+# We need some font, which can be 'LOCALIZED' - and this can't be done
+# with font names like 9x15 (actually we can, but this would need
+# highly skilled users :))
+%endif  
     
 %if(OS_UNIX)
     PrintDevice         = "|lpr";
@@ -220,3 +242,5 @@ object GLOBAL {
     SvnIgnoreRx = /^svn update: Updating /;
     SvnIgnoreRx = /^svn server: Updating /;
 }
+oinclude 'myfontsize.fte';
+

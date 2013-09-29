@@ -15,6 +15,10 @@
 #%define(UI_MEW_SYS)
 # experimental
 #%define(UI_VI_SYS)
+#%define(UI_EPM_SYS)
+#%define(UI_E_SYS)
+#%define(UI_EMACS_SYS)
+#%define(UI_EXTRA_SYS)
 
 %if(UI_FTE_SYS)
 %undefine(UI_WS)
@@ -24,6 +28,10 @@
 %undefine(UI_MEW)
 # experimental
 %undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
 
 %define(UI_FTE)
 %endif
@@ -36,6 +44,10 @@
 %undefine(UI_MEW)
 # experimental
 %undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
 
 %define(UI_WS)
 %endif
@@ -48,6 +60,10 @@
 %undefine(UI_MEW)
 # experimental
 %undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
 
 %define(UI_NE)
 %endif
@@ -60,6 +76,10 @@
 %undefine(UI_MEW)
 # experimental
 %undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
 
 %define(UI_BRIEF)
 %endif
@@ -72,6 +92,10 @@
 %undefine(UI_MEW)
 # experimental
 %undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
 
 %define(UI_MIXED)
 %endif
@@ -84,6 +108,10 @@
 %undefine(UI_FTE)
 # experimental
 %undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
 
 %define(UI_MEW)
 %endif
@@ -97,9 +125,81 @@
 %undefine(UI_FTE)
 
 # experimental
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
+
 %define(UI_VI)
 %endif
 
+%if(UI_EPM_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+%undefine(UI_FTE)
+
+# experimental
+%undefine(UI_VI)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
+
+%define(UI_EPM)
+%endif
+
+%if(UI_E_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+%undefine(UI_FTE)
+
+# experimental
+%undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_EMACS)
+%undefine(UI_EXTRA)
+
+%define(UI_E)
+%endif
+
+%if(UI_EMACS_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+%undefine(UI_FTE)
+
+# experimental
+%undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EXTRA)
+
+%define(UI_EMACS)
+%endif
+
+%if(UI_EXTRA_SYS)
+%undefine(UI_WS)
+%undefine(UI_NE)
+%undefine(UI_BRIEF)
+%undefine(UI_MIXED)
+%undefine(UI_MEW)
+%undefine(UI_FTE)
+
+# experimental
+%undefine(UI_VI)
+%undefine(UI_EPM)
+%undefine(UI_E)
+%undefine(UI_EMACS)
+
+%define(UI_EXTRA)
+%endif
 
 # Color Schemes
 #%define(COLORS_GRAY_BG_SYS)
