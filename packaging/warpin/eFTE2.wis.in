@@ -1,0 +1,122 @@
+<!--
+   IMPORTANT: DO NOT EDIT FM2.WIS! Please edit FM2.WIS.IN instead.
+   FM2.WIS.IN is used as input to SED which then replaces/inserts
+   various text and creates FM2.WIS during the FM/2 build process.
+
+   $Id: fm2.wis.in 1677 2013-01-01 20:17:06Z gyoung $
+
+Change log
+   22 Feb 08 JBS Ticket 231: Stop auto-select of FM/2 Utilities of already installed.
+   23 Feb 08 JBS Ticket 226: Add debugging support package
+   24 Feb 08 JBS Ticket 226: Add debugging support package
+   26 Feb 08 JBS Ticket 226: Reset debugging package version to match FM2_VER
+   06 Oct 08 JBS Ticket 287: Fix syntax of the required version attribute of Warpin tag
+                             in Warpin script.
+   23 Oct 08 JBS Ticket 292: Fix parameters field of Helpfile Viewer icon.
+   28 Oct 08 JBS Ticket 294: Add support for new object icons.
+   12 Apr 10 JBS Ticket 430: Add deletion of the now obsolete FM2RES.STR, if present
+   07 Aug 11 JBS Ticket 460: Fix bug in standalone installation of FM/2 Utilities (and
+                             correct a couple of object settings)
+
+   NOTE: If a NON-EXTERNAL package (i.e. a package whose files
+   will be staged before building the WPI file) with an index
+   greater than 999 is used, then the REXX program BLD_FM2_WPIDIRS.CMD
+   (found in the warpin directory of the build subtree) will have
+   to be changed. The line:
+         WPI.max_package_number_length = 3
+   will need to be changed accordingly.
+
+   NOTE: If a PACKAGEId line below ever has a '-' added to it, then the
+   SED command in warpin\makefile will have to change. Right now the SED
+   command first replaces the @@@EFTE2*_VER@@@ string in tha PACKAGEID's
+   below with the filename version strings (e.g. -3-6-0) and then it
+   replaces the '-' with backslashes. In summary, don't use '-' in these
+   PACKAGEID's if possible.
+
+   WARPIN VERSION="0.9.20" is required for PACKAGEID's with revision levels.
+   WARPIN VERSION="0.9.9"  is required for EXTRACTFROMPCK.
+
+-->
+<WARPIN VERSION="0.9.20">
+
+<HEAD>
+
+<PCK INDEX=1
+  PACKAGEID="Netlabs\eFTE2\Base@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 - enhanced Folding Text Editor/2 (Base package)"
+  TARGET="?:\eFTE"
+  SELECT
+  BASE
+  LONGFILENAMES
+  CREATEOBJECT="WPFolder|eFTE/2|<WP_DESKTOP>|ICONFILE=$(1)\icons\ftepm.ICO;ICONNFILE=1,$(1)\icons\ftepm2.ICO;CCVIEW=NO;OBJECTID=<eFTE_Folder>;"
+  CREATEOBJECT="FAIL WPProgram|eFTEPM/2|<eFTE_Folder>|EXENAME=$(1)\eftepm.exe;CCVIEW=YES;OBJECTID=<eFTEPM/2>;"
+  CREATEOBJECT="WPProgram|eFTEPM/2|<eFTE_Folder>|EXENAME=$(1)\eftepm.exe;STARTUPDIR=$(1);OBJECTID=<eFTEPM/2>;"
+  CREATEOBJECT="FAIL WPProgram|eFTE/2_VIO|<eFTE_Folder>|EXENAME=$(1)\efte.exe;CCVIEW=YES;TITLE=eFTE/2 VIO;OBJECTID=<eFTE/2>;"
+  CREATEOBJECT="WPProgram|eFTE/2 VIO|<eFTE_Folder>|EXENAME=$(1)\efte.exe;STARTUPDIR=$(1);TITLE=eFTE/2 VIO;OBJECTID=<eFTE/2>;"
+  CREATEOBJECT="WPProgram|eFTE/2 Online Help|<eFTE_Folder>|EXENAME=VIEW.EXE;PARAMETERS=$(1)\efte2.inf;OBJECTID=<eFTE2HELP>;"
+  CREATEOBJECT="WPProgram|Readme|<eFTE_Folder>|EXENAME=$(1)\eftepm.exe;PARAMETERS=$(1)\readme2);TITLE=eFTE/2 Readme;OBJECTID=<eFTE/2_README>;"
+  CLEARPROFILE="USER\eFTE/2"
+
+>This package contains the base enhanced Folding Text Editor/2 (eFTE/2) package.
+The eFTE/2 base package must be installed to a drive with long filename support!
+
+eFTE/2 is based on FTE. A major difference is that it compiles its configuration on the fly. Using efte(pm) -Cmain.fte may work with your FTE configuration files assuming efte can find it. See the readme for more information.
+
+eFTE/2 is built using OpenWatcom. Source is available on http://svn.netlabs.org/efte 
+</PCK>
+
+<PCK INDEX=2
+  PACKAGEID="Netlabs\eFTE/2 Configuration Files@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 Configuration Files"
+  TARGET="$(1)"
+  SELECT
+  FIXED
+>This package contains eFTE/2's configuration files which provide most of eFTE/2's user interface. If you already use FTE you can try using it with FTE's configuration files. eFTE/2 also contains a default configuration file which is part of the eFTE/2 package. It provides only a very small subset of eFTE/2's functionality. For a new install it is highly recommended that you install this package. If you are updating an existing eFTE/2 install and have modified the configuration other than by editing or creating "my*.fte files intalling this package will over write some of the changes. The History file will let you know what if any changes have been made to the configuration files so you can decide if you need/want to install them.
+</PCK>
+
+<PCK INDEX=3
+  PACKAGEID="Netlabs\eFTE/2 Customization Configuration Files@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 Personalization Configuration Files"
+  TARGET="$(1)"
+  SELECT
+  FIXED
+>This package contains eFTE/2's customization configuration files which provide a way to personalize eFTE/2's user interface. If you already have modified mymain.fte myfontsize.fte and/or systemmain.fte to personalize your install installing this package will revert your changes. The plan is for these files not to change here.
+</PCK>
+
+</HEAD>
+
+<BODY>
+
+<PAGE INDEX=1 TYPE=README>
+<NEXTBUTTON TARGET=2>~Next</NEXTBUTTON>
+<TEXT>NOTE: Thanks also goes to the many individuals who have continued to improve and enhance this great program. See Authors for more details</TEXT>
+<README FORMAT=PLAIN EXTRACTFROMPCK="1">docs\readme2</README>
+</PAGE>
+
+<PAGE INDEX=2 TYPE=README>
+<NEXTBUTTON TARGET=3>~I agree</NEXTBUTTON>
+<TEXT>eFTE2 License: By pressing the "I agree" button, you agree to all terms and conditions of the license agreement below.</TEXT>
+<README EXTRACTFROMPCK="1">docs\copying</README>
+</PAGE>
+
+<!-- The TYPE=CONTAINER will list the packages which can be installed. -->
+<PAGE INDEX=3 TYPE=CONTAINER>
+<NEXTBUTTON TARGET=4>~Next</NEXTBUTTON>
+<TEXT>Select your installation directory. Packages 1, 2 and 3 must be install on intial installation if you want the entire user interface. Package 2 fails without package 3. When updating don't install package 3 if you have customized mymain.fte or systemmain.fte. If you have made changes directly to any other configuration file intalling package 2 will overwrite those changes.
+</TEXT>
+</PAGE>
+
+<PAGE INDEX=4 TYPE=CONFIGURE>
+<NEXTBUTTON TARGET=0>I~nstall</NEXTBUTTON>
+<TEXT>Please select/deselect the desired configuration option(s).</TEXT>
+</PAGE>
+
+<PAGE INDEX=8 TYPE=CONFIGURE>
+<NEXTBUTTON TARGET=0>I~nstall</NEXTBUTTON>
+<TEXT>Please select/deselect the desired configuration option(s).
+</TEXT>
+</PAGE>
+
+</BODY>
+</WARPIN>
+
