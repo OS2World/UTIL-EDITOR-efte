@@ -1,4 +1,4 @@
 NAME eftepm 
 SYS os2v2_pm
-option description '@#The Netlabs eFTE2 team:2.0#@##1## 11/19/2011 03:19:01      tresbopeep::EN:US:0:M:@@eFTEPM Copyright (c) 2011 Gregg Young & Associates All rights reserved'
+option description '@#The Netlabs eFTE2 team:1.0#@##1## 10/02/2013 03:19:01      tresbopeep::EN:US:0:M:@@eFTEPM Copyright (c) 2013 Gregg Young All rights reserved'
 option stack = 655360
