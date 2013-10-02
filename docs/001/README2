@@ -1,0 +1,59 @@
+
+                          eFTE/2, Version 1.0
+
+                   Copyright 2009-2013 by Gregg Young
+                   Copyright 2008-2009 by eFTE SF Group.
+                   Copyright 1994-1998 by Marko Macek.
+                         All rights reserved.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of either:
+
+        a) the GNU General Public License as published by the Free
+           Software Foundation; either version 2, or (at your option) any
+           later version, or
+
+        b) the "Artistic License" which comes with this Kit.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See either
+    the GNU General Public License or the Artistic License for more details.
+
+    You should have received a copy of the Artistic License with this
+    Kit, in the file named "Artistic".  If not, I'll be glad to provide one.
+
+    You should also have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+-----------------------------------------------------------------------
+WWW http://svn.netlabs.org/efte
+
+This is the first version of eFTE/2. It is based on eFTE (see README.efte) which in 
+turn is based on FTE (Folding Text Editor). The configuration now compiles on
+the fly. You should be able to use it with the configuration files of an existing
+FTE install simply by creating a mymain.fte file in the same directory as your
+old main.fte. The file must include the line #include 'main.fte'. You could also
+use the mymain.fte and sysmain.fte files from the package. Simply copy them to
+the directory main.fte is in. You will need to edit mymain to set the UI and color
+scheme as it will override the settings in main.fte. Another alternative is to
+rename your main.fte mymain.fte or use -Cmain.fte on the command line. If eFTE/2 
+can't find your configuration SET EFTEDIR in config.sys to point to the directory 
+your main.fte is in.
+
+I have structured the configuration files to make it easier to translate the menus.
+I lack the language skills to do the translations. If you have an opportunity to do
+one or more of the translations please send them to me a ygk@qwest.net. The menu files
+are located in the menu_xx (where xx is the language code) subdirectories of the
+config directory. The keyboard files included there are present so you can change the
+accel keys for accessing the menus if needed. Note the key you want to use my already
+be in use so you will need to switch them. You may add any language with a 2 letter
+code. Simple create a menu_xx subdirectory using the code and place the menus in it.
+To use them start eFTE/2 with -Lxx (xx = language code) on the command line. You can
+also use -L to override the language default which is based on your systems LANG 
+environment variable. The edefault.fte also could be translated. If you are interested 
+in translating the documentation (help file etc) please contact me.
+
+See HISTORY file for a list of recent changes.
+See AUTHORS file for a list of contributors
