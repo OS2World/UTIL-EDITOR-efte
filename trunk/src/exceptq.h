@@ -1,11 +1,15 @@
 /******************************************************************************
  *
- *  exceptq.h - exceptq public header - v7.1
+ *  exceptq.h - exceptq public header - v7.12 with SHL modifications
  *
  *  Parts of this file are
- *    Copyright (c) 2000-2010 Steven Levine and Associates, Inc.
+ *    Copyright (c) 2000-2012 Steven Levine and Associates, Inc.
  *    Copyright (c) 2010-2011 Richard L Walsh
  *
+ * 2012-09-30 SHL Warn if INCL_DOSPROCESS not defined when required
+ * 2012-09-30 SHL Warn if INCL_DOSEXCEPTIONS not defined when required
+ * 2012-09-30 SHL Warn if INCL_DOSEXCEPTIONS not defined when required
+ * 2012-09-30 SHL Apply James Moe g++ compatibility tweaks
  *
  *****************************************************************************/
 
@@ -14,6 +18,29 @@
 
 #if !defined(__OS2_H__) && !defined(OS2_INCLUDED) && !defined(_OS2_H) && !defined(_OS2EMX_H)
 #error os2.h must be #included before exceptq.h
+#endif
+
+// 2012-09-30 SHL Verify required defines
+#ifdef INCL_LOADEXCEPTQ
+#ifndef INCL_DOSEXCEPTIONS
+#error INCL_DOSEXCEPTIONS must be defined before #include os2.h
+#endif
+#ifndef INCL_DOSPROCESS
+#error INCL_DOSPROCESS must be defined before #include os2.h
+#endif
+#endif
+
+// 2012-09-30 SHL Verify required defines
+#ifdef INCL_LIBLOADEXCEPTQ
+#ifndef INCL_DOSEXCEPTIONS
+#error INCL_DOSEXCEPTIONS must be defined before #include os2.h
+#endif
+#ifndef INCL_DOSPROCESS
+#error INCL_DOSPROCESS must be defined before #include os2.h
+#endif
+#ifndef INCL_DOSMODULEMGR
+#error INCL_DOSMODULEMGR must be defined before #include os2.h
+#endif
 #endif
 
 #ifdef __cplusplus
@@ -136,7 +163,8 @@ APIRET   APIENTRY   InstallExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
                                    const char* pszOptions,
                                    const char* pszReportInfo);
 
-typedef APIRET APIENTRY _INSTEXQ(EXCEPTIONREGISTRATIONRECORD*, const char*, const char*);
+typedef APIRET APIENTRY _INSTEXQ(EXCEPTIONREGISTRATIONRECORD*,
+                                 const char*, const char*);
 typedef _INSTEXQ* PINSTEXQ;
 
 #define UninstallExceptq(pExRegRec) DosUnsetExceptionHandler((pExRegRec))
@@ -173,27 +201,62 @@ APIRET16 APIENTRY16 UNSETEXCEPT(EXCEPTIONREGISTRATIONRECORD* _Seg16 pExRegRec);
  * Force the app to exit via a forced trap
  */
 void     APIENTRY   FORCEEXIT(void);
-BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
-                    const char* pOpts, const char* pInfo);
 
 /*****************************************************************************/
-#ifdef INCL_LOADEXCEPTQ
-
-
-
-/**
- * The following sample function loads and installs Exceptq dynamically
+/*  LoadExceptq() and LibLoadExceptq()                                       */
+/*****************************************************************************/
+/*
+ * LoadExceptq() is a sample function to load and install Exceptq dynamically
  * so your application can use it without being dependent on its presence.
  * By design, it will fail if it finds a version of Exceptq earlier than v7.0.
- * You can either copy it into your source or you can #define INCL_LOADEXCEPTQ
- * in *one* of your files to have it included.  It assumes that you have
- * #defined INCL_DOS and #included <os2.h> and <string.h> *before* exceptq.h.
+ * To use it, #define INCL_LOADEXCEPTQ in *one* of your files to have it
+ * included.  It assumes that you have #defined INCL_DOS and #included <os2.h>
+ * and <string.h> *before* exceptq.h.
  *
- * Important:  for each thread your app creates, you must call this function
+ * LibLoadExceptq() lets a third-party library add Exceptq support to threads
+ * it creates without forcing an application use Exceptq.  It will not install
+ * the exception handler unless the application has already loaded exceptq.dll.
+ * It omits the options and report info arguments because they should be set
+ * by the app, not the library.  To use it, #define INCL_LIBLOADEXCEPTQ.
+ *
+ * Important:  for each thread your app creates, you must call the function
  * on entry and UninstallExceptq() on exit.  Typically, LoadExceptq() should
  * be the first line of code in main() and each threadproc. UninstallExceptq()
  * should be called immediately before exiting main() and each threadproc.
+ * Exceptq's options can only be set on the first call to LoadExceptq().
  */
+
+/* If your app uses KLIBC's fork(), #define this along with INCL_LOADEXCEPTQ
+ * or INCL_LIBLOADEXCEPTQ to ensure Exceptq is loaded into the forked process;
+ * otherwise, avoid it.
+ */
+#if defined(INCL_LOADEXCEPTQ) || defined(INCL_LIBLOADEXCEPTQ)
+# ifdef INCL_FORKEXCEPTQ
+#   include <dlfcn.h>
+#   define XQ_LOADDLL(name, hndl)      (hndl = dlopen(name, 0))
+#   define XQ_GETPROC(hndl, sym, ptr)  (ptr = dlsym(hndl, sym))
+#   define XQ_UNLOADDLL(hndl)          (dlclose(hndl))
+#   define XQ_HMOD                     void*
+# else
+#ifdef __cplusplus
+#   define XQ_LOADDLL(name, hndl)      (DosLoadModule(0, 0, (PCSZ)name, &hndl) == 0)
+#   define XQ_GETPROC(hndl, sym, ptr)  (DosQueryProcAddr(hndl, 0, (PCSZ)sym, (PFN*)&ptr) == 0)
+#else
+#   define XQ_LOADDLL(name, hndl)      (DosLoadModule(0, 0, (PSZ)name, &hndl) == 0)
+#   define XQ_GETPROC(hndl, sym, ptr)  (DosQueryProcAddr(hndl, 0, (PSZ)sym, (PFN*)&ptr) == 0)
+#endif
+#   define XQ_UNLOADDLL(hndl)          (DosFreeModule(hndl) == 0)
+#   define XQ_HMOD                     HMODULE
+# endif
+#endif
+
+// 2012-09-30 SHL Always define so that callable from multiple source files
+#ifndef INCL_LIBLOADEXCEPTQ
+BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
+                    const char* pOpts, const char* pInfo);
+#endif
+
+#ifdef INCL_LOADEXCEPTQ
 
 BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
                     const char* pOpts, const char* pInfo)
@@ -201,8 +264,7 @@ BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
   static BOOL      fLoadTried = FALSE;
   static PINSTEXQ  pfnInstall = 0;
 
-  HMODULE   hmod = 0;
-  char      szFailName[16];
+  XQ_HMOD   hmod = 0;
 
   /* Make only one attempt to load the dll & resolve the proc address. */
   if (!fLoadTried) {
@@ -211,7 +273,7 @@ BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
     /* If the dll can't be found on the LIBPATH, look for it in the
      * exe's directory (which may not be the current directory).
      */
-    if (DosLoadModule(szFailName, sizeof(szFailName), "EXCEPTQ", &hmod)) {
+    if (!XQ_LOADDLL("EXCEPTQ", hmod)) {
       PPIB      ppib;
       PTIB      ptib;
       char *    ptr;
@@ -223,15 +285,15 @@ BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
         return FALSE;
 
       strcpy(&ptr[1], "EXCEPTQ.DLL");
-      if (DosLoadModule(szFailName, sizeof(szFailName), szPath, &hmod))
+      if (!XQ_LOADDLL(szPath, hmod))
         return FALSE;
     }
 
     /* If the proc address isn't found (possibly because an older
      * version of exceptq.dll was loaded), unload the dll & exit.
      */
-    if (DosQueryProcAddr(hmod, 0, "InstallExceptq", (PFN*)&pfnInstall)) {
-      DosFreeModule(hmod);
+    if (!XQ_GETPROC(hmod, "InstallExceptq", pfnInstall)) {
+      (void)XQ_UNLOADDLL(hmod);
       return FALSE;
     }
   }
@@ -251,7 +313,78 @@ BOOL    LoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec,
   return TRUE;
 }
 
-#endif
+#else
+#ifdef INCL_LIBLOADEXCEPTQ
+
+static BOOL   LibLoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec);
+
+static BOOL   LibLoadExceptq(EXCEPTIONREGISTRATIONRECORD* pExRegRec)
+{
+  static BOOL      fLoadTried = FALSE;
+  static PINSTEXQ  pfnInstall = 0;
+
+  XQ_HMOD   hmod = 0;
+
+  /* Make only one attempt to confirm the dll is already loaded
+   * and to resolve the proc address.
+   */
+  if (!fLoadTried) {
+    char  szPath[CCHMAXPATH];
+
+    fLoadTried = TRUE;
+
+    /* Try to get the loaded dll's module handle.  If it can't be
+     * found on the LIBPATH, look for it in the exe's directory
+     * (which may not be the current directory).
+     */
+
+    strcpy(szPath, "EXCEPTQ");
+    if (DosQueryModuleHandle(szPath, (HMODULE*)&hmod)) {
+      PPIB      ppib;
+      PTIB      ptib;
+      char *    ptr;
+
+      DosGetInfoBlocks(&ptib, &ppib);
+      if (DosQueryModuleName(ppib->pib_hmte, CCHMAXPATH, szPath) ||
+          (ptr = strrchr(szPath, '\\')) == 0)
+        return FALSE;
+
+      strcpy(&ptr[1], "EXCEPTQ.DLL");
+      if (DosQueryModuleHandle(szPath, (HMODULE*)&hmod))
+        return FALSE;
+    }
+
+    /* Reload the dll to ensure it doesn't get unloaded by the app. */
+    hmod = 0;
+    if (!XQ_LOADDLL(szPath, hmod))
+      return FALSE;
+
+    /* If the proc address isn't found (possibly because an older
+     * version of exceptq.dll was loaded), unload the dll & exit.
+     */
+    if (!XQ_GETPROC(hmod, "InstallExceptq", pfnInstall)) {
+      (void)XQ_UNLOADDLL(hmod);
+      return FALSE;
+    }
+  }
+
+  /* Ensure we have the proc address. */
+  if (!pfnInstall)
+    return FALSE;
+
+  /* Call InstallExceptq().  It really shouldn't fail, so if
+   * it does, zero-out the address to avoid further problems.
+   */
+  if (pfnInstall(pExRegRec, 0, 0)) {
+    pfnInstall = 0;
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+#endif // INCL_LIBLOADEXCEPTQ
+#endif // INCL_LOADEXCEPTQ
 /*****************************************************************************/
 
 #ifdef __cplusplus
