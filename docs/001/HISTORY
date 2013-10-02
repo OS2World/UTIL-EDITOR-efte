@@ -7,6 +7,32 @@ Revision legend
 
 Revision history
 -----------------------------------------------------------------------
+eFTE/2 1.0 -- October 2, 2013
+  - First release of eFTE2
+  - Branded eFTE to eFTE2
+  - Migrated to netlabs SVN
+  - Renamed some cofiguration files and reorganized configuration directories.
+  - Program will still work with old configurations
+  + Changes to ease translation of the menus
+  + Added autoloading of language based on LANG evironment variable or commandline switch (-L)
+  + Added Enhanced HTML, CSS, and IPF modes by Alfredo Fernandez Diaz
+  + Added Spanish translation Alfredo Fernandez Diaz
+  + Added Enhanced REXX editing mode by Michael DeBusk
+  + Added PHP & MySQL modes by Timo Maier
+  + Added BAT, BTM, and CONFIG.SYS modes by Michael DeBusk
+  + Added %undefine configuration compiler directive
+  + Reactivate the status bar message for toggles (eg tells you word wrap has changed to "Auto", "Yes" or "No")
+  + Updated main.fte to include all available modes
+  + Move UI %defines to mymain.fte with possibility to override them in systemmain.fte
+  + Move color %defines to mymain.fte
+  ! Fixed error messages to always use a dialog box for gui versions
+  ! Tolerate white space after "%" directives in configuration files
+  + Added ability to set the "C" indent style from commandline or by an environment variable
+  + Restored a default configuration (edefault.fte)
+  + Move default font size settings to global.fte added myfontsize.fte to allow for over riding the default
+  ! Fixed the find dialog layout
+  + Added latest perl highligting code from FTE
+  + Updated help file to reflect changes convert HTML to IPF
 
 1.1 -- October 11, 2009
   ! Fixed a frequent buffer overflow in e_redraw.cpp

@@ -1,14 +1,19 @@
-Current Authors
-   * Jeremy Cowgar
-   * Lauri Nurmi
-   * Timo Sirainen
+Current Author
+   * Gregg Young
 
 Current Contact Method:
-  http://sourceforge.net/projects/efte/
-  irc: #efte on irc.freenode.net
+   http://svn.netlabs.org/efte
+   ygk@qwest.net
+  
+Related Projects
+   http://sourceforge.net/projects/efte/ 
+   http://fte.sourceforge.net/
 
 Earlier Authors
    * Marko Macek
+   * Jeremy Cowgar
+   * Lauri Nurmi
+   * Timo Sirainen
 
 Contributors
    * F.Jalvingh
@@ -18,5 +23,8 @@ Contributors
    * Zednek Kabelac
    * Don Mahurin
    * Lothar Schmidt
+   * Alfredo Fernandez Diaz
+   * Michael DeBusk
+   * Timo Maier
 
 If you feel your name should be listed but it isn't, please contact us.
