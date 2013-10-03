@@ -1,0 +1,54 @@
+
+<PCK INDEX=13
+  PACKAGEID="Netlabs\eFTE/2 CS language menus@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 CS language menus"
+  TARGET="$(1)"
+  FIXED
+>This package contains eFTE/2's CS language menus. These menus have not actually been
+translated.
+</PCK>
+
+<PCK INDEX=4
+  PACKAGEID="Netlabs\eFTE/2 DE language menus@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 German language menus"
+  TARGET="$(1)"
+  FIXED
+>This package contains eFTE/2's German language menus. These menus have not actually been
+translated
+</PCK>
+
+<PCK INDEX=5
+  PACKAGEID="Netlabs\eFTE/2 ES language menus@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 Spanish language menus"
+  TARGET="$(1)"
+  FIXED
+>This package contains eFTE/2's German language menus. These menus are not completely
+translated
+</PCK>
+
+<PCK INDEX=6
+  PACKAGEID="Netlabs\eFTE/2 FR language menus@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 French language menus"
+  TARGET="$(1)"
+  FIXED
+>This package contains eFTE/2's French language menus. These menus have not actually been
+translated
+</PCK>
+
+<PCK INDEX=7
+  PACKAGEID="Netlabs\eFTE/2 IT language menus@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 Italian language menus"
+  TARGET="$(1)"
+  FIXED
+>This package contains eFTE/2's Italian language menus. These menus have not actually been
+translated
+</PCK>
+
+<PCK INDEX=8
+  PACKAGEID="Netlabs\eFTE/2 DE language menus@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 German language menus"
+  TARGET="$(1)"
+  FIXED
+>This package contains eFTE/2's German language menus. These menus have not actually been
+translated
+</PCK>
