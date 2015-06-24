@@ -147,6 +147,9 @@ menu Options {
 }                    
 
 menu Help {
+%if(OS_OS2)
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+%endif
     item "&Show key" { ShowKey }
     item;
     item "&About..."  { ShowVersion }

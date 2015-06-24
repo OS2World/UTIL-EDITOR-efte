@@ -23,7 +23,10 @@ menu IPF_Tools {
 }
 
 menu Help_IPF {
-    item "&Keyboard\tF1" { ViewModeMap }
+%if(OS_OS2)
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+%endif
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
     item "&Show key" { ShowKey }
     item;
 %if(OS_OS2)
