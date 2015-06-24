@@ -1,10 +1,15 @@
 
 menu Help_MAKE {
-    item "&Keyboard\tF1" { ViewModeMap }
+%if(OS_OS2)
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+%endif
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
     item "&Show key" { ShowKey }
     #item "&Bubblehelp PM Toolbar only"  {ToggleBubbleHelp}
     item;
+%if(OS_OS2)    
     item "&Make help" { RunProgram "view U:\\WATCOM\\binp\\help\\tools.inf" }
+%endif
     item;    
     item "&About..." { ShowVersion }
 }

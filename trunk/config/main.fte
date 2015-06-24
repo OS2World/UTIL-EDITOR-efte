@@ -294,7 +294,7 @@ eventmap PLAIN {
     key [A+C+M] { BlockMarkFunction }
     key [A+C+[] { MoveFunctionPrev }
     key [A+C+\]] { MoveFunctionNext }
-
+    key [A+F1] {ViewModeMap;}
     key [C+F1] { ShowHelpWord
 %if(OS_OS2)
         # OS/2 - helpfile (can be contatenated)

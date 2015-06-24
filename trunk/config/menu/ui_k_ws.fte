@@ -1,5 +1,8 @@
 eventmap MODEL {
-    key       [F1]      { ViewModeMap }
+%if(OS_OS2)
+    key [F1] { ShowHelp "eFTE2" "" }
+%endif
+    key [A+F1] {ViewModeMap;} 
     key     [C+F2]      { FileSaveAll }
     key       [F3]      { FileOpen }
     key       [F4]      { WinNext }

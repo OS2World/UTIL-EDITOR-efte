@@ -1,7 +1,8 @@
 # menu definitions for C mode
 %if(OS_OS2)
 menu Help_C {
-    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
     item "&Show key" { ShowKey }
     item;
     item "Watcom &C help" { RunProgram "view clib.inf+clr.inf" }
