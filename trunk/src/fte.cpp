@@ -24,6 +24,8 @@
 uid_t effuid;
 gid_t effgid;
 #endif /* UNIX */
+//#define  __PMPRINTF__
+//#include "PMPRINTF.H"
 
 char ConfigFileName[MAXPATH] = "";
 
@@ -245,38 +247,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
                 translate = 0;
         } // if lang
     } // if tanslate
-
-    // Ignore system config?
-    if (ign == 1) {
-	if (LoadDefaultConfig() == -1) {
-	    DieError(1, "Failed to load internal configuration\n"
-		     "Please specify an external configuration file\n"
-		     "via the command line option -C\n");
-	}
-    }
-    else if (LoadConfig(argc, argv, ConfigFileName) == -1) {
-        GxView *V;
-
-        switch (V->Choice(GPC_ERROR,
-                          "Failed to load configuration file '%s'. \n"
-                          "Should I attempt to load the default configuration",
-                          2, "&Yes", "&No", "")) {
-                          case 0:
-                              strcpy(ConfigFileName, "edefault.fte");
-                              if (LoadConfig(argc, argv, ConfigFileName) == -1)
-                                  DieError(1,
-                                           "Failed to load the default configuration file,\n"
-                                           "Make sure edefault.fte is in the efte directory\n");
-                              break;
-                          case 1:
-                              DieError(1, "Failed to load configuration file '%s'.\n"
-                                       "Use '-C' option followed by the filename or alone to load the default.",
-                                       ConfigFileName);
-
-	}
-	
-    }
-
+    LoadConfig(argc, argv, ConfigFileName);
     for (Arg = 1; Arg < argc; Arg++) {
 	if (!QuoteAll && !QuoteNext && (argv[Arg][0] == '-')) {
 	    if (argv[Arg][1] == '-' && argv[Arg][2] == '\0') {
@@ -324,63 +295,6 @@ static int CmdLoadConfiguration(int &argc, char **argv)
 	LoadDesktopOnEntry = 1;
     return 1;
 }
-
-#if 0 //defined(OS2)
-int LoadExceptq(EXCEPTIONREGISTRATIONRECORD * pExRegRec, char *pOpts)
-{
-    static BOOL fLoadTried = FALSE;
-    static PINSTEXQ pfnInstall = 0;
-
-    HMODULE hmod = 0;
-    char szFailName[16];
-
-    /* Make only one attempt to load the dll & resolve the proc address. */
-    if (!fLoadTried) {
-	fLoadTried = TRUE;
-
-	/* If the dll can't be found on the LIBPATH, look for it in the
-	 * exe's directory (which may not be the current directory).
-	 */
-	if (DosLoadModule(szFailName, sizeof(szFailName), "EXCEPTQ", &hmod)) {
-	    PPIB ppib;
-	    PTIB ptib;
-	    char *ptr;
-	    char szPath[CCHMAXPATH];
-
-	    DosGetInfoBlocks(&ptib, &ppib);
-	    if (DosQueryModuleName(ppib->pib_hmte, CCHMAXPATH, szPath) ||
-		(ptr = strrchr(szPath, '\\')) == 0)
-		return FALSE;
-
-	    strcpy(&ptr[1], "EXCEPTQ.DLL");
-	    if (DosLoadModule(szFailName, sizeof(szFailName), szPath, &hmod))
-		return FALSE;
-	}
-
-	/* If the proc address isn't found (possibly because an older
-	 * version of exceptq.dll was loaded), unload the dll & exit.
-	 */
-	if (DosQueryProcAddr(hmod, 0, "InstallExceptq", (PFN *) & pfnInstall)) {
-	    DosFreeModule(hmod);
-	    return FALSE;
-	}
-    }
-
-    /* Ensure we have the proc address. */
-    if (!pfnInstall)
-	return FALSE;
-
-    /* Call InstallExceptq().  It really shouldn't fail, so if
-     * it does, zero-out the address to avoid further problems.
-     */
-    if (pfnInstall(pExRegRec, pOpts)) {
-	pfnInstall = 0;
-	return FALSE;
-    }
-
-    return TRUE;
-}
-#endif
 
 int main(int argc, char **argv)
 {
