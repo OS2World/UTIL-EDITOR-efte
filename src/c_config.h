@@ -22,7 +22,8 @@ typedef struct _CurPos {
     const char *name; // filename
 } CurPos;
 
-extern int CFteMain();
+extern int LoadFile(const char *WhereName, const char *CfgName, int Level = 1,
+                    int optional = 0);
 
 typedef struct {
     unsigned char tag;

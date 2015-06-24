@@ -329,8 +329,8 @@ int main(int argc, char *argv[])
 {
     FILE *fin;
     FILE *fout;
-    char finname[255];
-    char foutname[255];
+    char finname[256];
+    char foutname[256];
     char linebuf[256];
     char *lptr;
     char keyspecbuf[32];
@@ -357,7 +357,7 @@ int main(int argc, char *argv[])
 	exit(-2);
     }
 
-    strcpy(finname, argv[1]);
+    snprintf(finname, 255, "%s", argv[1]);
     strcpy(foutname, argv[2]);
 
     fin = fopen(finname, "rt");

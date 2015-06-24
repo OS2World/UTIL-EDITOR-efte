@@ -17,15 +17,21 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#if defined(OS2)
+#define INCL_DOS
+#include <os2.h>
+#endif
+//#define  __PMPRINTF__
+//#include "PMPRINTF.H"
 
-#include "ftever.h"
+/*#include "ftever.h"
 #include "sysdep.h"
 #include "c_fconfig.h"
 #include "s_files.h"
 #include "s_string.h"
 #include "c_mode.h"
 #include "console.h"
-#include "c_hilit.h"
+#include "c_hilit.h"*/
 
 #include "fte.h"
 
@@ -84,9 +90,6 @@ static void Fail(CurPos & cp, const char *s, ...)
     DieError(1, "%s", diemsg);
 }
 
-static int LoadFile(const char *WhereName, const char *CfgName, int Level =
-		    1, int optional = 0);
-
 static void PutObject(CurPos & cp, int xtag, int xlen, void *obj)
 {
     unsigned char tag = (unsigned char)xtag;
@@ -125,54 +128,6 @@ static void PutNumber(CurPos & cp, int xtag, long num)
     b[2] = (unsigned char)((l >> 16) & 0xFF);
     b[3] = (unsigned char)((l >> 24) & 0xFF);
     PutObject(cp, xtag, 4, b);
-}
-
-int CFteMain()
-{
-    DefineWord("OS_"
-#if defined(OS2)
-	       "OS2"
-#elif defined(UNIX)
-	       "UNIX"
-#elif defined(NT)
-	       "NT"
-#endif
-              );
-
-    if (getenv("FM2"))
-        DefineWord("FM2");
-    if (getenv("OS2DDK"))
-        DefineWord("OS2DDK");
-    if (getenv("GNU"))
-        DefineWord("GNU");
-    if (getenv("LINUXKERNEL"))
-        DefineWord("LINUXKERNEL");
-
-
-    CurPos cp;
-
-    cp.sz = 0;
-    cp.c = 0;
-    cp.a = cp.c = 0;
-    cp.z = cp.a + cp.sz;
-    cp.line = 0;
-    cp.name = "<cfte-start>";
-
-    // Make a copy of the root dir from main config file to
-    // be able to search in main config's directory first for all includes
-    strcpy(ConfigDir, ConfigFileName);
-    for (int i = strlen(ConfigDir) - 1; i >= 0; i--) {
-	if (ISSLASH(ConfigDir[i])) {
-	    ConfigDir[i] = 0;
-	    break;
-	}
-    }
-
-    if (LoadFile("", ConfigFileName, 0) != 0) {
-	DieError(1, "\nCompile failed\n");
-    }
-
-    return 0;
 }
 
 #define MODE_BFI(x) { #x, BFI_##x }
@@ -2080,6 +2035,26 @@ int ProcessConfigFile(char *filename, char *buffer, int Level)
     cp.line = 1;
     cp.name = filename;
 
+    DefineWord("OS_"
+#if defined(OS2)
+	       "OS2"
+#elif defined(UNIX)
+	       "UNIX"
+#elif defined(NT)
+	       "NT"
+#endif
+              );
+
+    if (getenv("FM2"))
+        DefineWord("FM2");
+    if (getenv("OS2DDK"))
+        DefineWord("OS2DDK");
+    if (getenv("GNU"))
+        DefineWord("GNU");
+    if (getenv("LINUXKERNEL"))
+        DefineWord("LINUXKERNEL");
+
+
     // preprocess configuration file
     int rc = PreprocessConfigFile(cp);
 
@@ -2108,7 +2083,7 @@ int ProcessConfigFile(char *filename, char *buffer, int Level)
     return rc;
 }
 
-static int LoadFile(const char *WhereName, const char *CfgName, int Level,
+int LoadFile(const char *WhereName, const char *CfgName, int Level,
 		    int optional)
 {
     int fd;
@@ -2118,6 +2093,15 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
     char last[MAXPATH];
     char Cfg[MAXPATH];
 
+    // Make a copy of the root dir from main config file to
+    // be able to search in main config's directory first for all includes
+    strcpy(ConfigDir, ConfigFileName);
+    for (int i = strlen(ConfigDir) - 1; i >= 0; i--) {
+	if (ISSLASH(ConfigDir[i])) {
+	    ConfigDir[i] = 0;
+	    break;
+	}
+    }
     JustDirectory(WhereName, last, sizeof(last));
 
     if (IsFullPath(CfgName)) {
@@ -2232,7 +2216,7 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
                 }
             }
         }
-        if (found == false && stricmp(Cfg, "edefault.fte") && !checked && !optional){
+        if (found == false && stricmp(Cfg, "edefault.fte") && !checked && !optional) {
             ChoiceInfo *choice;
             char s[MAXPATH];
 
@@ -2252,8 +2236,8 @@ static int LoadFile(const char *WhereName, const char *CfgName, int Level,
                     found = true;
                 }
                 else {
-                    sprintf(s, "Can not find %s", Cfg);
-                    DieError(1, s);
+                    DieError(1, "Can not find %s", Cfg); // fixme
+                    //delay(100);
                     return -1;
                 }
             }

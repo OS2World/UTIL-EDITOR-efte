@@ -193,7 +193,8 @@ void ExComplete::HandleEvent(TEvent & Event)
                             FixedUpdate(1);
                         break;
 		    }
-		Event.What = evNone;
+                Event.What = evNone;
+                delete[]s;
 	    }
 	    break;
 	}

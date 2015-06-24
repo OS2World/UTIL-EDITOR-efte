@@ -1433,33 +1433,6 @@ static int ReadConfigFile(CurPos & cp)
     return -1;
 }
 
-int LoadDefaultConfig()
-{
-    /*
-       //char *buf = (char *)malloc(strlen(DefaultConfig) + 1);
-       //strlcpy(buf, DefaultConfig, strlen(DefaultConfig));
-       ProcessConfigFile((char *)"built-in", DefaultConfig, 0);
-
-       CurPos cp;
-       cp.name = "built-in";
-       cp.sz = cpos;
-       cp.a = 0;//buffer;
-       cp.c = 0;//cp.a + 2 * 4;
-       cp.z = 0;//cp.a + cp.sz;
-       cp.line = 1;
-
-       cpos = 0;
-
-       int rc = ReadConfigFile(cp);
-       if (rc == -1) {
-       DieError(1, "Final Error %s offset %d\n", "built-in", cpos);
-       }
-       return rc;
-     */
-    DieError(1, "Default config not yet implemented");
-    return 0;
-}
-
 int LoadConfig(int argc, char **argv, char *CfgFileName)
 {
     STARTFUNC("LoadConfig");
@@ -1468,8 +1441,17 @@ int LoadConfig(int argc, char **argv, char *CfgFileName)
     int rc;
     CurPos cp;
 
-    CFteMain();
+    cp.sz = 0;
+    cp.c = 0;
+    cp.a = cp.c = 0;
+    cp.z = cp.a + cp.sz;
+    cp.line = 0;
+    cp.name = "<cfte-start>";
 
+    if (LoadFile("", ConfigFileName, 0) != 0) {
+	DieError(1, "\nCompile failed\n");
+    }
+    
     cp.name = CfgFileName;
     cp.sz = cpos;
     cp.a = 0;				//buffer;
