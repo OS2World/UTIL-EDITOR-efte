@@ -231,7 +231,7 @@ eventmap MODEL { # basic commands, for files, directories, message view, etc.
 eventmap PLAIN {
     key [C+F1] { ShowHelpWord
 %if(OS_OS2)
-        # OS/2 - helpfile (can be contatenated)
+        # OS/2 - helpfile (can be concatenated)
         "addendum+CP1+CP2+CP3+GPI1+GPI2+GPI3+GPI4+MMREF1+MMREF2+MMREF3+MMSSPG+PM1+PM2+PM3+PM4+PM5+WPS1+WPS2+WPS3"
 %endif
 %if(OS_UNIX)
