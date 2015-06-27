@@ -924,7 +924,14 @@ int EGUI::CmdLoadFiles(int &argc, char **argv)
 		    GotoLine = (1 == sscanf(argv[Arg] + 2, "%d", &LineNum));
 		}
 		// printf("Gotoline = %d, line = %d, col = %d\n", GotoLine, LineNum, ColNum);
-		break;
+                break;
+            case 'L':
+            {
+                translate = -1;
+                if (argv[Arg][2] && argv[Arg][3] && strnicmp("en", &argv[Arg][2], 2))
+                    snprintf(menupath, MAXPATH, "menu_%c%c", argv[Arg][2], argv[Arg][3]);
+                break;
+	    }
 	    case 'r':
 		ReadOnly = 1;
 		break;
