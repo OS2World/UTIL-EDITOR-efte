@@ -1,13 +1,14 @@
 # menu definitions for C mode
 %if(OS_OS2)
 menu Help_C {
-    item "&Keyboard\tF1" { ViewModeMap }
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
     item "&Show key" { ShowKey }
     item;
-    item "Watcom &C help" { RunProgram "view clib.inf+clr.inf" }
-    item "Watcom C&++ help" { RunProgram "view cpplib.inf+wpperrs.inf" }
+    item "Watcom &C\tShift+F1 help" { ShowHelpWord " /s clib.inf+clr.inf" }
+    item "Watcom C&++ help" { ShowHelpWord " /s cpplib.inf+wpperrs.inf" }
     item;
-    item "OS/2 Programming Guide" { RunProgram "view addendum+CP1+CP2+CP3+GPI1+GPI2+GPI3+GPI4+MMREF1+MMREF2+MMREF3+MMSSPG+PM1+PM2+PM3+PM4+PM5+WPS1+WPS2+WPS3" }
+    item "OS/2 Programming Guide\tCtrl+F1" { ShowHelpWord " /s addendum+CP1+CP2+CP3+GPI1+GPI2+GPI3+GPI4+MMREF1+MMREF2+MMREF3+MMSSPG+PM1+PM2+PM3+PM4+PM5+WPS1+WPS2+WPS3 \"/title:OS2 Programing Guide\"" }
     item;
     item "&About..." { ShowVersion }
 }
