@@ -2,7 +2,7 @@
 #if you chose MY UI style, then you have to choose a lang... in main.fte
 
 include 'menu/ui_m_fte.fte';
-include 'menu/ui_k_fte.fte';
+include 'kbd/ui_k_fte.fte';
 
 include 'menu/m_c.fte';
 %define(TEXT_CONV)
