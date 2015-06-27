@@ -602,7 +602,7 @@ int EGUI::RunProgram(ExState & State, GxView * view)
     if (State.GetStrParam(ActiveView, Cmd, sizeof(Cmd)) == 0)
 	if (view->GetStr("Run", sizeof(Cmd), Cmd, HIST_COMPILE) == 0)
 	    return 0;
-    gui->RunProgram(RUN_WAIT, Cmd);
+    gui->RunProgram(RUN_WAIT, Cmd, 0);
     return 1;
 }
 
@@ -616,7 +616,7 @@ int EGUI::RunProgramAsync(ExState & State, GxView * view)
     if (State.GetStrParam(ActiveView, Cmd, sizeof(Cmd)) == 0)
 	if (view->GetStr("Run", sizeof(Cmd), Cmd, HIST_COMPILE) == 0)
 	    return 0;
-    gui->RunProgram(RUN_ASYNC, Cmd);
+    gui->RunProgram(RUN_ASYNC, Cmd, 0);
     return 1;
 }
 

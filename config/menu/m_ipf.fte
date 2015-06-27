@@ -30,7 +30,7 @@ menu Help_IPF {
     item "&Show key" { ShowKey }
     item;
 %if(OS_OS2)
-    item "&IPF" { RunProgram "view IPFREF.INF" }
+    item "&IPF" { ShowHelpWord " /s IPFREF.INF" }
 %endif
     item;    
     item "&About..." { ShowVersion }
