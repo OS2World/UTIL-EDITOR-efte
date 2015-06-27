@@ -392,11 +392,11 @@ menu Help_REXX {
     item "&Show key" { ShowKey }
     item;
 %if(OS_OS2)
-    item "&REXX Information" { RunProgram "view REXX.INF" }
-    item "REXX &Multimedia" { RunProgram "view mcirexx.inf" }
-    item "REXX &Tips and Tricks" { RunProgram "view RXTT36.INF" }
-    item "TCP/IP REXX &FTP API" { RunProgram "view RXFTP" }
-    item "TCP/IP REXX &Sockets API" { RunProgram "view RXSOCKET" }
+    item "&REXX Information" { ShowHelpWord " /s REXX.INF" }
+    item "REXX &Multimedia" { ShowHelpWord " /s mcirexx.inf" }
+    item "REXX &Tips and Tricks" { ShowHelpWord " /s RXTT36.INF" }
+    item "TCP/IP REXX &FTP API" { ShowHelpWord " /s RXFTP" }
+    item "TCP/IP REXX &Sockets API" { ShowHelpWord " /s RXSOCKET" }
 %endif
     item;
     item "&About..." { ShowVersion }

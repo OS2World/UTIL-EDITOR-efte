@@ -72,7 +72,7 @@ object GLOBAL {
     HelpCommand         = "man";
 %endif
 %if(OS_OS2)
-    HelpCommand         = "start view.exe";
+    HelpCommand         = "view.exe";
 %endif
 
     ScrollBorderX       = 0;

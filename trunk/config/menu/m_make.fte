@@ -8,7 +8,7 @@ menu Help_MAKE {
     #item "&Bubblehelp PM Toolbar only"  {ToggleBubbleHelp}
     item;
 %if(OS_OS2)    
-    item "&Make help" { RunProgram "view U:\\WATCOM\\binp\\help\\tools.inf" }
+    item "&Make help" { ShowHelpWord "tools.inf" "\"Make Utility\""}
 %endif
     item;    
     item "&About..." { ShowVersion }

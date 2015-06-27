@@ -9,13 +9,13 @@
  */
 
 // Win32 (NT) specific routines
-
 #include "fte.h"
 
 int EView::SysShowHelp(ExState & State, const char *word)
 {
     char file[MAXPATH] = "";
     char cmd[1024];
+    int rc;
 
     if (State.GetStrParam(this, file, sizeof(file) - 1) == 0)
 	if (MView->Win->GetStr("Help file",
@@ -32,11 +32,14 @@ int EView::SysShowHelp(ExState & State, const char *word)
 		return 0;
 	word = wordAsk;
     }
-
     sprintf(cmd, "%s %s %s", HelpCommand, file, word);
-
-    if (system(cmd) != 0) {
-	Msg(S_ERROR, "Failed to start view.exe!");
+#ifdef OS2
+    rc = gui->RunProgram(RUN_WAIT, cmd, 1);
+#else
+    rc = system(cmd);
+#endif
+    if (rc) {
+	Msg(S_ERROR, "Failed to start help viewer!");
 	return 0;
     }
     return 1;

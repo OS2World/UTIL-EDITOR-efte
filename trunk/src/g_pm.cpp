@@ -3944,7 +3944,7 @@ int GUI::ShowEntryScreen()
     return 1;
 }
 
-int GUI::RunProgram(int mode, char *Command)
+int GUI::RunProgram(int mode, char *Command, bool PM)
 {
     char FailBuf[256];
     char *Args;
@@ -3985,7 +3985,7 @@ int GUI::RunProgram(int mode, char *Command)
 	sd.TermQ = 0;
 	sd.Environment = 0;
 	sd.InheritOpt = SSF_INHERTOPT_PARENT;
-	sd.SessionType = SSF_TYPE_DEFAULT;
+        sd.SessionType = PM ? SSF_TYPE_PM : SSF_TYPE_DEFAULT;
 	sd.IconFile = 0;
 	sd.PgmHandle = 0;
 	sd.PgmControl = SSF_CONTROL_VISIBLE;	// | ((Command && Command[0] != 0) ? SSF_CONTROL_NOAUTOCLOSE : 0);

@@ -1471,7 +1471,7 @@ int GUI::ClosePipe(int id)
     return Pipes[id].RetCode;
 }
 
-int GUI::RunProgram(int mode, char *Command)
+int GUI::RunProgram(int mode, char *Command, bool PM)
 {
     int rc, W, H, W1, H1;
 
