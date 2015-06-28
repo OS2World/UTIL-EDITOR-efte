@@ -308,6 +308,16 @@ tools[] =
     117, 0, ExTagNext, MIS_BITMAP}
     , {
     118, 0, ExTagPrev, MIS_BITMAP}
+    , {
+    0, 0, 0, MIS_SEPARATOR}
+    , {
+    121, 0, ExCompile, MIS_BITMAP}
+    , {
+    122, 0, ExRunProgram, MIS_BITMAP}
+    , {
+    123, 0, ExRunCompiler, MIS_BITMAP}
+    , {
+    0, 0, 0, MIS_SEPARATOR}
 ,};
 
 HWND CreateToolBar(HWND parent, HWND owner, int id)
@@ -367,6 +377,10 @@ ToolBarItem tools[] = {
     {tiBITMAP, 112, CMD(ExBlockPasteStream), 0, 0},
     {tiBITMAP, 113, CMD(ExBlockPasteColumn), 0, 0},
     {tiSEPARATOR, 0, 0, 0, 0},
+    {tiBITMAP, 123, CMD(ExRunCompiler), 0, 0},
+    {tiBITMAP, 121, CMD(ExCompile), 0, 0},
+    {tiBITMAP, 122, CMD(ExRunProgram), 0, 0},  
+    {tiSEPARATOR, 0, 0, 0, 0},
     {tiBITMAP, 114, CMD(ExCompilePrevError), 0, 0},
     {tiBITMAP, 115, CMD(ExCompileNextError), 0, 0},
     {tiSEPARATOR, 0, 0, 0, 0},
@@ -374,8 +388,6 @@ ToolBarItem tools[] = {
     {tiBITMAP, 119, CMD(ExTagPop), 0, 0},
     {tiBITMAP, 117, CMD(ExTagNext), 0, 0},
     {tiBITMAP, 118, CMD(ExTagPrev), 0, 0},
-    {tiSEPARATOR, 0, 0, 0, 0},
-    {tiBITMAP, 121, CMD(ExCompile), 0, 0},
     {tiSEPARATOR, 0, 0, 0, 0},
 };
 
