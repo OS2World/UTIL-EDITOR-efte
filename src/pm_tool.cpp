@@ -312,7 +312,14 @@ MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 			    }
 			}
 			break;
-		    }
+                    }
+                    if (rcl.xLeft <= ptl.x && rcl.yBottom <= ptl.y &&
+                        rcl.xRight >= ptl.x && rcl.yTop >= ptl.y &&
+                        td->pItems[item].ulType == tiSEPARATOR && hwndBubble) {
+                        DosSleep(50);
+                        WinDestroyWindow(hwndBubble);
+                        hwndBubble = 0;
+                    }
 		    if (td->ulDepressed == -1 && BubbleHelp) {	
                         if (rcl.xLeft <= ptl.x && rcl.yBottom <= ptl.y &&
 			rcl.xRight >= ptl.x && rcl.yTop >= ptl.y &&
