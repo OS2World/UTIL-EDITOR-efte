@@ -905,7 +905,8 @@ int EGUI::CmdLoadFiles(int &argc, char **argv)
 	    case 'c':
 	    case 'D':
 	    case 'd':
-	    case 'H':
+            case 'H':
+            case 'L':
 		// handled before
 		break;
 	    case '+':
@@ -925,14 +926,7 @@ int EGUI::CmdLoadFiles(int &argc, char **argv)
 		}
 		// printf("Gotoline = %d, line = %d, col = %d\n", GotoLine, LineNum, ColNum);
                 break;
-            case 'L':
-            {
-                translate = -1;
-                if (argv[Arg][2] && argv[Arg][3] && strnicmp("en", &argv[Arg][2], 2))
-                    snprintf(menupath, MAXPATH, "menu_%c%c", argv[Arg][2], argv[Arg][3]);
-                break;
-	    }
-	    case 'r':
+            case 'r':
 		ReadOnly = 1;
 		break;
 	    case 'm':
@@ -952,9 +946,24 @@ int EGUI::CmdLoadFiles(int &argc, char **argv)
 		break;
 	    case 'v':
 		break;			// fte.cpp handles this.
-	    default:
-		DieError(2, "Invalid command line option %s", argv[Arg]);
-		return 0;
+            default:
+                {
+                    ChoiceInfo *choice;
+                    int rc;
+    
+                    choice = (ChoiceInfo *) malloc(sizeof(ChoiceInfo));
+                    choice->Title = "Do you want to terminate this session?";
+                    choice->Format = "Invalid command line option %s";
+                    choice->Message = argv[Arg];
+                    rc = EarlyDoChoice(choice);
+                    free(choice);
+                    if (rc ==0) {
+                        exit(2);
+                        return 0;
+                    }
+                    break;
+                }
+		
 	    }
 	}
 	else {

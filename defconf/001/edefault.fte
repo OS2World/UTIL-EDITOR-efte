@@ -1453,7 +1453,7 @@ colorize FTE {
         'C_BraceOfs', 'C_CaseDelta', 'C_CaseOfs', 'C_ClassDelta', 'C_ClassOfs', 'C_ColonOfs',
         'C_CommentDelta', 'C_CommentOfs', 'C_Continuation',
         'C_FirstLevelIndent', 'C_FirstLevelWidth', 'C_Indent', 'C_ParenDelta',
-        'Colorizer', 'CommentEnd', 'CommentStart', 'CompileCommand',
+        'Colorizer', 'CommentEnd', 'CommentStart', 'CompileCommand', 'CompileCommand2',
         'CompileRx', 'CompletionFilter', 'CursorBlink', 'CursorInsertMask', 'CursorOverMask',
         'CursorThroughTabs', 'CursorWithinEOL', 'CvsCommand', 'CvsIgnoreRx',
         'DefaultModeName', 'DefFindOpt', 'DefFindReplaceOpt', 'DeleteKillBlock',

@@ -65,7 +65,7 @@ object GLOBAL {
     
     CompileCommand      = 'grep -n ';
     KeepMessages        = 1;
-
+    CompileCommand2     = 'wmake -e';
     CvsCommand          = 'cvs';
     SvnCommand          = 'svn';
 %if(OS_UNIX)

@@ -23,6 +23,8 @@ BITMAP 118 bmps\tagprev.bmp
 BITMAP 119 bmps\tagpop.bmp
 BITMAP 120 bmps\reload.bmp
 BITMAP 121 bmps\run.bmp
+BITMAP 122 bmps\run2.bmp
+BITMAP 123 bmps\run3.bmp
 
 MENU 1
 BEGIN
@@ -50,7 +52,9 @@ BEGIN
    118 "Next tag"
    119 "Previous tag"
    120 "Reload current file"
-   121 "Compile (GREP)"    
+   121 "Run grep" 
+   122 "Run Program"
+   123 "Compile"
 END
 
 rcinclude pmdlg.rc

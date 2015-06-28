@@ -664,7 +664,8 @@ int EView::Compile(ExState & State)
 	if (Cmd[0] == 0)
 	    strcpy(Cmd, CompileCommand);
 
-	if (MView->Win->GetStr("Compile", sizeof(Cmd), Cmd, HIST_COMPILE) ==
+        if (MView->Win->GetStr(strstr(Cmd, "grep") ? "Grep" : "Compile",
+                               sizeof(Cmd), Cmd, HIST_COMPILE) ==
 	    0)
 	    return 0;
 
@@ -672,7 +673,8 @@ int EView::Compile(ExState & State)
     }
     else {
 	if (MView->Win->
-	    GetStr("Compile", sizeof(Command), Command, HIST_COMPILE) == 0)
+            GetStr(strstr(Command, "grep") ? "Grep" : "Compile",
+                   sizeof(Command), Command, HIST_COMPILE) == 0)
 	    return 0;
     }
     return Compile(Command);
@@ -691,11 +693,11 @@ int EView::RunCompiler(ExState & State)
 	if (Model->GetContext() == CONTEXT_FILE) {
 	    EBuffer *B = (EBuffer *) Model;
 
-	    if (BFS(B, BFS_CompileCommand) != 0)
-		strcpy(Command, BFS(B, BFS_CompileCommand));
+	    if (BFS(B, BFS_CompileCommand2) != 0)
+		strcpy(Command, BFS(B, BFS_CompileCommand2));
 	}
 	if (Command[0] == 0)
-	    strcpy(Command, CompileCommand);
+	    strcpy(Command, CompileCommand2);
     }
     return Compile(Command);
 }

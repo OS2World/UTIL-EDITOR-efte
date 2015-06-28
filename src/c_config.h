@@ -53,6 +53,7 @@ extern char DefaultModeName[32];
 extern int WSStyleSearch;
 extern char PrintDevice[MAXPATH];
 extern char CompileCommand[256];
+extern char CompileCommand2[256];
 extern int KeepHistory;
 extern int LoadDesktopOnEntry;
 extern int SaveDesktopOnExit;

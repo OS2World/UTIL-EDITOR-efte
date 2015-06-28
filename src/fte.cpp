@@ -201,7 +201,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
     }
     else if (haveConfig != 2)
         strcpy(ConfigFileName, "mymain.fte");
-
+#if 0
     if (translate != -1) {
         char *lang;
 
@@ -247,6 +247,7 @@ static int CmdLoadConfiguration(int &argc, char **argv)
                 translate = 0;
         } // if lang
     } // if tanslate
+#endif
     LoadConfig(argc, argv, ConfigFileName);
     for (Arg = 1; Arg < argc; Arg++) {
 	if (!QuoteAll && !QuoteNext && (argv[Arg][0] == '-')) {

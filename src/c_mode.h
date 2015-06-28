@@ -124,7 +124,7 @@ typedef int ChColor;
 #define BFS_FileNameRx          (5 | 256)
 #define BFS_FirstLineRx         (6 | 256)
 #define BFS_CompileCommand      (7 | 256)
-
+#define BFS_CompileCommand2     (8 | 256)
 #define BFS_COUNT               8
 
 #define BFS_WordChars           (100 | 256) // ext
@@ -204,7 +204,7 @@ extern EBufferFlags DefaultBufferFlags;
 #define FLAG_ReassignModelIds   59
 #define FLAG_RecheckReadOnly    60
 #define FLAG_XShellCommand      61
-#define FLAG_RGBColor  62
+#define FLAG_RGBColor           62
 #define FLAG_CursorBlink        63
 #define FLAG_SvnCommand         64
 #define FLAG_SvnLogMode         65
@@ -213,6 +213,7 @@ extern EBufferFlags DefaultBufferFlags;
 #define FLAG_CursorOverMask     68
 #define FLAG_BackupDirectory    69
 #define FLAG_BubbleHelp         70
+#define FLAG_CompileCommand2     71
 
 #define EM_MENUS 2
 #define EM_MainMenu 0

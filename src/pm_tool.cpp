@@ -14,7 +14,7 @@
 
 #define TYBORDER 6			// border on top and bottom of icon (all of it)
 #define TXBORDER 6
-#define TXSEPARATOR 4
+#define TXSEPARATOR 8
 #define TYICON 24
 #define TXICON 24
 
@@ -284,9 +284,6 @@ MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 		POINTL ptl;
 		RECTL rcl;
 
-		//if (td->ulDepressed == -1)
-		//    break;
-
 		ptl.x = (LONG) SHORT1FROMMP(mp1);
 		ptl.y = (LONG) SHORT2FROMMP(mp1);
 
@@ -316,9 +313,11 @@ MRESULT EXPENTRY ToolBarProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 			}
 			break;
 		    }
-		    if (td->ulDepressed == -1 && BubbleHelp) {	//SSBuffer && SSBuffer->CheckBubbleHelp()) {
-			if (rcl.xLeft <= ptl.x && rcl.yBottom <= ptl.y &&
-			    rcl.xRight >= ptl.x && rcl.yTop >= ptl.y) {
+		    if (td->ulDepressed == -1 && BubbleHelp) {	
+                        if (rcl.xLeft <= ptl.x && rcl.yBottom <= ptl.y &&
+			rcl.xRight >= ptl.x && rcl.yTop >= ptl.y &&
+			td->pItems[item].ulType == tiBITMAP &&
+                            (td->pItems[item].ulFlags & tfDISABLED) == 0) {
 			    if (sLastitem != td->pItems[item].ulId
 				&& hwndBubble) {
 				WinDestroyWindow(hwndBubble);
