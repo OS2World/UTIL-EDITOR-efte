@@ -1,5 +1,4 @@
 OBJS = &
-cfte.$(OEXT) &
 indent.$(OEXT) &
 e_mark.$(OEXT) &
 o_modemap.$(OEXT) &
@@ -73,6 +72,7 @@ view.$(OEXT) &
 gui.$(OEXT) &
 egui.$(OEXT) &
 fte.$(OEXT) &
+cfte.$(OEXT) &
 commands.$(OEXT) &
 log.$(OEXT)
 
