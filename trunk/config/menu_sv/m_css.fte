@@ -5,7 +5,7 @@
 menu CSSTools {
     
 #    item "&Compile...\tF9" { Compile "make -k " }
-#    item "&Grep..." { Compile "grep -n " }
+#    item "&Grep..." { Compile "grep -n -I " }
 #    item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
 #    item;
     item "&Shell\tAlt+F9" { RunProgram "" }
