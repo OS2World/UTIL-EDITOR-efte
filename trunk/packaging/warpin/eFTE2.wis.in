@@ -54,7 +54,7 @@ Change log
   CREATEOBJECT="FAIL WPProgram|eFTE/2_VIO|<eFTE_Folder>|EXENAME=$(1)\efte.exe;CCVIEW=YES;TITLE=eFTE/2 VIO;OBJECTID=<eFTE/2>;"
   CREATEOBJECT="WPProgram|eFTE/2 VIO|<eFTE_Folder>|EXENAME=$(1)\efte.exe;STARTUPDIR=$(1);TITLE=eFTE/2 VIO;OBJECTID=<eFTE/2>;"
   CREATEOBJECT="WPProgram|eFTE/2 Online Help|<eFTE_Folder>|EXENAME=VIEW.EXE;PARAMETERS=$(1)\efte2.inf;OBJECTID=<eFTE2HELP>;"
-  CREATEOBJECT="WPProgram|Readme|<eFTE_Folder>|EXENAME=$(1)\eftepm.exe;PARAMETERS=$(1)\readme2);TITLE=eFTE/2 Readme;OBJECTID=<eFTE/2_README>;"
+  CREATEOBJECT="WPProgram|Readme|<eFTE_Folder>|EXENAME=$(1)\eftepm.exe;PARAMETERS=$(1)\docs\readme2;TITLE=eFTE/2 Readme;OBJECTID=<eFTE/2_README>;"
   CLEARPROFILE="USER\eFTE/2"
 
 >This package contains the base enhanced Folding Text Editor/2 (eFTE/2) package.
