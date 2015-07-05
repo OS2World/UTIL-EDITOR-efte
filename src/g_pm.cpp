@@ -386,8 +386,8 @@ ToolBarItem tools[] = {
     {tiSEPARATOR, 0, 0, 0, 0},
     {tiBITMAP, 116, CMD(ExTagFindWord), 0, 0},
     {tiBITMAP, 119, CMD(ExTagPop), 0, 0},
-    {tiBITMAP, 117, CMD(ExTagNext), 0, 0},
-    {tiBITMAP, 118, CMD(ExTagPrev), 0, 0},
+    {tiBITMAP, 117, CMD(ExTagPrev), 0, 0},
+    {tiBITMAP, 118, CMD(ExTagNext), 0, 0},
     {tiSEPARATOR, 0, 0, 0, 0},
 };
 
