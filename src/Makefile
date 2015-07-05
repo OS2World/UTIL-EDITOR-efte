@@ -27,6 +27,8 @@ CC = wpp386
 LD = wlink
 RC = wrc
 PERL = perl
+CHDIR = cd
+MAKE = WMAKE
 
 # Machine type -5r Pent -6r Pent Pro
 MACHINE= -3r
@@ -56,7 +58,7 @@ OEXT    = obj
 .cpp.obj: .AUTODEPEND
   $(CC) $(CFLAGS) $<
 
-all: efte.exe eftepm.exe
+all: efte.exe eftepm.exe .symbolic
 
 #cefte.exe: $(CFTE_OBJS) fte.def
 #  $(LD) NAME cefte SYS os2v2 $(LDFLAGS) FILE {$(CFTE_OBJS)}
@@ -70,7 +72,7 @@ bin2c.exe: bin2c.obj
 c_config.obj: c_config.cpp defcfg.h
 
 efte.exe: $(OBJS) $(VIOOBJS) fte.def
-  $(LD)  $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)} @fte.def
+  $(LD)  $(LDFLAGS) FILE {$(OBJS) $(VIOOBJS)} @fte.def lib U:\PMPrintf\PMPRINTF.LIB
   $(PERL) ..\tools\mapsymw.pl efte.map 
   mapxqs.exe efte.map
   lxlite efte.exe /x- /b-
@@ -80,14 +82,26 @@ eftepm.res: eftepm.rc pmdlg.rc
   $(RC) -r eftepm.rc eftepm.res
 
 eftepm.exe: $(OBJS) $(PMOBJS) eftepm.res ftepm.def .explicit
-  $(LD) $(LDFLAGS) FILE {$(OBJS) $(PMOBJS)} @ftepm.def
+  $(LD) $(LDFLAGS) FILE {$(OBJS) $(PMOBJS)} @ftepm.def  lib U:\PMPrintf\PMPRINTF.LIB
   $(RC) eftepm.res eftepm.exe
   $(PERL) ..\tools\mapsymw.pl eftepm.map
   mapxqs.exe eftepm.map
   lxlite eftepm.exe /x- /b-
   lxlite eftepm.exe /c:minstub
 
-clean : .SYMBOLIC
+release: all hlp wpi .symbolic
+
+hlp: .symbolic
+  $(CHDIR) ..\docs\001
+  $(MAKE) $(__MAKEOPTS__) 
+  $(CHDIR) ..\..\src   
+  
+wpi: .symbolic
+  $(CHDIR) ..\packaging\warpin
+  $(MAKE) $(__MAKEOPTS__) 
+  $(CHDIR) ..\..\src    
+
+clean : .symbolic
   -@rm *.obj
   -@rm *.exe
   -@rm *.err
@@ -99,7 +113,7 @@ clean : .SYMBOLIC
   -@rm *.mbr
   -@rm *.*~
 
-cleanall : .SYMBOLIC
+cleanall : .symbolic
   -@rm *.obj
   -@rm *.exe
   -@rm *.err
@@ -113,3 +127,10 @@ cleanall : .SYMBOLIC
   -@rm *.res
   -@rm *.mbr
   -@rm *.*~
+  $(CHDIR) ..\packaging\warpin
+  $(MAKE) -h $(__MAKEOPTS__) clean
+  $(CHDIR) ..\..\src  
+  $(CHDIR) ..\docs\001
+  $(MAKE) -h $(__MAKEOPTS__) clean
+  $(CHDIR) ..\..\src   
+  

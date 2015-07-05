@@ -22,12 +22,12 @@ IPFC = ipfc
 IFLAGS = /CODEPAGE=850
 !else
 IPFC = wipfc
-IFLAGS = -l en_US
+IFLAGS =-l en_US
 !endif
 
 all: eFTE2.hlp .symbolic
 
-eFTE2.hlp: *.ipf 
+eFTE2.hlp: eFTE2.ipf 
   set WIPFC=$(%WATCOM)\wipfc
   $(IPFC) $(IFLAGS) eFTE2.ipf
 
