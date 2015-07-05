@@ -63,7 +63,7 @@ object GLOBAL {
     PrintDevice         = '\\DEV\\PRN';
 %endif
     
-    CompileCommand      = 'grep -n ';
+    CompileCommand      = 'grep -n -I ';
     KeepMessages        = 1;
     CompileCommand2     = 'wmake -e';
     CvsCommand          = 'cvs';

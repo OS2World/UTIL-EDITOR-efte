@@ -50,7 +50,7 @@ menu MSvn {
 
 menu Tools {
     item "&Compile\tF9" { Compile "wmake -e " }
-    item "&Grep" { Compile "grep -n " }
+    item "&Grep" { Compile "grep -n -I" }
 #    item "&Diff" { Compile "cvs diff" }
     item;
     item "Go to prev &error\tF11" { CompilePrevError }
@@ -81,6 +81,12 @@ menu Window {
 }
 
 menu Help {
+%if(OS_OS2)
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+%endif
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
     item "&About..."  { ShowVersion }
 }
 

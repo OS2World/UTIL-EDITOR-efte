@@ -77,7 +77,7 @@ menu Search {
 
 menu Tools {
     item "&Compile\tF9" { Compile "make -k " }
-    item "&Grep" { Compile "grep -n " }
+    item "&Grep" { Compile "grep -n -I " }
     item;
     item "Sh&ell"                  { RunProgram "" }
     item;

@@ -1,7 +1,7 @@
 menu IPF_Tools {
 
    item "&Compile" { FileSave; RunProgram "ipfc \"" . $FilePath."\""; }
-   item "&Grep..." { Compile "grep -n " }
+   item "&Grep..." { Compile "grep -n -I " }
    item "Save and &ISpell" { FileSave; RunProgram "ispell " . $FilePath; FileReload }
 #   item "Save, compile and &view\tF9"  { }
    item;
@@ -23,11 +23,14 @@ menu IPF_Tools {
 }
 
 menu Help_IPF {
-    item "&Keyboard\tF1" { ViewModeMap }
+%if(OS_OS2)
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+%endif
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
     item "&Show key" { ShowKey }
     item;
 %if(OS_OS2)
-    item "&IPF" { RunProgram "view IPFREF.INF" }
+    item "&IPF" { ShowHelpWord " /s IPFREF.INF" }
 %endif
     item;    
     item "&About..." { ShowVersion }
