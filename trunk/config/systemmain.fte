@@ -13,7 +13,7 @@
 #%define(UI_BRIEF_SYS)
 #%define(UI_MIXED_SYS)
 #%define(UI_MEW_SYS)
-# experimental
+# experimental or not yet implemented
 #%define(UI_VI_SYS)
 #%define(UI_EPM_SYS)
 #%define(UI_E_SYS)
@@ -26,7 +26,7 @@
 %undefine(UI_BRIEF)
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -42,7 +42,7 @@
 %undefine(UI_BRIEF)
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -58,7 +58,7 @@
 %undefine(UI_BRIEF)
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -74,7 +74,7 @@
 %undefine(UI_FTE)
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -90,7 +90,7 @@
 %undefine(UI_BRIEF)
 %undefine(UI_FTE)
 %undefine(UI_MEW)
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -106,7 +106,7 @@
 %undefine(UI_BRIEF)
 %undefine(UI_MIXED)
 %undefine(UI_FTE)
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -123,8 +123,7 @@
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
 %undefine(UI_FTE)
-
-# experimental
+# experimental or not yet implemented
 %undefine(UI_EPM)
 %undefine(UI_E)
 %undefine(UI_EMACS)
@@ -140,8 +139,7 @@
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
 %undefine(UI_FTE)
-
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_E)
 %undefine(UI_EMACS)
@@ -157,8 +155,7 @@
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
 %undefine(UI_FTE)
-
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_EMACS)
@@ -174,8 +171,7 @@
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
 %undefine(UI_FTE)
-
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -191,8 +187,7 @@
 %undefine(UI_MIXED)
 %undefine(UI_MEW)
 %undefine(UI_FTE)
-
-# experimental
+# experimental or not yet implemented
 %undefine(UI_VI)
 %undefine(UI_EPM)
 %undefine(UI_E)
@@ -208,6 +203,8 @@
 #%define(COLORS_BLUE_BG_SYS)
 #%define(COLORS_BLUEZ_BG_SYS)
 #%define(COLORS_NCE_BG_SYS)
+# experimental or not yet implemented
+#%define(COLORS_OS2_SYSTEM_DEFAULT)
 
 %if(COLORS_GRAY_BG_SYS)
 %define(COLORS_GRAY_BG)
@@ -215,7 +212,9 @@
 %undefine(COLORS_BLACK_BG)
 %undefine(COLORS_BLUE_BG)
 %undefine(COLORS_BLUEZ_BG)
-%undefine(COLORS_NCE_BG)
+%undefine(COLORS_NCE_BG) 
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
 %endif
 
 %if(COLORS_WHITE_BG_SYS)
@@ -225,6 +224,8 @@
 %undefine(COLORS_BLUE_BG)
 %undefine(COLORS_BLUEZ_BG)
 %undefine(COLORS_NCE_BG)
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
 %endif
 
 %if(COLORS_BLACK_BG_SYS)
@@ -234,6 +235,8 @@
 %undefine(COLORS_BLUE_BG)
 %undefine(COLORS_BLUEZ_BG)
 %undefine(COLORS_NCE_BG)
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
 %endif
 
 %if(COLORS_BLUE_BG_SYS)
@@ -243,6 +246,8 @@
 %define(COLORS_BLUE_BG)
 %undefine(COLORS_BLUEZ_BG)
 %undefine(COLORS_NCE_BG)
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
 %endif
 
 %if(COLORS_BLUEZ_BG_SYS)
@@ -252,6 +257,8 @@
 %undefine(COLORS_BLUE_BG)
 %define(COLORS_BLUEZ_BG)
 %undefine(COLORS_NCE_BG)
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
 %endif
 
 %if(COLORS_NCE_BG_SYS)
@@ -261,6 +268,20 @@
 %undefine(COLORS_BLUE_BG)
 %undefine(COLORS_BLUEZ_BG)
 %define(COLORS_NCE_BG)
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
+%endif
+
+# experimental or not yet implemented
+%if(COLORS_OS2_SYSTEM_DEFAULT)
+%undefine(COLORS_GRAY_BG)
+%undefine(COLORS_WHITE_BG)
+%undefine(COLORS_BLACK_BG)
+%undefine(COLORS_BLUE_BG)
+%undefine(COLORS_BLUEZ_BG)
+%define(COLORS_NCE_BG)
+# experimental or not yet implemented
+%undefine(COLORS_OS2_SYSTEM_DEFAULT)
 %endif
 
 # include the main config - usually in /usr/local/efte/config.

@@ -21,7 +21,7 @@
 #%define(UI_BRIEF)
 #%define(UI_MIXED)
 #%define(UI_MEW)
-# experimental
+# experimental or not yet implemented
 #%define(UI_VI)
 #%define(UI_EPM)
 #%define(UI_E) 
@@ -35,6 +35,8 @@
 #%define(COLORS_BLUE_BG)
 #%define(COLORS_BLUEZ_BG)
 #%define(COLORS_NCE_BG)
+# experimental or not yet implemented
+#%define(COLORS_OS2_SYSTEM_DEFAULT)
 
 # include the system main config - usually in /usr/local/fte/localconfig.
 include 'systemmain.fte';
