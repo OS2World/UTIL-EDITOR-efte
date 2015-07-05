@@ -40,7 +40,8 @@ eFTE2$(EFTE2_VER).wpi: bld_eFTE2_wpidirs.in makefile
 clean: .symbolic
   -if exist eFTE2$(EFTE2_VER).wpi del eFTE2$(EFTE2_VER).wpi
   -if exist bld_eFTE2_wpidirs.in del bld_eFTE2_wpidirs.in
-  clean_wpidirs
+  -@rm *.*~
+#  clean_wpidirs
 
 # fixme to decide if these should be cleaned and not distcleaned
 distclean: clean .symbolic
