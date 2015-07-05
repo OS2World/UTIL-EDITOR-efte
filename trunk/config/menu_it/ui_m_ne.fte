@@ -50,7 +50,7 @@ menu MSvn {
 
 menu Tools {
     item "&Compile\tF9" { Compile "wmake -e " }
-    item "&Grep" { Compile "grep -n " }
+    item "&Grep" { Compile "grep -n -I" }
 #    item "&Diff" { Compile "cvs diff" }
     item;
     item "Go to prev &error\tF11" { CompilePrevError }
