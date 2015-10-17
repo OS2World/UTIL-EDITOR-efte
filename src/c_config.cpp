@@ -1471,7 +1471,9 @@ int LoadConfig(int argc, char **argv, char *CfgFileName)
 
     rc = ReadConfigFile(cp);
     if (rc == -1) {
-	DieError(1, "Final Error %s offset %d\n", CfgFileName, cpos);
+        DieError(1, "Error %s offset %d\n Your last edit anywhere in the config files"
+                 "probably introduced an unrecognized keyword",
+                 CfgFileName, cpos);
     }
     ENDFUNCRC(rc);
 }
