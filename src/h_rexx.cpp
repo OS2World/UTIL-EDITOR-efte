@@ -160,9 +160,11 @@ int Hilit_REXX(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 
 int REXX_Base_Indent = 4;
 int REXX_Do_Offset = 0;
+int REXX_End_Offset = 0;
 
 #define REXX_BASE_INDENT       REXX_Base_Indent
 #define REXX_DO_OFFSET         REXX_Do_Offset
+#define REXX_END_OFFSET        REXX_End_Offset
 
 static int Match(int Len, int Pos, hsState * StateMap, const char *Text,
 		 const char *String, hsState State)
@@ -217,8 +219,8 @@ static int SearchMatch(int Count, EBuffer * B, int Row, int Ctx)
 	if (B->GetMap(Row, &StateLen, &StateMap) == 0)
 	    return -1;
 	Pos = L - 1;
-	if (L > 0)
-	    while (Pos >= 0) {
+        if (L > 0)
+            while (Pos >= 0) {
 		if (isalpha(P[Pos])) {
 		    if (Ctx == 1 || Ctx == 3) {
 			if (Match(L, Pos, StateMap, P, "do", hsREXX_Keyword)
@@ -230,17 +232,13 @@ static int SearchMatch(int Count, EBuffer * B, int Row, int Ctx)
 			    if (Count == 0) {
 				if (StateMap)
 				    free(StateMap);
-				if (Ctx == 3)
-				    return B->LineIndented(Row);
-				else
-				    return B->LineIndented(Row) +
-					REXX_BASE_INDENT;
+				    return B->LineIndented(Row) + REXX_END_OFFSET;
 			    }
 			}
 			else if (Match
 				 (L, Pos, StateMap, P, "end",
-				  hsREXX_Keyword)) {
-			    Count--;
+                                  hsREXX_Keyword)) {
+                            Count--;
 			}
 		    }
 		    else if (Ctx == 4) {
@@ -454,12 +452,15 @@ static int IndentNormal(EBuffer * B, int Line, int /*StateLen */ ,
 	return 0;
     }
     else if (LookAtNoCase(B, Line, 0, "end", hsREXX_Keyword)) {
-	return SearchMatch(-1, B, Line - 1, 1);
+        return SearchMatch(-1, B, Line - 1, 1);
     }
     else if (LookAtNoCase(B, Line, 0, "else", hsREXX_Keyword)) {
 	return SearchMatch(-1, B, Line - 1, 2);
     }
     else if (LookAtNoCase(B, Line, 0, "catch", hsREXX_Keyword)) {
+	return SearchMatch(-1, B, Line - 1, 3);
+    }
+    else if (LookAtNoCase(B, Line, 0, "finally", hsREXX_Keyword)) {
 	return SearchMatch(-1, B, Line - 1, 3);
     }
     else if (LookAtNoCase(B, Line, 0, "method", hsREXX_Keyword)
@@ -488,7 +489,7 @@ static int IndentNormal(EBuffer * B, int Line, int /*StateLen */ ,
 	case 'e':
 	case 'o':
 	    if (LookAtNoCase(B, Line, 0, "do", hsREXX_Keyword))
-		return I + REXX_DO_OFFSET;
+                return I + REXX_DO_OFFSET;
 	    else
 		return I + REXX_BASE_INDENT;
 	default:

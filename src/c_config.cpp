@@ -40,6 +40,7 @@ extern int FunctionUsesContinuation;
 // REXX Indent
 extern int REXX_Base_Indent;
 extern int REXX_Do_Offset;
+extern int REXX_End_Offset;
 
 extern int ShowVScroll;
 extern int ShowHScroll;
@@ -300,6 +301,9 @@ static int SetGlobalNumber(int what, int number)
 	break;
     case FLAG_REXX_Do_Offset:
 	REXX_Do_Offset = number;
+	break;
+    case FLAG_REXX_End_Offset:
+	REXX_End_Offset = number;
 	break;
     case FLAG_ScreenSizeX:
 	ScreenSizeX = number;
