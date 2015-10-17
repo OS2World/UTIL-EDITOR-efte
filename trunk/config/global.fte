@@ -184,7 +184,9 @@ object GLOBAL {
 %endif    
     
     REXX_Indent         = 4;
-#    REXX_Do_Offset      = 0;
+    REXX_Do_Offset      = 0;
+    # Effects placement of end, catch and finally relative to do, loop and select; 0 = aligned
+    REXX_End_Offset     = 0;
 
     # Compiler Regular Expressions
     # 1 = Filename

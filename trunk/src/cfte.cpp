@@ -230,6 +230,7 @@ static const OrdLookup global_num[] = {
     MODE_FLG(FunctionUsesContinuation),
     MODE_FLG(REXX_Indent),
     MODE_FLG(REXX_Do_Offset),
+    MODE_FLG(REXX_End_Offset),
     MODE_FLG(ScreenSizeX),
     MODE_FLG(ScreenSizeY),
     MODE_FLG(SysClipboard),
