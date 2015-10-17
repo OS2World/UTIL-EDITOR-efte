@@ -36,6 +36,29 @@ object GLOBAL {
 #    WindowFont = "8x16";
 #    WindowFont = "8x18";
 %endif
+                   
+    C_Indent            = 4;
+    C_BraceOfs          = 0;
+    C_ParenDelta        = -1;
+    C_CaseOfs           = 0;
+    C_CaseDelta         = 4;
+    C_ClassOfs          = 0;
+    C_ClassDelta        = 4;
+    C_ColonOfs          = -4;
+    C_CommentOfs        = 0;
+    C_CommentDelta      = 1;
+    C_FirstLevelWidth   = -1;
+    C_FirstLevelIndent  = 4;
+    C_Continuation      = 4;
+    # if this is true (1), function parameters will only indent
+    # as much as C_Continuation says, rather than line up one column
+    # to the right of the '('.
+    FunctionUsesContinuation = 0;
+    
+    REXX_Indent         = 4;
+    REXX_Do_Offset      = 0;
+    # Effects placement of end, catch and finally relative to do, loop and select; 0 = aligned
+    REXX_End_Offset     = 0;
 }
 
 menu File {
@@ -49,7 +72,7 @@ menu File {
     item    "&Next\tAlt+Left"         { FileNext }
     item    "&Previous\tAlt+Right"    { FilePrev }
     item;
-    item    "E&xit\tAlt+X"            { ExitEditor }
+    item    "E&xit\tAlt+X"            { ExitEditor }    
 }                              
                                
 menu Edit {
@@ -1463,12 +1486,13 @@ colorize FTE {
         'ForceNewLine', 'FunctionUsesContinuation',
         'GUIDialogs',
         'HelpCommand', 'HilitOn', 'HilitTags',
-        'IgnoreBufferList', 'IndentMode', 'IndentRx', 'IndentWithTabs', 'Insert', 'InsertKillBlock',
-        'KeepBackups', 'KeepHistory', 'KeepMessages',
+        'IgnoreBufferList', 'IndentMode', 'IndentRx', 'IndentWithTabs', 'Insert', 
+        'InsertKillBlock', 'KeepBackups', 'KeepHistory', 'KeepMessages',
         'LeftMargin', 'LineChar', 'LoadDesktopOnEntry', 'LoadMargin',
         'MakeBackups', 'MatchCase', 'MultiLineHilit',
         'OpenAfterClose', 'PersistentBlocks', 'PMDisableAccel', 'PrintDevice',
-        'ReadOnly', 'ReassignModelIds', 'RecheckReadOnly', 'REXX_Do_Offset', 'REXX_Indent', 'RightMargin',
+        'ReadOnly', 'ReassignModelIds', 'RecheckReadOnly', 'RightMargin',  
+        'REXX_Do_Offset', 'REXX_Indent', 'REXX_End_Offset',
         'RoutineRegexp', 'SaveBookmarks', 'SaveDesktopOnExit', 'SaveFolds', 'ScrollBorderX',
         'ScrollBorderY', 'ScrollJumpX', 'ScrollJumpY', 'SeeThruSel',
         'SelectPathname', 'ShowHScroll', 'ShowMarkers', 'ShowMenuBar',
