@@ -19,7 +19,7 @@ object GLOBAL {
     BubbleHelp          = 1;   # PM only
     GUIDialogs          = 1;   # PM only
 %if(OS_OS2)
-    HelpCommand         = "start view.exe";
+    HelpCommand         = "view.exe";
 %endif
 %if(GUI_PM)
 # PM
