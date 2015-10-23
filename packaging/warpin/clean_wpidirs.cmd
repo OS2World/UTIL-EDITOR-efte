@@ -1,7 +1,7 @@
 /*
  * $Id: clean_wpidirs.cmd 1246 2008-10-09 12:30:04Z jbs $
  *
- * REXX program to empty FM/2 Warpin WPI file staging directories
+ * REXX program to empty eFTE/2 Warpin WPI file staging directories
  *
  */
 
