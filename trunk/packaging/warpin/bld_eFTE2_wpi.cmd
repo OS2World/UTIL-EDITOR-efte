@@ -4,16 +4,17 @@
  * BLD_eFTE2_WPI - Create a Warpin archive (WPI) for installation of eFTE/2
  *
  * Author
- *    Gregg Young
- *    ygk@qwest.net
  *    John Small
  *    jsmall@os2world.net
+ * Adapted to eFTE/2 by
+ *    Gregg Young
+ *    ygk@qwest.net
  *
  * History
  *
  * Requirements/assumptions
- *    -  This program should reside in the Warpin subdirectory of the
- *       the FM/2 build subtree.
+ *    -  This program should reside in the Packaging\Warpin subdirectory of 
+ *       the eFTE/2 build subtree.
  *    -  This program assumes that all files needed for the WPI file have
  *       been already placed in subdirectories of the directory which
  *       contains this file (i.e. BLD_eFTE2_WPIDIRS.CMD has been run).

@@ -1,4 +1,4 @@
-# warpin\makefile - build the eFTE/2 Warpin installation file: eFTE2$(EFTE2_VER).WPI
+# packaging\warpin\makefile - build the eFTE/2 Warpin installation file: eFTE2$(EFTE2_VER).WPI
 
 # $Id: makefile 1679 2013-01-01 21:42:27Z gyoung $
 

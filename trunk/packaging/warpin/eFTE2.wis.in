@@ -46,6 +46,7 @@ Change log
   TITLE="eFTE/2 - enhanced Folding Text Editor/2 (Base package)"
   TARGET="?:\eFTE"
   SELECT
+  NODESELECT
   BASE
   LONGFILENAMES
   CREATEOBJECT="WPFolder|eFTE/2|<WP_DESKTOP>|ICONFILE=$(1)\icons\ftepm.ICO;ICONNFILE=1,$(1)\icons\ftepm2.ICO;CCVIEW=NO;OBJECTID=<eFTE_Folder>;"
@@ -60,7 +61,9 @@ Change log
 >This package contains the base enhanced Folding Text Editor/2 (eFTE/2) package.
 The eFTE/2 base package must be installed to a drive with long filename support!
 
-eFTE/2 is based on FTE. A major difference is that it compiles its configuration on the fly. Using efte(pm) -Cmain.fte may work with your FTE configuration files assuming efte can find it. See the readme for more information.
+eFTE/2 is based on FTE. A major difference is that it compiles its configuration on the fly. 
+Using efte(pm) -Cmain.fte may work with your FTE configuration files assuming efte can find it. 
+See the readme for more information.
 
 eFTE/2 is built using OpenWatcom. Source is available on http://svn.netlabs.org/efte 
 </PCK>
@@ -69,20 +72,65 @@ eFTE/2 is built using OpenWatcom. Source is available on http://svn.netlabs.org/
   PACKAGEID="Netlabs\eFTE/2 Configuration Files@@@EFTE2_VER@@@"
   TITLE="eFTE/2 Configuration Files"
   TARGET="$(1)"
+  REQUIRES=1
   SELECT
   FIXED
->This package contains eFTE/2's configuration files which provide most of eFTE/2's user interface. If you already use FTE you can try using it with FTE's configuration files. eFTE/2 also contains a default configuration file which is part of the eFTE/2 package. It provides only a very small subset of eFTE/2's functionality. For a new install it is highly recommended that you install this package. If you are updating an existing eFTE/2 install and have modified the configuration other than by editing or creating "my*.fte files intalling this package will over write some of the changes. The History file will let you know what if any changes have been made to the configuration files so you can decide if you need/want to install them.
+>This package contains eFTE/2's configuration files which provide most of eFTE/2's user 
+interface. If you already use FTE you can try using it with FTE's configuration files. 
+eFTE/2 also contains a default configuration file which is part of the eFTE/2 package. 
+It provides only a very small subset of eFTE/2's functionality. For a new install it 
+is highly recommended that you install this package. If you are updating an existing 
+eFTE/2 install and have modified the configuration other than by editing or creating 
+"my*.fte files intalling this package will over write some of the changes. The History 
+file will let you know what if any changes have been made to the configuration files so 
+you can decide if you need/want to install them.
 </PCK>
 
 <PCK INDEX=3
   PACKAGEID="Netlabs\eFTE/2 Customization Configuration Files@@@EFTE2_VER@@@"
   TITLE="eFTE/2 Personalization Configuration Files"
   TARGET="$(1)"
+  REQUIRES=1
   SELECT
   FIXED
->This package contains eFTE/2's customization configuration files which provide a way to personalize eFTE/2's user interface. If you already have modified mymain.fte myfontsize.fte and/or systemmain.fte to personalize your install installing this package will revert your changes. The plan is for these files not to change here.
+>This package contains eFTE/2's customization configuration files which provide a way to 
+personalize eFTE/2's user interface. If you already have modified mymain.fte myfontsize.fte 
+and/or systemmain.fte to personalize your install installing this package will revert your 
+changes. The plan is for these files not to change here.
 </PCK>
 
+<PCK INDEX=4
+  PACKAGEID="Netlabs\eFTE/2 English Menu Files@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 English Menu Files"
+  TARGET="$(1)"
+  REQUIRES=1
+  REQUIRES=2
+  SELECT
+  FIXED
+>This package contains eFTE/2's English menu files which provide. For a new install you 
+must install a menu package if you install the configuration files. If you are 
+updating an existing eFTE/2 install and have modified the menu files other than by 
+editing or creating "my*.fte files intalling this package will over write some of 
+the changes. The History file will let you know what if any changes have been made to 
+the configuration files so you can decide if you need/want to install them.
+</PCK>
+
+<GROUP TITLE="Other language Menu Files">
+<PCK INDEX=5
+  PACKAGEID="Netlabs\eFTE/2 Spanish Menu Files@@@EFTE2_VER@@@"
+  TITLE="eFTE/2 Spanish Menu Files"
+  TARGET="$(1)"
+  REQUIRES=1
+  REQUIRES=2
+  FIXED
+>This package contains eFTE/2's Spanish menu files which provide. For a new install you 
+must install a menu package if you install the configuration files. If you are updating 
+an existing eFTE/2 install and have modified the menu files other than by editing or 
+creating "my*.fte files intalling this package will over write some of the changes. 
+The History file will let you know what if any changes have been made to the 
+configuration files so you can decide if you need/want to install them.
+</PCK>
+</GROUP>
 </HEAD>
 
 <BODY>
