@@ -17,3 +17,6 @@ include 'kbd/k_perl.fte';
 include 'kbd/k_rexx.fte';
 include 'kbd/k_fte.fte';
 include 'kbd/k_html.fte';
+
+oinclude 'ui_ne.pte';
+oinclude 'myui_ne.fte';

@@ -484,4 +484,5 @@ mode NETREXX: REXX {
     Colorizer           = 'NETREXX';
 }
 
+oinclude 'm_rexx.pte';
 oinclude 'mym_rexx.fte';

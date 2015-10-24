@@ -26,3 +26,6 @@ include 'kbd/k_fte.fte';
 include 'kbd/k_html.fte';
 include 'kbd/k_sgml.fte';
 include 'kbd/k_rst.fte';
+
+oinclude 'ui_fte.pte';
+oinclude 'myui_fte.fte';

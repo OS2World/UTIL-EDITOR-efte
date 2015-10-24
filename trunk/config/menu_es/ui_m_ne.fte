@@ -400,3 +400,6 @@ menu MessagesLocal {
     item "&Previous error\tF11" { CompilePrevError }
     item "&Next error\tF12" { CompileNextError }
 }
+
+oinclude 'ui_m_ne.pte';
+oinclude 'myui_m_ne.fte';

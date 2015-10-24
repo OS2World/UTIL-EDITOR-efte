@@ -86,3 +86,5 @@ object PLAIN {
         { 'HilitWord',  'Editor_HilitWord' },
     };
 }
+oinclude 'color.pte'; 
+oinclude 'mycolor.fte'; 

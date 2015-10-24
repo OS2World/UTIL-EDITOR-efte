@@ -141,4 +141,5 @@ mode EUPHORIA: SOURCE {
     RoutineRegexp      = /^{{override}|{public}|{global}|{export}}*\s*{{function}|{procedure}|{type}}\s+/;
 }
 
+oinclude 'm_euphoria.pte';
 oinclude 'mym_euphoria.fte';

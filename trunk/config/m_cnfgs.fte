@@ -132,3 +132,5 @@ mode CNFGSYS: PLAIN {                    # CONFIG.SYS mode
     RoutineRegexp       = /^[\w_]+:/;
 }
 
+oinclude 'm_cnfgs.pte';
+oinclude 'mym_cnfgs.fte';

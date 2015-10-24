@@ -52,3 +52,6 @@ eventmap PLAIN: MODEL {
   key [C+Q_a] { FindReplace }
   key [C+Q_f] { Find }
 }
+
+oinclude 'ui_k_joe.pte';
+oinclude 'myui_k_joe.fte';

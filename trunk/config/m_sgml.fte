@@ -276,4 +276,5 @@ mode SGML: MARKUP {
     Trim                = 1;
 }
 
+oinclude 'm_sgml.pte';
 oinclude 'mym_sgml.fte';

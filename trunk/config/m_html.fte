@@ -982,7 +982,7 @@ colorize HTML {
 }
 
 mode HTML: PLAIN {
-    FileNameRx          = /\.\c{(S|X|D)?HTML?}|{HTM}|{WIS}$/;
+    FileNameRx          = /\.\c{(S|X|D)?HTML?}|{HTM}|{WIS}|{WIS.IN}$/;
     HilitOn             = 1;
     Colorizer           = "HTML";
     MultiLineHilit      = 1;
@@ -993,4 +993,6 @@ mode HTML: PLAIN {
     CommentStart        = "<!--";
     CommentEnd          = "-->";
 }
+
+oinclude 'm_html.pte';
 oinclude 'mym_html.fte';

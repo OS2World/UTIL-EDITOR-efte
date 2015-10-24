@@ -1,2 +1,5 @@
 menu HTML_Latin {
 }
+
+oinclude 'latin.pte';
+oinclude 'mylatin.fte';

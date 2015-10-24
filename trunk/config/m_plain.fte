@@ -66,4 +66,5 @@ mode PLAIN {
     %endif
 }
 
+oinclude 'm_plain.pte';
 oinclude 'mym_plain.fte';

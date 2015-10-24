@@ -57,4 +57,5 @@ eventmap JAVA {
         Fail;
     }
 }
-
+oinclude 'ab_java.pte';
+oinclude 'myab_java.fte';

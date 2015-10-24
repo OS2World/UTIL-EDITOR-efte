@@ -124,3 +124,6 @@ color_palette {
     { 'MERGE_New',                    'red:bg' },
     { 'MERGE_Control',                'yellow:bg' },
 }
+
+oinclude 'pal_nce.pte';
+oinclude 'mypal_nce.fte';

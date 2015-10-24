@@ -47,4 +47,5 @@ mode RPM: SOURCE {
     IndentMode           = "PLAIN";
 }
 
+oinclude 'm_rpm.pte';
 oinclude 'mym_rpm.fte';

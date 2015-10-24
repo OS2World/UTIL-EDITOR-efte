@@ -101,4 +101,5 @@ mode BASIC: SOURCE {
     RoutineRegexp      = /^\s*{{sub}|{function}|{type}}\s+/;
 }
 
+oinclude 'm_basic.pte';
 oinclude 'mym_basic.fte';

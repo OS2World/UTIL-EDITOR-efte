@@ -506,3 +506,6 @@ menu MessagesLocal {
     item "Error &anterior\tF11" { CompilePrevError }
     item "Siguiente &error\tF12" { CompileNextError }
 }
+
+oinclude 'ui_m_fte.pte';
+oinclude 'myui_m_fte.fte';

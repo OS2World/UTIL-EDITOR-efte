@@ -86,4 +86,5 @@ mode LISAAC: SOURCE {
     AutoHilitParen      = 1;
 }
 
+oinclude 'm_lisaac.pte';
 oinclude 'mym_lisaac.fte';

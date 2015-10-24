@@ -29,4 +29,5 @@ mode MERGE: PLAIN {                      # unix/gnu rscmerge
     MultiLineHilit      = 0;
 }
 
+oinclude 'm_merge.pte';
 oinclude 'mym_merge.fte';

@@ -81,4 +81,5 @@ eventmap XML {
    }
 }
 
+oinclude 'm_xml.pte';
 oinclude 'mym_xml.fte';

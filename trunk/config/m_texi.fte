@@ -220,4 +220,5 @@ mode TEXINFO: MARKUP {
     CommentEnd          = '';
 }
 
+oinclude 'm_texi.pte';
 oinclude 'mym_texi.fte';

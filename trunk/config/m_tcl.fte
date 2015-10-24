@@ -164,4 +164,5 @@ mode TCL: SOURCE { # TCL
     RoutineRegexp      = /^{proc}\s+/;
 }
 
+oinclude 'm_tcl.pte';
 oinclude 'mym_tcl.fte';

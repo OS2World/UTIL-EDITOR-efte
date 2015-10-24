@@ -419,3 +419,6 @@ eventmap REXX {
     MainMenu            = "Main_REXX";   # menu for menubar
     key [A+R] { MainMenu 'R' }
 }
+
+oinclude 'm_rexx.pte';
+oinclude 'mym_rexx.fte';

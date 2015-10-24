@@ -74,4 +74,5 @@ mode PERL: SOURCE { # PERL
     CommentEnd          = '';
 }
 
+oinclude 'm_perl.pte';
 oinclude 'mym_perl.fte';

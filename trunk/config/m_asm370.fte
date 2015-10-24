@@ -141,4 +141,5 @@ mode ASM370: SOURCE {
     Trim                = 1;
 }
 
+oinclude 'm_asm370.pte';
 oinclude 'mym_asm370.fte';

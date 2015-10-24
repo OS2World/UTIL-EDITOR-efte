@@ -47,3 +47,5 @@ eventmap C {
     abbrev 'S2MR' 'SHORT2FROMMR';
     abbrev 'LMR'  'LONGFROMMR';
 }
+oinclude 'ab_c_os2.pte';
+oinclude 'myab_c_os2.fte';

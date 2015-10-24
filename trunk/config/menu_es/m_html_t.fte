@@ -56,3 +56,6 @@ menu HTMLTools {
     submenu "C&VS\tC+O_C+V", MCvs;
     submenu "SVN\tC+O_C+N", MSvn;
 }
+
+oinclude 'm_html_t.pte';
+oinclude 'mym_html_t.fte';

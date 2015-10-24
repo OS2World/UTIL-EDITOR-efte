@@ -39,6 +39,7 @@
 #%define(COLORS_OS2_SYSTEM_DEFAULT)
 
 # include the system main config - usually in /usr/local/fte/localconfig.
+oinclude 'mymain.pte';
 include 'systemmain.fte';
 
 # Personal settings go here.

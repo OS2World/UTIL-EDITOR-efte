@@ -30,4 +30,5 @@ mode RESOURCE: PLAIN {           # Resource file
     CommentEnd          = '*/';
 }
 
+oinclude 'm_resdlg.pte';
 oinclude 'mym_resdlg.fte';

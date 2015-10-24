@@ -140,4 +140,5 @@ mode SQL: SOURCE {      # SQL Mode
     CommentEnd          = '*/';
 }
 
+oinclude 'm_sql.pte';
 oinclude 'mym_sql.fte';

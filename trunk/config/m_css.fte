@@ -365,4 +365,6 @@ mode CSS: PLAIN {
     CommentStart        = " /*";
     CommentEnd          = "*/";
 }
+
+oinclude 'm_css.pte';
 oinclude 'mym_css.fte';

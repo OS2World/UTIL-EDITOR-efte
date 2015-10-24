@@ -122,3 +122,6 @@ color_palette {
     { 'MERGE_New',                    'red:bg' },
     { 'MERGE_Control',                'yellow:bg' },
 }
+
+oinclude 'pal_blk.pte';
+oinclude 'mypal_blk.fte';

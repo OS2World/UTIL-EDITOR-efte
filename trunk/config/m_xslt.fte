@@ -347,4 +347,5 @@ eventmap XSLT {
     key [C+E_s]     { XSLT_Sort }
 }
 
+oinclude 'm_xslt.pte';
 oinclude 'mym_xslt.fte';

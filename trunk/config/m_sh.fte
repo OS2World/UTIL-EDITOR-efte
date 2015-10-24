@@ -57,4 +57,5 @@ mode SH: SOURCE { # *sh
     CommentEnd          = '';
 }
 
+oinclude 'm_sh.pte';
 oinclude 'mym_sh.fte';

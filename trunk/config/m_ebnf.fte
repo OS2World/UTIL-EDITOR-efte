@@ -33,4 +33,5 @@ mode EBNF: PLAIN {
     AutoHilitParen      = 1;
 }
 
+oinclude 'm_ebnf.pte';
 oinclude 'mym_ebnf.fte';

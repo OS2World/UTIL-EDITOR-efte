@@ -257,4 +257,5 @@ mode GL: SOURCE {      # 4GL Mode
 #    SpaceTabs = 0;
 }
 
+oinclude 'm_4gl.pte';
 oinclude 'mym_4gl.fte';

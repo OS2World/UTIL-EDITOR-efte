@@ -151,4 +151,5 @@ mode PASCAL: SOURCE {      # Pascal Mode
     RoutineRegexp       = '^{procedure}|{function}>';
 }
 
+oinclude 'm_pascal.pte';
 oinclude 'mym_pascal.fte';

@@ -119,4 +119,5 @@ mode XPE: SOURCE {
     CommentEnd          = '*/';
 }
 
+oinclude 'm_xp.pte';
 oinclude 'mym_xp.fte';

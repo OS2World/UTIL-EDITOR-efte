@@ -262,3 +262,6 @@ menu UTF_Nihongo {
   submenu "&r", Nihongo_r;
   submenu "&w", Nihongo_w;
 }
+
+oinclude 'jap.pte';
+oinclude 'myjap.fte';

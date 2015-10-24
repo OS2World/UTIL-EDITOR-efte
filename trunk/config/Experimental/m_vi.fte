@@ -102,4 +102,5 @@ mode VI_YANK: MODEOPTS {
     key [w]   { KillWord; ChangeKeys 'VIMODE' }
 }
 
+oinclude 'm_vi.pte';
 oinclude 'mym_vi.fte';

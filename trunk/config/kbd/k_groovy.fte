@@ -1,2 +1,5 @@
 eventmap GROOVY {
 }
+
+oinclude 'k_groovy.pte';
+oinclude 'myk_groovy.fte';

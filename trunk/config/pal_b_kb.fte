@@ -13,3 +13,6 @@ color_palette {
     { 'Lang_Preprocessor',	'cyan:bg' },
     { 'Lang_Function',		'green:bg' },
 }
+
+oinclude 'pal_b_kb.pte';
+oinclude 'mypal_b_kb.fte';

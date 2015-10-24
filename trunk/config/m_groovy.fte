@@ -58,4 +58,5 @@ mode GROOVY: SOURCE {      # GROOVY Mode
     CommentEnd          = '*/';
 }
 
+oinclude 'm_groovy.pte';
 oinclude 'mym_groovy.fte';

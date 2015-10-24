@@ -78,4 +78,5 @@ mode Eiffel: SOURCE {
     CursorThroughTabs   = 0;
 }
 
+oinclude 'm_eiffel.pte';
 oinclude 'mym_eiffel.fte';

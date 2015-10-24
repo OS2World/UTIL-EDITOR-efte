@@ -17,3 +17,5 @@ include 'kbd/k_rexx.fte';
 include 'kbd/k_fte.fte';
 include 'kbd/k_html.fte';
 
+oinclude 'ui_brief.pte';
+oinclude 'myui_brief.fte';

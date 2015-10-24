@@ -218,4 +218,5 @@ mode C: SOURCE {      # C/C++ Mode
 %endif
 }
 
+oinclude 'm_c.pte';
 oinclude 'mym_c.fte';

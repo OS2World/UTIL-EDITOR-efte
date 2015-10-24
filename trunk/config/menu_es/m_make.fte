@@ -26,3 +26,6 @@ menu Main_MAKE {
 eventmap MAKE {
     MainMenu  = "Main_MAKE";   # menu for menubar
 }
+
+oinclude 'm_make.pte';
+oinclude 'mym_make.fte';

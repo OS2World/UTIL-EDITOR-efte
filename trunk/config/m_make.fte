@@ -96,4 +96,5 @@ mode MAKE: PLAIN {
     CommentEnd          = '';
 }
 
+oinclude 'm_make.pte';
 oinclude 'mym_make.fte';

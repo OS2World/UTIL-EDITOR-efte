@@ -143,3 +143,6 @@ eventmap HTML {
 # Programming
     key [C+H_C+J]   { HTML_OBJECT }
 }
+
+oinclude 'k_html.pte';
+oinclude 'myk_html.fte';

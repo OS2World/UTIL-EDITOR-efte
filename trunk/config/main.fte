@@ -331,3 +331,5 @@ eventmap PLAIN {
 #   key [G-Right] { MoveNext }
     key [A+C+Enter] { noumlaut; RunProgram "latex " . $FileName; }
 }
+
+oinclude 'main.pte';

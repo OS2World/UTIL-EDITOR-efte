@@ -11,3 +11,6 @@ eventmap C {
     key [A+G-Enter] { LineIndent; LineAdd; LineIndent }
     key [S+G-Enter] { LineIndent; LineInsert; LineIndent }
 }
+
+oinclude 'k_c.pte';
+oinclude 'myk_c.fte';
