@@ -48,4 +48,5 @@ mode IDL: C {      # IDL Mode
     CommentEnd          = '*/';
 }
 
+oinclude 'm_idl.pte';
 oinclude 'mym_idl.fte';

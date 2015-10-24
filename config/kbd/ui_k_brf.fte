@@ -238,3 +238,6 @@ eventmap PLAIN: MODEL {
     key   [A+W]      { FileSave }
     #key   [A+Y]      { Find ?? "r" }
 }
+
+oinclude 'ui_k_brf.pte';
+oinclude 'myui_k_brf.fte';

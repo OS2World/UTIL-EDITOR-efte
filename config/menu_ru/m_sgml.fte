@@ -69,3 +69,6 @@ eventmap SGML {
 
     key [A+M] { MainMenu 'M' }
 }
+
+oinclude 'm_sgml.pte';
+oinclude 'mym_sgml.fte';

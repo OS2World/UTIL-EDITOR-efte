@@ -109,4 +109,5 @@ mode ICON: SOURCE {
     RoutineRegexp      = /^\s*{{procedure}}\s+/;
 }
 
+oinclude 'm_icon.pte';
 oinclude 'mym_icon.fte';

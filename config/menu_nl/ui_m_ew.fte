@@ -205,7 +205,7 @@ menu MChangeMode {
     item "&Text"       { ChangeMode 'TEXT' }
     item "&C"          { ChangeMode 'C' }
     item "&EMail"      { ChangeMode 'MSG' }
-    item "&HTML"       { ChangeMode 'HTML' }
+    item "&HTML/WIS"   { ChangeMode 'HTML' }
     item "&IPF"        { ChangeMode 'IPF' }
     item "&Ada"        { ChangeMode 'Ada' }
     item "&REXX"       { ChangeMode 'REXX' }
@@ -228,7 +228,7 @@ menu MOpenInMode {
     item "&Text"       { FileOpenInMode 'TEXT' }
     item "&C"          { FileOpenInMode 'C' }
     item "&EMail"      { FileOpenInMode 'MSG' }
-    item "&HTML"       { FileOpenInMode 'HTML' }
+    item "&HTML/WIS"       { FileOpenInMode 'HTML' }
     item "&IPF"        { FileOpenInMode 'IPF' }
     item "&Ada"        { FileOpenInMode 'Ada' }
     item "&REXX"       { FileOpenInMode 'REXX' }
@@ -916,3 +916,6 @@ eventmap FTE: PLAIN {
 
 # make sure proper eventmap is used
 mode FTE { EventMap = 'FTE'; }
+
+oinclude 'ui_m_ew.pte';
+oinclude 'myui_m_ew.fte';

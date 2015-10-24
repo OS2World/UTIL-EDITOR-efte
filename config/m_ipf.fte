@@ -675,4 +675,5 @@ sub IPF_2colon {
     ?FindReplace ':/' '&colon./' 'agn' ;
 }
 
+oinclude 'm_ipf.pte';
 oinclude 'mym_ipf.fte';

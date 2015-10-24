@@ -29,4 +29,5 @@ mode BIN: PLAIN { # Binary Mode
     Abbreviations       = 0;
 }
 
+oinclude 'm_bin.pte';
 oinclude 'mym_bin.fte';

@@ -22,3 +22,6 @@ eventmap SGML {
     key [C+E_>]         { InsertString "&gt;"; }
     key [C+E_@]         { InsertString "&copy;"; }
 }
+
+oinclude 'k_sgml.pte';
+oinclude 'myk_sgml.fte';

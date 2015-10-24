@@ -235,3 +235,6 @@ eventmap PLAIN: MODEL {
     key     [A+G+/]     { FoldCloseAll }
 
 }
+
+oinclude 'ui_k_ne.pte';
+oinclude 'myui_k_ne.fte';

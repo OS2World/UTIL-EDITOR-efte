@@ -21,4 +21,5 @@ mode MSG: TEXT {                       # EMail messages
     RoutineRegexp       = /^Subject:/; 
 }
 
+oinclude 'm_msg.pte';
 oinclude 'mym_msg.fte';

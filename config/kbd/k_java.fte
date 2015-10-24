@@ -12,3 +12,6 @@ eventmap JAVA {
     key       [#]       { SelfInsert; LineIndent }
     key       [A+\\]    { BlockReIndent }
 }
+
+oinclude 'k_java.pte';
+oinclude 'myk_java.fte';

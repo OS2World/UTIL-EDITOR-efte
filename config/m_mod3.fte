@@ -142,8 +142,9 @@ mode MODULA3: SOURCE {      # Modula-3 Mode
     CommentEnd          = '*)';
 
     # Needs to be modified to allow PROCEDURE to start anywhere on a line,
-    # not just column 1.
-    RoutineRegexp       = '^{PROCEDURE}'; 
+    # not just column 1. Hopefully my change fixed this GKY 23 OCT 15
+    RoutineRegexp       = /^\s*{procedure}\s/; 
 }
 
+oinclude 'm_mod3.pte';
 oinclude 'mym_mod3.fte';

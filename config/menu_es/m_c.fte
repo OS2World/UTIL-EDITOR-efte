@@ -48,3 +48,6 @@ eventmap C {
     MainMenu  = "Main_C";   # menu for menubar
 %endif
 }
+
+oinclude 'm_c.pte';
+oinclude 'mym_c.fte';

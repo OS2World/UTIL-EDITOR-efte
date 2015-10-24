@@ -144,3 +144,6 @@ eventmap reST {
     MainMenu            = "Main_RST";   # menu for menubar
     key [A+R] { MainMenu 'R' } # reload 'A+R'
 }
+
+oinclude 'm_rst.pte';
+oinclude 'mym_rst.fte';

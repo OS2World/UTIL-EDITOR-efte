@@ -130,7 +130,7 @@ colorize FTE {
 }
 
 mode FTE: SOURCE {
-    FileNameRx          = /\.\cfte$/;
+    FileNameRx          = /\.\c{fte}|{pte}$/;
     HilitOn             = 1;
     Colorizer           = 'FTE';
     IndentMode          = 'C';
@@ -144,4 +144,5 @@ mode FTE: SOURCE {
     RoutineRegexp       = /^{mode}|{sub}|{menu}|{object}|{eventmap}|{colorize}\s+/;
 }
 
+oinclude 'm_fte.pte';
 oinclude 'mym_fte.fte';

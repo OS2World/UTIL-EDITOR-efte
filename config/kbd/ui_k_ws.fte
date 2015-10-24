@@ -388,3 +388,6 @@ eventmap PLAIN: MODEL {
     key     [A+.]     { SearchWordNext }
     key     [A+/]     { HilitWord }
 }
+
+oinclude 'ui_k_ws.pte';
+oinclude 'myui_k_ws.fte';

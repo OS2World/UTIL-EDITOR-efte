@@ -43,3 +43,6 @@ eventmap GROOVY {
     key [A+G] { MainMenu 'M' }
     key [F9] { Compile "ant -emacs -find build.xml " }
 }
+
+oinclude 'm_groovy.pte';
+oinclude 'mym_groovy.fte';

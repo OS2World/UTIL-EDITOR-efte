@@ -45,3 +45,5 @@ eventmap PERL {
         MoveSavedPos; Fail;
     }
 }
+oinclude 'ab_perl.pte';
+oinclude 'myab_perl.fte';

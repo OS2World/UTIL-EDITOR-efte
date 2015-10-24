@@ -38,4 +38,5 @@ mode DIFF: PLAIN {        # unix/gnu diff
     MultiLineHilit      = 0;
 }
 
+oinclude 'm_diff.pte';
 oinclude 'mym_diff.fte';

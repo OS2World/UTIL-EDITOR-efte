@@ -84,4 +84,5 @@ mode Ruby: SOURCE { # Ruby mode
         CommentEnd          = '';
 }
 
+oinclude 'm_ruby.pte';
 oinclude 'mym_ruby.fte';

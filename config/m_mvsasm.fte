@@ -57,4 +57,5 @@ mode MVSASM: SOURCE {
     CommentEnd          = '';
 }
 
+oinclude 'm_mvsasm.pte';
 oinclude 'mym_mvsasm.fte';

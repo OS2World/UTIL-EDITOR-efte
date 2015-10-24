@@ -9,3 +9,6 @@ menu HTML_Typo {
 
 menu HTML_Fin {
 }
+
+oinclude 'ents.pte';
+oinclude 'myents.fte';

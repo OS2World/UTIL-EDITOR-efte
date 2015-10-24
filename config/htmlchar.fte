@@ -110,3 +110,6 @@ sub hg_wo { InsertString "&#12434;" } sub kk_wo { InsertString "&#12530;" }
 
 sub hg_n { InsertString "&#12435;" } sub kk_n { InsertString "&#12531;" }
 sub hg_vu { InsertString "&#12436;" } sub kk_vu { InsertString "&#12532;" }
+
+oinclude 'htmlchar.pte';
+oinclude 'myhtmlchar.fte';

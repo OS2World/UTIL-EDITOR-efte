@@ -69,3 +69,5 @@ mode OCAML: PLAIN {
     RoutineRegexp  = /^{let}|{module}|{type}\ .+}/;
 }
 
+oinclude 'm_ocaml.pte';
+oinclude 'mym_ocaml.fte';

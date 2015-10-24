@@ -56,4 +56,5 @@ mode FALCON: SOURCE {      # Falcon Mode
    CommentEnd          = '*/';
 }
 
+oinclude 'm_falcon.pte';
 oinclude 'mym_falcon.fte';

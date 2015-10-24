@@ -57,3 +57,6 @@ eventmap C {
         Fail;
     }
 }
+oinclude 'ab_c.pte';
+oinclude 'myab_c.fte';
+

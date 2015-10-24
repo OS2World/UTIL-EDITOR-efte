@@ -7,3 +7,6 @@ eventmap FTE {
     key       [{]       { SelfInsert; LineIndent }
     key       [}]       { SelfInsert; LineIndent }
 }
+
+oinclude 'k_fte.pte';
+oinclude 'myk_fte.fte';

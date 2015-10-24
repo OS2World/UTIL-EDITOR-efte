@@ -20,3 +20,6 @@ eventmap REXX {
 #    key      [C+E_5]    { REXX_If }
 #    key      [C+E_6]    { REXX_Select }
 }
+
+oinclude 'k_rexx.pte';
+oinclude 'myk_rexx.fte';

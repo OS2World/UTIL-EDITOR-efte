@@ -52,3 +52,6 @@ menu Main_IPF {
 eventmap IPF {
     MainMenu  = "Main_IPF";   # menu for menubar
 }
+
+oinclude 'm_ipf.pte';
+oinclude 'mym_ipf.fte';

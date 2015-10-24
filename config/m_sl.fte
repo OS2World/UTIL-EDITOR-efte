@@ -81,4 +81,5 @@ mode sl: SOURCE {      # SLang Mode
     CommentEnd          = '';
 }
 
+oinclude 'm_sl.pte';
 oinclude 'mym_sl.fte';

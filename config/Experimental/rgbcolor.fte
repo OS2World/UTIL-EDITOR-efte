@@ -16,3 +16,6 @@ object GLOBAL {
   RGBColor = 'e:fc,fc,54';
   RGBColor = 'f:fc,fc,e4';
 }
+
+oinclude 'rgbcolor.pte';
+oinclude 'myrgbcolor.fte';

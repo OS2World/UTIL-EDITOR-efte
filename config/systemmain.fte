@@ -285,6 +285,7 @@
 %endif
 
 # include the main config - usually in /usr/local/efte/config.
+oinclude 'systemmain.pte';
 include 'main.fte';
 
 # Local settings go here.

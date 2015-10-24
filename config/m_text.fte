@@ -5,4 +5,5 @@ mode TEXT: PLAIN {              # Text files (wordwrap)
     WordWrap            = 1;
 }
 
+oinclude 'm_text.pte';
 oinclude 'mym_text.fte';

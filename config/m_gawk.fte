@@ -195,4 +195,5 @@ mode GAWK: SOURCE {      # AWK mode with GNU extensions
     CommentEnd          = '';
 }
 
+oinclude 'm_gawk.pte';
 oinclude 'mym_gawk.fte';

@@ -343,3 +343,6 @@ eventmap HTML {
 
     key [A+H] { MainMenu 'H' }
 }
+
+oinclude 'm_html.pte';
+oinclude 'mym_html.fte';

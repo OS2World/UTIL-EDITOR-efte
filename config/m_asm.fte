@@ -162,4 +162,5 @@ mode ASM: SOURCE {
     CommentEnd          = '';
 }
 
+oinclude 'm_asm.pte';
 oinclude 'mym_asm.fte';

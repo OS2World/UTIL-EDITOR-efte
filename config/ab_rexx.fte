@@ -72,3 +72,5 @@ eventmap REXX {
         Fail; # do not insert typed character
     }
 }
+oinclude 'ab_rexx.pte';
+oinclude 'myab_rexx.fte';

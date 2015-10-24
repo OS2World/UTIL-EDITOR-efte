@@ -265,4 +265,5 @@ mode TEX: MARKUP {
     CommentEnd          = '';
 }
 
+oinclude 'm_tex.pte';
 oinclude 'mym_tex.fte';

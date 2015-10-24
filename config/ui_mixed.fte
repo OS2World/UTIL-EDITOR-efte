@@ -1,5 +1,4 @@
 # FTE 
-#if you chose MY UI style, then you have to choose a lang... in main.fte
 
 include 'menu/ui_m_fte.fte';
 include 'kbd/ui_k_fte.fte';
@@ -22,3 +21,6 @@ include 'kbd/k_rexx.fte';
 include 'kbd/k_fte.fte';
 include 'kbd/k_html.fte';
 include 'kbd/k_sgml.fte';
+
+oinclude 'ui_mixed.pte';
+oinclude 'myui_mixed.fte';

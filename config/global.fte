@@ -244,5 +244,7 @@ object GLOBAL {
     SvnIgnoreRx = /^svn update: Updating /;
     SvnIgnoreRx = /^svn server: Updating /;
 }
+oinclude 'global.pte'; 
+oinclude 'myglobal.fte'; 
 oinclude 'myfontsize.fte';
 

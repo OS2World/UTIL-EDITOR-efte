@@ -364,3 +364,6 @@ eventmap PLAIN: MODEL {
     key     [A+[]     { TagPrev }
     key     [S+Tab]   { InsertTab; LineTrim }
 }
+
+oinclude 'ui_k_fte.pte';
+oinclude 'myui_k_fte.fte';

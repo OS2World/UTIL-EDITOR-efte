@@ -33,3 +33,6 @@ color_palette {
     { 'yellow',                       'E E' },
     { 'white',                        'F F' },
 }
+
+oinclude 'pal_base.pte';
+oinclude 'mypal_base.fte';

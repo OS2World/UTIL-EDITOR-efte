@@ -412,3 +412,6 @@ menu MessagesLocal {
     item "&Previous error\tF11" { CompilePrevError }
     item "&Next error\tF12" { CompileNextError }
 }
+
+oinclude 'ui_m_ws.pte';
+oinclude 'myui_m_ws.fte';

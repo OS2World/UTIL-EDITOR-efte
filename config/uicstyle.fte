@@ -30,3 +30,6 @@ menu MChangeCIndentStyle {
 %endif
     # more...
 }
+
+oinclude 'uicstyle.pte';
+oinclude 'myuicstyle.fte';

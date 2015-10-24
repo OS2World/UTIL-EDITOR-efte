@@ -1499,3 +1499,6 @@ sub Conv_num_ent {
   ?FindReplace /&#9829;/ /&hearts;/ "agn" ;
   ?FindReplace /&#9830;/ /&diams;/ "agn" ;
 }
+
+oinclude 'htmlconv.pte';
+oinclude 'myhtmlconv.fte';

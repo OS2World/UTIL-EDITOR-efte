@@ -148,3 +148,6 @@ mode Batch: PLAIN {                    # Batch File mode
 
     RoutineRegexp       = /^[\w_]+:/;
 }
+
+oinclude 'm_batch.pte';
+oinclude 'mym_batch.fte';

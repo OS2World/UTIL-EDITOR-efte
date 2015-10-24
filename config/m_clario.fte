@@ -62,4 +62,5 @@ mode CLARION: SOURCE {       # CLARION mode
 #    CommentEnd          = '';
 }
 
+oinclude 'm_clario.pte';
 oinclude 'mym_clario.fte';

@@ -54,3 +54,6 @@ eventmap reST {
     key [C+Enter]      { RST_LISTS_1ENT }
 
 }
+
+oinclude 'k_rst.pte';
+oinclude 'myk_rst.fte';

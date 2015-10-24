@@ -224,3 +224,6 @@ eventmap CSS {
     MainMenu  = "Main_CSS";   # menu for menubar
     key [A+C] { MainMenu 'C' }
 }
+
+oinclude 'm_css.pte';
+oinclude 'mym_css.fte';

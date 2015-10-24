@@ -132,7 +132,7 @@ menu MChangeMode {
     item "&Text"       { ChangeMode 'TEXT' }
     item "&C"          { ChangeMode 'C' }
     item "&EMail"      { ChangeMode 'MSG' }
-    item "&HTML"       { ChangeMode 'HTML' }
+    item "&HTML/WIS"   { ChangeMode 'HTML' }
     item "&IPF"        { ChangeMode 'IPF' }
     item "&Ada"        { ChangeMode 'Ada' }
     item "&REXX"       { ChangeMode 'REXX' }
@@ -154,7 +154,7 @@ menu MOpenInMode {
     item "&Text"       { FileOpenInMode 'TEXT' }
     item "&C"          { FileOpenInMode 'C' }
     item "&EMail"      { FileOpenInMode 'MSG' }
-    item "&HTML"       { FileOpenInMode 'HTML' }
+    item "&HTML/WIS"   { FileOpenInMode 'HTML' }
     item "&IPF"        { FileOpenInMode 'IPF' }
     item "&Ada"        { FileOpenInMode 'Ada' }
     item "&REXX"       { FileOpenInMode 'REXX' }
@@ -406,3 +406,6 @@ menu MessagesLocal {
     item "&Previous error\tF11" { CompilePrevError }
     item "&Next error\tF12" { CompileNextError }
 }
+
+oinclude 'ui_m_ne.pte';
+oinclude 'myui_m_ne.fte';
