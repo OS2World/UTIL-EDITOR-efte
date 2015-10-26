@@ -1,29 +1,29 @@
 # FTE default menus
 
 menu MOpenInMode {
-    item "&Plain"      { FileOpenInMode 'PLAIN' }
-    item "&Text"       { FileOpenInMode 'TEXT' }
-    item "&C"	       { FileOpenInMode 'C' }
-    item "&EMail"      { FileOpenInMode 'MSG' }
-    item "&HTML/WIS"   { FileOpenInMode 'HTML' }
-    item "&IPF"        { FileOpenInMode 'IPF' }
-    item "&Ada"        { FileOpenInMode 'Ada' }
-    item "&REXX"       { FileOpenInMode 'REXX' }
-    item "MA&KE"       { FileOpenInMode 'MAKE' }
-    item "&FTE"        { FileOpenInMode 'FTE' }
-    item "&Win Resource" { FileOpenInMode 'RESOURCE' }
-    item "&DIFF"       { FileOpenInMode 'DIFF' }
-    item "&MERGE"      { FileOpenInMode 'MERGE' }
-    item "&SH"	       { FileOpenInMode 'SH' }
-    item "PER&L"       { FileOpenInMode 'PERL' }
-    item "PASCAL"      { FileOpenInMode 'PASCAL' }
-    item "&JAVA"       { FileOpenInMode 'JAVA' }
-    item "TE&X"        { FileOpenInMode 'TEX' }
-    item "&BIN"        { FileOpenInMode 'BIN' }
-    item "4&GL"        { FileOpenInMode 'GL' }
-    item "PHP"	       { FileOpenInMode 'PHP' }
-    item "P&ython"     { FileOpenInMode 'PYTHON' }
-    item "reST"        { FileOpenInMode 'reST' }
+    item "&Plain"            { FileOpenInMode 'PLAIN' }
+    item "&Text"             { FileOpenInMode 'TEXT' }
+    item "&C"	             { FileOpenInMode 'C' }
+    item "&EMail"            { FileOpenInMode 'MSG' }
+    item "&HTML/WIS"         { FileOpenInMode 'HTML' }
+    item "&IPF"              { FileOpenInMode 'IPF' }
+    item "&Ada"              { FileOpenInMode 'Ada' }
+    item "&REXX"             { FileOpenInMode 'REXX' }
+    item "MA&KE"             { FileOpenInMode 'MAKE' }
+    item "&FTE"              { FileOpenInMode 'FTE' }
+    item "&OS2/Win Resource" { FileOpenInMode 'RESOURCE' }
+    item "&DIFF"             { FileOpenInMode 'DIFF' }
+    item "&MERGE"            { FileOpenInMode 'MERGE' }
+    item "&SH"	             { FileOpenInMode 'SH' }
+    item "PER&L"             { FileOpenInMode 'PERL' }
+    item "PASCAL"            { FileOpenInMode 'PASCAL' }
+    item "&JAVA"             { FileOpenInMode 'JAVA' }
+    item "TE&X"              { FileOpenInMode 'TEX' }
+    item "&BIN"              { FileOpenInMode 'BIN' }
+    item "4&GL"              { FileOpenInMode 'GL' }
+    item "PHP"	             { FileOpenInMode 'PHP' }
+    item "P&ython"           { FileOpenInMode 'PYTHON' }
+    item "reST"              { FileOpenInMode 'reST' }
 %if(!GUI_PM)
 }
 
@@ -52,29 +52,29 @@ menu MOpenInModeMore {
 }
 
 menu MChangeMode {
-    item "&Plain"      { ChangeMode 'PLAIN' }
-    item "&Text"       { ChangeMode 'TEXT' }
-    item "&C"	       { ChangeMode 'C' }
-    item "&EMail"      { ChangeMode 'MSG' }
-    item "&HTML/WIS"   { ChangeMode 'HTML' }
-    item "&IPF"        { ChangeMode 'IPF' }
-    item "&Ada"        { ChangeMode 'Ada' }
-    item "&REXX"       { ChangeMode 'REXX' }
-    item "MA&KE"        { ChangeMode 'MAKE' }
-    item "&FTE"        { ChangeMode 'FTE' }
-    item "&Win Resource" { ChangeMode 'RESOURCE' }
-    item "&DIFF"       { ChangeMode 'DIFF' }
-    item "&MERGE"      { ChangeMode 'MERGE' }
-    item "&SH"	       { ChangeMode 'SH' }
-    item "PER&L"       { ChangeMode 'PERL' }
-    item "PASCAL"      { ChangeMode 'PASCAL' }
-    item "&JAVA"       { ChangeMode 'JAVA' }
-    item "TE&X"        { ChangeMode 'TEX' }
-    item "&BIN"        { ChangeMode 'BIN' }
-    item "4&GL"        { ChangeMode 'GL' }
-    item "PHP"	       { ChangeMode 'PHP' }
-    item "P&ython"     { ChangeMode 'PYTHON' }
-    item "reST"        { ChangeMode 'reST' }
+    item "&Plain"            { ChangeMode 'PLAIN' }
+    item "&Text"             { ChangeMode 'TEXT' }
+    item "&C"	             { ChangeMode 'C' }
+    item "&EMail"            { ChangeMode 'MSG' }
+    item "&HTML/WIS"         { ChangeMode 'HTML' }
+    item "&IPF"              { ChangeMode 'IPF' }
+    item "&Ada"              { ChangeMode 'Ada' }
+    item "&REXX"             { ChangeMode 'REXX' }
+    item "MA&KE"             { ChangeMode 'MAKE' }
+    item "&FTE"              { ChangeMode 'FTE' }
+    item "&OS2/Win Resource" { ChangeMode 'RESOURCE' }
+    item "&DIFF"             { ChangeMode 'DIFF' }
+    item "&MERGE"            { ChangeMode 'MERGE' }
+    item "&SH"	             { ChangeMode 'SH' }
+    item "PER&L"             { ChangeMode 'PERL' }
+    item "PASCAL"            { ChangeMode 'PASCAL' }
+    item "&JAVA"             { ChangeMode 'JAVA' }
+    item "TE&X"              { ChangeMode 'TEX' }
+    item "&BIN"              { ChangeMode 'BIN' }
+    item "4&GL"              { ChangeMode 'GL' }
+    item "PHP"	             { ChangeMode 'PHP' }
+    item "P&ython"           { ChangeMode 'PYTHON' }
+    item "reST"              { ChangeMode 'reST' }
 %if(!GUI_PM)
 }
 

@@ -4,6 +4,7 @@ include 'menu/ui_m_fte.fte';
 include 'kbd/ui_k_fte.fte';
 
 include 'menu/m_c.fte';
+include 'menu/m_resdlg.fte';
 include 'menu/m_groovy.fte';
 
 %define(TEXT_CONV)

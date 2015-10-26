@@ -1,0 +1,51 @@
+# menu definitions for C mode
+%if(OS_OS2)
+menu Help_RESOURCE {
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+    item "OS/2 Programming Guide\tCtrl+F1" { ShowHelpWord " /s addendum+CP1+CP2+CP3+GPI1+GPI2+GPI3+GPI4+MMREF1+MMREF2+MMREF3+MMSSPG+PM1+PM2+PM3+PM4+PM5+WPS1+WPS2+WPS3 \"/title:OS2 Programing Guide\"" }
+    item;
+    item "&About..." { ShowVersion }
+}
+
+menu Main_RESOURCE {
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "&Tools",   Tools;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help_RESOURCE;
+
+}
+%endif
+menu Local_RESOURCE {
+    item "&Unmark\tEsc"            { BlockMarkStream; BlockUnmark }
+    item "Cu&t\tShift+Del"         { BlockCut }
+    item "&Copy\tCtrl+Ins"         { BlockCopy }
+    item "&Paste\tShift+Ins"       { BlockPasteStream }
+    item "P&aste Column\tAlt+Ins"  { BlockPasteColumn }
+    item;
+    item "Delete &line\tCtrl+Y"    { KillLine }
+    item "Delete to &EOL\tAlt+End" { KillToLineEnd }
+    item;
+    item "&Save\tF2"               { FileSave }
+    item "Cl&ose\tAlt+Q"           { FileClose }
+    item;
+    item "&Indent line\tTab"       { LineIndent }
+    item "I&ndent block\tAlt+\\"   { BlockReIndent }
+}
+
+eventmap  RESOURCE{
+    LocalMenu = 'Local_RESOURCE';  # local menu for C mode
+%if(OS_OS2)
+    MainMenu  = "Main_RESOURCE";   # menu for menubar
+%endif
+}
+
+oinclude 'm_resdlg.pte';
+oinclude 'mym_resdlg.fte';
