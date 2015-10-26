@@ -50,7 +50,7 @@ BEGIN
    116 "Choose/set tag"
    117 "Previous tag"
    118 "Next tag"
-   119 "Remove tag from list"
+   119 "Remove from list"
    120 "Reload current file"
    121 "Run grep" 
    122 "Run Program"
