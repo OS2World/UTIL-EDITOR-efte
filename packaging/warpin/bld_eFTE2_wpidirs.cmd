@@ -4,13 +4,19 @@
  * REXX code to create and populate directories in preparation for the creation of the
  * eFTE/2 Warpin archive (WPI file).
  *
+ * Change log:
+ *    24 Oct 15 JBS: Support multiple levels of destination directories
+ *
  * TODO:
- *    -  Support multiple levels of destination directories
- *    -  Add logic to read script to determine
- *       -  Number of packages
- *       -  Package numbers
+ *    -  Redo code for NOFILESPACKAGE code so that the dirs are created after all the lines
+ *       of the input file have been read (and the max packagenumber length is set). The
+ *       current code will not work if a longer package number follows the NOFILESPACKAGE line.
  *    -  Document errors internally (Error. ?)
  *    -  Display more descriptive error messages to user
+ *    -  ? Add support for filenames with spaces
+ *    -  ? Add logic to read script to determine
+ *       -  Number of packages
+ *       -  Package numbers
  *
  */
 
@@ -39,19 +45,20 @@ call ProcessArgs strip(args)
 call ReadFile
 
 do f = 1 to WPI.fileline.0
-   parse var WPI.fileline.f . filename pkgnum src_subdir dest_subdir
+   parse var WPI.fileline.f . filename pkgnum src_subdir dest_subdir .
    if WPI.src_basedir \= '..\..\' then  /* Ignore src_subdir from file if not using build subtree */
       src_subdir = '.'
    dest_basedir   = MakePackageDir( pkgnum )
-   dest_dir = dest_basedir || '\' || strip(dest_subdir)
-   call SysMkDir dest_dir
-   'copy ' || WPI.src_basedir || src_subdir || '\' || filename || ' ' || dest_dir
+   if dest_subdir \= '.' then
+      call MkDir dest_basedir, dest_subdir
+   'copy' WPI.src_basedir || src_subdir || '\' || filename || ' ' || dest_basedir || '\' || dest_subdir
 end
 
 if WPI.retval = 0 then
    signal NormalExit
 
 ErrorExit:
+   WPI.retval = 1
    parse arg errorcode
    select
       when errorcode = 3 then
@@ -67,6 +74,10 @@ novalue:
             say 'Error: Unitialized value: "' || condition('D') || ' encountered on line: 'sigl
             say '   'sourceline(sigl)
             signal NormalExit
+         end
+      when errorcode = 6 then
+         do
+            say 'Error: Unable to create package staging subdirectory.'
          end
       otherwise
          say 'Error: unknown error code: 'errorcode
@@ -102,10 +113,8 @@ ReadFile: procedure expose (globals)
                do
                   f = f + 1
                   WPI.fileline.f = strip(txtline)
-
-                  if word3 > WPI.max_package_number then
-                      WPI.max_package_number = word3
-
+                  if length(word3) > WPI.max_package_number then
+                      WPI.max_package_number = length(word3)
                end
          end
       else
@@ -155,4 +164,30 @@ MakePackageDir: procedure expose (globals)
    full_dirname = 'PACKAGE.' || right(pkgnum, WPI.max_package_number_length, '0')
    call SysMkDir full_dirname
 return full_dirname
+
+      when errorcode = 6 then
+         do
+            say 'Error: Unable to create package staging subdirectory.'
+         end
+
+/* Creates a directory, including any non-existant parents */
+MkDir: procedure expose (globals)
+   parse arg basedir, subdirs
+   curdir = directory()
+   do while subdirs \= ''
+      parse var subdirs subdir '\' subdirs
+      if subdir \= '.' then
+         do
+            dir = basedir || '\' || subdir
+            if translate(dir) \= translate(right(directory(dir), length(dir))) then
+               do
+                  rcx = SysMkDir(dir)
+                  if rcx \= 0 then
+                     call ErrorExit 6
+               end
+            call directory curdir
+            basedir = dir
+         end
+   end
+return
 
