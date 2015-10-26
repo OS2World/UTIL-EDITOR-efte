@@ -58,7 +58,7 @@ static void Usage()
              "  -r                Open next file as read-only.\n"
              "  -T[<tagfile>]     Load tags file at startup.\n"
              "  -t<tag>           Locate specified tag.\n"
-             "  -L<Lang>          Choose the language where lang is the 2 letter lanuage code or \n nothing to default to english"
+             "  -L<Lang>          Choose the language where lang is the 2 letter lanuage code or \n \t \tnothing to default to english"
 //           "       -p        Load files into already running eFTE.\n"
 	);
 }
