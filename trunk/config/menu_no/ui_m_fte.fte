@@ -34,15 +34,14 @@ menu MOpenInModeMore {
     item "TCL"			{ FileOpenInMode 'TCL' }
     item "Fortran 90"		{ FileOpenInMode 'FORTRAN' }
     item "IPF"			{ FileOpenInMode 'IPF' }
-    item "A51"			{ FileOpenInMode 'A51' }
+    item "A51"			{ FileOpenInMode 'ASM51' }
     item "CLARION (.CLW)"	{ FileOpenInMode 'CLARION' }
-    item "EBFN"			{ FileOpenInMode 'EBFN' }
+    item "EBNF"			{ FileOpenInMode 'EBNF' }
     item "SGML"			{ FileOpenInMode 'SGML' }
     item "SIOD (.cscm)"		{ FileOpenInMode 'SIOD' }
     item "S&Lang"		{ FileOpenInMode 'sl' }
     item "Module 3"		{ FileOpenInMode 'MODULA3' }
     item "Tex Info"		{ FileOpenInMode 'TEXINFO' }
-    item "Diff"			{ FileOpenInMode 'DIFF' }
     item "Merge"		{ FileOpenInMode 'MERGE' }
     item "Man pages"		{ FileOpenInMode 'CATBS' }
     item "Batch files"		{ FileOpenInMode 'Batch' }
@@ -85,15 +84,14 @@ menu MChangeModeMore {
     item "TCL"			{ ChangeMode 'TCL' }
     item "Fortran 90"		{ ChangeMode 'FORTRAN' }
     item "IPF"			{ ChangeMode 'IPF' }
-    item "A51"			{ ChangeMode 'A51' }
+    item "A51"			{ ChangeMode 'ASM51' }
     item "CLARION (.CLW)"	{ ChangeMode 'CLARION' }
-    item "EBFN"			{ ChangeMode 'EBFN' }
+    item "EBNF"			{ ChangeMode 'EBNF' }
     item "SGML"        		{ ChangeMode 'SGML' }
     item "SIOD (.cscm)"		{ ChangeMode 'SIOD' }
     item "S&Lang"		{ ChangeMode 'sl' }
     item "Module 3"		{ ChangeMode 'MODULA3' }
     item "Tex Info"		{ ChangeMode 'TEXINFO' }
-    item "Diff"			{ ChangeMode 'DIFF' }
     item "Merge"		{ ChangeMode 'MERGE' }
     item "Man pages"		{ ChangeMode 'CATBS' }
     item "Batch files"		{ ChangeMode 'Batch' }

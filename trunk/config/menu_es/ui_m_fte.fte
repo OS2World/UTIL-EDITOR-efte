@@ -23,6 +23,26 @@ menu MOpenInMode {
     item "4&GL"        { FileOpenInMode 'GL' }
     item "PHP"         { FileOpenInMode 'PHP' }
     item "P&ython"     { FileOpenInMode 'PYTHON' }
+%if(!GUI_PM)
+}
+
+menu MOpenInModeMore {
+%endif    
+    item "ASM"                  { FileOpenInMode 'ASM' }
+    item "ASM 370 (.CPY,.MLC)"  { FileOpenInMode 'ASM370' }
+    item "TCL"                  { FileOpenInMode 'TCL' }
+    item "Fortran 90"           { FileOpenInMode 'FORTRAN' }
+    item "IPF"                  { FileOpenInMode 'IPF' }
+    item "A51"                  { FileOpenInMode 'A51' }
+    item "CLARION (.CLW)"       { FileOpenInMode 'CLARION' }
+    item "EBNF"                 { FileOpenInMode 'EBFN' }
+    item "SGML"                 { FileOpenInMode 'SGML' }
+    item "SIOD (.cscm)"         { FileOpenInMode 'SIOD' }
+    item "S&Lang"               { FileOpenInMode 'sl' }
+    item "Modula 3"             { FileOpenInMode 'MODULA3' }
+    item "Tex Info"             { FileOpenInMode 'TEXINFO' }
+    item "Merge"                { FileOpenInMode 'MERGE' }
+    item "P ginas Man"          { FileOpenInMode 'CATBS' }
 }
 
 menu MChangeMode {
@@ -48,42 +68,24 @@ menu MChangeMode {
     item "4&GL"        { ChangeMode 'GL' }
     item "PHP"         { ChangeMode 'PHP' }
     item "P&ython"     { ChangeMode 'PYTHON' }
-}
-
-menu MOpenInModeMore {
-    item "ASM"                  { FileOpenInMode 'ASM' }
-    item "ASM 370 (.CPY,.MLC)"  { FileOpenInMode 'ASM370' }
-    item "TCL"                  { FileOpenInMode 'TCL' }
-    item "Fortran 90"           { FileOpenInMode 'FORTRAN' }
-    item "IPF"                  { FileOpenInMode 'IPF' }
-    item "A51"                  { FileOpenInMode 'A51' }
-    item "CLARION (.CLW)"       { FileOpenInMode 'CLARION' }
-    item "EBFN"                 { FileOpenInMode 'EBFN' }
-    item "SGML"                 { FileOpenInMode 'SGML' }
-    item "SIOD (.cscm)"         { FileOpenInMode 'SIOD' }
-    item "S&Lang"               { FileOpenInMode 'sl' }
-    item "Modula 3"             { FileOpenInMode 'MODULA3' }
-    item "Tex Info"             { FileOpenInMode 'TEXINFO' }
-    item "Diff"                 { FileOpenInMode 'DIFF' }
-    item "Merge"                { FileOpenInMode 'MERGE' }
-    item "P ginas Man"          { FileOpenInMode 'CATBS' }
+%if(!GUI_PM)
 }
 
 menu MChangeModeMore {
+%endif     
     item "ASM"                  { ChangeMode 'ASM' }
     item "ASM 370 (.CPY,.MLC)"  { ChangeMode 'ASM370' }
     item "TCL"                  { ChangeMode 'TCL' }
     item "Fortran 90"           { ChangeMode 'FORTRAN' }
     item "IPF"                  { ChangeMode 'IPF' }
-    item "A51"                  { ChangeMode 'A51' }
+    item "A51"                  { ChangeMode 'ASM51' }
     item "CLARION (.CLW)"       { ChangeMode 'CLARION' }
-    item "EBFN"                 { ChangeMode 'EBFN' }
+    item "EBNF"                 { ChangeMode 'EBNF' }
     item "SGML"                 { ChangeMode 'SGML' }
     item "SIOD (.cscm)"         { ChangeMode 'SIOD' }
     item "S&Lang"               { ChangeMode 'sl' }
     item "Modula 3"             { ChangeMode 'MODULA3' }
     item "Tex Info"             { ChangeMode 'TEXINFO' }
-    item "Diff"                 { ChangeMode 'DIFF' }
     item "Merge"                { ChangeMode 'MERGE' }
     item "P ginas Man"          { ChangeMode 'CATBS' }
 }
