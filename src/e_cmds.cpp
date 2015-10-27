@@ -1799,16 +1799,17 @@ int EBuffer::SetRightMargin()
 int EBuffer::ChangeMode(char *AMode)
 {
     Mode = FindMode(AMode);
-    if (Mode) {
-	Flags = Mode->Flags;
-	HilitProc = 0;
-	if (Mode->fColorize)
-	    HilitProc = GetHilitProc(Mode->fColorize->SyntaxParser);
-	FullRedraw();
-	return 1;
+    if (Mode == 0) {
+        Msg(S_ERROR, "'%s' not found switching to 'PLAIN' \n Check the spelling in the menu file", AMode);
+        ChangeMode("PLAIN");
+        return 0;
     }
-    Msg(S_ERROR, "Mode '%s' not found.", AMode);
-    return 0;
+    Flags = Mode->Flags;
+    HilitProc = 0;
+    if (Mode->fColorize)
+        HilitProc = GetHilitProc(Mode->fColorize->SyntaxParser);
+    FullRedraw();
+    return 1;
 }
 
 int EBuffer::ChangeKeys(char *AMode)

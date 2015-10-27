@@ -468,7 +468,7 @@ int EView::FileOpenInMode(ExState & State)
 	    return 0;
 
     if (FindMode(Mode) == 0) {
-	MView->Win->Choice(GPC_ERROR, "Error", 1, "O&K", "Invalid mode '%s'",
+        MView->Win->Choice(GPC_ERROR, "Error", 1, "O&K", "Invalid mode '%s'\nCheck the spelling in the menu file",
 			   Mode);
 	return 0;
     }
