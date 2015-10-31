@@ -162,6 +162,7 @@ include 'm_tcl.fte';
 include 'm_tex.fte';
 include 'm_texi.fte';
 include 'm_text.fte';
+include 'm_trp.fte';
 include 'm_unrealscript.fte';
 include 'm_vhdl.fte';
 include 'm_xml.fte';
