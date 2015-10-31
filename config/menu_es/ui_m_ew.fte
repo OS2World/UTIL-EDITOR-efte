@@ -17,14 +17,20 @@ menu Window {
 }
 
 menu Help {
-    item "&Keyboard" { ViewModeMap }
+%if(OS_OS2)
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+%endif
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
 #   item "&Bubblehelp PM Toolbar only"  {ToggleBubbleHelp}
     item;
     item "&About..." { ShowVersion }
 }
 
 eventmap MODEL {
-    key       [F1]      { ViewModeMap }
+%if(OS_OS2)
+    key [F1] { ShowHelp "eFTE2" "" }
+%endif
+    key [A+F1] {ViewModeMap;} 
     key     [C+F2]      { FileSaveAll }
     key       [F3]      { FileOpen }
     key       [F4]      { WinNext }
@@ -194,50 +200,114 @@ eventmap EVENTMAPVIEW: MLIST {
 # Editor - Editing Modes
 # PLAIN
 # menus 
-menu MChangeMode {
-    item "&Plain"      { ChangeMode 'PLAIN' }
-    item "&Text"       { ChangeMode 'TEXT' }
-    item "&C"          { ChangeMode 'C' }
-    item "&EMail"      { ChangeMode 'MSG' }
-    item "&HTML"       { ChangeMode 'HTML' }
-    item "&IPF"        { ChangeMode 'IPF' }
-    item "&Ada"        { ChangeMode 'Ada' }
-    item "&REXX"       { ChangeMode 'REXX' }
-    item "MAKE"        { ChangeMode 'MAKE' }
-    item "&FTE"        { ChangeMode 'FTE' }
-    item "Resource"    { ChangeMode 'RESOURCE' }
-    item "&DIFF"       { ChangeMode 'DIFF' }
-    item "&MERGE"      { ChangeMode 'MERGE' }
-    item "&SH"         { ChangeMode 'SH' }
-    item "PER&L"       { ChangeMode 'PERL' }
-    item "PASCAL"      { ChangeMode 'PASCAL' }
-    item "&JAVA"       { ChangeMode 'JAVA' }
-    item "TE&X"        { ChangeMode 'TEX' }
-    item "&BIN"        { ChangeMode 'BIN' }
-    item "4&GL"        { ChangeMode 'GL' }
+menu ProgrammingAK  { 
+    item "&4GL"       { FileOpenInMode '4GL'      }
+    item "ASM&51"     { FileOpenInMode 'ASM51'    }
+    item "A&da"       { FileOpenInMode 'Ada'      }
+    item "&ASM"       { FileOpenInMode 'ASM'      }
+    item "ASM&370"    { FileOpenInMode 'ASM370'   }
+    item "&BASIC"     { FileOpenInMode 'BASIC'    }
+    item "&C"         { FileOpenInMode 'C'        }
+    item "C&LARION"   { FileOpenInMode 'CLARION'  }
+    item "&Eiffel"    { FileOpenInMode 'Eiffel'   }
+    item "E&UPHORIA"  { FileOpenInMode 'EUPHORIA' }
+    item "&FORTRAN"   { FileOpenInMode 'FORTRAN'  }
+    item "ICO&N"      { FileOpenInMode 'ICON'     }
+    item "&IDL"       { FileOpenInMode 'IDL'      }
+    item "&JAVA"      { FileOpenInMode 'JAVA'     }
+}
+
+menu ProgrammingLZ {     
+    item "LIS&AAC"        { FileOpenInMode 'LISAAC'        }  
+    item "&Lua"           { FileOpenInMode 'Lua'           }
+    item "MODULA&3"       { FileOpenInMode 'MODULA3'       }
+    item "MVS&ASM"        { FileOpenInMode 'MVSASM'        }
+    item "&OCAML"         { FileOpenInMode 'OCAML'         }
+    item "&PASCAL"        { FileOpenInMode 'PASCAL'        }
+%if(OS_OS2)    
+    item "&OS2 RESOURCE"  { FileOpenInMode 'RESOURCE'      }
+%endif  
+%if(OS_NT)    
+    item "&Win RESOURCE"  { FileOpenInMode 'RESOURCE'      }
+%endif  
+    item "S&IOD"          { FileOpenInMode 'SIOD'          }
+    item "&SL"            { FileOpenInMode 'SL'            }
+    item "S&ML"           { FileOpenInMode 'SML'           }
+    item "&UNREALSCRIPT"  { FileOpenInMode 'UNREALSCRIPT'  }     
+    item "&XPE"           { FileOpenInMode 'XPE'           }
+}
+
+menu MarkupLanguages {   
+    item "&MAN"       { FileOpenInMode 'CATBS'   }
+    item "&CSS"       { FileOpenInMode 'CSS'     }
+    item "&HTML"      { FileOpenInMode 'HTML'    }
+    item "&IPF"       { FileOpenInMode 'IPF'     }
+    item "&LDSGML"    { FileOpenInMode 'LDSGML'  }
+    item "&reST"      { FileOpenInMode 'reST'    }
+    item "S&GML"      { FileOpenInMode 'SGML'    }
+    item "&TEX"       { FileOpenInMode 'TEX'     }
+    item "TEXINF&O"   { FileOpenInMode 'TEXINFO' }
+    item "&XML"       { FileOpenInMode 'XML'     }
+    item "X&SLT"      { FileOpenInMode 'XSLT'    }
+}
+
+menu ScriptingLanguages {
+    item "&Batch"  { FileOpenInMode 'Batch'  }
+    item "&CMAKE"  { FileOpenInMode 'CMAKE'  }
+    item "FA&LCON" { FileOpenInMode 'FALCON' }
+    item "&FTE"    { FileOpenInMode 'FTE'    }
+    item "&GROOVY" { FileOpenInMode 'GROOVY' }
+    item "&IDC"    { FileOpenInMode 'C'      }
+    item "&MAKE"   { FileOpenInMode 'MAKE'   }
+    item "&PERL"   { FileOpenInMode 'PERL'   }
+    item "P&HP"    { FileOpenInMode 'PHP'    }
+    item "P&YTHON" { FileOpenInMode 'PYTHON' }
+    item "RE&XX"   { FileOpenInMode 'REXX'   }
+    item "&NETREXX"{ FileOpenInMode 'NETREXX'}
+    item "&RPM"    { FileOpenInMode 'RPM'    }
+    item "R&uby"   { FileOpenInMode 'Ruby'   }
+    item "&SH"     { FileOpenInMode 'SH'     }
+    item "S&QL"    { FileOpenInMode 'SQL'    }
+    item "&TCL"    { FileOpenInMode 'TCL'    }
+%if(OS_OS2)    
+    item "WIS"    { FileOpenInMode 'HTML'   }
+%endif    
+}
+   
+menu Misc {  
+    item "&AWK"         { FileOpenInMode 'GAWK'    }
+%if(OS_OS2)   
+    item "&CONFIGSYS"   { FileOpenInMode 'CNFGSYS' }
+%endif    
+    item "&DIFF"        { FileOpenInMode 'DIFF'    }
+    item "&EBNF"        { FileOpenInMode 'EBNF'    }
+%if(OS_OS2)     
+    item "Exceptq &TRP" { FileOpenInMode 'TRP'     }
+%endif    
+    item "&GNU MERGE"   { FileOpenInMode 'MERGE'   }
+    item "&MSG"         { FileOpenInMode 'MSG'     }
+    item "&VHDL"        { FileOpenInMode 'VHDL'    }
 }
 
 menu MOpenInMode {
-    item "&Plain"      { FileOpenInMode 'PLAIN' }
-    item "&Text"       { FileOpenInMode 'TEXT' }
-    item "&C"          { FileOpenInMode 'C' }
-    item "&EMail"      { FileOpenInMode 'MSG' }
-    item "&HTML"       { FileOpenInMode 'HTML' }
-    item "&IPF"        { FileOpenInMode 'IPF' }
-    item "&Ada"        { FileOpenInMode 'Ada' }
-    item "&REXX"       { FileOpenInMode 'REXX' }
-    item "MAKE"        { FileOpenInMode 'MAKE' }
-    item "&FTE"        { FileOpenInMode 'FTE' }
-    item "Resource"    { FileOpenInMode 'RESOURCE' }
-    item "&DIFF"       { FileOpenInMode 'DIFF' }
-    item "&MERGE"      { FileOpenInMode 'MERGE' }
-    item "&SH"         { FileOpenInMode 'SH' }
-    item "PER&L"       { FileOpenInMode 'PERL' }
-    item "PASCAL"      { FileOpenInMode 'PASCAL' }
-    item "&JAVA"       { FileOpenInMode 'JAVA' }
-    item "TE&X"        { FileOpenInMode 'TEX' }
-    item "&BIN"        { FileOpenInMode 'BIN' }
-    item "4&GL"        { FileOpenInMode 'GL' }
+    item "&Plain"            { FileOpenInMode 'PLAIN' }
+    item "&Text"             { FileOpenInMode 'TEXT' }
+    submenu "Programming  &A-K", ProgrammingAK;
+    submenu "Programming L-&Z",  ProgrammingLZ;
+    submenu "&Markup Languages", MarkupLanguages;
+    submenu "&Scripting Languages", ScriptingLanguages;
+    submenu "&Utility output files misc", Misc;
+}
+
+menu MChangeMode {
+    item "&Plain"            { ChangeMode 'PLAIN' }
+    item "&Text"             { ChangeMode 'TEXT' }
+    item "&BIN"              { ChangeMode 'BIN' }
+    submenu "Programming  &A-K", ProgrammingAK;
+    submenu "Programming L-&Z",  ProgrammingLZ;
+    submenu "&Markup Languages", MarkupLanguages;
+    submenu "&Scripting Languages", ScriptingLanguages;
+    submenu "&Utility output files misc", Misc;
 }
 
 menu File {
@@ -408,7 +478,7 @@ menu MSvn {
 
 menu Tools {
     item "&Compile\tF9" { FileSaveAll; Compile "wmake" }
-    item "&Grep" { Compile "grep -n " }
+    item "&Grep" { Compile "grep -n -I " }
     item;
     item "&Shell\tAlt+F9" { RunProgram "" }
     item;
@@ -807,7 +877,7 @@ menu HTMLTags {
     submenu "&Tables                           ", HTML_Table;
     item;
     item    "Pre&formatted  <PRE>\tC-E C-F  " { HTML_PRE }
-    item    "&Centered      <CENTER>\tC-E .    " { HTML_CENTER }
+    #item    "&Centered      <CENTER>\tC-E .    " { HTML_CENTER }
     item;
     item    "Anchor &Name   <A NAME>\tC-E C-N  " { HTML_ANAME }
     item    "Anchor H&Ref   <A HREF>\tC-E C-H  " { HTML_AHREF }
@@ -886,7 +956,7 @@ eventmap HTML: PLAIN {
     key [C+E_C+F]   { HTML_PRE }
     key [C+E_G-Enter] { HTML_BR }
     key [C+E_-]     { HTML_HR }
-    key [C+E_.]     { HTML_CENTER }
+    #key [C+E_.]     { HTML_CENTER }
     key [C+E_C+P]   { HTML_P }
     
 # character escapes

@@ -1,6 +1,95 @@
 # FTE default menus
 
-menu ProgrammingAK  { 
+menu CProgrammingAK  { 
+    item "&4GL"       { ChangeMode '4GL'      }
+    item "ASM&51"     { ChangeMode 'ASM51'    }
+    item "&Ada"       { ChangeMode 'Ada'      }
+    item "A&SM"       { ChangeMode 'ASM'      }
+    item "ASM&370"    { ChangeMode 'ASM370'   }
+    item "&BASIC"     { ChangeMode 'BASIC'    }
+    item "&C"         { ChangeMode 'C'        }
+    item "C&LARION"   { ChangeMode 'CLARION'  }
+    item "&Eiffel"    { ChangeMode 'Eiffel'   }
+    item "E&UPHORIA"  { ChangeMode 'EUPHORIA' }
+    item "&FORTRAN"   { ChangeMode 'FORTRAN'  }
+    item "ICO&N"      { ChangeMode 'ICON'     }
+    item "&IDL"       { ChangeMode 'IDL'      }
+    item "&JAVA"      { ChangeMode 'JAVA'     }
+}
+
+menu CProgrammingLZ {     
+    item "LIS&AAC"        { ChangeMode 'LISAAC'        }  
+    item "&Lua"           { ChangeMode 'Lua'           }
+    item "MODULA&3"       { ChangeMode 'MODULA3'       }
+    item "M&VSASM"        { ChangeMode 'MVSASM'        }
+    item "&OCAML"         { ChangeMode 'OCAML'         }
+    item "&PASCAL"        { ChangeMode 'PASCAL'        }
+%if(OS_OS2)    
+    item "Recurso &OS2"  { ChangeMode 'RESOURCE'      }
+%endif  
+%if(OS_NT)    
+    item "Recurso &Win"  { ChangeMode 'RESOURCE'      }
+%endif  
+    item "S&IOD"          { ChangeMode 'SIOD'          }
+    item "&SL"            { ChangeMode 'SL'            }
+    item "S&ML"           { ChangeMode 'SML'           }
+    item "&UNREALSCRIPT"  { ChangeMode 'UNREALSCRIPT'  }     
+    item "&XPE"           { ChangeMode 'XPE'           }
+}
+
+menu CMarkupLanguages {   
+    item "&P ginas MAN" { ChangeMode 'CATBS'   }
+    item "&CSS"       { ChangeMode 'CSS'     }
+    item "&HTML"      { ChangeMode 'HTML'    }
+    item "&IPF"       { ChangeMode 'IPF'     }
+    item "&LDSGML"    { ChangeMode 'LDSGML'  }
+    item "&reST"      { ChangeMode 'reST'    }
+    item "&SGML"      { ChangeMode 'SGML'    }
+    item "&TEX"       { ChangeMode 'TEX'     }
+    item "TEXINF&O"   { ChangeMode 'TEXINFO' }
+    item "X&ML"       { ChangeMode 'XML'     }
+    item "&XSLT"      { ChangeMode 'XSLT'    }
+}
+
+menu CScriptingLanguages {
+    item "&Batch"  { ChangeMode 'Batch'  }
+    item "&CMAKE"  { ChangeMode 'CMAKE'  }
+    item "F&ALCON" { ChangeMode 'FALCON' }
+    item "&FTE"    { ChangeMode 'FTE'    }
+    item "&GROOVY" { ChangeMode 'GROOVY' }
+    item "&IDC"    { ChangeMode 'C'      }
+    item "&MAKE"   { ChangeMode 'MAKE'   }
+    item "&PERL"   { ChangeMode 'PERL'   }
+    item "P&HP"    { ChangeMode 'PHP'    }
+    item "P&YTHON" { ChangeMode 'PYTHON' }
+    item "&REXX"   { ChangeMode 'REXX'   }
+    item "&NETREXX"{ ChangeMode 'NETREXX'}
+    item "&RPM"    { ChangeMode 'RPM'    }
+    item "R&uby"   { ChangeMode 'Ruby'   }
+    item "&SH"     { ChangeMode 'SH'     }
+    item "S&QL"    { ChangeMode 'SQL'    }
+    item "&TCL"    { ChangeMode 'TCL'    }
+%if(OS_OS2)    
+    item "&WIS"    { ChangeMode 'HTML'   }
+%endif    
+}
+   
+menu CMisc {  
+    item "&AWK"         { ChangeMode 'GAWK'    }
+%if(OS_OS2)   
+    item "&CONFIGSYS"   { ChangeMode 'CNFGSYS' }
+%endif    
+    item "&DIFF"        { ChangeMode 'DIFF'    }
+    item "&EBNF"        { ChangeMode 'EBNF'    }
+%if(OS_OS2)     
+    item "Exceptq &TRP" { ChangeMode 'TRP'     }
+%endif    
+    item "&GNU MERGE"   { ChangeMode 'MERGE'   }
+    item "&MSG"         { ChangeMode 'MSG'     }
+    item "&VHDL"        { ChangeMode 'VHDL'    }
+}
+
+menu OProgrammingAK  { 
     item "&4GL"       { FileOpenInMode '4GL'      }
     item "ASM&51"     { FileOpenInMode 'ASM51'    }
     item "&Ada"       { FileOpenInMode 'Ada'      }
@@ -17,7 +106,7 @@ menu ProgrammingAK  {
     item "&JAVA"      { FileOpenInMode 'JAVA'     }
 }
 
-menu ProgrammingLZ {     
+menu OProgrammingLZ {     
     item "LIS&AAC"        { FileOpenInMode 'LISAAC'        }  
     item "&Lua"           { FileOpenInMode 'Lua'           }
     item "MODULA&3"       { FileOpenInMode 'MODULA3'       }
@@ -37,7 +126,7 @@ menu ProgrammingLZ {
     item "&XPE"           { FileOpenInMode 'XPE'           }
 }
 
-menu MarkupLanguages {   
+menu OMarkupLanguages {   
     item "&P ginas MAN" { FileOpenInMode 'CATBS'   }
     item "&CSS"       { FileOpenInMode 'CSS'     }
     item "&HTML"      { FileOpenInMode 'HTML'    }
@@ -51,7 +140,7 @@ menu MarkupLanguages {
     item "&XSLT"      { FileOpenInMode 'XSLT'    }
 }
 
-menu ScriptingLanguages {
+menu OScriptingLanguages {
     item "&Batch"  { FileOpenInMode 'Batch'  }
     item "&CMAKE"  { FileOpenInMode 'CMAKE'  }
     item "F&ALCON" { FileOpenInMode 'FALCON' }
@@ -74,7 +163,7 @@ menu ScriptingLanguages {
 %endif    
 }
    
-menu Misc {  
+menu OMisc {  
     item "&AWK"         { FileOpenInMode 'GAWK'    }
 %if(OS_OS2)   
     item "&CONFIGSYS"   { FileOpenInMode 'CNFGSYS' }
@@ -92,22 +181,22 @@ menu Misc {
 menu MOpenInMode {
     item "&Plain"            { FileOpenInMode 'PLAIN' }
     item "&Texto"             { FileOpenInMode 'TEXT' }
-    submenu "Programming  &A-K", ProgrammingAK;
-    submenu "Programming L-&Z",  ProgrammingLZ;
-    submenu "&Markup Languages", MarkupLanguages;
-    submenu "&Scripting Languages", ScriptingLanguages;
-    submenu "&Utility output files misc", Misc;
+    submenu "Programming  &A-K", OProgrammingAK;
+    submenu "Programming L-&Z",  OProgrammingLZ;
+    submenu "&Markup Languages", OMarkupLanguages;
+    submenu "&Scripting Languages", OScriptingLanguages;
+    submenu "&Utility output files misc", OMisc;
 }
 
 menu MChangeMode {
     item "&Plain"            { ChangeMode 'PLAIN' }
     item "&Texto"             { ChangeMode 'TEXT' }
     item "&BIN"              { ChangeMode 'BIN' }
-    submenu "Programming  &A-K", ProgrammingAK;
-    submenu "Programming L-&Z",  ProgrammingLZ;
-    submenu "&Markup Languages", MarkupLanguages;
-    submenu "&Scripting Languages", ScriptingLanguages;
-    submenu "&Utility output files misc", Misc;
+    submenu "Programming  &A-K", CProgrammingAK;
+    submenu "Programming L-&Z",  CProgrammingLZ;
+    submenu "&Markup Languages", CMarkupLanguages;
+    submenu "&Scripting Languages", CScriptingLanguages;
+    submenu "&Utility output files misc", CMisc;
 }
 
 menu MOpenInMode {
