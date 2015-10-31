@@ -1,5 +1,115 @@
 # FTE default menus
 
+menu ProgrammingAK  { 
+    item "&4GL"       { FileOpenInMode '4GL'      }
+    item "ASM&51"     { FileOpenInMode 'ASM51'    }
+    item "&Ada"       { FileOpenInMode 'Ada'      }
+    item "A&SM"       { FileOpenInMode 'ASM'      }
+    item "ASM&370"    { FileOpenInMode 'ASM370'   }
+    item "&BASIC"     { FileOpenInMode 'BASIC'    }
+    item "&C"         { FileOpenInMode 'C'        }
+    item "C&LARION"   { FileOpenInMode 'CLARION'  }
+    item "&Eiffel"    { FileOpenInMode 'Eiffel'   }
+    item "E&UPHORIA"  { FileOpenInMode 'EUPHORIA' }
+    item "&FORTRAN"   { FileOpenInMode 'FORTRAN'  }
+    item "ICO&N"      { FileOpenInMode 'ICON'     }
+    item "&IDL"       { FileOpenInMode 'IDL'      }
+    item "&JAVA"      { FileOpenInMode 'JAVA'     }
+}
+
+menu ProgrammingLZ {     
+    item "LIS&AAC"        { FileOpenInMode 'LISAAC'        }  
+    item "&Lua"           { FileOpenInMode 'Lua'           }
+    item "MODULA&3"       { FileOpenInMode 'MODULA3'       }
+    item "M&VSASM"        { FileOpenInMode 'MVSASM'        }
+    item "&OCAML"         { FileOpenInMode 'OCAML'         }
+    item "&PASCAL"        { FileOpenInMode 'PASCAL'        }
+%if(OS_OS2)    
+    item "Recurso &OS2"  { FileOpenInMode 'RESOURCE'      }
+%endif  
+%if(OS_NT)    
+    item "Recurso &Win"  { FileOpenInMode 'RESOURCE'      }
+%endif  
+    item "S&IOD"          { FileOpenInMode 'SIOD'          }
+    item "&SL"            { FileOpenInMode 'SL'            }
+    item "S&ML"           { FileOpenInMode 'SML'           }
+    item "&UNREALSCRIPT"  { FileOpenInMode 'UNREALSCRIPT'  }     
+    item "&XPE"           { FileOpenInMode 'XPE'           }
+}
+
+menu MarkupLanguages {   
+    item "&P ginas MAN" { FileOpenInMode 'CATBS'   }
+    item "&CSS"       { FileOpenInMode 'CSS'     }
+    item "&HTML"      { FileOpenInMode 'HTML'    }
+    item "&IPF"       { FileOpenInMode 'IPF'     }
+    item "&LDSGML"    { FileOpenInMode 'LDSGML'  }
+    item "&reST"      { FileOpenInMode 'reST'    }
+    item "&SGML"      { FileOpenInMode 'SGML'    }
+    item "&TEX"       { FileOpenInMode 'TEX'     }
+    item "TEXINF&O"   { FileOpenInMode 'TEXINFO' }
+    item "X&ML"       { FileOpenInMode 'XML'     }
+    item "&XSLT"      { FileOpenInMode 'XSLT'    }
+}
+
+menu ScriptingLanguages {
+    item "&Batch"  { FileOpenInMode 'Batch'  }
+    item "&CMAKE"  { FileOpenInMode 'CMAKE'  }
+    item "F&ALCON" { FileOpenInMode 'FALCON' }
+    item "&FTE"    { FileOpenInMode 'FTE'    }
+    item "&GROOVY" { FileOpenInMode 'GROOVY' }
+    item "&IDC"    { FileOpenInMode 'C'      }
+    item "&MAKE"   { FileOpenInMode 'MAKE'   }
+    item "&PERL"   { FileOpenInMode 'PERL'   }
+    item "P&HP"    { FileOpenInMode 'PHP'    }
+    item "P&YTHON" { FileOpenInMode 'PYTHON' }
+    item "&REXX"   { FileOpenInMode 'REXX'   }
+    item "&NETREXX"{ FileOpenInMode 'NETREXX'}
+    item "&RPM"    { FileOpenInMode 'RPM'    }
+    item "R&uby"   { FileOpenInMode 'Ruby'   }
+    item "&SH"     { FileOpenInMode 'SH'     }
+    item "S&QL"    { FileOpenInMode 'SQL'    }
+    item "&TCL"    { FileOpenInMode 'TCL'    }
+%if(OS_OS2)    
+    item "&WIS"    { FileOpenInMode 'HTML'   }
+%endif    
+}
+   
+menu Misc {  
+    item "&AWK"         { FileOpenInMode 'GAWK'    }
+%if(OS_OS2)   
+    item "&CONFIGSYS"   { FileOpenInMode 'CNFGSYS' }
+%endif    
+    item "&DIFF"        { FileOpenInMode 'DIFF'    }
+    item "&EBNF"        { FileOpenInMode 'EBNF'    }
+%if(OS_OS2)     
+    item "Exceptq &TRP" { FileOpenInMode 'TRP'     }
+%endif    
+    item "&GNU MERGE"   { FileOpenInMode 'MERGE'   }
+    item "&MSG"         { FileOpenInMode 'MSG'     }
+    item "&VHDL"        { FileOpenInMode 'VHDL'    }
+}
+
+menu MOpenInMode {
+    item "&Plain"            { FileOpenInMode 'PLAIN' }
+    item "&Texto"             { FileOpenInMode 'TEXT' }
+    submenu "Programming  &A-K", ProgrammingAK;
+    submenu "Programming L-&Z",  ProgrammingLZ;
+    submenu "&Markup Languages", MarkupLanguages;
+    submenu "&Scripting Languages", ScriptingLanguages;
+    submenu "&Utility output files misc", Misc;
+}
+
+menu MChangeMode {
+    item "&Plain"            { ChangeMode 'PLAIN' }
+    item "&Texto"             { ChangeMode 'TEXT' }
+    item "&BIN"              { ChangeMode 'BIN' }
+    submenu "Programming  &A-K", ProgrammingAK;
+    submenu "Programming L-&Z",  ProgrammingLZ;
+    submenu "&Markup Languages", MarkupLanguages;
+    submenu "&Scripting Languages", ScriptingLanguages;
+    submenu "&Utility output files misc", Misc;
+}
+
 menu MOpenInMode {
     item "&Plain"      { FileOpenInMode 'PLAIN' }
     item "&Texto"      { FileOpenInMode 'TEXT' }
