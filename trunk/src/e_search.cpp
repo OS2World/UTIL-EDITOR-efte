@@ -586,8 +586,7 @@ int EBuffer::FindRx(RxNode * Rx, SearchReplaceOptions & opt)
 	}
 
 	if (Start <= End) {
-	    if (RxExec
-		(Rx, P + Start, End - Start, P + C, &b,
+	    if (RxExec(Rx, P + Start, End - Start, P + C, &b,
 		 (Options & SEARCH_NCASE) ? 0 : RX_CASE) == 1) {
 		C = ScreenPos(X, b.Open[0] + Start);
 		Match.Col = C;
@@ -600,7 +599,7 @@ int EBuffer::FindRx(RxNode * Rx, SearchReplaceOptions & opt)
 		}
 		MatchRes = b;
 		//The following fixes a failure of search and replace in FTEPM when
-		//the replace strin contains the search string. It also fixes "Skip"
+		//the replace string contains the search string. It also fixes "Skip"
 		//(search/replace) and search all occurences (infinate loop)
 		//not tested on other platforms.
 		if (Options & SEARCH_REPLACE && !(Options & SEARCH_BACK)) {
