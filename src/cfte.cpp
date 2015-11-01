@@ -2221,7 +2221,7 @@ int LoadFile(const char *WhereName, const char *CfgName, int Level,
         }
         if (found == false && stricmp(Cfg, "edefault.fte") && !checked && !optional) {
             ChoiceInfo *choice;
-            char s[MAXPATH];
+            //char s[MAXPATH];
 
             choice = (ChoiceInfo *) malloc(sizeof(ChoiceInfo));
             choice->Title = "Do you want to load the default configuration?";
