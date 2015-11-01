@@ -359,7 +359,6 @@ HWND CreateToolBar(HWND parent, HWND owner, int id)
 #define CMD(x) ((x) + 16384 + 8192)
 
 ToolBarItem tools[] = {
-    //   { tiBITMAP, 101, CMD(ExExitEditor), 0, 0 },
     {tiBITMAP, 102, CMD(ExFileOpen), 0, 0},
     {tiBITMAP, 103, CMD(ExFileSave), 0, 0},
     {tiBITMAP, 120, CMD(ExFileReload), 0, 0},
@@ -389,6 +388,8 @@ ToolBarItem tools[] = {
     {tiBITMAP, 117, CMD(ExTagPrev), 0, 0},
     {tiBITMAP, 118, CMD(ExTagNext), 0, 0},
     {tiSEPARATOR, 0, 0, 0, 0},
+    {tiSEPARATOR, 0, 0, 0, 0},
+    { tiBITMAP, 101, CMD(ExExitEditor), 0, 0 },
 };
 
 HWND CreateToolBar(HWND parent, HWND owner, int id)
