@@ -33,6 +33,7 @@ END
 
 STRINGTABLE
 BEGIN
+   101 "Exit eFTE"
    102 "Open a file"
    103 "Save current file"
    104 "Close current file"
