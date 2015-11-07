@@ -5,6 +5,7 @@ include 'kbd/ui_k_brf.fte'; # incomplete
 
 include 'menu/m_c.fte';
 include 'menu/m_resdlg.fte';
+include 'menu/m_wis.fte';
 %define(TEXT_CONV)
 include 'htmlconv.fte';
 %define(TEXT_CHARS)

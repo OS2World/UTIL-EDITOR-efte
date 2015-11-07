@@ -1,0 +1,100 @@
+# SGML markup by Patrick L. McGillan
+# feel free to change and send changes to package maintainer
+# basic document
+
+colorize WIS {
+    SyntaxParser = 'SIMPLE';
+    
+    color {
+        { 'Normal',     'Editor_Default' },
+        { 'String',     'Lang_String' },
+        { 'Comment',    'Lang_Comment' },
+        { 'Command',    'Markup_Punctuation' },
+        { 'Symbol',     'Markup_Symbol' },
+        { 'Tag',        'Markup_Tag' },
+        { 'Special',    'Markup_Special' },
+        { 'Number',        'Lang_DecimalNumber' },
+    };
+
+    keyword "Editor_Keywords" { # should be SGML 3.2 complete
+        "PCK","INDEX", "PACKAGEID", "TITLE", "EXTERNAL","REQUIRED", "TARGET",
+        "BASE", "NOBASE", "FIXED", "SELECT", "NODESELECT", "LONGFILENAMES",
+        "REQUIRES", "CONFIGSYS", "REGISTERCLASS", "REPLACECLASS",
+        "CREATEOBJECT", "CREATEOBJECT", "EXECUTE", "DEEXECUTE",
+        "CLEARPROFILE", "WRITEPROFILE", "KILLPROCESS",        
+    };
+    keyword "Editor_Keywords2" { 
+        "REPLACE", "FAIL", "README", "PLAIN", "FLOW", "HTML",
+    };
+    keyword "Editor_Keywords3" {  
+        "PAGE", "TYPE", "NEXTBUTTON", "EXTRACTFROMPCK", "TEXT", "FORMAT", 
+    };
+
+    h_state 0 { 'Normal' }
+    h_trans { 4, '<', '<!--', 'Comment' }
+    h_trans { 8, '<', '</', 'Command' }
+    h_trans { 1, '<', '<', 'Command' }
+    h_trans { 2, '<', '&', 'Symbol' }
+
+    h_state 1 { 'Command' }
+    h_trans { 0, '>', '>', 'Command' }
+    h_trans { 0, '>', '<', 'Command' }
+    h_trans { 0, '>', '/>', 'Command' }
+    h_trans { 6, '<', '/', 'Command' }
+    h_trans { 3, '<', '"', 'String' }
+    h_wtype { -1, -1, -1, 'i', 'a-zA-Z0-9_\-' }
+
+    h_state 2 { 'Symbol' }
+    h_trans { 0, '>', ';', 'Symbol' }
+    h_trans { 0, '-S', '#a-zA-Z0-9', 'Symbol' }
+
+    h_state 3 { 'String' }
+    h_trans { 1, '>', '"', 'String' }
+
+    h_state 4 { 'Comment' }
+    h_trans { 5, '>', '--', 'Comment' }
+
+    h_state 5 { 'Special' }
+    h_trans { 4, '>', '--', 'Comment' }
+    h_trans { 0, '>', '>', 'Comment' }
+
+    h_state 6 { 'Symbol' }
+    h_trans { 7, '-', '//', 'Command' }
+    h_trans { 0, '>', '/', 'Command' }
+    h_trans { 0, '>', '>', 'Symbol' }
+    h_trans { 7, '>', '</', 'Command' }
+    h_trans { 1, '>', '<', 'Command' }
+
+    h_state 7 { 'Command' }
+    h_trans { 6, '>', '/', 'Command' }
+
+    h_state 8 { 'Command' }
+    h_trans { 0, '>', '>', 'Command' }
+    h_trans { 3, '<', '"', 'String' }
+    h_wtype { -1, -1, -1, 'i', 'a-zA-Z0-9_\-' }
+
+}
+
+mode WIS: PLAIN {
+    FileNameRx          = /\.\c{WIS}|{WIS.IN}$/;
+    HilitOn             = 1;
+    Colorizer           = "WIS";
+    MultiLineHilit      = 1;
+    AutoHilitParen      = 1;
+
+    RoutineRegexp       = /\<[Hh]\d\>/;
+
+    SaveFolds           = 2;      # save fold info at end of line
+    CommentStart        = "<!--";
+    CommentEnd          = "-->";
+    #WordWrap            = 2;
+    #RightMargin         = 85;
+    #AutoIndent          = 1;
+    
+    #Insert              = 1;
+    #IndentMode          = "PLAIN";
+    #Trim                = 1;
+}
+
+oinclude 'm_sgml.pte';
+oinclude 'mym_sgml.fte';
