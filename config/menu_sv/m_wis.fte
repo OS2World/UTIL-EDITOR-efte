@@ -1,0 +1,51 @@
+# menu definitions for WIS mode
+%if(OS_OS2)
+menu Help_WIS {
+    item "&Contents\tF1" { ShowHelp "eFTE2" "" }
+    item "&Keyboard\tAlt+F1" { ViewModeMap }
+    item "&Show key" { ShowKey }
+    item;
+    item "&WarpIN Programmer's Guide and Reference" { ShowHelpWord " /s wpi_prog.inf" }
+    item;
+    item "&About..." { ShowVersion }
+}
+
+menu Main_WIS {
+    submenu "&File",    File;
+    submenu "&Edit",    Edit;
+    submenu "&Block",   Block;
+    submenu "&Search",  Search;
+    submenu "Fol&d",    Fold;
+    submenu "&Tools",   Tools;
+    submenu "&Window",  Window;
+    submenu "&Options", Options;
+    submenu "&Help",    Help_WIS;
+
+}
+%endif
+menu Local_WIS {
+    item "&Unmark\tEsc"            { BlockMarkStream; BlockUnmark }
+    item "Cu&t\tShift+Del"         { BlockCut }
+    item "&Copy\tCtrl+Ins"         { BlockCopy }
+    item "&Paste\tShift+Ins"       { BlockPasteStream }
+    item "P&aste Column\tAlt+Ins"  { BlockPasteColumn }
+    item;
+    item "Delete &line\tCtrl+Y"    { KillLine }
+    item "Delete to &EOL\tAlt+End" { KillToLineEnd }
+    item;
+    item "&Save\tF2"               { FileSave }
+    item "Cl&ose\tAlt+Q"           { FileClose }
+    item;
+    item "&Indent line\tTab"       { LineIndent }
+    item "I&ndent block\tAlt+\\"   { BlockReIndent }
+}
+
+eventmap  WIS{
+    LocalMenu = 'Local_WIS';  # local menu for C mode
+%if(OS_OS2)
+    MainMenu  = "Main_WIS";   # menu for menubar
+%endif
+}
+
+oinclude 'm_wis.pte';
+oinclude 'mym_wis.fte';

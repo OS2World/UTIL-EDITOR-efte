@@ -982,7 +982,7 @@ colorize HTML {
 }
 
 mode HTML: PLAIN {
-    FileNameRx          = /\.\c{(S|X|D)?HTML?}|{HTM}|{WIS}|{WIS.IN}$/;
+    FileNameRx          = /\.\c{(S|X|D)?HTML?}|{HTM}$/;
     HilitOn             = 1;
     Colorizer           = "HTML";
     MultiLineHilit      = 1;
