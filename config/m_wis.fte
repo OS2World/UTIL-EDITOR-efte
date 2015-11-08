@@ -87,14 +87,7 @@ mode WIS: PLAIN {
     SaveFolds           = 2;      # save fold info at end of line
     CommentStart        = "<!--";
     CommentEnd          = "-->";
-    #WordWrap            = 2;
-    #RightMargin         = 85;
-    #AutoIndent          = 1;
-    
-    #Insert              = 1;
-    #IndentMode          = "PLAIN";
-    #Trim                = 1;
 }
 
-oinclude 'm_sgml.pte';
-oinclude 'mym_sgml.fte';
+oinclude 'm_wis.pte';
+oinclude 'mym_wis.fte';

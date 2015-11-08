@@ -189,6 +189,8 @@ int EView::ExecCommand(int Command, ExState & State)
 	return Compile(State);
     case ExRunCompiler:
 	return RunCompiler(State);
+    case ExMakeListFile:
+	return MakeListFile(State);
     case ExCompilePrevError:
 	return CompilePrevError(State);
     case ExCompileNextError:
@@ -680,6 +682,73 @@ int EView::Compile(ExState & State)
     return Compile(Command);
 }
 
+int EView::MakeListFile(ExState & State)
+{
+    static char Cmd[256] = "";
+    char Command[256] = "";
+
+    if (CompilerMsgs != 0 && CompilerMsgs->Running) {
+	Msg(S_INFO, "Already running...");
+	return 0;
+    }
+
+    if (State.GetStrParam(this, Command, sizeof(Command)) == 0) {
+	if (Model->GetContext() == CONTEXT_FILE) {
+	    EBuffer *B = (EBuffer *) Model;
+
+	    if (BFS(B, BFS_ListCommand) != 0)
+		strcpy(Cmd, BFS(B, BFS_ListCommand));
+	}
+	if (Cmd[0] == 0)
+	    strcpy(Cmd, ListCommand);
+
+        if (MView->Win->GetStr("List", sizeof(Cmd), Cmd, HIST_COMPILE) ==
+	    0)
+	    return 0;
+
+	strcpy(Command, Cmd);
+    }
+    else {
+	if (MView->Win->
+            GetStr("List", sizeof(Command), Command, HIST_COMPILE) == 0)
+	    return 0;
+    }
+    if (strchr(Command, ':') !=0) {
+        Msg(S_INFO, "Absolute paths are not supported");
+        return 0;
+    }
+    if (Compile(Command)) {
+        char *p, *q;
+        char Dir[MAXPATH] = "";
+
+        sleep(2);
+        p = Command + strlen(Command) - 1;
+        while (*Command && strchr("\r\n \t", *p) != NULL) {
+            *p = 0;
+            p--;
+        }
+        p = strrchr(Command, ' ');
+        if (p) {
+            p++;
+            q = strrchr(Command, '.');
+            if (q)
+                *q = 0;
+            if (CompilerMsgs != 0)
+                strcpy(Dir, CompilerMsgs->Directory);
+            strcat(Dir, "\\");
+            strcat(Dir, p);
+            strcat(Dir, ".lst"); // fixme to be user settable
+            if (access(Dir, 0) == 0)
+                FileLoad(0, Dir, 0, this);
+            else
+                Msg(S_ERROR, "Cannot find file %s.", Dir);
+            return 1;
+        }
+        return 1;
+    }
+    return 0;
+}
+
 int EView::RunCompiler(ExState & State)
 {
     char Command[256] = "";
@@ -747,19 +816,19 @@ int EView::CompileNextError(ExState & /*State */ )
 
 int EView::ShowVersion()
 {
-    if (access("/usr/local/share/doc/efte/README", 0) == 0)
-	FileLoad(0, "/usr/local/share/doc/efte/README", 0, this);
-    else if (access("/usr/share/doc/efte/README", 0) == 0)
-	FileLoad(0, "/usr/share/doc/efte/README", 0, this);
-    else if (access("/efte/doc/README", 0) == 0)
-	FileLoad(0, "/efte/doc/README", 0, this);
-    else if (access("/efte/README", 0) == 0)
-	FileLoad(0, "/efte/README", 0, this);
-    else if (access("/Program Files/efte/doc/README", 0) == 0)
-	FileLoad(0, "/Program Files/efte/doc/README", 0, this);
-    else if (access("/Program Files (x86)/doc/README", 0) == 0)
-	FileLoad(0, "/Program Files (x86)/doc/README", 0, this);
-    else
+    if (access("/usr/local/share/doc/efte/README2", 0) == 0)
+	FileLoad(0, "/usr/local/share/doc/efte/README2", 0, this);
+    else if (access("/usr/share/doc/efte/README2", 0) == 0)
+	FileLoad(0, "/usr/share/doc/efte/README2", 0, this);
+    else if (access("/efte/doc/README2", 0) == 0)
+	FileLoad(0, "/efte/doc/README2", 0, this);
+    else if (access("/efte/README2", 0) == 0)
+	FileLoad(0, "/efte/README2", 0, this);
+    else if (access("/Program Files/efte/doc/README2", 0) == 0)
+	FileLoad(0, "/Program Files/efte/doc/README2", 0, this);
+    else if (access("/Program Files (x86)/doc/README2", 0) == 0)
+	FileLoad(0, "/Program Files (x86)/doc/README2", 0, this);
+    //else
 	MView->Win->Choice(GPC_ABOUT, "About", 1, "O&K",
 			   PROGRAM " " VERSION " " COPYRIGHT);
     return 1;

@@ -125,7 +125,8 @@ typedef int ChColor;
 #define BFS_FirstLineRx         (6 | 256)
 #define BFS_CompileCommand      (7 | 256)
 #define BFS_CompileCommand2     (8 | 256)
-#define BFS_COUNT               8
+#define BFS_ListCommand         (9 | 256)
+#define BFS_COUNT               10
 
 #define BFS_WordChars           (100 | 256) // ext
 #define BFS_CapitalChars        (101 | 256)
@@ -215,6 +216,7 @@ extern EBufferFlags DefaultBufferFlags;
 #define FLAG_BubbleHelp         70
 #define FLAG_CompileCommand2    71
 #define FLAG_REXX_End_Offset    72
+#define FLAG_ListCommand        73
 
 #define EM_MENUS 2
 #define EM_MainMenu 0

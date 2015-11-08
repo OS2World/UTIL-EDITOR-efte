@@ -84,7 +84,9 @@ EBufferFlags DefaultBufferFlags = {
      0,					// comment end (folds)
      0,					// filename rx
      0,					// firstline rx
-     0					// compile command
+     0,					// compile command
+     0,                                 // compile command 2
+     0                                  // make list file
      }
 };
 
