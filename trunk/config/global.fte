@@ -7,20 +7,20 @@ object GLOBAL {
 
     SysClipboard        = 1;   # use system (PM) clipboard if available
     SelectPathname      = 1;   # select pathname when asking for file
-        
+
     OpenAfterClose      = 1;   # prompt to load new file after closing last
-        
+
     ShowMenuBar         = 1;   # show main menu bar
     ShowToolBar         = 1;   # builtin tool bar (OS/2 PM version only)
                                # 0=none, 1=top 1=bottom of window
     ShowVScroll         = 1;   # show vertical scroll bar (text)
     ShowHScroll         = 0;   # show horizontal scroll bar (text)
-    WeirdScroll         = 0; 
+    WeirdScroll         = 0;
 
     PMDisableAccel      = 0;   # disable Alt+Fx PM accelerators
 
-    DefaultModeName     = 'PLAIN'; 
-    
+    DefaultModeName     = 'PLAIN';
+
     KeepHistory         = 1;   # load/save history on entry/exit
     LoadDesktopOnEntry  = 0;   # load desktop on fte start (2 = when no files)
     SaveDesktopOnExit   = 0;   # save desktop in ExitEditor
@@ -54,15 +54,15 @@ object GLOBAL {
 # We need some font, which can be 'LOCALIZED' - and this can't be done
 # with font names like 9x15 (actually we can, but this would need
 # highly skilled users :))
-%endif  
-    
+%endif
+
 %if(OS_UNIX)
     PrintDevice         = "|lpr";
 %endif
 %if(!OS_UNIX)
     PrintDevice         = '\\DEV\\PRN';
 %endif
-    
+    ListCommand         = 'wdis -l -s ';
     CompileCommand      = 'grep -n -I ';
     KeepMessages        = 1;
     CompileCommand2     = 'wmake -e';
@@ -79,8 +79,8 @@ object GLOBAL {
     ScrollBorderY       = 0;
     ScrollJumpX         = 8;
     ScrollJumpY         = 1;
-    
-# smart indentation.        
+
+# smart indentation.
     C_Indent            = 4;
     C_BraceOfs          = 0;
     C_ParenDelta        = -1;
@@ -98,9 +98,9 @@ object GLOBAL {
     # as much as C_Continuation says, rather than line up one column
     # to the right of the '('.
     FunctionUsesContinuation = 0;
-    
-%if(LINUXKERNEL)    
-    # smart indentation.        
+
+%if(LINUXKERNEL)
+    # smart indentation.
     C_Indent            = 8;
     C_BraceOfs          = 0;
     C_ParenDelta        = -1;
@@ -118,10 +118,10 @@ object GLOBAL {
     # as much as C_Continuation says, rather than line up one column
     # to the right of the '('.
     FunctionUsesContinuation = 0;
-%endif        
-    
-%if(GNU)    
-    # smart indentation.        
+%endif
+
+%if(GNU)
+    # smart indentation.
     C_Indent            = 2;
     C_BraceOfs          = 2;
     C_ParenDelta        = -1;
@@ -139,10 +139,10 @@ object GLOBAL {
     # as much as C_Continuation says, rather than line up one column
     # to the right of the '('.
     FunctionUsesContinuation = 0;
-%endif        
-    
-%if(OS2DDK)    
-    # smart indentation.        
+%endif
+
+%if(OS2DDK)
+    # smart indentation.
     C_Indent            = 3;
     C_BraceOfs          = 0;
     C_ParenDelta        = -1;
@@ -160,10 +160,10 @@ object GLOBAL {
     # as much as C_Continuation says, rather than line up one column
     # to the right of the '('.
     FunctionUsesContinuation = 0;
-%endif        
-    
-%if(FM2)    
-    # smart indentation.        
+%endif
+
+%if(FM2)
+    # smart indentation.
     C_Indent            = 2;
     C_BraceOfs          = 0;
     C_ParenDelta        = -1;
@@ -181,9 +181,9 @@ object GLOBAL {
     # as much as C_Continuation says, rather than line up one column
     # to the right of the '('.
     FunctionUsesContinuation = 0;
-%endif    
-    
-    REXX_Indent         = 4;
+%endif
+
+    REXX_Indent         = 3;
     REXX_Do_Offset      = 0;
     # Effects placement of end, catch and finally relative to do, loop and select; 0 = aligned
     REXX_End_Offset     = 0;
@@ -201,28 +201,28 @@ object GLOBAL {
 
     # grep -n
     CompileRx = { 1, 2, 3, /^([\w:._\-\+\/\\]#):(\d+):/ };
-    
+
     # GCC
     CompileRx = { 1, 2, 3, /^([\w:._\-\+\/\\]+):(\d+):\s(.*)$/ };
-    
+
     # Borland C++
     CompileRx = { 1, 2, 3, /^{Error}|{Warning}\s(\S+)\s(\d+):\s(.*)$/ };
-    
+
     # Borland C++ 5.5 command line <wirawan0>
     CompileRx = { 1, 2, 3, /^{Error E}|{Warning W}\d+\s(\S+)\s(\d+):\s(.*)$/ };
-    
+
     # CSet++
     CompileRx = { 1, 2, 3, /^([\w:._\-\+\/\\]+)\((\d+):\d+\)(.*)$/ };
-    
+
     # Watcom C++
     CompileRx = { 1, 2, 3, /^([\w:._\-\+\/\\]+)\((\d+)\):\x20{Error!}|{Warning!}(.*)$/ };
-    
+
     # xlC (AIX)
     CompileRx = { 1, 2, 3, /^"([\w:._\-\+\/\\]+)", line (\d+){.\d+}?: (.*)$/ };
-    
+
     # IPF compiler
     CompileRx = { 1, 2, 3, /^\<([^:]+):(\d+)\> (.*)$/ };
-    
+
     CompileRx = { 1, 2, 3, /^([\w:._\-\+\/\\]+)\((\d+)\)\s*:\s*(.*)$/ };
     CompileRx = { 2, 3, 1, /^([^\t]+)\t([^\t]+)\t(\d+)$/ };
     CompileRx = { 2, 3, 1, /^\s*at\s*([^\(]+)\(([^\:]+)\:(\d+)\)$/ };  # PAF@design.ru
@@ -232,19 +232,18 @@ object GLOBAL {
 
     # Python interpreter tracebacks
     CompileRx = { 1, 2, 3, /^\s*File\s+"([\w:._\-\+\/\\]+)",\s+line\s+(\d+)(.*)$/ };
-    
+
     # bash: <wirawan0>
     CompileRx = { 1, 2, 3, /^([\w:._\-\/\\]+): line (\d+):\s(.*)$/ };
-    
+
     # perl: <wirawan0>
     CompileRx = { 2, 3, 1, /^(.*) at ([^ ]+) line ([0-9]+)/ };
-    
+
     CvsIgnoreRx = /^cvs update: Updating /;
     CvsIgnoreRx = /^cvs server: Updating /;
     SvnIgnoreRx = /^svn update: Updating /;
     SvnIgnoreRx = /^svn server: Updating /;
 }
-oinclude 'global.pte'; 
-oinclude 'myglobal.fte'; 
+oinclude 'global.pte';
+oinclude 'myglobal.fte';
 oinclude 'myfontsize.fte';
-

@@ -509,6 +509,8 @@ typedef enum {
 
     //<cmd_compile> Compiler Support
     ExCompile,
+    /// Ask for list command make list and load
+    ExMakeListFile,
     /// Ask for compile command and run compiler
     ExRunCompiler,
     /// Run configured compile command

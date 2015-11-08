@@ -59,8 +59,9 @@ int SelectPathname = 0;
 char DefaultModeName[32] = "";
 RxNode *CompletionFilter = NULL;
 char PrintDevice[MAXPATH] = "\\DEV\\PRN";
-char CompileCommand[256] =  "grep -n";
-char CompileCommand2[256] = "wmake -e" ;
+char CompileCommand[256] =  "grep -n -I ";
+char CompileCommand2[256] = "wmake -e ";
+char ListCommand[256] =  "wdis -l -s ";
 int KeepHistory = 0;
 int LoadDesktopOnEntry = 0;
 int SaveDesktopOnExit = 0;
@@ -449,6 +450,9 @@ static int SetGlobalString(long what, const char *string)
         break;
     case FLAG_CompileCommand2:
 	strlcpy(CompileCommand2, string, sizeof(CompileCommand2));
+        break;
+    case FLAG_ListCommand:
+	strlcpy(ListCommand, string, sizeof(ListCommand));
         break;
     case FLAG_WindowFont:
 	strlcpy(WindowFont, string, sizeof(WindowFont));

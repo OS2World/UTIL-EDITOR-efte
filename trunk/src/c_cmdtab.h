@@ -342,6 +342,7 @@ const struct {
     TAB(SetCIndentStyle),
     TAB(SetIndentWithTabs),
     TAB(RunCompiler),
+    TAB(MakeListFile),
     TAB(FoldCreateAtRoutines),
     TAB(LineCenter),
     TAB(RunProgramAsync),

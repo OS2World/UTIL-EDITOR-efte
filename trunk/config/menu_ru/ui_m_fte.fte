@@ -254,6 +254,7 @@ menu MSvn {
 menu Tools {
     item "&Compile...\tF9" { Compile "wmake -e " }
     item "&Grep..." { Compile "grep -n -I " }
+    item "Make and Load List File" { MakeListFile }
     item "Save and &ISpell" { FileSave; RunProgram "ispell.exe " . $FilePath; FileReload }
     item;
     item "&Shell\tAlt+F9" { RunProgram "" }

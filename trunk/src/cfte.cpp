@@ -209,6 +209,7 @@ static const OrdLookup mode_string[] = {
     MODE_BFS(FirstLineRx),
     MODE_BFS(CompileCommand),
     MODE_BFS(CompileCommand2),
+    MODE_BFS(ListCommand),
     MODE_BFI(EventMap),
     {0, 0},
 };
@@ -271,6 +272,7 @@ static const OrdLookup global_string[] = {
     MODE_FLG(PrintDevice),
     MODE_FLG(CompileCommand),
     MODE_FLG(CompileCommand2),
+    MODE_FLG(ListCommand),
     MODE_FLG(WindowFont),
     MODE_FLG(HelpCommand),
     MODE_FLG(GUICharacters),

@@ -139,6 +139,7 @@ public:
     int ViewRoutines(ExState &State);
     int Compile(ExState &State);
     int RunCompiler(ExState &State);
+    int MakeListFile(ExState &State);
     int Compile(char *Command);
     int ViewMessages(ExState &State);
     int CompilePrevError(ExState &State);
