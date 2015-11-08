@@ -976,44 +976,47 @@ int DLGGetStr(GView * View, const char *Prompt, unsigned int BufLen,
 }
 
 static SearchReplaceOptions SearchOpt;
+static SearchReplaceOptions ReplaceOpt;
 static int ReplaceDlg = 0;
 
 MRESULT EXPENTRY FindDlgProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 {
     switch (msg) {
     case WM_INITDLG:
+        strcpy(SearchOpt.strSearch, ""); // Open dialog with blank combobox
 	WinSendMsg(hwnd, WM_SETICON,
 		   MPFROMLONG(WinLoadPointer(HWND_DESKTOP, 0, 1)), 0);
 
 	WinSendDlgItemMsg(hwnd, IDE_FIND, EM_SETTEXTLIMIT,
 			  MPFROMLONG(MAXSEARCH), 0);
-	WinSetDlgItemText(hwnd, IDE_FIND, SearchOpt.strSearch);
+        WinSetDlgItemText(hwnd, IDE_FIND,
+                          ReplaceDlg ? ReplaceOpt.strSearch : SearchOpt.strSearch);
 	InsertHistory(WinWindowFromID(hwnd, IDE_FIND), HIST_SEARCH,
 		      MAXSEARCH);
 	WinCheckButton(hwnd, IDC_IGNORECASE,
-		       (SearchOpt.Options & SEARCH_NCASE) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_NCASE) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_REGEXPS,
-		       (SearchOpt.Options & SEARCH_RE) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_RE) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_WORDS,
-		       (SearchOpt.Options & SEARCH_WORD) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_WORD) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_BLOCK,
-		       (SearchOpt.Options & SEARCH_BLOCK) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_BLOCK) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_GLOBAL,
-		       (SearchOpt.Options & SEARCH_GLOBAL) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_GLOBAL) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_REVERSE,
-		       (SearchOpt.Options & SEARCH_BACK) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_BACK) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_ALLOCCURENCES,
-		       (SearchOpt.Options & SEARCH_ALL) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_ALL) ? 1 : 0);
 	WinCheckButton(hwnd, IDC_JOINLINE,
-		       (SearchOpt.Options & SEARCH_JOIN) ? 1 : 0);
+		       ((ReplaceDlg ? ReplaceOpt.Options : SearchOpt.Options) & SEARCH_JOIN) ? 1 : 0);
 	if (ReplaceDlg) {
 	    WinSendDlgItemMsg(hwnd, IDE_REPLACE, EM_SETTEXTLIMIT,
 			      MPFROMLONG(MAXSEARCH), 0);
-	    WinSetDlgItemText(hwnd, IDE_REPLACE, SearchOpt.strReplace);
+	    WinSetDlgItemText(hwnd, IDE_REPLACE, ReplaceOpt.strReplace);
 	    InsertHistory(WinWindowFromID(hwnd, IDE_REPLACE), HIST_SEARCH,
 			  MAXSEARCH);
 	    WinCheckButton(hwnd, IDC_NOPROMPTING,
-			   (SearchOpt.Options & SEARCH_NASK) ? 1 : 0);
+			   (ReplaceOpt.Options & SEARCH_NASK) ? 1 : 0);
 	}
 	else {
 	    WinCheckButton(hwnd, IDC_DELETELINE,
@@ -1027,42 +1030,69 @@ MRESULT EXPENTRY FindDlgProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
     case WM_COMMAND:
 	switch (SHORT1FROMMP(mp1)) {
 	case DID_OK:
-	    SearchOpt.ok = 1;
-	    SearchOpt.resCount = 0;
-	    SearchOpt.Options = 0;
-	    strcpy(SearchOpt.strReplace, "");
+            if (ReplaceDlg) {
+                ReplaceOpt.ok = 1;
+                ReplaceOpt.resCount = 0;
+                ReplaceOpt.Options = 0;
+                strcpy(ReplaceOpt.strReplace, "");
+            }
+            else {
+                SearchOpt.ok = 1;
+                SearchOpt.resCount = 0;
+                SearchOpt.Options = 0;
+                strcpy(SearchOpt.strReplace, "");
+            }
 	    WinQueryDlgItemText(hwnd, IDE_FIND, MAXSEARCH,
-				SearchOpt.strSearch);
-	    SearchOpt.strSearch[MAXSEARCH - 1] = 0;
-	    AddInputHistory(HIST_SEARCH, SearchOpt.strSearch);
+				ReplaceDlg ? ReplaceOpt.strSearch : SearchOpt.strSearch);
+            if (ReplaceDlg)
+                ReplaceOpt.strSearch[MAXSEARCH - 1] = 0;
+            else
+                SearchOpt.strSearch[MAXSEARCH - 1] = 0;
+            AddInputHistory(HIST_SEARCH,
+                            ReplaceDlg ? ReplaceOpt.strSearch : SearchOpt.strSearch);
 
-	    if (WinQueryButtonCheckstate(hwnd, IDC_IGNORECASE))
-		SearchOpt.Options |= SEARCH_NCASE;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_REGEXPS))
-		SearchOpt.Options |= SEARCH_RE;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_WORDS))
-		SearchOpt.Options |= SEARCH_WORD;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_BLOCK))
-		SearchOpt.Options |= SEARCH_BLOCK;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_GLOBAL))
-		SearchOpt.Options |= SEARCH_GLOBAL;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_REVERSE))
-		SearchOpt.Options |= SEARCH_BACK;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_ALLOCCURENCES))
-		SearchOpt.Options |= SEARCH_ALL;
-	    if (WinQueryButtonCheckstate(hwnd, IDC_JOINLINE))
-		SearchOpt.Options |= SEARCH_JOIN;
-
-	    if (ReplaceDlg) {
+            if (ReplaceDlg) {
+                if (WinQueryButtonCheckstate(hwnd, IDC_IGNORECASE))
+                   ReplaceOpt.Options |= SEARCH_NCASE;
+                if (WinQueryButtonCheckstate(hwnd, IDC_REGEXPS))
+                    ReplaceOpt.Options |= SEARCH_RE;
+                if (WinQueryButtonCheckstate(hwnd, IDC_WORDS))
+                    ReplaceOpt.Options |= SEARCH_WORD;
+                if (WinQueryButtonCheckstate(hwnd, IDC_BLOCK))
+                    ReplaceOpt.Options |= SEARCH_BLOCK;
+                if (WinQueryButtonCheckstate(hwnd, IDC_GLOBAL))
+                    ReplaceOpt.Options |= SEARCH_GLOBAL;
+                if (WinQueryButtonCheckstate(hwnd, IDC_REVERSE))
+                    ReplaceOpt.Options |= SEARCH_BACK;
+                if (WinQueryButtonCheckstate(hwnd, IDC_ALLOCCURENCES))
+                    ReplaceOpt.Options |= SEARCH_ALL;
+                if (WinQueryButtonCheckstate(hwnd, IDC_JOINLINE))
+                    ReplaceOpt.Options |= SEARCH_JOIN;
 		WinQueryDlgItemText(hwnd, IDE_REPLACE, MAXSEARCH,
-				    SearchOpt.strReplace);
+				    ReplaceOpt.strReplace);
 		SearchOpt.strReplace[MAXSEARCH - 1] = 0;
-		AddInputHistory(HIST_SEARCH, SearchOpt.strReplace);
-		SearchOpt.Options |= SEARCH_REPLACE;
+		AddInputHistory(HIST_SEARCH, ReplaceOpt.strReplace);
+		ReplaceOpt.Options |= SEARCH_REPLACE;
 		if (WinQueryButtonCheckstate(hwnd, IDC_NOPROMPTING))
-		    SearchOpt.Options |= SEARCH_NASK;
+		    ReplaceOpt.Options |= SEARCH_NASK;
 	    }
-	    else {
+            else {
+                if (WinQueryButtonCheckstate(hwnd, IDC_IGNORECASE)) 
+                    SearchOpt.Options |= SEARCH_NCASE;
+                if (WinQueryButtonCheckstate(hwnd, IDC_REGEXPS))
+                    SearchOpt.Options |= SEARCH_RE;
+                if (WinQueryButtonCheckstate(hwnd, IDC_WORDS))
+                    SearchOpt.Options |= SEARCH_WORD;
+                if (WinQueryButtonCheckstate(hwnd, IDC_BLOCK))
+                    SearchOpt.Options |= SEARCH_BLOCK;
+                if (WinQueryButtonCheckstate(hwnd, IDC_GLOBAL))
+                    SearchOpt.Options |= SEARCH_GLOBAL;
+                if (WinQueryButtonCheckstate(hwnd, IDC_REVERSE))
+                    SearchOpt.Options |= SEARCH_BACK;
+                if (WinQueryButtonCheckstate(hwnd, IDC_ALLOCCURENCES))
+                    SearchOpt.Options |= SEARCH_ALL;
+                if (WinQueryButtonCheckstate(hwnd, IDC_JOINLINE))
+                    SearchOpt.Options |= SEARCH_JOIN;
 		if (WinQueryButtonCheckstate(hwnd, IDC_DELETELINE))
 		    SearchOpt.Options |= SEARCH_DELETE;
 	    }
@@ -1073,7 +1103,7 @@ MRESULT EXPENTRY FindDlgProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 	    WinDismissDlg(hwnd, TRUE);
 	    return (MRESULT) FALSE;
 
-	case DID_CANCEL:
+        case DID_CANCEL:
 	    WinShowWindow(hwnd, FALSE);
 	    WinStoreWindowPos("eFTEPM", ReplaceDlg ? "ReplaceDlg" : "FindDlg",
 			      hwnd);
@@ -1094,7 +1124,8 @@ MRESULT EXPENTRY FindDlgProc(HWND hwnd, ULONG msg, MPARAM mp1, MPARAM mp2)
 
 int DLGGetFind(GView * View, SearchReplaceOptions & sr)
 {
-    SearchOpt = sr;
+    if (SearchOpt.ok == 0) // Set "ignore case" on first open
+       SearchOpt.Options |= SEARCH_NCASE;
     ReplaceDlg = 0;
 
     if (LONGFROMMR(WinSendMsg(View->Parent->Peer->hwndFrame, UWM_DLGBOX,
@@ -1102,14 +1133,14 @@ int DLGGetFind(GView * View, SearchReplaceOptions & sr)
 			      MPFROMLONG(IDD_FIND))) != DID_OK)
 	return 0;
 
-    sr = SearchOpt;
+    sr = SearchOpt; // Send search term for use in status window
 
     return 1;
 }
 
 int DLGGetFindReplace(GView * View, SearchReplaceOptions & sr)
 {
-    SearchOpt = sr;
+    ReplaceOpt = sr;
     ReplaceDlg = 1;
 
     if (LONGFROMMR(WinSendMsg(View->Parent->Peer->hwndFrame, UWM_DLGBOX,
@@ -1117,7 +1148,7 @@ int DLGGetFindReplace(GView * View, SearchReplaceOptions & sr)
 			      MPFROMLONG(IDD_FINDREPLACE))) != DID_OK)
 	return 0;
 
-    sr = SearchOpt;
+    sr = ReplaceOpt;
 
     return 1;
 }
