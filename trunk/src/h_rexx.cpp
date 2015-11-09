@@ -111,12 +111,6 @@ int Hilit_REXX(EBuffer * BF, int /*LN*/, PCell B, int Pos, int Width,
 		    ColorNext();
 		    continue;
                 }
-                else if (*p == '#') {
-		    State = hsREXX_CommentL;
-                    Color = CLR_Comment;
-		    ColorNext();
-		    continue;
-		}
                 else if ((len >= 2) && (*p == '-') && (p[1] == '-')) {
 		    State = hsREXX_CommentL;
 		    Color = CLR_Comment;

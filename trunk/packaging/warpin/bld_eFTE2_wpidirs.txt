@@ -137,8 +137,10 @@ FILE: m_tcl.fte                        2  config  config
 FILE: m_tex.fte                        2  config  config
 FILE: m_texi.fte                       2  config  config
 FILE: m_text.fte                       2  config  config
+FILE: m_trp.fte                        2  config  config
 FILE: m_unrealscript.fte               2  config  config
 FILE: m_vhdl.fte                       2  config  config
+FILE: m_wis.fte                        2  config  config
 FILE: m_xml.fte                        2  config  config
 FILE: m_xslt.fte                       2  config  config
 FILE: main.fte                         2  config  config
@@ -198,6 +200,7 @@ FILE: m_resdlg.fte                     4  config\menu      config\menu
 FILE: m_rexx.fte                       4  config\menu      config\menu
 FILE: m_rst.fte                        4  config\menu      config\menu
 FILE: m_sgml.fte                       4  config\menu      config\menu
+FILE: m_wis.fte                        4  config\menu      config\menu
 FILE: ui_m_fte.fte                     4  config\menu      config\menu
 FILE: ui_m_ne.fte                      4  config\menu      config\menu
 FILE: ui_m_ws.fte                      4  config\menu      config\menu
@@ -213,6 +216,7 @@ FILE: m_resdlg.fte                     5  config\menu_es      config\menu
 FILE: m_rexx.fte                       5  config\menu_es      config\menu
 FILE: m_rst.fte                        5  config\menu_es      config\menu
 FILE: m_sgml.fte                       5  config\menu_es      config\menu
+FILE: m_wis.fte                        5  config\menu_es      config\menu
 FILE: ui_m_ew.fte                      5  config\menu_es      config\menu
 FILE: ui_m_fte.fte                     5  config\menu_es      config\menu
 FILE: ui_m_ne.fte                      5  config\menu_es      config\menu
@@ -229,6 +233,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       6  config\menu_fr      config\menu
 ;FILE: m_rst.fte                        6  config\menu_fr      config\menu
 ;FILE: m_sgml.fte                       6  config\menu_fr      config\menu
+;FILE: m_wis.fte                        6  config\menu_fr      config\menu
 ;FILE: ui_m_ew.fte                      6  config\menu_fr      config\menu
 ;FILE: ui_m_fte.fte                     6  config\menu_fr      config\menu
 ;FILE: ui_m_ne.fte                      6  config\menu_fr      config\menu
@@ -245,6 +250,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       7  config\menu_it      config\menu
 ;FILE: m_rst.fte                        7  config\menu_it      config\menu
 ;FILE: m_sgml.fte                       7  config\menu_it      config\menu
+;FILE: m_wis.fte                        7  config\menu_it      config\menu
 ;FILE: ui_m_ew.fte                      7  config\menu_it      config\menu
 ;FILE: ui_m_fte.fte                     7  config\menu_it      config\menu
 ;FILE: ui_m_ne.fte                      7  config\menu_it      config\menu
@@ -261,6 +267,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       8  config\menu_nl      config\menu
 ;FILE: m_rst.fte                        8  config\menu_nl      config\menu
 ;FILE: m_sgml.fte                       8  config\menu_nl      config\menu
+;FILE: m_wis.fte                        8  config\menu_nl      config\menu
 ;FILE: ui_m_ew.fte                      8  config\menu_nl      config\menu
 ;FILE: ui_m_fte.fte                     8  config\menu_nl      config\menu
 ;FILE: ui_m_ne.fte                      8  config\menu_nl      config\menu
@@ -277,6 +284,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       9  config\menu_no      config\menu
 ;FILE: m_rst.fte                        9  config\menu_no      config\menu
 ;FILE: m_sgml.fte                       9  config\menu_no      config\menu
+;FILE: m_wis.fte                        9  config\menu_no      config\menu
 ;FILE: ui_m_ew.fte                      9  config\menu_no      config\menu
 ;FILE: ui_m_fte.fte                     9  config\menu_no      config\menu
 ;FILE: ui_m_ne.fte                      9  config\menu_no      config\menu
@@ -293,6 +301,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       10  config\menu_ru      config\menu
 ;FILE: m_rst.fte                        10  config\menu_ru      config\menu
 ;FILE: m_sgml.fte                       10  config\menu_ru      config\menu
+;FILE: m_wis.fte                        10  config\menu_ru      config\menu
 ;FILE: ui_m_ew.fte                      10  config\menu_ru      config\menu
 ;FILE: ui_m_fte.fte                     10  config\menu_ru      config\menu
 ;FILE: ui_m_ne.fte                      10  config\menu_ru      config\menu
@@ -309,6 +318,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       11  config\menu_sv      config\menu
 ;FILE: m_rst.fte                        11  config\menu_sv      config\menu
 ;FILE: m_sgml.fte                       11  config\menu_sv      config\menu
+;FILE: m_wis.fte                        11  config\menu_sv      config\menu
 ;FILE: ui_m_ew.fte                      11  config\menu_sv      config\menu
 ;FILE: ui_m_fte.fte                     11  config\menu_sv      config\menu
 ;FILE: ui_m_ne.fte                      11  config\menu_sv      config\menu
@@ -325,6 +335,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       13  config\menu_cs      config\menu
 ;FILE: m_rst.fte                        13  config\menu_cs      config\menu
 ;FILE: m_sgml.fte                       13  config\menu_cs      config\menu
+;FILE: m_wis.fte                        13  config\menu_cs      config\menu
 ;FILE: ui_m_ew.fte                      13  config\menu_cs      config\menu
 ;FILE: ui_m_fte.fte                     13  config\menu_cs      config\menu
 ;FILE: ui_m_ne.fte                      13  config\menu_cs      config\menu
@@ -341,6 +352,7 @@ FILE: ui_m_ws.fte                      5  config\menu_es      config\menu
 ;FILE: m_rexx.fte                       14  config\menu_de      config\menu
 ;FILE: m_rst.fte                        14  config\menu_de      config\menu
 ;FILE: m_sgml.fte                       14  config\menu_de      config\menu
+;FILE: m_wis.fte                        14  config\menu_de      config\menu
 ;FILE: ui_m_ew.fte                      14  config\menu_de      config\menu
 ;FILE: ui_m_fte.fte                     14  config\menu_de      config\menu
 ;FILE: ui_m_ne.fte                      14  config\menu_de      config\menu
@@ -357,6 +369,7 @@ FILE: m_resdlg.fte                     105  config\menu_es      config\menu_es
 FILE: m_rexx.fte                       105  config\menu_es      config\menu_es
 FILE: m_rst.fte                        105  config\menu_es      config\menu_es
 FILE: m_sgml.fte                       105  config\menu_es      config\menu_es
+FILE: m_wis.fte                        105  config\menu_es      config\menu_es
 FILE: ui_m_ew.fte                      105  config\menu_es      config\menu_es
 FILE: ui_m_fte.fte                     105  config\menu_es      config\menu_es
 FILE: ui_m_ne.fte                      105  config\menu_es      config\menu_es
@@ -373,6 +386,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       106  config\menu_fr      config\menu_fr
 ;FILE: m_rst.fte                        106  config\menu_fr      config\menu_fr
 ;FILE: m_sgml.fte                       106  config\menu_fr      config\menu_fr
+;FILE: m_wis.fte                        106  config\menu_fr      config\menu_fr
 ;FILE: ui_m_ew.fte                      106  config\menu_fr      config\menu_fr
 ;FILE: ui_m_fte.fte                     106  config\menu_fr      config\menu_fr
 ;FILE: ui_m_ne.fte                      106  config\menu_fr      config\menu_fr
@@ -389,6 +403,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       107  config\menu_it      config\menu_it
 ;FILE: m_rst.fte                        107  config\menu_it      config\menu_it
 ;FILE: m_sgml.fte                       107  config\menu_it      config\menu_it
+;FILE: m_wis.fte                        107  config\menu_it      config\menu_it
 ;FILE: ui_m_ew.fte                      107  config\menu_it      config\menu_it
 ;FILE: ui_m_fte.fte                     107  config\menu_it      config\menu_it
 ;FILE: ui_m_ne.fte                      107  config\menu_it      config\menu_it
@@ -405,6 +420,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       108  config\menu_nl      config\menu_nl
 ;FILE: m_rst.fte                        108  config\menu_nl      config\menu_nl
 ;FILE: m_sgml.fte                       108  config\menu_nl      config\menu_nl
+;FILE: m_wis.fte                        108  config\menu_nl      config\menu_nl
 ;FILE: ui_m_ew.fte                      108  config\menu_nl      config\menu_nl
 ;FILE: ui_m_fte.fte                     108  config\menu_nl      config\menu_nl
 ;FILE: ui_m_ne.fte                      108  config\menu_nl      config\menu_nl
@@ -421,6 +437,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       109  config\menu_no      config\menu_no
 ;FILE: m_rst.fte                        109  config\menu_no      config\menu_no
 ;FILE: m_sgml.fte                       109  config\menu_no      config\menu_no
+;FILE: m_wis.fte                        109  config\menu_no      config\menu_no
 ;FILE: ui_m_ew.fte                      109  config\menu_no      config\menu_no
 ;FILE: ui_m_fte.fte                     109  config\menu_no      config\menu_no
 ;FILE: ui_m_ne.fte                      109  config\menu_no      config\menu_no
@@ -437,6 +454,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       110  config\menu_ru      config\menu_ru
 ;FILE: m_rst.fte                        110  config\menu_ru      config\menu_ru
 ;FILE: m_sgml.fte                       110  config\menu_ru      config\menu_ru
+;FILE: m_wis.fte                        110  config\menu_ru      config\menu_ru
 ;FILE: ui_m_ew.fte                      110  config\menu_ru      config\menu_ru
 ;FILE: ui_m_fte.fte                     110  config\menu_ru      config\menu_ru
 ;FILE: ui_m_ne.fte                      110  config\menu_ru      config\menu_ru
@@ -453,6 +471,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       111  config\menu_sv      config\menu_sv
 ;FILE: m_rst.fte                        111  config\menu_sv      config\menu_sv
 ;FILE: m_sgml.fte                       111  config\menu_sv      config\menu_sv
+;FILE: m_wis.fte                        111  config\menu_sv      config\menu-sv
 ;FILE: ui_m_ew.fte                      111  config\menu_sv      config\menu_sv
 ;FILE: ui_m_fte.fte                     111  config\menu_sv      config\menu_sv
 ;FILE: ui_m_ne.fte                      111  config\menu_sv      config\menu_sv
@@ -469,6 +488,7 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       113  config\menu_cs      config\menu_cs
 ;FILE: m_rst.fte                        113  config\menu_cs      config\menu_cs
 ;FILE: m_sgml.fte                       113  config\menu_cs      config\menu_cs
+;FILE: m_wis.fte                        113  config\menu_cs      config\menu_cs
 ;FILE: ui_m_ew.fte                      113  config\menu_cs      config\menu_cs
 ;FILE: ui_m_fte.fte                     113  config\menu_cs      config\menu_cs
 ;FILE: ui_m_ne.fte                      113  config\menu_cs      config\menu_cs
@@ -485,12 +505,13 @@ FILE: ui_m_ws.fte                      105  config\menu_es      config\menu_es
 ;FILE: m_rexx.fte                       114  config\menu_de      config\menu_de
 ;FILE: m_rst.fte                        114  config\menu_de      config\menu_de
 ;FILE: m_sgml.fte                       114  config\menu_de      config\menu_de
+;FILE: m_wis.fte                        114  config\menu_de      config\menu_de
 ;FILE: ui_m_ew.fte                      114  config\menu_de      config\menu_de
 ;FILE: ui_m_fte.fte                     114  config\menu_de      config\menu_de
 ;FILE: ui_m_ne.fte                      114  config\menu_de      config\menu_de
 ;FILE: ui_m_ws.fte                      114  config\menu_de      config\menu_de
 
 
-;NOFILESPACKAGE: 100
+;NOFILESPACKAGE: 200
 
 
